@@ -1,0 +1,177 @@
+.root {
+  width: 100%;
+}
+
+.wrap {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 2px 0 12px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  width: 172px;
+  height: 228px;
+  border-radius: 12px;
+  padding: 20px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #ffffff;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  box-shadow: none;
+  transition: transform 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.title {
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: #ffffff;
+}
+
+.brand {
+  margin-top: auto;
+  min-height: 40px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.brandMark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  line-height: 1;
+}
+
+.brandMark span {
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  max-width: 260px;
+}
+
+.controls button {
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  border: none;
+  color: #8a8a8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.controls button:hover {
+  color: #333;
+}
+
+.scrollbar {
+  flex: 1;
+  height: 3px;
+  border-radius: 999px;
+  background: #e2e2e2;
+  position: relative;
+}
+
+.scrollbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 34%;
+  height: 100%;
+  border-radius: inherit;
+  background: #b0b0b0;
+}
+
+.certs {
+  margin-top: 36px;
+  padding-top: 26px;
+  border-top: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.certsLabel {
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+  white-space: nowrap;
+}
+
+.certList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  align-items: center;
+}
+
+.certItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2a2a2a;
+  letter-spacing: -0.01em;
+  opacity: 0.78;
+}
+
+.certItem svg {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+@media (max-width: 700px) {
+  .card {
+    width: 152px;
+    height: 208px;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .certs {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

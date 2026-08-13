@@ -1,0 +1,167 @@
+.section {
+  padding: 110px 0 90px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.copy {
+  max-width: 480px;
+  padding-top: 12px;
+}
+
+.title {
+  font-size: clamp(36px, 4.8vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 18px;
+}
+
+.desc {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.infoList li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.infoIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: #f3e8ff;
+  color: var(--color-purple);
+  flex-shrink: 0;
+}
+
+.infoList strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  color: var(--color-text);
+}
+
+.infoList a,
+.infoList span:last-child {
+  font-size: 15px;
+  color: var(--color-muted);
+}
+
+.infoList a:hover {
+  color: var(--color-purple);
+}
+
+.formCard {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  box-shadow: var(--shadow-sm);
+}
+
+.formTitle {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field span {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-size: 15px;
+  color: var(--color-text);
+  background: var(--color-white);
+  resize: vertical;
+  transition: border-color var(--transition);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--color-purple);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--color-light-text);
+}
+
+.thanks {
+  text-align: center;
+  padding: 48px 12px;
+}
+
+.thanks h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.thanks p {
+  max-width: 360px;
+  margin: 0 auto 28px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .copy {
+    max-width: none;
+  }
+
+  .section {
+    padding: 96px 0 64px;
+  }
+}
+
+@media (max-width: 640px) {
+  .formCard {
+    padding: 24px;
+  }
+}

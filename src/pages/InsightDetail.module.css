@@ -1,0 +1,138 @@
+.article {
+  padding: 48px 0 80px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-bottom: 28px;
+}
+
+.back:hover {
+  color: var(--color-orange);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-orange);
+  margin-bottom: 16px;
+}
+
+.meta span:not(:first-child) {
+  color: var(--color-light-text);
+}
+
+.title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  max-width: 860px;
+  margin-bottom: 18px;
+}
+
+.excerpt {
+  font-size: 18px;
+  max-width: 680px;
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+.heroImage {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 21 / 9;
+  margin-bottom: 48px;
+  background: var(--color-light-bg);
+}
+
+.heroImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.body p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+.relatedTitle {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+}
+
+.related {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.relatedCard {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.relatedCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.relatedCard img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.relatedCard span,
+.relatedCard strong {
+  display: block;
+  padding: 0 16px;
+}
+
+.relatedCat {
+  padding-top: 14px !important;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.relatedCard strong {
+  padding: 8px 16px 18px;
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 900px) {
+  .related {
+    grid-template-columns: 1fr;
+  }
+
+  .heroImage {
+    aspect-ratio: 16 / 9;
+  }
+}
