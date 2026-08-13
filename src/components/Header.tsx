@@ -1,5 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { ASSETS } from "../assets";
+
 import {
   Accessibility,
   Award,
@@ -120,8 +122,11 @@ export function Header() {
     >
       <div className={`container ${styles.bar}`}>
         <Link to="/" className={styles.logo} aria-label="QUORIXA home">
-          <span className={styles.logoMark}>Q</span>
-          QUORIXA
+          <img
+            src={ASSETS.logo}
+            alt="QUORIXA"
+            className={styles.logoImg}
+          />
         </Link>
 
         <nav className={styles.nav} aria-label="Primary">
