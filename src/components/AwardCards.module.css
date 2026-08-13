@@ -2,29 +2,49 @@
   width: 100%;
 }
 
+.fullWidth {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
 .wrap {
   overflow: hidden;
 }
 
 .track {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 2px 0 14px;
+  padding: 4px max(24px, calc((100vw - 1240px) / 2)) 18px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.fullWidth .track {
+  padding-left: max(24px, calc((100vw - 1310px) / 2));
+  padding-right: 24px;
 }
 
 .track::-webkit-scrollbar {
   display: none;
 }
 
+.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
 .card {
-  width: 172px;
-  height: 236px;
-  border-radius: 14px;
-  padding: 20px 16px 18px;
+  width: 236px;
+  height: 318px;
+  border-radius: 16px;
+  padding: 24px 18px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -36,7 +56,7 @@
 
 .title {
   font-family: Inter, "Helvetica Neue", Arial, sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: -0.02em;
@@ -47,70 +67,27 @@
 
 .brand {
   margin-top: auto;
-  min-height: 52px;
+  min-height: 132px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  padding-bottom: 2px;
 }
 
-.brandMark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  max-width: 100%;
-  line-height: 1;
-  color: inherit;
-  transform: scale(1.35);
-  transform-origin: center bottom;
-}
-
-.brandMark svg {
+.awardLogo {
   display: block;
-  flex-shrink: 0;
+  width: auto;
+  max-width: 190px;
+  max-height: 120px;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
 }
 
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 2px;
-  max-width: 220px;
-}
-
-.controls button {
-  width: 22px;
-  height: 22px;
-  border: none;
-  color: #9a9a9a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  padding: 0;
-}
-
-.controls button:hover {
-  color: #222;
-}
-
-.scrollbar {
-  flex: 1;
-  height: 2px;
-  border-radius: 999px;
-  background: #dedede;
-  position: relative;
-}
-
-.scrollbar::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 32%;
-  height: 100%;
-  border-radius: inherit;
-  background: #111;
+.footer {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
 }
 
 .certs {
@@ -152,18 +129,19 @@
 
 @media (max-width: 700px) {
   .card {
-    width: 156px;
-    height: 214px;
-    border-radius: 12px;
-    padding: 16px 14px 14px;
+    width: 188px;
+    height: 252px;
+    border-radius: 14px;
+    padding: 18px 14px 16px;
   }
 
   .title {
-    font-size: 14px;
+    font-size: 15px;
   }
 
-  .brandMark {
-    transform: scale(1.2);
+  .awardLogo {
+    max-width: 160px;
+    max-height: 96px;
   }
 
   .certLogo {
@@ -174,5 +152,10 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+  }
+
+  .track {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }

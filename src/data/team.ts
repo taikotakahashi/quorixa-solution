@@ -157,49 +157,49 @@ export const teamMembers = [
     name: "Amelia Chen",
     role: "Engineering Director",
     image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=520&fit=crop&q=80",
   },
   {
     name: "Marcus Reid",
     role: "Principal Architect",
     image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=520&fit=crop&q=80",
   },
   {
     name: "Sofia Alvarez",
     role: "Head of Design",
     image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=520&fit=crop&q=80",
   },
   {
     name: "James Okonkwo",
     role: "AI Practice Lead",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=520&fit=crop&q=80",
   },
   {
     name: "Elena Petrova",
     role: "QA Lead",
     image:
-      "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=300&h=300&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=520&fit=crop&q=80",
   },
   {
     name: "David Kim",
     role: "Delivery Manager",
     image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=520&fit=crop&q=80",
   },
   {
     name: "Priya Sharma",
     role: "Data Engineering Lead",
     image:
-      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=300&h=300&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=520&fit=crop&q=80",
   },
   {
     name: "Noah Fischer",
     role: "Mobile Lead",
     image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=520&fit=crop&q=80",
   },
 ];
 

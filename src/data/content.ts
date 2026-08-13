@@ -11,6 +11,18 @@ import grLogo from "../assets/logo-slider/gr-logo.webp";
 import naLogo from "../assets/logo-slider/na-logo.webp";
 import shLogo from "../assets/logo-slider/sh-logo.webp";
 import vmLogo from "../assets/logo-slider/vm-logo.webp";
+import awardMeta from "../assets/logo-slider/a.webp";
+import awardPlay from "../assets/logo-slider/a-1.webp";
+import awardStore from "../assets/logo-slider/a-2.webp";
+import awardDeloitte from "../assets/logo-slider/a-3.webp";
+import awardG2 from "../assets/logo-slider/a-4.webp";
+import awardGartner1 from "../assets/logo-slider/a-5.webp";
+import awardGartner2 from "../assets/logo-slider/a-6.webp";
+import awardCrn from "../assets/logo-slider/a-7.webp";
+import awardIbd from "../assets/logo-slider/a-8.webp";
+import awardFastCompany from "../assets/logo-slider/a-9.webp";
+import awardWebby from "../assets/logo-slider/a-10.webp";
+import awardSoftwareReviews from "../assets/logo-slider/a-11.webp";
 
 export type ClientLogo = {
   id: string;
@@ -30,58 +42,69 @@ export const clients: ClientLogo[] = [
 export type Award = {
   title: string;
   color: string;
-  logoColor: string;
-  brand: string;
+  logoSrc: string;
 };
 
 export const awards: Award[] = [
   {
     title: "Featured React Native app by Facebook | Meta",
     color: "#5B79E6",
-    logoColor: "#1E3A8A",
-    brand: "meta",
+    logoSrc: awardMeta,
   },
   {
     title: "Android Excellence app",
     color: "#EF624C",
-    logoColor: "#8B1E14",
-    brand: "google-play",
+    logoSrc: awardPlay,
   },
   {
     title: "#1 in Health and Fitness",
     color: "#3C4ED8",
-    logoColor: "#1A246B",
-    brand: "app-store",
+    logoSrc: awardStore,
   },
   {
     title: "Deloitte Technology Fast 500",
     color: "#6FD243",
-    logoColor: "#2F6A0E",
-    brand: "deloitte",
+    logoSrc: awardDeloitte,
   },
   {
     title: "The Best Embedded Business Intelligence Software",
     color: "#FF6B22",
-    logoColor: "#9A2A00",
-    brand: "g2",
+    logoSrc: awardG2,
   },
   {
     title: "Gartner top OEM/Embedded BI",
     color: "#5FA6E8",
-    logoColor: "#0F4F86",
-    brand: "gartner",
+    logoSrc: awardGartner1,
   },
   {
     title: "Gartner's Magic Quadrant for RTTVPs",
     color: "#8E28F3",
-    logoColor: "#3A0A7A",
-    brand: "gartner",
+    logoSrc: awardGartner2,
   },
   {
-    title: "CRN Magazine Sec 100",
+    title: "CRN Magazine Security 100",
     color: "#E2231A",
-    logoColor: "#7A0E09",
-    brand: "crn",
+    logoSrc: awardCrn,
+  },
+  {
+    title: "10 years Winner",
+    color: "#4B3FD6",
+    logoSrc: awardIbd,
+  },
+  {
+    title: "The Biggest Innovator",
+    color: "#F06A1A",
+    logoSrc: awardFastCompany,
+  },
+  {
+    title: "Webby Awards nominee | Apps and Software",
+    color: "#35B968",
+    logoSrc: awardWebby,
+  },
+  {
+    title: "The Biggest Innovator",
+    color: "#E8A317",
+    logoSrc: awardSoftwareReviews,
   },
 ];
 

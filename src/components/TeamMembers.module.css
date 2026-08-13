@@ -1,40 +1,68 @@
 .row {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 18px 14px;
+  align-items: start;
+  padding-top: 8px;
+  padding-bottom: 12px;
 }
 
 .card {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.card img {
+.card:nth-child(odd) {
+  transform: translateY(28px);
+}
+
+.card:nth-child(even) {
+  transform: translateY(0);
+}
+
+.photo {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 12px;
+  border-radius: 22px;
+  display: block;
   background: var(--color-light-bg);
+  margin-bottom: 14px;
 }
 
 .card strong {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #111;
-  margin-bottom: 2px;
+  letter-spacing: -0.02em;
+  color: var(--color-purple);
+  margin-bottom: 4px;
+  line-height: 1.25;
 }
 
 .card span {
-  font-size: 12px;
-  color: #777;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
   line-height: 1.35;
 }
 
 @media (max-width: 1100px) {
   .row {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+
+  .card:nth-child(4n + 1),
+  .card:nth-child(4n + 3) {
+    transform: translateY(24px);
+  }
+
+  .card:nth-child(4n + 2),
+  .card:nth-child(4n + 4) {
+    transform: translateY(0);
   }
 }
 
@@ -42,8 +70,8 @@
   .row {
     display: flex;
     overflow-x: auto;
-    gap: 16px;
-    padding-bottom: 4px;
+    gap: 14px;
+    padding: 8px 4px 20px;
     scrollbar-width: none;
   }
 
@@ -52,6 +80,19 @@
   }
 
   .card {
-    flex: 0 0 104px;
+    flex: 0 0 132px;
+    transform: none !important;
+  }
+
+  .photo {
+    border-radius: 18px;
+  }
+
+  .card strong {
+    font-size: 13px;
+  }
+
+  .card span {
+    font-size: 12px;
   }
 }

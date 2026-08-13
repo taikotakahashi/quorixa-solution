@@ -201,19 +201,22 @@ export function Home() {
         </div>
       </section>
 
-      <section className="section section--light">
+      <section className={`section section--light ${styles.teamSection}`}>
         <div className="container">
           <Reveal>
-            <SectionHeader
-              title="Meet our experts"
-              description="Leaders and practitioners across engineering, design, AI, and delivery."
-              align="center"
-            />
+            <div className={styles.teamIntro}>
+              <span className={styles.teamPill}>Leadership & key experts</span>
+              <h2>Meet our team</h2>
+              <p>
+                Exceptional technology solutions are only possible with
+                exceptional people. Learn more about our key experts
+              </p>
+            </div>
           </Reveal>
           <TeamMembers members={teamMembers} />
           <div className={styles.centerCta}>
             <Button href="/about" variant="ghost" arrow>
-              See more
+              Get to know us
             </Button>
           </div>
         </div>
@@ -231,7 +234,7 @@ export function Home() {
               />
             </div>
           </Reveal>
-          <AwardCards />
+          <AwardCards fullWidth logoHeight={120} />
         </div>
       </section>
 

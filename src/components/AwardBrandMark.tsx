@@ -163,6 +163,108 @@ export function AwardBrandMark({ brand, className, color }: Props) {
         </span>
       );
 
+    case "ibd":
+      return (
+        <div className={className} style={{ ...style, textAlign: "center" }}>
+          <div
+            style={{
+              fontFamily: "Inter, Helvetica Neue, Arial, sans-serif",
+              fontSize: "10px",
+              fontWeight: 800,
+              letterSpacing: "0.06em",
+              lineHeight: 1.2,
+              textTransform: "uppercase",
+            }}
+          >
+            Best Online
+            <br />
+            Brokers
+          </div>
+        </div>
+      );
+
+    case "fast-company":
+      return (
+        <span
+          className={className}
+          style={{
+            ...style,
+            fontFamily: "Inter, Helvetica Neue, Arial, sans-serif",
+            fontSize: "13px",
+            fontWeight: 800,
+            letterSpacing: "0.08em",
+            lineHeight: 1.15,
+            textTransform: "uppercase",
+            textAlign: "center",
+          }}
+        >
+          Fast
+          <br />
+          Company
+        </span>
+      );
+
+    case "webby":
+      return (
+        <div className={className} style={{ ...style, textAlign: "center" }}>
+          <div
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: "50%",
+              border: "2px solid currentColor",
+              display: "grid",
+              placeItems: "center",
+              margin: "0 auto 6px",
+              fontSize: 11,
+              fontWeight: 800,
+            }}
+          >
+            W
+          </div>
+          <span
+            style={{
+              fontFamily: "Inter, Helvetica Neue, Arial, sans-serif",
+              fontSize: "10px",
+              fontWeight: 800,
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
+            }}
+          >
+            The Webby Awards
+          </span>
+        </div>
+      );
+
+    case "software-reviews":
+      return (
+        <div className={className} style={{ ...style, textAlign: "center" }}>
+          <div
+            style={{
+              width: 54,
+              height: 54,
+              borderRadius: "50%",
+              border: "3px solid currentColor",
+              display: "grid",
+              placeItems: "center",
+              margin: "0 auto",
+              fontFamily: "Inter, Helvetica Neue, Arial, sans-serif",
+              fontSize: "9px",
+              fontWeight: 800,
+              lineHeight: 1.15,
+              letterSpacing: "0.02em",
+              textTransform: "uppercase",
+            }}
+          >
+            Gold
+            <br />
+            Medal
+            <br />
+            2021
+          </div>
+        </div>
+      );
+
     default:
       return null;
   }

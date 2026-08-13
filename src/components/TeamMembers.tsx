@@ -15,7 +15,12 @@ export function TeamMembers({ members }: Props) {
     <div className={styles.row}>
       {members.map((m) => (
         <article key={m.name} className={styles.card}>
-          <img src={m.image} alt={m.name} loading="lazy" />
+          <img
+            className={styles.photo}
+            src={m.image}
+            alt={m.name}
+            loading="lazy"
+          />
           <strong>{m.name}</strong>
           <span>{m.role}</span>
         </article>
