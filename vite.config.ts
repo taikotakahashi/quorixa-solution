@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { chatApiPlugin } from "./vite-plugin-chat-api";
+import { chatApiPlugin } from "./vite-plugin-chat-api.js";
 
 // https://vite.dev/config/
 export default defineConfig({

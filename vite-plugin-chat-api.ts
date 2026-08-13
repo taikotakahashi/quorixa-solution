@@ -1,6 +1,6 @@
 import type { Plugin } from "vite";
 import { loadEnv } from "vite";
-import { CHAT_SYSTEM_PROMPT } from "./src/lib/chatKnowledge";
+import { CHAT_SYSTEM_PROMPT } from "./src/lib/chatKnowledge.js";
 
 type IncomingMessage = {
   role: "user" | "assistant" | "system";
