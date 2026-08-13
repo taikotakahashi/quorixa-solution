@@ -1,5 +1,3 @@
-import type { ClientLogo } from "../data/content";
-
 type Props = {
   id: string;
   className?: string;
@@ -75,10 +73,4 @@ export function ClientBrandIcon({ id, className }: Props) {
     default:
       return null;
   }
-}
-
-export function getLogoClass(client: ClientLogo) {
-  if (client.style === "uppercase") return "uppercase";
-  if (client.style === "italic") return "italic";
-  return "normal";
 }
