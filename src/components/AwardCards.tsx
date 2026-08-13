@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { awards, certifications } from "../data/content";
-import { AwardBrandMark, CertificationMark } from "./AwardBrandMark";
+import { AwardBrandMark } from "./AwardBrandMark";
 import styles from "./AwardCards.module.css";
 
 type Props = {
@@ -14,7 +14,7 @@ export function AwardCards({ showCertifications = true }: Props) {
   const scroll = (dir: -1 | 1) => {
     const el = trackRef.current;
     if (!el) return;
-    el.scrollBy({ left: dir * 220, behavior: "smooth" });
+    el.scrollBy({ left: dir * 172, behavior: "smooth" });
   };
 
   return (
@@ -55,11 +55,11 @@ export function AwardCards({ showCertifications = true }: Props) {
           <h3 className={styles.certsLabel}>Certifications and recognition</h3>
           <div className={styles.certList}>
             {certifications.map((item) => (
-              <CertificationMark
+              <img
                 key={item.id}
-                id={item.id}
-                label={item.label}
-                className={styles.certItem}
+                src={item.src}
+                alt={item.label}
+                className={styles.certLogo}
               />
             ))}
           </div>

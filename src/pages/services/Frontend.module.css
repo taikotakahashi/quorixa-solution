@@ -1,0 +1,174 @@
+.skinCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.skinCard {
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  height: 100%;
+}
+
+.skinValue {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--color-orange);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.skinCard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.impactGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.impactCard {
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  height: 100%;
+}
+
+.impactValue {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-purple);
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+
+.impactCard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.advantagesHead {
+  max-width: 720px;
+  margin-bottom: 36px;
+}
+
+.advantagesHead h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--color-white);
+  margin: 12px 0 16px;
+  line-height: 1.1;
+}
+
+.advantagesHead p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 560px;
+}
+
+.partnerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.partnerCard {
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  border: 1px solid transparent;
+  height: 100%;
+}
+
+.partnerCard h3 {
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.partnerCard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.techLogoGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.techLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.darkCta {
+  display: grid;
+  grid-template-columns: 1.5fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.darkCta h2 {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  max-width: 640px;
+}
+
+.darkCta p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 520px;
+}
+
+@media (max-width: 1100px) {
+  .techLogoGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .skinCards,
+  .impactGrid,
+  .partnerGrid,
+  .darkCta {
+    grid-template-columns: 1fr;
+  }
+
+  .techLogoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

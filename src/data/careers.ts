@@ -2,29 +2,31 @@ export type TalentLocation = {
   id: string;
   name: string;
   region: "Americas" | "Europe" | "Asia";
+  /** emoji fallback */
   flag: string;
+  utcOffset: string;
   openRoles: number;
-  /** percent positions on the map */
+  /** percent positions on the map image */
   x: number;
   y: number;
 };
 
 export const talentLocations: TalentLocation[] = [
-  { id: "usa", name: "USA", region: "Americas", flag: "🇺🇸", openRoles: 13, x: 22, y: 38 },
-  { id: "mexico", name: "Mexico", region: "Americas", flag: "🇲🇽", openRoles: 4, x: 18, y: 48 },
-  { id: "argentina", name: "Argentina", region: "Americas", flag: "🇦🇷", openRoles: 3, x: 28, y: 78 },
-  { id: "colombia", name: "Colombia", region: "Americas", flag: "🇨🇴", openRoles: 5, x: 26, y: 58 },
-  { id: "brazil", name: "Brazil", region: "Americas", flag: "🇧🇷", openRoles: 6, x: 32, y: 68 },
-  { id: "guatemala", name: "Guatemala", region: "Americas", flag: "🇬🇹", openRoles: 2, x: 20, y: 52 },
-  { id: "poland", name: "Poland", region: "Europe", flag: "🇵🇱", openRoles: 8, x: 52, y: 32 },
-  { id: "spain", name: "Spain", region: "Europe", flag: "🇪🇸", openRoles: 5, x: 46, y: 40 },
-  { id: "portugal", name: "Portugal", region: "Europe", flag: "🇵🇹", openRoles: 4, x: 44, y: 42 },
-  { id: "ukraine", name: "Ukraine", region: "Europe", flag: "🇺🇦", openRoles: 7, x: 56, y: 34 },
-  { id: "romania", name: "Romania", region: "Europe", flag: "🇷🇴", openRoles: 3, x: 55, y: 38 },
-  { id: "bulgaria", name: "Bulgaria", region: "Europe", flag: "🇧🇬", openRoles: 2, x: 54, y: 40 },
-  { id: "slovenia", name: "Slovenia", region: "Europe", flag: "🇸🇮", openRoles: 2, x: 51, y: 38 },
-  { id: "slovakia", name: "Slovakia", region: "Europe", flag: "🇸🇰", openRoles: 2, x: 52, y: 36 },
-  { id: "india", name: "India", region: "Asia", flag: "🇮🇳", openRoles: 9, x: 68, y: 50 },
+  { id: "usa", name: "USA", region: "Americas", flag: "🇺🇸", utcOffset: "UTC-5", openRoles: 13, x: 22, y: 38 },
+  { id: "mexico", name: "Mexico", region: "Americas", flag: "🇲🇽", utcOffset: "UTC-6", openRoles: 4, x: 18, y: 48 },
+  { id: "argentina", name: "Argentina", region: "Americas", flag: "🇦🇷", utcOffset: "UTC-3", openRoles: 3, x: 28, y: 78 },
+  { id: "colombia", name: "Colombia", region: "Americas", flag: "🇨🇴", utcOffset: "UTC-5", openRoles: 5, x: 26, y: 58 },
+  { id: "brazil", name: "Brazil", region: "Americas", flag: "🇧🇷", utcOffset: "UTC-3", openRoles: 6, x: 32, y: 68 },
+  { id: "guatemala", name: "Guatemala", region: "Americas", flag: "🇬🇹", utcOffset: "UTC-6", openRoles: 2, x: 20, y: 52 },
+  { id: "poland", name: "Poland", region: "Europe", flag: "🇵🇱", utcOffset: "UTC+1", openRoles: 8, x: 52, y: 32 },
+  { id: "spain", name: "Spain", region: "Europe", flag: "🇪🇸", utcOffset: "UTC+1", openRoles: 5, x: 46, y: 40 },
+  { id: "portugal", name: "Portugal", region: "Europe", flag: "🇵🇹", utcOffset: "UTC+0", openRoles: 4, x: 44, y: 42 },
+  { id: "ukraine", name: "Ukraine", region: "Europe", flag: "🇺🇦", utcOffset: "UTC+2", openRoles: 7, x: 56, y: 34 },
+  { id: "romania", name: "Romania", region: "Europe", flag: "🇷🇴", utcOffset: "UTC+2", openRoles: 3, x: 55, y: 38 },
+  { id: "bulgaria", name: "Bulgaria", region: "Europe", flag: "🇧🇬", utcOffset: "UTC+2", openRoles: 2, x: 54, y: 40 },
+  { id: "slovenia", name: "Slovenia", region: "Europe", flag: "🇸🇮", utcOffset: "UTC+1", openRoles: 2, x: 51, y: 38 },
+  { id: "slovakia", name: "Slovakia", region: "Europe", flag: "🇸🇰", utcOffset: "UTC+1", openRoles: 2, x: 52, y: 36 },
+  { id: "india", name: "India", region: "Asia", flag: "🇮🇳", utcOffset: "UTC+5:30", openRoles: 9, x: 68, y: 50 },
 ];
 
 export const careerHeroPortraits = [

@@ -1,0 +1,141 @@
+.grid5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.outcomes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.metricsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.metric {
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.metricValue {
+  font-size: clamp(36px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--color-orange);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.metricLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.expertCta {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: center;
+  background: var(--color-light-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+}
+
+.expertTitle {
+  font-size: clamp(28px, 3.2vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 12px;
+  line-height: 1.15;
+}
+
+.expertDesc {
+  color: var(--color-muted);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.portraits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.portrait {
+  text-align: center;
+}
+
+.portrait img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.portrait strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.portrait span {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.caseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1100px) {
+  .grid5,
+  .caseGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .metricsRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .outcomes,
+  .expertCta {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .portraits {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid5,
+  .caseGrid,
+  .metricsRow {
+    grid-template-columns: 1fr;
+  }
+
+  .portraits {
+    grid-template-columns: 1fr;
+  }
+
+  .expertCta {
+    padding: 28px 20px;
+  }
+}

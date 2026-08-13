@@ -22,11 +22,11 @@
 }
 
 .title {
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(34px, 4.2vw, 48px);
   font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-  max-width: 700px;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  max-width: 720px;
 }
 
 .center .title {
@@ -39,6 +39,7 @@
   font-size: 16px;
   max-width: 560px;
   color: var(--color-muted);
+  line-height: 1.65;
 }
 
 .dark .title {

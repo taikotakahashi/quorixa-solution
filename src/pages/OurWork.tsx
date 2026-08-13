@@ -1,39 +1,137 @@
-import { useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
+import { ChevronDown } from "lucide-react";
 import { CaseStudyCard } from "../components/CaseStudyCard";
 import { CTASection } from "../components/CTASection";
 import { Reveal } from "../components/Reveal";
-import { SectionHeader } from "../components/SectionHeader";
 import { caseStudies } from "../data/caseStudies";
 import styles from "./OurWork.module.css";
 
-const FILTERS = ["All", "Mobile", "AI", "Data", "Design", "QA"] as const;
-type Filter = (typeof FILTERS)[number];
+const SERVICE_OPTIONS = [
+  "AI Studio",
+  "Backend",
+  "Data Studio",
+  "Design Studio",
+  "Front-end",
+  "Mobile",
+  "Quality Studio",
+] as const;
 
-const filterMatchers: Record<Exclude<Filter, "All">, string[]> = {
-  Mobile: ["mobile"],
-  AI: ["ai studio", "ai"],
-  Data: ["data studio", "data"],
-  Design: ["design studio", "design"],
-  QA: ["quality studio", "qa", "quality"],
-};
+const INDUSTRY_OPTIONS = [
+  "Agriculture",
+  "Automotive",
+  "Education",
+  "Energy & Resources",
+  "Financial Services",
+  "Fitness & Wellness",
+  "Healthcare & Pharma",
+  "Human Capital",
+  "Insurance",
+  "Legal",
+  "Logistics & Delivery",
+  "Manufacturing",
+  "Marketing",
+  "Media",
+  "Private Equity",
+  "Real Estate",
+  "Retail & Ecommerce",
+  "Tech & Software",
+  "Telecom",
+  "Travel",
+] as const;
 
-function matchesFilter(
-  tags: { label: string }[],
-  filter: Filter,
-): boolean {
-  if (filter === "All") return true;
-  const labels = tags.map((t) => t.label.toLowerCase());
-  const keys = filterMatchers[filter];
-  return labels.some((label) => keys.some((key) => label.includes(key)));
+type FilterPanel = "services" | "industries" | null;
+
+function normalize(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function matchesService(tags: { label: string }[], selected: string[]) {
+  if (selected.length === 0) return true;
+  const labels = tags.map((t) => normalize(t.label));
+  return selected.some((service) => {
+    const key = normalize(service);
+    return labels.some(
+      (label) => label === key || label.includes(key) || key.includes(label),
+    );
+  });
+}
+
+function matchesIndustry(industry: string | undefined, selected: string[]) {
+  if (selected.length === 0) return true;
+  if (!industry) return false;
+  const value = normalize(industry);
+  return selected.some((item) => {
+    const key = normalize(item);
+    return value === key || value.includes(key) || key.includes(value);
+  });
+}
+
+function toggleValue(list: string[], value: string) {
+  return list.includes(value)
+    ? list.filter((item) => item !== value)
+    : [...list, value];
 }
 
 export function OurWork() {
-  const [active, setActive] = useState<Filter>("All");
+  const [openPanel, setOpenPanel] = useState<FilterPanel>(null);
+  const [services, setServices] = useState<string[]>([]);
+  const [industries, setIndustries] = useState<string[]>([]);
+  const filterRef = useRef<HTMLDivElement>(null);
+
+  const industryOptions = useMemo(() => {
+    const fromData = caseStudies
+      .map((study) => study.industry)
+      .filter((value): value is string => Boolean(value));
+    return Array.from(new Set([...INDUSTRY_OPTIONS, ...fromData]));
+  }, []);
 
   const filtered = useMemo(
-    () => caseStudies.filter((study) => matchesFilter(study.tags, active)),
-    [active],
+    () =>
+      caseStudies.filter(
+        (study) =>
+          matchesService(study.tags, services) &&
+          matchesIndustry(study.industry, industries),
+      ),
+    [services, industries],
   );
+
+  useEffect(() => {
+    function onPointerDown(event: MouseEvent) {
+      if (
+        filterRef.current &&
+        !filterRef.current.contains(event.target as Node)
+      ) {
+        setOpenPanel(null);
+      }
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpenPanel(null);
+    }
+
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
+  function onTogglePanel(
+    panel: Exclude<FilterPanel, null>,
+    event: ReactMouseEvent<HTMLButtonElement>,
+  ) {
+    event.stopPropagation();
+    setOpenPanel((current) => (current === panel ? null : panel));
+  }
+
+  const hasFilters = services.length > 0 || industries.length > 0;
 
   return (
     <>
@@ -41,51 +139,120 @@ export function OurWork() {
         <div className="container">
           <Reveal>
             <div className={styles.heroInner}>
-              <span className="label">Our work</span>
-              <h1 className={styles.heroTitle}>
-                Explore our work{" "}
-                <span className="highlight-orange">in action</span>
-              </h1>
+              <span className={styles.heroLabel}>Portfolio</span>
+              <h1 className={styles.heroTitle}>Explore our work in action</h1>
               <p className={styles.heroDesc}>
-                Selected engagements across mobile, AI, data, design, and
-                quality — outcomes delivered with senior engineering ownership.
+                Solve industry challenges, drive growth, and build award-winning
+                products with QUORIXA. See how startups and Fortune 500 companies
+                do it.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="section section--sm">
+      <section className={styles.workSection}>
         <div className="container">
-          <Reveal>
-            <SectionHeader
-              title="Case studies"
-              description="Filter by capability to explore how QUORIXA partners ship."
-            />
-          </Reveal>
+          <div className={styles.filterBarWrap} ref={filterRef}>
+            <div className={styles.filterBar}>
+              <div className={styles.filterControl}>
+                <button
+                  type="button"
+                  className={`${styles.filterBtn} ${
+                    openPanel === "services" || services.length > 0
+                      ? styles.filterBtnActive
+                      : ""
+                  }`}
+                  aria-expanded={openPanel === "services"}
+                  aria-haspopup="listbox"
+                  onClick={(event) => onTogglePanel("services", event)}
+                >
+                  <span>
+                    Filter by Services{" "}
+                    <span className={styles.count}>{services.length}</span>
+                  </span>
+                  <ChevronDown size={16} strokeWidth={2.2} />
+                </button>
+                {openPanel === "services" && (
+                  <div className={styles.dropdown} role="listbox">
+                    {SERVICE_OPTIONS.map((option) => (
+                      <label key={option} className={styles.checkItem}>
+                        <input
+                          type="checkbox"
+                          checked={services.includes(option)}
+                          onChange={() =>
+                            setServices((current) =>
+                              toggleValue(current, option),
+                            )
+                          }
+                        />
+                        <span>{option}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
 
-          <div
-            className={styles.filters}
-            role="tablist"
-            aria-label="Filter case studies"
-          >
-            {FILTERS.map((filter) => (
+              <div className={styles.filterControl}>
+                <button
+                  type="button"
+                  className={`${styles.filterBtn} ${
+                    openPanel === "industries" || industries.length > 0
+                      ? styles.filterBtnActive
+                      : ""
+                  }`}
+                  aria-expanded={openPanel === "industries"}
+                  aria-haspopup="listbox"
+                  onClick={(event) => onTogglePanel("industries", event)}
+                >
+                  <span>
+                    Filter by Industries{" "}
+                    <span className={styles.count}>{industries.length}</span>
+                  </span>
+                  <ChevronDown size={16} strokeWidth={2.2} />
+                </button>
+                {openPanel === "industries" && (
+                  <div
+                    className={`${styles.dropdown} ${styles.dropdownWide}`}
+                    role="listbox"
+                  >
+                    {industryOptions.map((option) => (
+                      <label key={option} className={styles.checkItem}>
+                        <input
+                          type="checkbox"
+                          checked={industries.includes(option)}
+                          onChange={() =>
+                            setIndustries((current) =>
+                              toggleValue(current, option),
+                            )
+                          }
+                        />
+                        <span>{option}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {hasFilters && (
               <button
-                key={filter}
                 type="button"
-                role="tab"
-                aria-selected={active === filter}
-                className={`${styles.pill} ${active === filter ? styles.pillActive : ""}`}
-                onClick={() => setActive(filter)}
+                className={styles.clearBtn}
+                onClick={() => {
+                  setServices([]);
+                  setIndustries([]);
+                }}
               >
-                {filter}
+                Clear All
               </button>
-            ))}
+            )}
           </div>
 
           {filtered.length === 0 ? (
             <p className={styles.empty}>
-              No case studies match this filter yet. Try another category.
+              No case studies found. Try adjusting your filters or click “Clear
+              All” to see more results.
             </p>
           ) : (
             <div className={styles.grid}>

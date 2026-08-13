@@ -1,3 +1,10 @@
+import googleCloud from "../assets/logo-slider/g-cl.webp";
+import teradata from "../assets/logo-slider/tet-p.webp";
+import inc5000 from "../assets/logo-slider/inc.webp";
+import clutch from "../assets/logo-slider/clutch.webp";
+import iso from "../assets/logo-slider/iso.webp";
+import aws from "../assets/logo-slider/aws.webp";
+import istqb from "../assets/logo-slider/istqb.webp";
 import asLogo from "../assets/logo-slider/as-logo.webp";
 import dhLogo from "../assets/logo-slider/dh-logo.webp";
 import grLogo from "../assets/logo-slider/gr-logo.webp";
@@ -15,16 +22,14 @@ export const clients: ClientLogo[] = [
   { id: "shutterstock", name: "Shutterstock", src: shLogo },
   { id: "asana", name: "Asana", src: asLogo },
   { id: "vmware", name: "VMware", src: vmLogo },
-  { id: "delivery-hero", name: "Delivery Hero", src: dhLogo },
   { id: "groupon", name: "Groupon", src: grLogo },
+  { id: "delivery-hero", name: "Delivery Hero", src: dhLogo },
   { id: "netapp", name: "NetApp", src: naLogo },
 ];
 
 export type Award = {
   title: string;
-  /** Card background */
   color: string;
-  /** Darker logo tint matching original treatment */
   logoColor: string;
   brand: string;
 };
@@ -32,44 +37,44 @@ export type Award = {
 export const awards: Award[] = [
   {
     title: "Featured React Native app by Facebook | Meta",
-    color: "#3B7DED",
-    logoColor: "#163A8A",
+    color: "#5B79E6",
+    logoColor: "#1E3A8A",
     brand: "meta",
   },
   {
     title: "Android Excellence app",
-    color: "#F15A4A",
+    color: "#EF624C",
     logoColor: "#8B1E14",
     brand: "google-play",
   },
   {
     title: "#1 in Health and Fitness",
-    color: "#1F5FE0",
-    logoColor: "#0B2F8A",
+    color: "#3C4ED8",
+    logoColor: "#1A246B",
     brand: "app-store",
   },
   {
     title: "Deloitte Technology Fast 500",
-    color: "#6FBF2C",
+    color: "#6FD243",
     logoColor: "#2F6A0E",
     brand: "deloitte",
   },
   {
     title: "The Best Embedded Business Intelligence Software",
-    color: "#FF5A1F",
+    color: "#FF6B22",
     logoColor: "#9A2A00",
     brand: "g2",
   },
   {
     title: "Gartner top OEM/Embedded BI",
-    color: "#4BA3E3",
+    color: "#5FA6E8",
     logoColor: "#0F4F86",
     brand: "gartner",
   },
   {
     title: "Gartner's Magic Quadrant for RTTVPs",
-    color: "#7A4DFF",
-    logoColor: "#3A188F",
+    color: "#8E28F3",
+    logoColor: "#3A0A7A",
     brand: "gartner",
   },
   {
@@ -83,16 +88,17 @@ export const awards: Award[] = [
 export type Certification = {
   id: string;
   label: string;
+  src: string;
 };
 
 export const certifications: Certification[] = [
-  { id: "google-cloud", label: "Google Cloud Partner" },
-  { id: "teradata", label: "Teradata Partner" },
-  { id: "inc5000", label: "Inc. 5000" },
-  { id: "clutch", label: "Clutch" },
-  { id: "iso", label: "ISO" },
-  { id: "aws", label: "AWS Partner" },
-  { id: "istqb", label: "ISTQB" },
+  { id: "google-cloud", label: "Google Cloud Partner", src: googleCloud },
+  { id: "teradata", label: "Teradata Partner", src: teradata },
+  { id: "inc5000", label: "Inc. 5000", src: inc5000 },
+  { id: "clutch", label: "Clutch", src: clutch },
+  { id: "iso", label: "ISO", src: iso },
+  { id: "aws", label: "AWS Partner", src: aws },
+  { id: "istqb", label: "ISTQB", src: istqb },
 ];
 
 export const industries = [

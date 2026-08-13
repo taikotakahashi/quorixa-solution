@@ -1,7 +1,6 @@
 .section {
   background: var(--color-black);
   padding: 100px 0;
-  text-align: center;
   position: relative;
 }
 
@@ -20,6 +19,7 @@
   position: relative;
   z-index: 1;
   padding-top: 12px;
+  text-align: center;
 }
 
 .title {
@@ -46,6 +46,68 @@
   flex-wrap: wrap;
 }
 
+.split {
+  position: relative;
+  z-index: 1;
+  padding-top: 12px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.splitTitle {
+  font-size: clamp(32px, 4.2vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: #fff;
+  line-height: 1.1;
+  max-width: 480px;
+}
+
+.splitDesc {
+  margin-top: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 420px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.linkGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 28px;
+  margin-bottom: 32px;
+}
+
+.linkGrid a {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 15px;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.linkGrid a:hover {
+  color: #fff;
+}
+
+.linkGrid a::before {
+  content: "→ ";
+  color: var(--color-orange);
+}
+
+.splitAction {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (max-width: 900px) {
+  .split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
 @media (max-width: 767px) {
   .section {
     padding: 80px 0 64px;
@@ -53,5 +115,9 @@
 
   .section::before {
     height: 28px;
+  }
+
+  .linkGrid {
+    grid-template-columns: 1fr;
   }
 }

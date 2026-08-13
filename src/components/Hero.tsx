@@ -10,7 +10,6 @@ type Props = {
   visual?: React.ReactNode;
   className?: string;
   layout?: "split" | "centered";
-  /** Show background video (homepage centered hero) */
   withVideo?: boolean;
 };
 
@@ -41,12 +40,12 @@ export function Hero({
             <source src={ASSETS.heroVideo} type="video/webm" />
           </video>
         )}
-        <div className={styles.videoOverlay} aria-hidden="true" />
+        {withVideo && <div className={styles.videoOverlay} aria-hidden="true" />}
         <div className={`container ${styles.centered}`}>
           <h1 className={styles.centeredTitle}>{title}</h1>
           <p className={styles.centeredDesc}>{description}</p>
           <div className={styles.centeredCta}>
-            <Button href={ctaHref} variant="secondary" arrow>
+            <Button href={ctaHref} variant={withVideo ? "secondary" : undefined} arrow>
               {ctaLabel}
             </Button>
           </div>

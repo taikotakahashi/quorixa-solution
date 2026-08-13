@@ -1,0 +1,256 @@
+.specialtyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.trustSplit {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.trustTitle {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  margin: 12px 0 16px;
+  max-width: 480px;
+  line-height: 1.1;
+}
+
+.trustCopy {
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 420px;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.consultBar {
+  display: grid;
+  grid-template-columns: 1.5fr auto;
+  gap: 28px;
+  align-items: center;
+  margin-top: 48px;
+  padding: 28px 32px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.consultTitle {
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 8px;
+  color: var(--color-white);
+  line-height: 1.2;
+}
+
+.consultDesc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 560px;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px 28px;
+}
+
+.benefit {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.benefitIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff0e6;
+  color: var(--color-orange);
+}
+
+.benefit h3 {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.benefit p {
+  font-size: 14px;
+  color: var(--color-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.advantagesGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.advantageCard {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-lg);
+  padding: 28px 22px;
+  height: 100%;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.advantageCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.advantageIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  background: rgba(255, 101, 0, 0.15);
+  color: var(--color-orange);
+}
+
+.advantageCard h3 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  color: var(--color-white);
+  line-height: 1.3;
+}
+
+.advantageCard p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.assemble {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.assembleTitle {
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 28px;
+  line-height: 1.05;
+  max-width: 420px;
+}
+
+.assembleImage {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--color-light-bg);
+}
+
+.assembleImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.assembleList {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: 8px;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.assembleItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.assembleIcon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #fff0e6;
+  color: var(--color-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assembleItem h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+
+.assembleItem p {
+  font-size: 14px;
+  color: var(--color-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media (max-width: 1100px) {
+  .specialtyGrid,
+  .benefits {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .advantagesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .statsRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .trustSplit,
+  .assemble,
+  .consultBar {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .assembleImage {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 640px) {
+  .specialtyGrid,
+  .benefits,
+  .advantagesGrid {
+    grid-template-columns: 1fr;
+  }
+}

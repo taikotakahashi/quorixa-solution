@@ -1,61 +1,178 @@
 .hero {
-  padding: 120px 0 80px;
+  padding: 120px 0 56px;
 }
 
 .heroInner {
-  max-width: 720px;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroLabel {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-bottom: 18px;
 }
 
 .heroTitle {
-  font-size: clamp(40px, 5.2vw, 64px);
+  font-size: clamp(36px, 5vw, 56px);
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 1.02;
-  margin-bottom: 20px;
+  line-height: 1.08;
+  margin-bottom: 18px;
+  color: var(--color-text);
 }
 
 .heroDesc {
   font-size: 17px;
   line-height: 1.7;
-  max-width: 520px;
+  color: var(--color-muted);
+  max-width: 620px;
 }
 
-.filters {
+.workSection {
+  padding: 24px 0 100px;
+}
+
+.filterBarWrap {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 8px 0 40px;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 5;
 }
 
-.pill {
-  padding: 10px 18px;
+.filterBar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+
+.filterControl {
+  position: relative;
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
   border-radius: 999px;
   border: 1px solid var(--color-border);
-  background: white;
+  background: var(--color-white);
+  color: var(--color-text);
   font-size: 14px;
   font-weight: 600;
-  color: var(--color-text);
+  white-space: nowrap;
   transition:
     background var(--transition),
     color var(--transition),
     border-color var(--transition);
 }
 
-.pill:hover {
-  border-color: var(--color-purple);
-  color: var(--color-purple);
+.filterBtn svg {
+  flex-shrink: 0;
+  transition: transform var(--transition);
 }
 
-.pillActive {
-  background: var(--color-purple);
-  border-color: var(--color-purple);
-  color: white;
+.filterBtn[aria-expanded="true"] svg {
+  transform: rotate(180deg);
 }
 
-.pillActive:hover {
-  color: white;
+.filterBtn:hover {
+  border-color: rgba(91, 53, 245, 0.35);
+}
+
+.filterBtnActive {
+  background: #5b35f5;
+  border-color: #5b35f5;
+  color: var(--color-white);
+}
+
+.filterBtnActive:hover {
   background: var(--color-purple-dark);
   border-color: var(--color-purple-dark);
+  color: var(--color-white);
+}
+
+.count {
+  font-variant-numeric: tabular-nums;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  min-width: 240px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 12px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-dropdown);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdownWide {
+  min-width: 280px;
+  max-height: 360px;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  user-select: none;
+}
+
+.checkItem:hover {
+  background: var(--color-light-bg);
+}
+
+.checkItem input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-purple);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.clearBtn {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-purple);
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.clearBtn:hover {
+  color: var(--color-purple-dark);
 }
 
 .grid {
@@ -65,9 +182,11 @@
 }
 
 .empty {
-  padding: 48px 0;
+  padding: 64px 0;
   text-align: center;
   color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 @media (max-width: 1100px) {
@@ -78,7 +197,35 @@
 
 @media (max-width: 767px) {
   .hero {
-    padding: 96px 0 56px;
+    padding: 96px 0 40px;
+  }
+
+  .workSection {
+    padding: 8px 0 72px;
+  }
+
+  .filterBar {
+    width: 100%;
+    flex-direction: column;
+    border-radius: var(--radius-xl);
+    align-items: stretch;
+  }
+
+  .filterControl {
+    width: 100%;
+  }
+
+  .filterBtn {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .dropdown,
+  .dropdownWide {
+    left: 0;
+    right: 0;
+    min-width: 0;
+    width: 100%;
   }
 
   .grid {

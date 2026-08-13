@@ -1,18 +1,19 @@
 import {
-  ArrowUpRight,
   Brain,
-  Clock,
+  Briefcase,
   Code2,
   Compass,
   Gauge,
   Handshake,
-  Layout,
+  Layers,
   Monitor,
   Palette,
+  Rocket,
   ShieldCheck,
   Smartphone,
   Target,
   Users,
+  Zap,
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
@@ -23,63 +24,50 @@ import { ServiceCard } from "../../components/ServiceCard";
 import { StatCard } from "../../components/StatCard";
 import { CTASection } from "../../components/CTASection";
 import { Reveal } from "../../components/Reveal";
-import { ProcessSteps } from "../../components/ProcessSteps";
-import styles from "./ServicePage.module.css";
+import { CurvedDivider } from "../../components/CurvedDivider";
+import { Button } from "../../components/Button";
+import styles from "./DedicatedTeams.module.css";
 
 const specialties: {
   icon: LucideIcon;
   title: string;
   description: string;
-  iconBg: string;
-  iconColor: string;
 }[] = [
   {
     icon: Code2,
-    title: "Full-stack engineering",
+    title: "Full-stack and backend development",
     description:
-      "Product-minded engineers who own features across APIs, services, and front-end delivery.",
-    iconBg: "#F3E8FF",
-    iconColor: "#5B35F5",
+      "Node.js · Java · .NET · Python · Go · Scala — product-minded engineers who own services end to end.",
   },
   {
     icon: Monitor,
-    title: "Front-end specialists",
+    title: "Front-end development",
     description:
-      "React, TypeScript, and design-system experts who ship accessible, high-performance UIs.",
-    iconBg: "#E8F1FF",
-    iconColor: "#1677FF",
+      "React.js · Angular · Vue.js · JavaScript — interfaces that stay fast, accessible, and maintainable.",
   },
   {
     icon: Smartphone,
-    title: "Mobile engineering",
+    title: "Mobile development",
     description:
-      "Native and cross-platform talent for iOS, Android, React Native, and Flutter roadmaps.",
-    iconBg: "#E6F7EF",
-    iconColor: "#35B968",
+      "iOS · Android · React Native · Flutter — native and cross-platform talent for shipping on schedule.",
   },
   {
     icon: ShieldCheck,
-    title: "QA & automation",
+    title: "Quality assurance",
     description:
-      "Manual and automated quality engineers who protect every release with clear coverage.",
-    iconBg: "#FFE8E6",
-    iconColor: "#FF3B30",
+      "TDD · BDD · Manual QA · Test automation — coverage that protects every release.",
   },
   {
     icon: Brain,
-    title: "Big data & ML",
+    title: "Big data and machine learning",
     description:
-      "Data engineers and ML practitioners who turn pipelines and models into product leverage.",
-    iconBg: "#FFF0E6",
-    iconColor: "#FF6500",
+      "Data engineering · Performance · Visualization · Data science — pipelines and models that create leverage.",
   },
   {
     icon: Palette,
-    title: "UI/UX design",
+    title: "UI / UX design",
     description:
-      "Product designers who shape flows, systems, and interfaces your users trust and enjoy.",
-    iconBg: "#F3E8FF",
-    iconColor: "#4523D8",
+      "Design strategy · User research · Interaction · Visual & motion · UX consultancy.",
   },
 ];
 
@@ -87,56 +75,42 @@ const benefits: {
   icon: LucideIcon;
   title: string;
   description: string;
-  iconBg: string;
-  iconColor: string;
 }[] = [
   {
-    icon: Gauge,
-    title: "Accelerate delivery",
+    icon: Layers,
+    title: "Scale capabilities on demand",
     description:
-      "Add senior capacity immediately — without the ramp-up cost of traditional hiring.",
-    iconBg: "#E8F1FF",
-    iconColor: "#1677FF",
-  },
-  {
-    icon: Target,
-    title: "Stay focused on outcomes",
-    description:
-      "Teams align to your KPIs, ceremonies, and roadmap — not a generic outsourcing playbook.",
-    iconBg: "#F3E8FF",
-    iconColor: "#5B35F5",
-  },
-  {
-    icon: Layout,
-    title: "Scale with flexibility",
-    description:
-      "Grow or reshape the squad as priorities shift — skills, seniority, and size on demand.",
-    iconBg: "#E6F7EF",
-    iconColor: "#35B968",
-  },
-  {
-    icon: Clock,
-    title: "Work in your timezone",
-    description:
-      "Nearshore collaboration means real-time standups, pair sessions, and faster decisions.",
-    iconBg: "#FFF0E6",
-    iconColor: "#FF6500",
+      "Easily scale development and design capacity to match your project needs.",
   },
   {
     icon: Handshake,
-    title: "Extend your culture",
+    title: "Retain product knowledge",
     description:
-      "Engineers who communicate clearly, document well, and operate as part of your org.",
-    iconBg: "#FFE8E6",
-    iconColor: "#FF3B30",
+      "Ensure long-term commitment so context stays with your product — not lost to turnover.",
   },
   {
-    icon: ArrowUpRight,
-    title: "Raise the bar",
+    icon: Rocket,
+    title: "Kick off faster",
     description:
-      "Bring patterns, tooling, and practices that lift engineering standards across the team.",
-    iconBg: "#E8F1FF",
-    iconColor: "#4523D8",
+      "Start new work and iterate on existing projects without months of hiring lag.",
+  },
+  {
+    icon: Target,
+    title: "Find niche experts",
+    description:
+      "Access technical and industry specialists that are hard to hire locally.",
+  },
+  {
+    icon: Zap,
+    title: "Add brainpower efficiently",
+    description:
+      "Extend your team with senior capacity at a fraction of traditional in-house cost.",
+  },
+  {
+    icon: Compass,
+    title: "Free your core team",
+    description:
+      "Let your in-house leaders focus on strategy while dedicated specialists execute.",
   },
 ];
 
@@ -147,61 +121,70 @@ const advantages: {
 }[] = [
   {
     icon: Users,
-    title: "Vetted senior talent",
+    title: "Top-shelf talent pool",
     description:
-      "Every specialist passes technical and soft-skill screening before joining your squad.",
-  },
-  {
-    icon: Compass,
-    title: "Strategic partnership",
-    description:
-      "We advise on architecture and process — not just ticket throughput — so you ship smarter.",
-  },
-  {
-    icon: Gauge,
-    title: "Predictable velocity",
-    description:
-      "Transparent planning, stable capacity, and delivery rituals that keep stakeholders aligned.",
+      "Engage global professionals whose skills and ownership mentality match your best in-house experts.",
   },
   {
     icon: ShieldCheck,
-    title: "Quality by default",
+    title: "Robust security",
     description:
-      "Code review, testing discipline, and security awareness baked into how the team works.",
+      "Information security practices aligned to ISO/IEC 27001 standards so your project stays protected.",
   },
   {
-    icon: Handshake,
-    title: "Long-term continuity",
+    icon: Briefcase,
+    title: "Industry expertise",
     description:
-      "Low attrition and knowledge retention so institutional context stays with your product.",
+      "We select candidates for your industry challenges and business needs — not just the tech stack.",
+  },
+  {
+    icon: Gauge,
+    title: "Flexibility",
+    description:
+      "Scale the team up or down, or switch engagement models — you stay in control.",
+  },
+  {
+    icon: Compass,
+    title: "Strategic support",
+    description:
+      "Tech leads and delivery managers advise on architecture decisions and process improvements.",
   },
 ];
 
-const processSteps = [
+const assembleWays: {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}[] = [
   {
-    title: "Discovery",
+    icon: Zap,
+    title: "Efficiency",
     description:
-      "We learn your product, stack, ways of working, and the outcomes that matter most.",
+      "Align on goals, architecture, and milestones so the squad starts delivering immediately.",
   },
   {
-    title: "Team",
+    icon: Layers,
+    title: "Scale",
     description:
-      "QUORIXA assembles a shortlist of specialists matched to skills, seniority, and culture fit.",
+      "Define composition, roles, and seniority — then grow capacity as the roadmap expands.",
   },
   {
-    title: "Pitching",
+    icon: Gauge,
+    title: "Flexibility",
     description:
-      "Meet candidates, review portfolios, and validate collaboration style in live sessions.",
+      "Adjust skills and headcount as priorities shift without restarting a full hiring cycle.",
   },
   {
-    title: "Selection",
+    icon: Target,
+    title: "Expertise",
     description:
-      "You choose the team. We finalize roles, onboarding plan, and success criteria together.",
+      "Interview, shortlist, and engage specialists matched to your stack and domain.",
   },
   {
-    title: "Delivery",
+    icon: Handshake,
+    title: "Stability",
     description:
-      "The squad embeds with your process and starts shipping — with continuous optimization.",
+      "Once assembled, your team ships through a transparent iterative process with lasting continuity.",
   },
 ];
 
@@ -217,7 +200,7 @@ export function DedicatedTeams() {
             <span className="highlight-orange">teams</span>
           </>
         }
-        description="Thoroughly vetted nearshore specialists aligned to your goals, process, and timezone. Scale product delivery with teams that feel like your own."
+        description="Thoroughly vetted, highly efficient, and custom-built for your unique challenge. Boost development velocity with high-impact agile teams aligned with your goals, process, and time zone."
         ctaLabel="Book a free consultation"
         visual={<VideoCallVisual />}
       />
@@ -228,20 +211,20 @@ export function DedicatedTeams() {
         <div className="container">
           <Reveal>
             <SectionHeader
-              label="Capabilities"
+              label="Services"
               title="Our nearshore experts specialize in"
               description="Compose a squad around the disciplines your roadmap needs — from full-stack delivery to design, data, and quality."
             />
           </Reveal>
-          <div className={styles.grid6}>
+          <div className={styles.specialtyGrid}>
             {specialties.map((item) => (
               <Reveal key={item.title}>
                 <ServiceCard
                   icon={item.icon}
                   title={item.title}
                   description={item.description}
-                  iconBg={item.iconBg}
-                  iconColor={item.iconColor}
+                  iconBg="#FFF0E6"
+                  iconColor="#FF6500"
                 />
               </Reveal>
             ))}
@@ -249,57 +232,69 @@ export function DedicatedTeams() {
         </div>
       </section>
 
+      <CurvedDivider from="light" to="black" />
+
       <section className="section section--dark">
         <div className="container">
-          <div className={styles.darkSplit}>
+          <div className={styles.trustSplit}>
             <Reveal>
               <div>
                 <span className="label">Trusted delivery</span>
-                <h2 className={styles.darkTitle}>
-                  Built for teams that ship like{" "}
-                  <span className="highlight-orange">Fortune 500</span>{" "}
-                  organizations
+                <h2 className={styles.trustTitle}>
+                  Tech teams trusted by Fortune 500 firms and{" "}
+                  <span className="highlight-orange">VC startups</span>
                 </h2>
-                <p className={styles.darkCopy}>
+                <p className={styles.trustCopy}>
                   QUORIXA dedicated teams bring enterprise-grade discipline with
-                  the speed and ownership of a focused product squad —
-                  measured by outcomes, not headcount.
+                  the speed and ownership of a focused product squad.
                 </p>
               </div>
             </Reveal>
-            <div className={styles.statsGrid2}>
-              <Reveal>
-                <StatCard
-                  value="3×"
-                  label="Faster ramp-up"
-                  description="Senior engineers productive in days, not months of hiring cycles."
-                />
-              </Reveal>
-              <Reveal>
-                <StatCard
-                  value="95%"
-                  label="Client retention"
-                  description="Long-term partnerships built on trust, clarity, and delivery."
-                />
-              </Reveal>
+            <div className={styles.statsRow}>
               <Reveal>
                 <StatCard
                   value="850+"
-                  label="Specialists"
-                  description="Talent across engineering, design, data, AI, and QA."
+                  label="Access experts"
+                  description="Specialists across global talent hubs ready to embed with your team."
                 />
               </Reveal>
               <Reveal>
                 <StatCard
-                  value="25+"
-                  label="Countries"
-                  description="Distributed experts collaborating as one team."
+                  value="3×"
+                  label="Faster time-to-hire"
+                  description="Up to 3× faster ramp compared to the industry average."
+                />
+              </Reveal>
+              <Reveal>
+                <StatCard
+                  value="2×"
+                  label="Higher cost-efficiency"
+                  description="Up to 2× better cost-efficiency versus typical in-house rates."
                 />
               </Reveal>
             </div>
           </div>
+
+          <Reveal>
+            <div className={styles.consultBar}>
+              <div>
+                <h3 className={styles.consultTitle}>
+                  Consult our experts to start assembling your dedicated team
+                </h3>
+                <p className={styles.consultDesc}>
+                  Leverage QUORIXA to access top tech talent with greater speed
+                  and efficiency.
+                </p>
+              </div>
+              <Button href="/contact" arrow>
+                Book a call
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </section>
+
+      <CurvedDivider from="black" to="light" invert />
 
       <section className="section section--light">
         <div className="container">
@@ -315,14 +310,8 @@ export function DedicatedTeams() {
               const Icon = item.icon;
               return (
                 <Reveal key={item.title}>
-                  <article className={styles.benefitCard}>
-                    <div
-                      className={styles.benefitIcon}
-                      style={{
-                        background: item.iconBg,
-                        color: item.iconColor,
-                      }}
-                    >
+                  <article className={styles.benefit}>
+                    <div className={styles.benefitIcon}>
                       <Icon size={20} strokeWidth={1.8} />
                     </div>
                     <h3>{item.title}</h3>
@@ -335,17 +324,19 @@ export function DedicatedTeams() {
         </div>
       </section>
 
+      <CurvedDivider from="light" to="black" />
+
       <section className="section section--dark">
         <div className="container">
           <Reveal>
             <SectionHeader
               label="Strategic advantages"
-              title="Why product leaders choose QUORIXA teams"
+              title="Your strategic advantages with QUORIXA"
               description="More than staff augmentation — a partnership model designed for sustained product momentum."
               dark
             />
           </Reveal>
-          <div className={styles.grid3}>
+          <div className={styles.advantagesGrid}>
             {advantages.map((item) => {
               const Icon = item.icon;
               return (
@@ -364,22 +355,48 @@ export function DedicatedTeams() {
         </div>
       </section>
 
+      <CurvedDivider from="black" to="white" invert />
+
       <section className="section">
         <div className="container">
           <Reveal>
-            <ProcessSteps
-              title="How we build your dedicated team"
-              image="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80"
-              imageAlt="QUORIXA engineering team collaborating"
-              steps={processSteps}
-            />
+            <div className={styles.assemble}>
+              <div>
+                <h2 className={styles.assembleTitle}>
+                  Assemble your expert team your way
+                </h2>
+                <div className={styles.assembleImage}>
+                  <img
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80"
+                    alt="QUORIXA engineering team collaborating in the office"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <ul className={styles.assembleList}>
+                {assembleWays.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <li key={item.title} className={styles.assembleItem}>
+                      <div className={styles.assembleIcon}>
+                        <Icon size={18} strokeWidth={1.8} />
+                      </div>
+                      <div>
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </Reveal>
         </div>
       </section>
 
       <CTASection
-        title="Let's assemble your dedicated team"
-        description="Share your goals and stack — we'll match specialists who can start contributing quickly."
+        title="Industry grows with our dedicated teams"
+        description="Talk with our experts to see how companies in your industry grow with QUORIXA dedicated teams."
         ctaLabel="Book a consultation"
         secondaryLabel="Explore mobile development"
         secondaryHref="/mobile-development"

@@ -2,14 +2,15 @@ import {
   Apple,
   Code2,
   Layers,
+  RefreshCw,
   Smartphone,
   Users,
-  Zap,
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
 import { MobileVisual } from "../../components/HeroVisuals";
 import { ClientLogoMarquee } from "../../components/ClientLogoMarquee";
+import { CurvedDivider } from "../../components/CurvedDivider";
 import { SectionHeader } from "../../components/SectionHeader";
 import { ServiceCard } from "../../components/ServiceCard";
 import { StatCard } from "../../components/StatCard";
@@ -18,10 +19,10 @@ import { Testimonial } from "../../components/Testimonial";
 import { AwardCards } from "../../components/AwardCards";
 import { CTASection } from "../../components/CTASection";
 import { Reveal } from "../../components/Reveal";
-import { CheckList } from "../../components/CheckList";
 import { Button } from "../../components/Button";
 import { caseStudies } from "../../data/caseStudies";
-import styles from "./ServicePage.module.css";
+import shared from "./ServicePage.module.css";
+import styles from "./MobileDevelopment.module.css";
 
 const principles: {
   icon: LucideIcon;
@@ -34,7 +35,7 @@ const principles: {
     icon: Code2,
     title: "Robust code",
     description:
-      "Clean architecture, automated tests, and review discipline so your app stays stable as features grow.",
+      "Fast, smooth apps need optimal architecture and clean, well-tested code bases that stay stable as features grow.",
     iconBg: "#E8F1FF",
     iconColor: "#1677FF",
   },
@@ -42,7 +43,7 @@ const principles: {
     icon: Layers,
     title: "Future-proof technology",
     description:
-      "Stack choices and modular patterns that keep upgrades predictable — without locking you into dead ends.",
+      "Mature stacks with strong community support — modular patterns that keep upgrades predictable without dead ends.",
     iconBg: "#F3E8FF",
     iconColor: "#5B35F5",
   },
@@ -50,51 +51,86 @@ const principles: {
     icon: Users,
     title: "Focus on users",
     description:
-      "Performance, accessibility, and UX craft that turn downloads into retention and loyal product advocates.",
+      "Apps built for high App Store and Play ratings — performance, accessibility, and UX that turn downloads into loyalty.",
     iconBg: "#FFF0E6",
     iconColor: "#FF6500",
   },
 ];
 
-const platforms = [
+const expertiseStrip = [
   {
-    icon: Apple,
-    title: "iOS",
+    title: "Top app development partner",
     description:
-      "Native Swift and SwiftUI experiences tuned for Apple platforms, App Store guidelines, and device capabilities.",
-    tags: ["Swift", "SwiftUI", "UIKit", "Combine", "XCTest"],
+      "Senior mobile specialists who own architecture, delivery, and continuous improvement end to end.",
   },
   {
-    icon: Zap,
+    title: "Fastest-growing engagements",
+    description:
+      "Squads that scale with your roadmap — from MVP to multi-million download products.",
+  },
+  {
+    title: "Top-1% mobile experts",
+    description:
+      "Vetted talent across native and cross-platform stacks from 15+ countries, aligned to your timezone.",
+  },
+];
+
+const platforms: {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  tags: string[];
+}[] = [
+  {
+    icon: Apple,
+    title: "Native",
+    description:
+      "Swift and Kotlin experiences tuned for platform guidelines, device capabilities, and store excellence.",
+    tags: ["Swift", "SwiftUI", "Kotlin", "Compose", "XCTest"],
+  },
+  {
+    icon: RefreshCw,
+    title: "Interoperable",
+    description:
+      "Shared modules and bridge layers that connect native shells with reusable business logic and APIs.",
+    tags: ["KMP", "Turbo Modules", "FFI", "GraphQL", "REST"],
+  },
+  {
+    icon: Smartphone,
     title: "Cross-platform",
     description:
       "Shared codebases that ship iOS and Android together — without sacrificing feel, speed, or release cadence.",
     tags: ["React Native", "Flutter", "TypeScript", "Expo", "Detox"],
   },
+];
+
+const trustStats = [
   {
-    icon: Smartphone,
-    title: "Android",
-    description:
-      "Kotlin-first apps built for Play quality, material systems, and the breadth of the Android ecosystem.",
-    tags: ["Kotlin", "Jetpack Compose", "Coroutines", "Room", "Espresso"],
+    value: "11M+",
+    label: "New downloads",
+    description: "Consumer apps we helped launch and scale across stores.",
+  },
+  {
+    value: "2×",
+    label: "More users",
+    description: "Typical lift after UX and performance revamps on live apps.",
+  },
+  {
+    value: "3 mo",
+    label: "Greenfield to launch",
+    description: "AI, IoT, and consumer apps shipped from scratch on tight timelines.",
   },
 ];
 
-const expertiseItems = [
-  "Product discovery & UX for mobile",
-  "Native iOS and Android engineering",
-  "React Native & Flutter delivery",
-  "CI/CD, store releases & analytics",
-  "Offline-first & real-time sync",
-  "Security, privacy & compliance",
-];
-
-const mobileStudies = caseStudies
-  .filter((s) => s.tags.some((t) => /mobile|product|retail/i.test(t.label)))
+const studies = caseStudies
+  .filter((s) =>
+    ["geotap", "retailpulse", "medflow"].includes(s.id)
+  )
+  .concat(caseStudies)
+  .filter(
+    (s, i, arr) => arr.findIndex((x) => x.id === s.id) === i
+  )
   .slice(0, 3);
-
-const studies =
-  mobileStudies.length >= 3 ? mobileStudies : caseStudies.slice(0, 3);
 
 export function MobileDevelopment() {
   return (
@@ -106,50 +142,53 @@ export function MobileDevelopment() {
             <span className="highlight-orange">development</span>
           </>
         }
-        description="Native and cross-platform apps engineered for performance, polish, and long-term product growth — from concept to App Store and Play."
+        description="iOS, Android, and cross-platform — QUORIXA builds mobile apps that win awards and earn millions of downloads."
         ctaLabel="Book a free consultation"
         visual={<MobileVisual />}
       />
 
       <ClientLogoMarquee />
 
+      <CurvedDivider from="white" to="black" />
+
       <section className="section section--dark">
         <div className="container">
-          <div className={styles.darkSplit}>
+          <div className={shared.darkSplit}>
             <Reveal>
               <div>
                 <span className="label">Why quality wins</span>
-                <h2 className={styles.darkTitle}>
+                <h2 className={shared.darkTitle}>
                   In mobile, quality is critical to{" "}
                   <span className="highlight-orange">success</span>
                 </h2>
-                <p className={styles.darkCopy}>
-                  Users abandon slow, buggy, or confusing apps in seconds.
-                  QUORIXA builds mobile products that feel intentional — stable
-                  releases, crisp UX, and metrics that prove the investment.
+                <p className={shared.darkCopy}>
+                  When it comes to mobile apps, you can&apos;t compromise on
+                  design or quality. QUORIXA ships products that feel
+                  intentional — stable releases, crisp UX, and metrics that
+                  prove the investment.
                 </p>
               </div>
             </Reveal>
-            <div className={styles.statsGrid3}>
+            <div className={shared.statsGrid3}>
               <Reveal>
                 <StatCard
-                  value="82%"
-                  label="Retention lift"
-                  description="Teams that invest in release quality see stronger 30-day retention."
+                  value="62%"
+                  label="Of app uninstalls"
+                  description="Result from performance issues like freezing or crashes."
                 />
               </Reveal>
               <Reveal>
                 <StatCard
                   value="42%"
-                  label="Faster cycles"
-                  description="Shared pipelines and senior ownership shorten sprint-to-store time."
+                  label="Of users quit apps"
+                  description="Because of underwhelming UX — polish is non-negotiable."
                 />
               </Reveal>
               <Reveal>
                 <StatCard
                   value="53%"
-                  label="Fewer regressions"
-                  description="Automated gates and device coverage catch issues before users do."
+                  label="Of app users"
+                  description="Are ready to switch to better, more useful alternatives."
                 />
               </Reveal>
             </div>
@@ -157,16 +196,18 @@ export function MobileDevelopment() {
         </div>
       </section>
 
+      <CurvedDivider from="black" to="light" invert />
+
       <section className="section section--light">
         <div className="container">
           <Reveal>
             <SectionHeader
               label="Our principles"
-              title="How we build mobile products that last"
+              title="The principles driving our mobile solutions"
               description="Every engagement is anchored in engineering rigor, forward-looking tech choices, and relentless focus on the people who use your app."
             />
           </Reveal>
-          <div className={styles.grid3}>
+          <div className={shared.grid3}>
             {principles.map((item) => (
               <Reveal key={item.title}>
                 <ServiceCard
@@ -184,32 +225,29 @@ export function MobileDevelopment() {
 
       <section className="section section--dark">
         <div className="container">
-          <div className={styles.darkSplit}>
-            <Reveal>
-              <div>
-                <span className="label">Expertise</span>
-                <h2 className={styles.darkTitle}>
+          <Reveal>
+            <SectionHeader
+              label="Expertise"
+              title={
+                <>
                   Drive app development with{" "}
                   <span className="highlight-orange">proven expertise</span>
-                </h2>
-                <p className={styles.darkCopy}>
-                  From greenfield MVPs to complex enterprise suites, our mobile
-                  specialists plug into your roadmap and own outcomes —
-                  architecture, delivery, and continuous improvement.
-                </p>
-                <div className={styles.pillRow}>
-                  <span>Consumer apps</span>
-                  <span>Enterprise mobility</span>
-                  <span>Wearables & IoT</span>
-                  <span>FinTech & Health</span>
-                </div>
-              </div>
-            </Reveal>
-            <Reveal>
-              <div className={styles.expertiseList}>
-                <CheckList items={expertiseItems} columns={2} />
-              </div>
-            </Reveal>
+                </>
+              }
+              description="From greenfield MVPs to complex enterprise suites — mobile specialists who plug into your roadmap and own outcomes."
+              dark
+              align="center"
+            />
+          </Reveal>
+          <div className={styles.expertiseStrip}>
+            {expertiseStrip.map((item) => (
+              <Reveal key={item.title}>
+                <article className={styles.expertiseCard}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
@@ -217,28 +255,42 @@ export function MobileDevelopment() {
       <section className="section">
         <div className="container">
           <Reveal>
+            <Testimonial
+              quote="Since hiring QUORIXA, the company has seen significant improvements in velocity, sprint cadence, and ticket volume. They excel at identifying high-quality talent and scaling to meet increasingly complicated requirements."
+              author="Jeff Phillips"
+              role="Head of Quality Assurance"
+              company="smart agriculture app"
+              image="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&q=80"
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section section--light">
+        <div className="container">
+          <Reveal>
             <SectionHeader
               label="Technology"
-              title="Native or cross-platform — we meet you where you are"
+              title="Native, interoperable, or cross-platform — we've got you covered"
               description="Choose the path that fits your product goals, team skills, and timeline. We help you decide — then execute with depth."
               align="center"
             />
           </Reveal>
-          <div className={styles.techRow}>
+          <div className={shared.techRow}>
             {platforms.map((platform) => {
               const Icon = platform.icon;
               return (
                 <Reveal key={platform.title}>
-                  <div className={styles.techBlock}>
+                  <div className={shared.techBlock}>
                     <div
-                      className={styles.benefitIcon}
+                      className={shared.benefitIcon}
                       style={{ background: "#E8F1FF", color: "#1677FF" }}
                     >
                       <Icon size={20} strokeWidth={1.8} />
                     </div>
                     <h3>{platform.title}</h3>
                     <p>{platform.description}</p>
-                    <div className={styles.tagList}>
+                    <div className={shared.tagList}>
                       {platform.tags.map((tag) => (
                         <span key={tag}>{tag}</span>
                       ))}
@@ -251,11 +303,42 @@ export function MobileDevelopment() {
         </div>
       </section>
 
+      <section className="section section--dark">
+        <div className="container">
+          <Reveal>
+            <SectionHeader
+              label="Why QUORIXA"
+              title={
+                <>
+                  Industry leaders trust us.{" "}
+                  <span className="highlight-orange">Here&apos;s why</span>
+                </>
+              }
+              description="Measurable outcomes from mobile products that shipped, scaled, and kept winning users."
+              dark
+              align="center"
+            />
+          </Reveal>
+          <div className={styles.trustStats}>
+            {trustStats.map((stat) => (
+              <Reveal key={stat.label}>
+                <StatCard
+                  value={stat.value}
+                  label={stat.label}
+                  description={stat.description}
+                />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section section--light">
         <div className="container">
           <Reveal>
             <SectionHeader
-              title="Recognition that reflects delivery quality"
+              title="Our proof of success"
+              description="Recognition that reflects delivery quality — not slideware."
               align="center"
             />
           </Reveal>
@@ -267,20 +350,20 @@ export function MobileDevelopment() {
         <div className="container">
           <Reveal>
             <SectionHeader
-              label="Our work"
-              title="Mobile products that shipped and scaled"
-              description="Selected engagements where QUORIXA helped teams launch, modernize, and grow mobile experiences."
+              label="Case studies"
+              title="Featured success stories"
+              description="From mobile MVPs to apps with millions of users — engagements where QUORIXA turned mobile into a growth driver."
               align="center"
             />
           </Reveal>
-          <div className={styles.caseGrid}>
+          <div className={shared.caseGrid}>
             {studies.map((study) => (
               <Reveal key={study.id}>
                 <CaseStudyCard study={study} />
               </Reveal>
             ))}
           </div>
-          <div className={styles.centerCta}>
+          <div className={shared.centerCta}>
             <Button href="/our-work" variant="ghost" arrow>
               View all case studies
             </Button>
@@ -288,23 +371,9 @@ export function MobileDevelopment() {
         </div>
       </section>
 
-      <section className="section section--light">
-        <div className="container">
-          <Reveal>
-            <Testimonial
-              quote="QUORIXA's mobile team took our product from fragile prototype to a polished release with rock-solid performance. They owned quality end to end — and our App Store ratings show it."
-              author="Maya Chen"
-              role="VP of Product"
-              company="consumer tech company"
-              image="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&q=80"
-            />
-          </Reveal>
-        </div>
-      </section>
-
       <CTASection
-        title="Ready to build a mobile product users love?"
-        description="Tell us about your app goals — we'll assemble native or cross-platform specialists who can ship."
+        title="Turn your brilliant idea into a top-class mobile app"
+        description="Create high-quality mobile applications faster with leading-edge technology — explore strategies with our experts."
         ctaLabel="Book a consultation"
         secondaryLabel="Explore dedicated teams"
         secondaryHref="/dedicated-teams"

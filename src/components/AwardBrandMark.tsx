@@ -11,68 +11,82 @@ export function AwardBrandMark({ brand, className, color }: Props) {
   switch (brand) {
     case "meta":
       return (
-        <svg
-          className={className}
-          style={style}
-          viewBox="0 0 88 28"
-          fill="none"
-          aria-hidden
-        >
-          <path
-            d="M6.5 19.2c2.6-5.8 5.9-9.7 9.5-9.7 2.4 0 3.9 1.7 5.8 4.9 2.1-3.4 3.6-4.9 6.1-4.9 3.4 0 6.6 3.8 9.3 9.7-.7 1.4-1.5 2.3-2.4 2.3-1.3 0-2.4-1.7-4.1-5.1-1.8 3.6-3.1 5.1-5 5.1-2.1 0-3.9-2.3-5.6-5.9-1.7 3.6-3 5.9-5.1 5.9-1.9 0-3.7-1.7-5.2-4.9-.9 2.8-1.7 4.1-2.5 4.1-.9 0-1.6-.9-2.3-2.3.1 0 .8.8 1.5.7z"
-            fill="currentColor"
-          />
-          <text
-            x="48"
-            y="19.5"
-            fill="currentColor"
-            fontFamily="Inter, Helvetica Neue, Arial, sans-serif"
-            fontSize="12"
-            fontWeight="700"
+        <div className={className} style={style}>
+          <svg viewBox="0 0 28 14" width="28" height="14" aria-hidden>
+            <path
+              d="M2.1 10.2C3.6 6.4 5.7 3.6 8.2 3.6c1.5 0 2.5 1.1 3.7 3.2 1.3-2.2 2.3-3.2 3.9-3.2 2.2 0 4.2 2.5 6 6.4-.5.9-1 1.5-1.6 1.5-.8 0-1.5-1.1-2.6-3.3-1.2 2.3-2 3.3-3.2 3.3-1.3 0-2.5-1.5-3.6-3.8C9.7 9.9 8.9 11.5 7.5 11.5c-1.2 0-2.4-1.1-3.4-3.2-.6 1.8-1.1 2.7-1.6 2.7-.6 0-1-.6-1.5-1.5.1 0 .6.5 1.1.7z"
+              fill="currentColor"
+            />
+          </svg>
+          <span
+            style={{
+              fontFamily: "Inter, Helvetica Neue, Arial, sans-serif",
+              fontSize: "15px",
+              fontWeight: 700,
+              letterSpacing: "-0.02em",
+            }}
           >
             Meta
-          </text>
-        </svg>
+          </span>
+        </div>
       );
 
     case "google-play":
       return (
         <div className={className} style={style}>
-          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden>
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden>
             <path
-              d="M3.2 2.1c-.4.2-.7.7-.7 1.3v17.2c0 .6.3 1.1.7 1.3l10.1-9.9L3.2 2.1z"
+              d="M3.6 2.4c-.5.3-.8.8-.8 1.5v16.2c0 .7.3 1.2.8 1.5l9.5-9.6L3.6 2.4z"
               fill="currentColor"
             />
             <path
-              d="m14.2 12.9 2.6 1.5 4.1 2.3c.6.4.6 1.1 0 1.4L15.2 21l-1-8.1z"
+              d="m14.2 12.8 2.5 1.4 3.9 2.2c.6.3.6 1 0 1.3l-5.3 3-1.1-7.9z"
               fill="currentColor"
-              opacity="0.85"
+              opacity="0.88"
             />
             <path
-              d="M14.2 11.1 15.2 3l5.7 3.3c.6.4.6 1.1 0 1.4l-4.1 2.3-2.6 1.1z"
+              d="M14.2 11.2 15.3 3.4l5.3 3c.6.3.6 1 0 1.3l-3.9 2.2-2.5 1.3z"
               fill="currentColor"
-              opacity="0.75"
+              opacity="0.78"
             />
             <path
-              d="m13.3 12-1 8.1-9.1-5.2L13.3 12z"
+              d="m13.1 12-1.1 7.9-8.4-4.8L13.1 12z"
               fill="currentColor"
-              opacity="0.55"
+              opacity="0.58"
             />
           </svg>
-          <span>Google Play</span>
+          <span
+            style={{
+              fontFamily: "Inter, Helvetica Neue, Arial, sans-serif",
+              fontSize: "15px",
+              fontWeight: 700,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Google Play
+          </span>
         </div>
       );
 
     case "app-store":
       return (
         <div className={className} style={style}>
-          <svg viewBox="0 0 18 22" width="18" height="22" aria-hidden>
+          <svg viewBox="0 0 18 22" width="22" height="26" aria-hidden>
             <path
               d="M13.9 11.5c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.7-1.7-3.3-1.7-1.4-.1-2.7.8-3.4.8s-1.8-.8-3-.8C4.3 6.5 2.7 7.7 1.6 9.6-.1 12.5 1.2 16.6 2.7 18.9c.7 1.1 1.6 2.3 2.8 2.2 1.1 0 1.5-.7 2.9-.7s1.7.7 2.9.7c1.2 0 2-.1 2.8-2.1.9-1.3 1.2-2.5 1.2-2.6 0 0-2.4-.9-2.4-3.9zM11.2 4.8c.6-.8 1-1.8.9-2.9-.9 0-1.9.6-2.5 1.3-.6.7-1.1 1.8-.9 2.8.9.1 1.9-.5 2.5-1.2z"
               fill="currentColor"
             />
           </svg>
-          <span>App Store</span>
+          <span
+            style={{
+              fontFamily: "Inter, Helvetica Neue, Arial, sans-serif",
+              fontSize: "16px",
+              fontWeight: 700,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            App Store
+          </span>
         </div>
       );
 
@@ -82,13 +96,14 @@ export function AwardBrandMark({ brand, className, color }: Props) {
           className={className}
           style={{
             ...style,
-            fontFamily: "Georgia, 'Times New Roman', serif",
-            fontSize: "22px",
+            fontFamily: "Georgia, 'Times New Roman', Times, serif",
+            fontSize: "24px",
             fontWeight: 500,
             letterSpacing: "-0.02em",
+            lineHeight: 1,
           }}
         >
-          Deloitte<span style={{ color: "currentColor" }}>.</span>
+          Deloitte.
         </span>
       );
 
@@ -97,14 +112,19 @@ export function AwardBrandMark({ brand, className, color }: Props) {
         <svg
           className={className}
           style={style}
-          viewBox="0 0 40 28"
+          viewBox="0 0 48 32"
+          width="64"
+          height="42"
           aria-hidden
         >
           <path
-            d="M14 3c-6 0-11 4.9-11 11s5 11 11 11c4.4 0 8.2-2.6 9.9-6.4l-4.7-2.1C18.4 18.6 16.4 20 14 20c-3.3 0-6-2.7-6-6s2.7-6 6-6c1.7 0 3.2.7 4.3 1.9l1.8-1.8 4.3-4.3C21.7 4.3 18.1 3 14 3z"
+            d="M15.2 2.5C8.1 2.5 2.4 8.2 2.4 15.3S8.1 28.1 15.2 28.1c5.1 0 9.5-3 11.5-7.4l-5.5-2.4c-.9 2.4-3.2 4.1-6 4.1-3.8 0-6.9-3.1-6.9-6.9s3.1-6.9 6.9-6.9c2 0 3.8.8 5.1 2.2l2.1-2.1 5-5C24.2 4 20 2.5 15.2 2.5z"
             fill="currentColor"
           />
-          <rect x="18" y="11" width="14" height="5.5" rx="1" fill="currentColor" />
+          <path
+            d="M22.5 13.2h16.2c1.1 0 2 .9 2 2v2.4c0 1.1-.9 2-2 2H22.5v-6.4z"
+            fill="currentColor"
+          />
         </svg>
       );
 
@@ -114,11 +134,12 @@ export function AwardBrandMark({ brand, className, color }: Props) {
           className={className}
           style={{
             ...style,
-            fontFamily: "Inter, Helvetica Neue, Arial, sans-serif",
-            fontSize: "20px",
-            fontWeight: 800,
-            letterSpacing: "-0.04em",
+            fontFamily: "Georgia, 'Times New Roman', Times, serif",
+            fontSize: "26px",
+            fontWeight: 700,
+            letterSpacing: "-0.03em",
             fontStyle: "italic",
+            lineHeight: 1,
           }}
         >
           Gartner
@@ -132,9 +153,10 @@ export function AwardBrandMark({ brand, className, color }: Props) {
           style={{
             ...style,
             fontFamily: "Inter, Helvetica Neue, Arial, sans-serif",
-            fontSize: "26px",
+            fontSize: "28px",
             fontWeight: 900,
-            letterSpacing: "0.12em",
+            letterSpacing: "0.08em",
+            lineHeight: 1,
           }}
         >
           CRN

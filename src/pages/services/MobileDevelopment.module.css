@@ -1,0 +1,42 @@
+.expertiseStrip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.expertiseCard {
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  height: 100%;
+}
+
+.expertiseCard h3 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  margin: 0 0 10px;
+}
+
+.expertiseCard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.trustStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .expertiseStrip,
+  .trustStats {
+    grid-template-columns: 1fr;
+  }
+}

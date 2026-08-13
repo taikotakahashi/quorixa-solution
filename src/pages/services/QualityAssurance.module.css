@@ -1,0 +1,79 @@
+.outcomesBlock {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  align-items: start;
+  margin-top: 48px;
+}
+
+.greenChecks :global(svg) {
+  color: var(--color-green) !important;
+}
+
+.pillCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.pillCloud span {
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.metricsCta {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.metricsCtaActions {
+  margin-top: 28px;
+}
+
+.recognitionCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.recognitionCard {
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  height: 100%;
+}
+
+.recognitionCard h3 {
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+}
+
+.recognitionCard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+@media (max-width: 900px) {
+  .outcomesBlock,
+  .metricsCta,
+  .recognitionCards {
+    grid-template-columns: 1fr;
+  }
+}

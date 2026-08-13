@@ -1,307 +1,225 @@
-import { Link } from "react-router-dom";
-import {
-  BarChart3,
-  Cpu,
-  PenTool,
-  ShieldCheck,
-  Smartphone,
-  Users,
-  type LucideIcon,
-} from "lucide-react";
+import { Check, FolderCode, Smile } from "lucide-react";
 import { Hero } from "../components/Hero";
 import { ClientLogoMarquee } from "../components/ClientLogoMarquee";
 import { SectionHeader } from "../components/SectionHeader";
-import { ServiceCard } from "../components/ServiceCard";
-import { StatCard } from "../components/StatCard";
-import { Testimonial } from "../components/Testimonial";
 import { AwardCards } from "../components/AwardCards";
-import { CTASection } from "../components/CTASection";
 import { Reveal } from "../components/Reveal";
 import { Button } from "../components/Button";
 import { CaseStudyCarousel } from "../components/CaseStudyCarousel";
-import { CurvedDivider } from "../components/CurvedDivider";
 import { TeamMembers } from "../components/TeamMembers";
-import { CheckList } from "../components/CheckList";
+import { TestimonialGrid } from "../components/TestimonialGrid";
+import { HomeServicesExpertise } from "../components/HomeServicesExpertise";
+import { HomeContactSection } from "../components/HomeContactSection";
+import { HomeGlobalTalent } from "../components/HomeGlobalTalent";
 import { caseStudies } from "../data/caseStudies";
-import { homeServices, industries, technologies } from "../data/content";
 import { teamMembers } from "../data/team";
 import styles from "./Home.module.css";
 
-const iconMap: Record<string, LucideIcon> = {
-  Smartphone,
-  Users,
-  Cpu,
-  BarChart3,
-  PenTool,
-  ShieldCheck,
-};
+const engineeringItems = [
+  "Top-1% remote experts and dedicated teams",
+  "Achieve 30–70% higher productivity thanks to AI augmentation",
+  "Delivery based on your backlog",
+  "Experts integrated into your team and process",
+];
+
+const solutionsItems = [
+  "Software solutions to your business challenges",
+  "Strategic AI use ensuring the high quality of generated assets",
+  "End-to-end delivery of products and features",
+  "Fully managed cross-functional team",
+];
+
+const testimonials = [
+  {
+    quote:
+      "QUORIXA became an extension of our product org. The team shipped reliably and elevated our engineering standards.",
+    author: "Jordan Hale",
+    role: "CTO, enterprise SaaS",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&q=80",
+  },
+  {
+    quote:
+      "They moved faster than our internal hiring loop without sacrificing quality. Communication stayed crisp every week.",
+    author: "Priya Natarajan",
+    role: "VP Product, FinTech",
+    image:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&q=80",
+  },
+  {
+    quote:
+      "Design and engineering worked as one unit. The release cadence and UX polish improved within the first quarter.",
+    author: "Marcus Lee",
+    role: "Head of Digital, Retail",
+    image:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&q=80",
+  },
+  {
+    quote:
+      "We needed AI features with real evaluation. QUORIXA delivered production systems, not demos.",
+    author: "Elena Rossi",
+    role: "Director of AI, Healthcare",
+    image:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&q=80",
+  },
+  {
+    quote:
+      "From discovery to launch, ownership was clear. Our stakeholders finally trusted the roadmap again.",
+    author: "Daniel Brooks",
+    role: "COO, Logistics",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80",
+  },
+];
 
 export function Home() {
   return (
     <>
-      {/* 1. Hero — centered, matching original "AI-driven approach to building products that people love" */}
       <Hero
         layout="centered"
         withVideo
         title={
           <>
-            <span className="highlight-orange">AI-driven</span> approach to{" "}
-            <span className={styles.heroHighlight}>building</span>
-            {" "}products that people love
+            AI-driven approach to{" "}
+            <span className={styles.pillPurple}>building</span> products that
+            people <span className={styles.pillGreen}>love</span>
           </>
         }
-        description="We match you with vetted senior engineers and cross-functional teams to build, scale, and modernize your digital products."
+        description="We match you with vetted senior engineers and cross-functional teams to build, scale, and modernize digital products."
         ctaLabel="Tell us about your project"
         ctaHref="/contact"
       />
 
-      {/* 2. Client logos marquee */}
       <ClientLogoMarquee />
 
-      {/* 3. Content showcase — "Every year we're privileged to guide..." */}
-      <section className="section">
-        <div className="container">
+      <HomeServicesExpertise />
+
+      <section className={`section grid-bg ${styles.helpSection}`}>
+        <div className={`container-wide ${styles.helpContainer}`}>
           <Reveal>
-            <div className={styles.showcaseIntro}>
-              <SectionHeader
-                title="Every year we're privileged to guide the tech strategies of some of the world's most innovative companies"
-                align="center"
-              />
-            </div>
-          </Reveal>
-
-          <div className={styles.showcaseRow}>
-            <div className={styles.showcaseText}>
-              <Reveal>
-                <div className={styles.showcaseBlock}>
-                  <img
-                    src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&q=80"
-                    alt="Team strategy session"
-                    className={styles.showcaseImg}
-                  />
-                  <h3>We pair strong technical minds with product-thinking</h3>
-                  <p>
-                    Our engineers don't just code — they contribute ideas, question assumptions,
-                    and help you ship the right features faster.
-                  </p>
-                </div>
-              </Reveal>
-            </div>
-            <div className={styles.showcaseText}>
-              <Reveal>
-                <div className={styles.showcaseBlock}>
-                  <img
-                    src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&q=80"
-                    alt="Software development"
-                    className={styles.showcaseImg}
-                  />
-                  <h3>End-to-end capabilities, one delivery team</h3>
-                  <p>
-                    Product, design, engineering, data, and QA working together —
-                    no silos, no handoff friction.
-                  </p>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. App uninstall stats / dark section */}
-      <CurvedDivider from="white" to="black" />
-
-      <section className="section section--dark">
-        <div className="container">
-          <Reveal>
-            <div className={styles.statIntro}>
-              <p className={styles.statLead}>
-                <span className={styles.statBig}>62%</span> of mobile apps are uninstalled in the first month
-              </p>
-              <p className={styles.statSub}>
-                We help you build products people keep, recommend, and rely on —
-                combining engineering excellence with deep product understanding.
+            <div className={styles.helpIntro}>
+              <span className={styles.helpPill}>Flexible engagement models</span>
+              <h2>Your business needs are covered</h2>
+              <p>
+                Scale your engineering team with remote professionals or
+                delegate product and feature delivery to QUORIXA
               </p>
             </div>
           </Reveal>
-          <div className={styles.statsGrid}>
-            <StatCard
-              value="3×"
-              label="Faster delivery"
-              description="Accelerate roadmaps with senior, ready-to-contribute teams."
-            />
-            <StatCard
-              value="850+"
-              label="Engineers"
-              description="Specialists across product, data, AI, design, and QA."
-            />
-            <StatCard
-              value="25+"
-              label="Countries"
-              description="Distributed talent collaborating as one delivery team."
-            />
-            <StatCard
-              value="95%"
-              label="Retention"
-              description="Long-term partnerships built on trust and outcomes."
-            />
-          </div>
-        </div>
-      </section>
 
-      <CurvedDivider from="black" to="white" invert />
-
-      {/* 5. How we work — process with dashboard visual */}
-      <section className="section">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="How we work"
-              title="From kickoff to production, we move with you"
-              description="A lean, high-trust engagement model designed for speed and quality."
-              align="center"
-            />
-          </Reveal>
-          <div className={styles.processRow}>
-            <div className={styles.processSteps}>
-              {[
-                { num: "01", title: "Discovery & scoping", desc: "We map technical requirements, constraints, and goals with your team." },
-                { num: "02", title: "Team assembly", desc: "Handpick senior engineers aligned to your stack, domain, and timezone." },
-                { num: "03", title: "Embedded delivery", desc: "Engineers join your workflow — same tools, ceremonies, and standards." },
-                { num: "04", title: "Continuous improvement", desc: "Regular check-ins, velocity tracking, and proactive optimization." },
-              ].map((step) => (
-                <Reveal key={step.num}>
-                  <div className={styles.stepCard}>
-                    <span className={styles.stepNum}>{step.num}</span>
-                    <div>
-                      <h4 className={styles.stepTitle}>{step.title}</h4>
-                      <p className={styles.stepDesc}>{step.desc}</p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-            <div className={styles.processVisual}>
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80"
-                alt="Dashboard interface"
-                className={styles.processImg}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Services */}
-      <section className="section section--light">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Our expertise"
-              title="What we bring"
-              description="Technical expertise across the full product lifecycle."
-            />
-          </Reveal>
-          <div className={styles.serviceGrid}>
-            {homeServices.map((s) => {
-              const Icon = iconMap[s.icon] || Users;
-              return (
-                <Reveal key={s.title}>
-                  <Link to={s.href} className={styles.serviceLink}>
-                    <ServiceCard
-                      icon={Icon}
-                      title={s.title}
-                      description={s.description}
-                      iconBg={s.color}
-                      iconColor={s.iconColor}
-                    />
-                  </Link>
-                </Reveal>
-              );
-            })}
-          </div>
-          <div className={styles.helpBlock}>
-            <Reveal>
-              <SectionHeader
-                title="How we help your company"
-                description="Practical ways QUORIXA embeds with your product organization."
-              />
-              <CheckList
-                items={[
-                  "Stand up senior dedicated teams aligned to your timezone",
-                  "Modernize platforms without freezing feature delivery",
-                  "Ship GenAI features with evaluation and guardrails",
-                  "Raise release quality with automation and QA strategy",
-                  "Build design systems engineers actually adopt",
-                  "Turn fragmented data into trusted decision pipelines",
-                ]}
-              />
-              <div className={styles.inlineLinks}>
-                <Button href="/solutions" variant="ghost" arrow>
-                  Explore solutions
-                </Button>
-                <Button href="/industries" variant="ghost" arrow>
-                  Industries
-                </Button>
-                <Button href="/technologies" variant="ghost" arrow>
-                  Technologies
-                </Button>
+          <div className={styles.helpBox}>
+            <div className={styles.helpCol}>
+              <div className={styles.helpColHead}>
+                <Smile
+                  className={styles.helpColIcon}
+                  size={28}
+                  strokeWidth={1.7}
+                  aria-hidden
+                />
+                <h3>Engineering teams</h3>
               </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+              <ul className={styles.helpList}>
+                {engineeringItems.map((item) => (
+                  <li key={item}>
+                    <Check
+                      className={styles.helpCheck}
+                      size={16}
+                      strokeWidth={2.8}
+                      aria-hidden
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-      {/* 7. Case studies */}
-      <section className="section">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Our work"
-              title="Our client results"
-              description="Selected engagements across industries — from consumer mobile to enterprise platforms."
-              align="center"
-            />
-          </Reveal>
-          <CaseStudyCarousel studies={caseStudies} />
+            <div className={styles.helpCol}>
+              <div className={styles.helpColHead}>
+                <FolderCode
+                  className={styles.helpColIcon}
+                  size={28}
+                  strokeWidth={1.7}
+                  aria-hidden
+                />
+                <h3>Software Solutions</h3>
+              </div>
+              <ul className={styles.helpList}>
+                {solutionsItems.map((item) => (
+                  <li key={item}>
+                    <Check
+                      className={styles.helpCheck}
+                      size={16}
+                      strokeWidth={2.8}
+                      aria-hidden
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
           <div className={styles.centerCta}>
-            <Button href="/our-work" variant="ghost" arrow>
-              View all case studies
+            <Button href="/solutions" arrow>
+              Learn more
             </Button>
           </div>
         </div>
       </section>
 
-      {/* 8. Testimonial */}
       <section className="section section--light">
         <div className="container">
           <Reveal>
-            <Testimonial
-              quote="QUORIXA became an extension of our product org. The team shipped reliably, communicated clearly, and elevated our engineering standards."
-              author="Jordan Hale"
-              role="CTO"
-              company="enterprise SaaS company"
-              image="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&q=80"
-            />
+            <div className={styles.casesIntro}>
+              <span className={styles.casesPill}>Case studies</span>
+              <h2 className={styles.casesTitle}>
+                <span className={styles.casesAccent}>Our clients win.</span>
+                <br />
+                You can, too.
+              </h2>
+              <p className={styles.casesDesc}>
+                Discover how other business overcame industry challenges and
+                achieved their goals by partnering with us
+              </p>
+            </div>
           </Reveal>
+          <CaseStudyCarousel studies={caseStudies.slice(0, 5)} />
         </div>
       </section>
 
-      {/* 9. Team section — "People and expertise" */}
-      <section className="section">
+      <section className="section section--light">
+        <div className="container">
+          <TestimonialGrid
+            items={testimonials}
+            featuredLabel="What our clients say about us"
+            featuredImages={[
+              "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160&h=160&fit=crop&q=80",
+              "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=160&h=160&fit=crop&q=80",
+              "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=160&h=160&fit=crop&q=80",
+            ]}
+          />
+        </div>
+      </section>
+
+      <section className="section section--light">
         <div className="container">
           <Reveal>
             <SectionHeader
-              title="People and expertise"
+              title="Meet our experts"
               description="Leaders and practitioners across engineering, design, AI, and delivery."
               align="center"
             />
           </Reveal>
           <TeamMembers members={teamMembers} />
+          <div className={styles.centerCta}>
+            <Button href="/about" variant="ghost" arrow>
+              See more
+            </Button>
+          </div>
         </div>
       </section>
 
-      {/* 10. Awards */}
-      <section className="section section--light">
+      <section className="section">
         <div className="container">
           <Reveal>
             <div className={styles.awardsIntro}>
@@ -317,97 +235,9 @@ export function Home() {
         </div>
       </section>
 
-      {/* 11. Tech stack */}
-      <section className="section">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Stack"
-              title="Depth across modern engineering stacks"
-              align="center"
-            />
-          </Reveal>
-          <div className={styles.techGroups}>
-            {Object.entries(technologies).map(([group, items]) => (
-              <div key={group} className={styles.techGroup}>
-                <h4>{group}</h4>
-                <div className={styles.techTags}>
-                  {items.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HomeGlobalTalent />
 
-      {/* 12. Industries */}
-      <section className="section section--light">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              title="Industries we serve"
-              description="Domain-aware teams that understand regulated environments, high-growth products, and complex operations."
-              align="center"
-            />
-          </Reveal>
-          <div className={styles.industryCloud}>
-            {industries.map((ind) => (
-              <span key={ind}>{ind}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 13. Global talent map section */}
-      <CurvedDivider from="light" to="black" />
-
-      <section className="section section--dark">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              title="Global talent, local expertise, your timezone"
-              description="Our distributed teams span 25+ countries, working in your hours and speaking your language."
-              align="center"
-              dark
-            />
-          </Reveal>
-          <div className={styles.mapWrap}>
-            <img
-              src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=1000&q=80"
-              alt="World map with QUORIXA offices"
-              className={styles.mapImg}
-            />
-            <div className={styles.mapDots}>
-              {[
-                { x: 23, y: 35 },
-                { x: 48, y: 30 },
-                { x: 52, y: 28 },
-                { x: 55, y: 45 },
-                { x: 72, y: 38 },
-                { x: 78, y: 50 },
-                { x: 30, y: 55 },
-              ].map((dot, i) => (
-                <span
-                  key={i}
-                  className={styles.mapDot}
-                  style={{ left: `${dot.x}%`, top: `${dot.y}%` }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <CurvedDivider from="black" to="light" invert />
-
-      {/* 14. Final CTA */}
-      <CTASection
-        title="Let's build something you're proud of"
-        description="Tell us about your product goals — we'll assemble the right specialists."
-        ctaLabel="Book a consultation"
-      />
+      <HomeContactSection />
     </>
   );
 }

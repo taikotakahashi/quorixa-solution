@@ -2,6 +2,7 @@ import {
   ClipboardCheck,
   Compass,
   Eye,
+  GraduationCap,
   HeartHandshake,
   PencilRuler,
   type LucideIcon,
@@ -12,15 +13,13 @@ import { ClientLogoMarquee } from "../../components/ClientLogoMarquee";
 import { SectionHeader } from "../../components/SectionHeader";
 import { ServiceCard } from "../../components/ServiceCard";
 import { StatCard } from "../../components/StatCard";
-import { CaseStudyCard } from "../../components/CaseStudyCard";
 import { Testimonial } from "../../components/Testimonial";
 import { CTASection } from "../../components/CTASection";
 import { Reveal } from "../../components/Reveal";
 import { CheckList } from "../../components/CheckList";
 import { ProcessSteps } from "../../components/ProcessSteps";
-import { Button } from "../../components/Button";
-import { caseStudies } from "../../data/caseStudies";
-import styles from "./ServicePage.module.css";
+import { CurvedDivider } from "../../components/CurvedDivider";
+import styles from "./Accessibility.module.css";
 
 const services: {
   icon: LucideIcon;
@@ -33,59 +32,93 @@ const services: {
     icon: ClipboardCheck,
     title: "Accessibility audit",
     description:
-      "WCAG-aligned evaluations across code, design, and content — with prioritized findings your teams can act on immediately.",
+      "From agile assessments to deep WCAG audits — findings prioritized so teams can act immediately.",
     iconBg: "#F3E8FF",
     iconColor: "#5B35F5",
   },
   {
     icon: Compass,
-    title: "Consulting",
+    title: "Accessibility consulting",
     description:
-      "Strategy for policies, training, and governance so accessibility becomes a lasting capability — not a one-off checklist.",
+      "Build accessibility into product strategy — policies, governance, and industry-specific opportunity mapping.",
     iconBg: "#E8F1FF",
     iconColor: "#1677FF",
   },
   {
     icon: PencilRuler,
-    title: "Accessibility-first development",
+    title: "Accessibility development",
     description:
-      "Engineers who embed semantics, focus management, and ARIA correctly while shipping features at product pace.",
+      "Engineers who optimize existing tech or build custom inclusive features from scratch at product pace.",
     iconBg: "#E6F7EF",
     iconColor: "#35B968",
   },
   {
     icon: Eye,
-    title: "Inclusive design",
+    title: "Accessibility-focused design",
     description:
-      "Research-informed patterns for contrast, motion, language, and interaction that welcome more people into your product.",
+      "Guidance on motion, multimedia, controls, type, color, and layout so design choices welcome more people.",
     iconBg: "#FFF0E6",
     iconColor: "#FF6500",
   },
   {
     icon: HeartHandshake,
-    title: "Testing",
+    title: "Accessibility testing",
     description:
-      "Automated scans plus assistive-technology validation — screen readers, keyboard-only flows, and real-user scenarios.",
+      "Automated scans plus assistive-technology validation — screen readers, keyboard-only flows, and real scenarios.",
     iconBg: "#FFE8E6",
     iconColor: "#FF3B30",
+  },
+  {
+    icon: GraduationCap,
+    title: "Training & enablement",
+    description:
+      "Workshops and playbooks for design, engineering, and content so accessibility capability lasts beyond the project.",
+    iconBg: "#E8F1FF",
+    iconColor: "#4523D8",
   },
 ];
 
 const deliverables = [
-  "Prioritized WCAG findings with remediation guidance",
-  "Component-level accessibility patterns for your design system",
-  "Keyboard and screen-reader test scripts for critical journeys",
-  "Content and media guidelines for inclusive publishing",
-  "Training workshops for design, engineering, and content teams",
-  "Roadmaps that balance compliance risk with product velocity",
+  "Site accessibility audit uncovering WCAG violations with remediation guidance",
+  "Resolution of critical violations to meet internal SLAs and standards",
+  "Accessibility fixes applied to the base design system",
+  "Chrome extension enabling accessibility testing for squads",
+  "Screen-reader-announcement components and modernized deprecated patterns",
+  "Unit and journey tests ensuring compliance with EU and global regulations",
 ];
 
-const a11yStudies = caseStudies.filter((s) =>
-  ["retailpulse", "securegate", "medflow"].includes(s.id)
-);
-
-const studies =
-  a11yStudies.length >= 3 ? a11yStudies : caseStudies.slice(0, 3);
+const impactAreas = [
+  {
+    title: "Navigation",
+    description:
+      "Keyboard-only flows with clear, visible focus indicators across critical journeys.",
+  },
+  {
+    title: "Semantic HTML",
+    description:
+      "Structure and meaning optimized so assistive tech can parse content reliably.",
+  },
+  {
+    title: "Multimedia",
+    description:
+      "Captions, transcripts, and descriptions validated across media experiences.",
+  },
+  {
+    title: "Assistive tech testing",
+    description:
+      "Screen readers and voice commands used to identify and fix real barriers.",
+  },
+  {
+    title: "Forms & labels",
+    description:
+      "Proper grouping and labels for every form control users encounter.",
+  },
+  {
+    title: "Contrast & zoom",
+    description:
+      "Color redesigns and full functionality maintained at 200% zoom.",
+  },
+];
 
 export function Accessibility() {
   return (
@@ -97,7 +130,7 @@ export function Accessibility() {
             <span className="highlight-orange">accessibility solutions</span>
           </>
         }
-        description="QUORIXA helps teams design, build, and verify inclusive experiences — so every customer can use your product with confidence."
+        description="Comply with ADA, EAA, and WCAG — build more inclusive products and engage an audience representing roughly 15% of the world's population."
         ctaLabel="Book a free consultation"
         visual={<QAVisual />}
       />
@@ -108,12 +141,12 @@ export function Accessibility() {
         <div className="container">
           <Reveal>
             <SectionHeader
-              label="Services"
-              title="Accessibility expertise across the product lifecycle"
-              description="Audits, coaching, inclusive design, and engineering support — delivered as one coherent practice."
+              label="Solutions and deliverables"
+              title="Accessibility solutions and services"
+              description="Audits, consulting, inclusive design, engineering, and testing — delivered as one coherent practice."
             />
           </Reveal>
-          <div className={styles.grid5}>
+          <div className={styles.grid6}>
             {services.map((item) => (
               <Reveal key={item.title}>
                 <ServiceCard
@@ -131,30 +164,59 @@ export function Accessibility() {
 
       <section className="section">
         <div className="container">
-          <div className={styles.split}>
+          <div className={styles.caseDetail}>
             <Reveal>
-              <SectionHeader
-                label="Deliverables"
-                title="What you leave with after an engagement"
-                description="Concrete artifacts and capabilities your teams keep using long after the project ends."
-              />
+              <div>
+                <span className="label">Featured case study</span>
+                <h2>
+                  Accessibility for a platform with{" "}
+                  <span className="highlight-orange">200M+</span> users
+                </h2>
+                <p className={styles.caseDetailLead}>
+                  Accessibility has been central to our work with one of the
+                  world&apos;s highest-traffic employment platforms. Impact
+                  spans components, extensions, design, testing, and compliance
+                  audits — from keyboard navigation to semantic HTML, forms,
+                  contrast, and more.
+                </p>
+                <SectionHeader
+                  title="Key deliverables"
+                  description="Concrete artifacts teams keep using long after the engagement."
+                />
+                <CheckList items={deliverables} columns={1} />
+              </div>
             </Reveal>
             <Reveal>
-              <CheckList items={deliverables} columns={1} />
+              <div>
+                <SectionHeader
+                  label="Impact"
+                  title="What changed for people using the product"
+                />
+                <div className={styles.impactGrid}>
+                  {impactAreas.map((item) => (
+                    <article key={item.title} className={styles.impactItem}>
+                      <strong>{item.title}</strong>
+                      <p>{item.description}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
             </Reveal>
           </div>
         </div>
       </section>
+
+      <CurvedDivider from="white" to="black" />
 
       <section className="section section--dark">
         <div className="container">
           <div className={styles.darkSplit}>
             <Reveal>
               <div>
-                <span className="label">Impact</span>
+                <span className="label">Why QUORIXA</span>
                 <h2 className={styles.darkTitle}>
-                  Inclusive products that{" "}
-                  <span className="highlight-orange">reach further</span>
+                  Embrace accessibility-centric design, development, and{" "}
+                  <span className="highlight-orange">QA strategies</span>
                 </h2>
                 <p className={styles.darkCopy}>
                   Accessibility is a growth and risk decision — widening your
@@ -167,21 +229,21 @@ export function Accessibility() {
                 <StatCard
                   value="F500"
                   label="Enterprise partners"
-                  description="Teams trusted by Fortune 500 product organizations."
+                  description="Accessibility solutions delivered for Fortune 500 brands."
                 />
               </Reveal>
               <Reveal>
                 <StatCard
-                  value="20M+"
+                  value="30M+"
                   label="Users impacted"
-                  description="Experiences improved across consumer and enterprise products."
+                  description="Potential reach of inclusive experiences we help ship."
                 />
               </Reveal>
               <Reveal>
                 <StatCard
                   value="3×"
-                  label="ROI on remediation"
-                  description="Fewer escalations, broader reach, and stronger brand trust."
+                  label="Higher ROI"
+                  description="Up to triple the return versus typical in-house-only approaches."
                 />
               </Reveal>
             </div>
@@ -189,7 +251,9 @@ export function Accessibility() {
         </div>
       </section>
 
-      <section className="section section--light">
+      <CurvedDivider from="black" to="white" invert />
+
+      <section className="section">
         <div className="container">
           <Reveal>
             <Testimonial
@@ -203,33 +267,33 @@ export function Accessibility() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section--light">
         <div className="container">
           <Reveal>
             <ProcessSteps
-              title="How we embed accessibility that lasts"
+              title="Your seamless path to digital accessibility"
               image="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&q=80"
               imageAlt="Inclusive product collaboration"
               steps={[
                 {
                   title: "Discovery",
                   description:
-                    "Map products, risk, and user journeys. Establish the WCAG target and success criteria for your context.",
+                    "Evaluate accessibility posture, business goals, and industry challenges to determine the right strategy.",
                 },
                 {
                   title: "Team",
                   description:
-                    "Align designers, engineers, and content owners with shared standards, tooling, and ownership models.",
+                    "Engage certified software and UX experts — matching specialization, seniority, and collaboration model.",
                 },
                 {
                   title: "Implementation",
                   description:
-                    "Remediate critical paths, harden components, and bake checks into design and CI workflows.",
+                    "Testing, design, and custom accessibility features with full transparency into deliverables.",
                 },
                 {
                   title: "Support",
                   description:
-                    "Ongoing audits, coaching, and release gates so accessibility quality compounds release over release.",
+                    "Monitoring, optimizations, and modernizations woven into your broader product strategy.",
                 },
               ]}
             />
@@ -237,34 +301,9 @@ export function Accessibility() {
         </div>
       </section>
 
-      <section className="section section--light">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Our work"
-              title="Inclusive experiences shipped with care"
-              description="Selected engagements where QUORIXA strengthened accessibility alongside product delivery."
-              align="center"
-            />
-          </Reveal>
-          <div className={styles.caseGrid}>
-            {studies.map((study) => (
-              <Reveal key={study.id}>
-                <CaseStudyCard study={study} />
-              </Reveal>
-            ))}
-          </div>
-          <div className={styles.centerCta}>
-            <Button href="/our-work" variant="ghost" arrow>
-              View all case studies
-            </Button>
-          </div>
-        </div>
-      </section>
-
       <CTASection
-        title="Ready to make your product truly usable by everyone?"
-        description="Tell us about your platforms and goals — we'll outline an accessibility plan that fits your roadmap."
+        title="Let's create solutions that work for everyone"
+        description="Trusted by Fortune 500 enterprises and fast-growing startups — tell us about your platforms and we'll outline a plan that fits your roadmap."
         ctaLabel="Book a consultation"
         secondaryLabel="Explore quality studio"
         secondaryHref="/quality-assurance"

@@ -1,14 +1,44 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { CTASection } from "../components/CTASection";
 import { Reveal } from "../components/Reveal";
-import { SectionHeader } from "../components/SectionHeader";
-import { insights } from "../data/insights";
+import {
+  insights,
+  type Insight,
+  type InsightSection,
+} from "../data/insights";
 import styles from "./Insights.module.css";
 
+const SECTIONS: InsightSection[] = ["Insights", "Articles", "News"];
+
+function ArticleCard({ article }: { article: Insight }) {
+  return (
+    <Link to={`/insights/${article.id}`} className={styles.card}>
+      <div className={styles.cardImage}>
+        <img src={article.image} alt="" loading="lazy" />
+      </div>
+      <div className={styles.cardBody}>
+        <h3 className={styles.cardTitle}>{article.title}</h3>
+        <time className={styles.cardDate} dateTime={article.date}>
+          {article.date}
+        </time>
+        <div className={styles.tagRow}>
+          {article.tags.map((tag) => (
+            <span key={tag} className={styles.tag}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export function Insights() {
-  const featured = insights[0];
-  const rest = insights.slice(1);
+  const featured = insights.find((item) => item.featured) ?? insights[0];
+
+  const bySection = (section: InsightSection) =>
+    insights.filter((item) => item.section === section);
 
   return (
     <>
@@ -16,21 +46,14 @@ export function Insights() {
         <div className="container">
           <Reveal>
             <div className={styles.heroInner}>
-              <span className="label">Insights</span>
-              <h1 className={styles.heroTitle}>
-                Perspectives from the{" "}
-                <span className="highlight-orange">engineering floor</span>
-              </h1>
-              <p className={styles.heroDesc}>
-                Ideas on product delivery, AI, design systems, and building
-                teams that ship with confidence.
-              </p>
+              <span className={styles.blogPill}>Blog</span>
+              <h1 className={styles.heroTitle}>QUORIXA's blog corner</h1>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="section section--sm">
+      <section className={styles.featuredSection}>
         <div className="container">
           <Reveal>
             <Link to={`/insights/${featured.id}`} className={styles.featured}>
@@ -38,14 +61,18 @@ export function Insights() {
                 <img src={featured.image} alt="" loading="lazy" />
               </div>
               <div className={styles.featuredBody}>
-                <div className={styles.meta}>
-                  <span className={styles.category}>{featured.category}</span>
-                  <time dateTime={featured.date}>{featured.date}</time>
+                <span className={styles.featuredEyebrow}>Insights</span>
+                <h2 className={styles.featuredTitle}>{featured.title}</h2>
+                <p className={styles.featuredExcerpt}>{featured.excerpt}</p>
+                <div className={styles.tagRow}>
+                  {featured.tags.map((tag) => (
+                    <span key={tag} className={styles.tag}>
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <h2>{featured.title}</h2>
-                <p>{featured.excerpt}</p>
                 <span className={styles.readMore}>
-                  Read article <ArrowUpRight size={16} strokeWidth={2.2} />
+                  Read Full Story <ArrowRight size={16} strokeWidth={2.2} />
                 </span>
               </div>
             </Link>
@@ -53,35 +80,32 @@ export function Insights() {
         </div>
       </section>
 
-      <section className="section section--light">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              title="Latest articles"
-              description="Editorial notes and practical guidance from QUORIXA practitioners."
-            />
-          </Reveal>
-          <div className={styles.grid}>
-            {rest.map((article) => (
-              <Reveal key={article.id}>
-                <Link to={`/insights/${article.id}`} className={styles.card}>
-                  <div className={styles.cardImage}>
-                    <img src={article.image} alt="" loading="lazy" />
-                  </div>
-                  <div className={styles.cardBody}>
-                    <div className={styles.meta}>
-                      <span className={styles.category}>{article.category}</span>
-                      <time dateTime={article.date}>{article.date}</time>
-                    </div>
-                    <h3>{article.title}</h3>
-                    <p>{article.excerpt}</p>
-                  </div>
-                </Link>
+      {SECTIONS.map((section) => {
+        const items = bySection(section).slice(0, 3);
+        if (items.length === 0) return null;
+
+        return (
+          <section key={section} className={styles.listSection}>
+            <div className="container">
+              <Reveal>
+                <div className={styles.sectionHead}>
+                  <h2 className={styles.sectionTitle}>{section}</h2>
+                  <Link to="/insights" className={styles.allLink}>
+                    All {section} <ArrowRight size={16} strokeWidth={2.2} />
+                  </Link>
+                </div>
               </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+              <div className={styles.grid}>
+                {items.map((article) => (
+                  <Reveal key={article.id}>
+                    <ArticleCard article={article} />
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })}
 
       <CTASection
         title="Want this thinking on your product?"

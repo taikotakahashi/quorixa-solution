@@ -4,7 +4,7 @@
   --color-text: #111111;
   --color-muted: #666666;
   --color-light-text: #888888;
-  --color-light-bg: #f3f3f3;
+  --color-light-bg: #f7f7f7;
   --color-card: #ffffff;
   --color-border: #e5e5e5;
   --color-border-soft: #eaeaea;
@@ -16,7 +16,7 @@
   --color-red: #ff3b30;
   --color-yellow: #f5c518;
 
-  --font-sans: 'Open Sans',sans-serif;
+  --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
   
   --radius-sm: 6px;
   --radius-md: 10px;

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ASSETS } from "../assets";
 import styles from "./Footer.module.css";
 
 function IconLinkedIn() {
@@ -62,8 +63,8 @@ export function Footer() {
       <div className={`container ${styles.inner}`}>
         <div className={styles.top}>
           <div className={styles.brand}>
-            <Link to="/" className={styles.logo}>
-              QUORIXA
+            <Link to="/" className={styles.logo} aria-label="QUORIXA home">
+              <img src={ASSETS.logo} alt="QUORIXA" className={styles.logoImg} />
             </Link>
             <p className={styles.tagline}>
               Premium software engineering for products that matter — dedicated

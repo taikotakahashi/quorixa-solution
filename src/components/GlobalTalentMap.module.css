@@ -59,6 +59,8 @@
 .flag {
   font-size: 16px;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 
 .mapPanel {
@@ -79,6 +81,17 @@
   inset: 4% 2% 2%;
   width: 96%;
   height: 92%;
+}
+
+.mapImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
 }
 
 .marker {

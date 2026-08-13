@@ -1,115 +1,111 @@
 import {
-  Accessibility,
-  Boxes,
-  Gauge,
   LayoutTemplate,
   Monitor,
-  Sparkles,
   Zap,
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
 import { DesignCollageVisual } from "../../components/HeroVisuals";
 import { ClientLogoMarquee } from "../../components/ClientLogoMarquee";
+import { CurvedDivider } from "../../components/CurvedDivider";
 import { SectionHeader } from "../../components/SectionHeader";
-import { ServiceCard } from "../../components/ServiceCard";
 import { CaseStudyCard } from "../../components/CaseStudyCard";
 import { Testimonial } from "../../components/Testimonial";
 import { CTASection } from "../../components/CTASection";
 import { Reveal } from "../../components/Reveal";
 import { Button } from "../../components/Button";
 import { caseStudies } from "../../data/caseStudies";
-import styles from "./ServicePage.module.css";
+import shared from "./ServicePage.module.css";
+import styles from "./Frontend.module.css";
 
-const pillars: {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}[] = [
+const skinDeep = [
   {
-    icon: Zap,
-    title: "Fast",
+    value: "70%",
     description:
-      "Performance budgets, thoughtful rendering, and release pipelines that keep interfaces snappy under real traffic.",
+      "According to Google, 70% of web UIs take 7+ seconds to load above-the-fold content.",
   },
   {
-    icon: Sparkles,
-    title: "Focused",
+    value: "1 sec",
     description:
-      "Interfaces shaped around critical journeys — less chrome, clearer hierarchy, and copy that earns every screen.",
+      "A 1-second delay decreases user satisfaction by 16% and conversions by 7%.",
   },
   {
-    icon: Monitor,
-    title: "Full-stack aware",
+    value: "4–5",
     description:
-      "Front-end engineers who understand APIs, auth, and data contracts — so UI never becomes the bottleneck.",
+      "A user tells 4–5 people about great UX — and complains to 8–20 about a terrible experience.",
   },
 ];
 
-const capabilities: {
+const impactCards = [
+  {
+    value: "76%",
+    description: "Faster first meaningful render from UI modernization programs.",
+  },
+  {
+    value: "10+",
+    description: "Client engineering teams benefiting from microfrontend UI systems.",
+  },
+  {
+    value: "2–4×",
+    description: "Usability improvement from custom client-facing solutions.",
+  },
+  {
+    value: "2×",
+    description: "User base growth after FinTech UI revamps we delivered.",
+  },
+  {
+    value: "64%",
+    description: "Reduction of return rates traced to immersive try-on experiences.",
+  },
+  {
+    value: "3 mo",
+    description: "Typical timeline for MVPs, market-ready apps, or full UI revamps.",
+  },
+];
+
+const advantages: {
   icon: LucideIcon;
   title: string;
   description: string;
-  iconBg: string;
-  iconColor: string;
 }[] = [
   {
     icon: LayoutTemplate,
-    title: "Design systems",
+    title: "Ready for heavy lifting",
     description:
-      "Tokenized components, documentation, and contribution models that keep product UI consistent as teams grow.",
-    iconBg: "#F3E8FF",
-    iconColor: "#5B35F5",
-  },
-  {
-    icon: Gauge,
-    title: "Performance",
-    description:
-      "Core Web Vitals, bundle discipline, and rendering strategies that protect conversion on every device.",
-    iconBg: "#E8F1FF",
-    iconColor: "#1677FF",
-  },
-  {
-    icon: Accessibility,
-    title: "Accessibility-ready UI",
-    description:
-      "Semantic structure, keyboard flows, and contrast standards built into components — not bolted on later.",
-    iconBg: "#E6F7EF",
-    iconColor: "#35B968",
-  },
-  {
-    icon: Boxes,
-    title: "SPA & MPA architectures",
-    description:
-      "The right delivery model for your product — client apps, server-rendered sites, or hybrid approaches that fit SEO and UX.",
-    iconBg: "#FFF0E6",
-    iconColor: "#FF6500",
+      "From SPAs, PWAs, and custom data visualization to WYSIWYG builders and UI architecture — complex, strategic surfaces.",
   },
   {
     icon: Monitor,
-    title: "Component libraries",
+    title: "Fortune-grade",
     description:
-      "Reusable UI kits wired to your brand and engineering standards — ready for feature teams to ship against.",
-    iconBg: "#FFE8E6",
-    iconColor: "#FF3B30",
+      "Fortune 500 enterprises and high-growth companies trust QUORIXA with flagship customer-facing solutions.",
+  },
+  {
+    icon: Zap,
+    title: "Blazing-fast",
+    description:
+      "MVPs, market-ready web apps, or full UI revamps — shipped in as little as three months when urgency matters.",
   },
 ];
 
-const metrics = [
-  { value: "40%", label: "Faster interactive load" },
-  { value: "2×", label: "Quicker feature cycles" },
-  { value: "+28%", label: "Conversion lifts shipped" },
-  { value: "99%", label: "Design-system adoption" },
+const techLogos = [
+  "TypeScript",
+  "JavaScript",
+  "React",
+  "Vue.js",
+  "Angular",
+  "Next.js",
+  "Nuxt.js",
+  "Three.js",
+  "Tailwind CSS",
+  "Vite",
 ];
 
-const techStack = ["React", "TypeScript", "Next.js", "Vue", "Angular"];
-
-const frontendStudies = caseStudies.filter((s) =>
-  ["retailpulse", "geotap", "medflow"].includes(s.id)
-);
-
-const studies =
-  frontendStudies.length >= 3 ? frontendStudies : caseStudies.slice(0, 3);
+const studies = caseStudies
+  .filter((s) => ["retailpulse", "geotap", "medflow"].includes(s.id))
+  .concat(caseStudies)
+  .filter((s, i, arr) => arr.findIndex((x) => x.id === s.id) === i)
+  .slice(0, 3);
 
 export function Frontend() {
   return (
@@ -121,12 +117,14 @@ export function Frontend() {
             <span className="highlight-orange">web UI solutions</span>
           </>
         }
-        description="QUORIXA crafts interfaces that feel intentional — performant, accessible, and grounded in systems your engineering teams can scale."
+        description="Captivate users with sleek, fast, fluid UIs that adapt to any screen — powered by future-proof technology."
         ctaLabel="Book a free consultation"
         visual={<DesignCollageVisual />}
       />
 
       <ClientLogoMarquee />
+
+      <CurvedDivider from="white" to="black" />
 
       <section className="section section--dark">
         <div className="container">
@@ -139,18 +137,73 @@ export function Frontend() {
                   <span className="highlight-orange">skin-deep</span>
                 </>
               }
-              description="Great front-end work balances craft with architecture — so products look sharp and stay maintainable."
+              description="UIs that generate business value never compromise on performance, design, and user experience."
               dark
               align="center"
             />
           </Reveal>
-          <div className={styles.grid3}>
-            {pillars.map((item) => {
+          <div className={styles.skinCards}>
+            {skinDeep.map((item) => (
+              <Reveal key={item.value}>
+                <article className={styles.skinCard}>
+                  <div className={styles.skinValue}>{item.value}</div>
+                  <p>{item.description}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CurvedDivider from="black" to="light" invert />
+
+      <section className="section section--light">
+        <div className="container">
+          <Reveal>
+            <SectionHeader
+              label="Impact"
+              title="Deliver impactful user-facing experiences"
+              description="Tailored UI solutions yield impressive outcomes — modernizations, rearchitectures, and custom web apps that drive measurable growth."
+            />
+          </Reveal>
+          <div className={styles.impactGrid}>
+            {impactCards.map((item) => (
+              <Reveal key={item.value + item.description}>
+                <article className={styles.impactCard}>
+                  <div className={styles.impactValue}>{item.value}</div>
+                  <p>{item.description}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--dark">
+        <div className="container">
+          <Reveal>
+            <div className={styles.advantagesHead}>
+              <span className="label">Why QUORIXA</span>
+              <h2>
+                Your UI solutions are in the{" "}
+                <span className="highlight-orange">right hands</span>
+              </h2>
+              <p>
+                From complex SPAs to design-system foundations — front-end
+                engineers who blend craft with architecture.
+              </p>
+            </div>
+          </Reveal>
+          <div className={styles.partnerGrid}>
+            {advantages.map((item) => {
               const Icon = item.icon;
               return (
                 <Reveal key={item.title}>
-                  <article className={styles.advantageCard}>
-                    <div className={styles.advantageIcon}>
+                  <article className={styles.partnerCard}>
+                    <div
+                      className={shared.benefitIcon}
+                      style={{ background: "#FFF0E6", color: "#FF6500" }}
+                    >
                       <Icon size={20} strokeWidth={1.8} />
                     </div>
                     <h3>{item.title}</h3>
@@ -163,69 +216,22 @@ export function Frontend() {
         </div>
       </section>
 
-      <section className="section section--light">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Capabilities"
-              title="Front-end services that elevate the product surface"
-              description="From design-system foundations to high-traffic web apps — specialists who ship UI with engineering rigor."
-            />
-          </Reveal>
-          <div className={styles.grid5}>
-            {capabilities.map((item) => (
-              <Reveal key={item.title}>
-                <ServiceCard
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.description}
-                  iconBg={item.iconBg}
-                  iconColor={item.iconColor}
-                />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--dark">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Impact"
-              title="Metrics product leaders care about"
-              description="We measure front-end success in speed, conversion, and how confidently teams ship the next release."
-              dark
-              align="center"
-            />
-          </Reveal>
-          <div className={styles.metricsRow}>
-            {metrics.map((m) => (
-              <Reveal key={m.label}>
-                <div className={styles.metric}>
-                  <div className={styles.metricValue}>{m.value}</div>
-                  <div className={styles.metricLabel}>{m.label}</div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="section">
         <div className="container">
           <Reveal>
             <SectionHeader
               label="Stack"
-              title="Modern front-end technologies we master"
+              title="Your UI development stack is covered"
               description="Framework depth with TypeScript discipline — matched to your roadmap, not a fashion cycle."
               align="center"
             />
           </Reveal>
           <Reveal>
-            <div className={styles.techTags}>
-              {techStack.map((tech) => (
-                <span key={tech}>{tech}</span>
+            <div className={styles.techLogoGrid}>
+              {techLogos.map((tech) => (
+                <div key={tech} className={styles.techLogo}>
+                  {tech}
+                </div>
               ))}
             </div>
           </Reveal>
@@ -235,21 +241,57 @@ export function Frontend() {
       <section className="section section--light">
         <div className="container">
           <Reveal>
+            <Testimonial
+              quote="Working alongside an in-house team, QUORIXA helped develop a new user interface for our platform. The launch landed on time, customer feedback was strongly positive, and their professionalism established a seamless process."
+              author="Daniel Okoro"
+              role="CTO"
+              company="security software company"
+              image="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&q=80"
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section section--dark">
+        <div className="container">
+          <Reveal>
+            <div className={styles.darkCta}>
+              <div>
+                <h2>
+                  Explore our front-end expertise and find out how we can help
+                  achieve your goals
+                </h2>
+                <p>
+                  Need robust UI architectures, feature-rich SPAs, PWAs, or
+                  industry-specific interfaces? Let&apos;s brainstorm.
+                </p>
+              </div>
+              <Button href="/contact" arrow>
+                Book a free consultation
+              </Button>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <Reveal>
             <SectionHeader
-              label="Our work"
-              title="Interfaces that shipped and scaled"
-              description="Selected engagements where QUORIXA elevated web UX, systems, and front-end architecture."
+              label="Case studies"
+              title="Success stories"
+              description="See how companies enhance flagship web solutions, boost performance, and drive engagement with QUORIXA UI expertise."
               align="center"
             />
           </Reveal>
-          <div className={styles.caseGrid}>
+          <div className={shared.caseGrid}>
             {studies.map((study) => (
               <Reveal key={study.id}>
                 <CaseStudyCard study={study} />
               </Reveal>
             ))}
           </div>
-          <div className={styles.centerCta}>
+          <div className={shared.centerCta}>
             <Button href="/our-work" variant="ghost" arrow>
               View all case studies
             </Button>
@@ -257,22 +299,8 @@ export function Frontend() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <Reveal>
-            <Testimonial
-              quote="QUORIXA's front-end team turned a fragmented UI into a coherent system. Performance improved, design handoffs got cleaner, and feature velocity finally matched our ambitions."
-              author="Daniel Okoro"
-              role="Head of Product Engineering"
-              company="retail commerce platform"
-              image="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&q=80"
-            />
-          </Reveal>
-        </div>
-      </section>
-
       <CTASection
-        title="Ready to elevate your product's front end?"
+        title="Build custom UI solutions faster while boosting engineering efficiency"
         description="Share your UI goals — we'll assemble engineers who blend craft, systems thinking, and delivery speed."
         ctaLabel="Book a consultation"
         secondaryLabel="Explore design studio"

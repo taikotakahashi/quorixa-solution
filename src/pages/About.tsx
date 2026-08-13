@@ -1,8 +1,8 @@
 import {
-  Compass,
+  Code2,
+  Eye,
   Handshake,
-  Lightbulb,
-  Shield,
+  HeartHandshake,
   Target,
   Users,
 } from "lucide-react";
@@ -10,111 +10,175 @@ import { AwardCards } from "../components/AwardCards";
 import { Button } from "../components/Button";
 import { ClientLogoMarquee } from "../components/ClientLogoMarquee";
 import { CTASection } from "../components/CTASection";
+import {
+  DashboardVisual,
+  MobileVisual,
+} from "../components/HeroVisuals";
 import { Reveal } from "../components/Reveal";
 import { SectionHeader } from "../components/SectionHeader";
 import { ServiceCard } from "../components/ServiceCard";
 import { StatCard } from "../components/StatCard";
+import { TeamMembers } from "../components/TeamMembers";
 import { Testimonial } from "../components/Testimonial";
 import { employeeTestimonials, teamMembers } from "../data/team";
+import { certifications } from "../data/content";
 import styles from "./About.module.css";
 
 const timeline = [
   {
-    year: "2012",
-    title: "Founded",
+    year: "2010",
+    title: "Founded as a product studio",
     description:
-      "QUORIXA began as a product engineering studio focused on shipping reliable software for ambitious founders.",
+      "QUORIXA began building proprietary software loved by ambitious product teams — laying the foundation for senior engineering craft.",
   },
   {
-    year: "2016",
-    title: "Global delivery",
+    year: "2014",
+    title: "Dedicated teams take shape",
     description:
-      "Expanded into dedicated teams across Europe and the Americas, aligning specialists to client timezones.",
+      "We launched software development services and expanded nearshore hubs so clients could embed specialists aligned to their timezone.",
   },
   {
-    year: "2020",
-    title: "Studios model",
+    year: "2018",
+    title: "Recognition & global scale",
     description:
-      "Launched AI, Data, Design, and Quality studios — deep practices under one delivery organization.",
+      "Industry recognition accelerated as we grew delivery across the Americas and Europe — still keeping ownership close to every engagement.",
   },
   {
     year: "2024",
-    title: "Platform era",
+    title: "Studios for AI, data & quality",
     description:
-      "Scaled AI-assisted engineering and enterprise partnerships while keeping senior ownership on every engagement.",
+      "AI Studio, Data Studio, and Quality Studio deepened our practice model — helping clients ship faster with measurable ROI.",
+  },
+];
+
+const impactStats = [
+  {
+    value: "12×",
+    label: "Faster data processing",
+    description:
+      "Achieved for a SaaS platform optimizing energy use across global retail brands.",
+  },
+  {
+    value: "700+",
+    label: "Microservices optimized",
+    description:
+      "For enterprise vendors — unlocking cloud cost savings and cleaner architecture.",
+  },
+  {
+    value: "120%",
+    label: "Higher conversions",
+    description:
+      "Driven by UX/UI redesign for a leading digital content platform.",
+  },
+  {
+    value: "12×",
+    label: "Faster release cycles",
+    description:
+      "Delivered for licensing platforms trusted by entertainment and gaming leaders.",
   },
 ];
 
 const principles = [
   {
-    icon: Target,
-    title: "Outcomes over output",
+    icon: Code2,
+    title: "Technical excellence",
     description:
-      "We measure success by business impact — not ticket volume or hours billed.",
-    iconBg: "#F3E8FF",
-    iconColor: "#5B35F5",
+      "You always get robust, scalable, elegant, and future-proof software built just in time.",
+  },
+  {
+    icon: Target,
+    title: "Ownership mentality",
+    description:
+      "We own the results of our work, adhere to best practices, and understand your unique goals.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Client focus",
+    description:
+      "We build software that solves real-world challenges and creates new business opportunities.",
+  },
+  {
+    icon: Eye,
+    title: "Transparency",
+    description:
+      "You always get a clear, complete picture of our talent, workflows, and deliverables.",
   },
   {
     icon: Users,
-    title: "Senior ownership",
+    title: "Diversity",
     description:
-      "Experienced engineers lead delivery, mentor teams, and stay accountable end to end.",
-    iconBg: "#E8F1FF",
-    iconColor: "#1677FF",
-  },
-  {
-    icon: Lightbulb,
-    title: "Craft with curiosity",
-    description:
-      "We stay current on platforms and patterns so clients get durable, modern solutions.",
-    iconBg: "#FFF0E6",
-    iconColor: "#FF6500",
+      "Talent and skills aren't defined by race, gender, orientation, age, health, or religion.",
   },
   {
     icon: Handshake,
-    title: "Partnership mindset",
+    title: "Teamwork",
     description:
-      "We integrate with your process, communicate clearly, and protect trust at every milestone.",
-    iconBg: "#E6F7EF",
-    iconColor: "#35B968",
-  },
-  {
-    icon: Shield,
-    title: "Quality by default",
-    description:
-      "Testing, accessibility, and operational readiness are built in — not bolted on later.",
-    iconBg: "#FFE8E6",
-    iconColor: "#FF3B30",
-  },
-  {
-    icon: Compass,
-    title: "Clarity in complexity",
-    description:
-      "We simplify architecture and decisions so teams can move fast without losing control.",
-    iconBg: "#F3E8FF",
-    iconColor: "#4523D8",
+      "Every idea is welcome, every team member is important, and every contribution counts.",
   },
 ];
 
 const employeeQuote = employeeTestimonials[0];
 
+const partnerCards = [
+  {
+    id: "google-cloud",
+    title: "Google Cloud Partner Advantage",
+    description: "Service partner for cloud-native delivery and modernization.",
+  },
+  {
+    id: "inc5000",
+    title: "Fastest-growing companies",
+    description: "Recognized among the fastest-growing firms in the US.",
+  },
+  {
+    id: "iso",
+    title: "Information security certified",
+    description: "Certified practices for cybersecurity and privacy protection.",
+  },
+  {
+    id: "clutch",
+    title: "Leader in custom software",
+    description: "Trusted for application development and dedicated teams.",
+  },
+  {
+    id: "istqb",
+    title: "ISTQB partner company",
+    description: "Quality engineering aligned to industry testing standards.",
+  },
+  {
+    id: "aws",
+    title: "Cloud architect expertise",
+    description: "Certified Solutions Architects and Cloud Practitioners.",
+  },
+];
+
 export function About() {
   return (
     <>
       <section className={`${styles.storyHero} grid-bg`}>
-        <div className="container">
+        <div className={`container ${styles.storyLayout}`}>
           <Reveal>
-            <div className={styles.storyInner}>
-              <span className="label">About QUORIXA</span>
+            <div className={styles.storyCopy}>
+              <span className="label">About us</span>
               <h1 className={styles.storyTitle}>
-                Our story: elevating digital products with{" "}
-                <span className="highlight-orange">engineering excellence</span>
+                Our story: 15+ years of elevating{" "}
+                <span className="highlight-orange">digital products</span>
               </h1>
               <p className={styles.storyDesc}>
-                We assemble dedicated specialists who treat your product like
-                their own — shipping with rigor, empathy, and long-term
-                technical judgment.
+                QUORIXA evolved from a proprietary software product into a
+                provider of tailored engineering, AI, data, and design solutions
+                fueling the growth of hundreds of companies.
               </p>
+            </div>
+          </Reveal>
+          <Reveal>
+            <div className={styles.deviceStage} aria-hidden>
+              <div className={styles.deviceDash}>
+                <DashboardVisual accent="orange" />
+              </div>
+              <div className={styles.devicePhones}>
+                <MobileVisual />
+              </div>
             </div>
           </Reveal>
         </div>
@@ -122,45 +186,46 @@ export function About() {
 
       <ClientLogoMarquee />
 
-      <section className="section section--dark">
+      <section className={`section section--dark ${styles.impactSection}`}>
         <div className="container">
           <div className={styles.impactLayout}>
             <Reveal>
               <div>
-                <span className="label">Impact</span>
                 <h2 className={styles.impactTitle}>
-                  Built for teams that need{" "}
-                  <span className="highlight-orange">results</span>
+                  The hottest VC startups and world-famous brands report
+                  impressive growth thanks to our{" "}
+                  <span className="highlight-orange">
+                    software expertise and solutions
+                  </span>
                 </h2>
-                <p>
-                  From early-stage products to enterprise platforms, QUORIXA
-                  delivers senior engineering capacity with studio-level depth.
-                </p>
               </div>
             </Reveal>
             <div className={styles.impactGrid}>
-              <StatCard
-                value="12+"
-                label="Years"
-                description="Shipping production software across industries."
-              />
-              <StatCard
-                value="850+"
-                label="Engineers"
-                description="Specialists across product, data, AI, and QA."
-              />
-              <StatCard
-                value="25+"
-                label="Countries"
-                description="Distributed talent collaborating as one team."
-              />
-              <StatCard
-                value="95%"
-                label="Retention"
-                description="Long-term partnerships built on delivery trust."
-              />
+              {impactStats.map((stat) => (
+                <StatCard
+                  key={stat.label}
+                  value={stat.value}
+                  label={stat.label}
+                  description={stat.description}
+                  variant="bordered"
+                />
+              ))}
             </div>
           </div>
+
+          <Reveal>
+            <div className={styles.purpleBar}>
+              <div>
+                <h3 className={styles.purpleTitle}>
+                  Drive measurable growth with custom software engineering and
+                  design solutions
+                </h3>
+              </div>
+              <Button href="/contact" variant="outline" arrow>
+                Book a consultation
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -168,9 +233,9 @@ export function About() {
         <div className="container">
           <Reveal>
             <SectionHeader
-              label="Timeline"
+              label="QUORIXA history"
               title="How we got here"
-              description="A decade of refining how exceptional engineering teams partner with product organizations."
+              description="A decade-plus of refining how exceptional engineering teams partner with product organizations."
               align="center"
             />
           </Reveal>
@@ -178,14 +243,14 @@ export function About() {
             {timeline.map((item, index) => (
               <Reveal key={item.year}>
                 <li className={styles.timelineItem}>
-                  <div className={styles.timelineMarker}>
+                  <div className={styles.timelineCard}>
                     <span className={styles.timelineYear}>{item.year}</span>
-                    {index < timeline.length - 1 && (
-                      <span className={styles.timelineLine} aria-hidden />
-                    )}
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
                   </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
+                  {index < timeline.length - 1 && (
+                    <span className={styles.timelineConnector} aria-hidden />
+                  )}
                 </li>
               </Reveal>
             ))}
@@ -197,42 +262,56 @@ export function About() {
         <div className="container">
           <Reveal>
             <SectionHeader
-              label="Leadership"
-              title="The people behind the work"
-              description="Leaders and practitioners across engineering, design, AI, and delivery."
+              label="Leadership & key experts"
+              title="Meet our team"
+              description="Exceptional technology solutions are only possible with exceptional people."
               align="center"
             />
           </Reveal>
-          <div className={styles.teamGrid}>
-            {teamMembers.map((member) => (
-              <Reveal key={member.name}>
-                <article className={styles.teamCard}>
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    loading="lazy"
-                  />
-                  <strong>{member.name}</strong>
-                  <span>{member.role}</span>
-                </article>
-              </Reveal>
-            ))}
+          <TeamMembers members={teamMembers} />
+          <div className={styles.centerCta}>
+            <Button href="/careers" variant="ghost" arrow>
+              Explore careers at QUORIXA
+            </Button>
           </div>
         </div>
       </section>
 
-      <section id="recognition" className="section section--dark">
+      <section id="recognition" className={`section section--dark ${styles.recognition}`}>
         <div className="container">
           <Reveal>
             <SectionHeader
-              label="Recognition"
-              title="Awards that reflect delivery quality"
-              description="Industry trust earned through products that perform in the real world."
+              label="Get to know us"
+              title="Recognition, certifications, and partnerships"
+              description="The solutions you get with QUORIXA are secure, reliable, and up to the highest industry standards."
               align="center"
               dark
             />
           </Reveal>
-          <AwardCards />
+
+          <div className={styles.partnerGrid}>
+            {partnerCards.map((card) => {
+              const logo = certifications.find((c) => c.id === card.id);
+              return (
+              <Reveal key={card.title}>
+                <article className={styles.partnerCard}>
+                  {logo ? (
+                    <img
+                      src={logo.src}
+                      alt={logo.label}
+                      className={styles.partnerMark}
+                    />
+                  ) : null}
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                </article>
+              </Reveal>
+              );
+            })}          </div>
+
+          <div className={styles.awardStrip}>
+            <AwardCards showCertifications={false} />
+          </div>
         </div>
       </section>
 
@@ -240,9 +319,9 @@ export function About() {
         <div className="container">
           <Reveal>
             <SectionHeader
-              label="Principles"
-              title="How we work when it matters"
-              description="Six commitments that shape every engagement — from discovery through production."
+              label="Culture and values"
+              title="The principles guiding us"
+              description="We continually improve our strategy and business practices while staying true to our core values."
               align="center"
             />
           </Reveal>
@@ -253,8 +332,8 @@ export function About() {
                   icon={principle.icon}
                   title={principle.title}
                   description={principle.description}
-                  iconBg={principle.iconBg}
-                  iconColor={principle.iconColor}
+                  iconBg="#FFF0E6"
+                  iconColor="#FF6500"
                 />
               </Reveal>
             ))}
@@ -263,7 +342,24 @@ export function About() {
       </section>
 
       <section className="section section--light">
-        <div className="container">
+        <div className={`container ${styles.expertLayout}`}>
+          <Reveal>
+            <div>
+              <SectionHeader
+                label="Culture and values"
+                title="We engage top experts — and help them grow"
+                description="Technical, honest, enthusiastic, and innovative — our team consistently earns stellar reviews from talented software experts."
+              />
+              <div className={styles.expertActions}>
+                <Button href="/careers" arrow>
+                  View open roles
+                </Button>
+                <Button href="/contact" variant="ghost" arrow>
+                  Talk to us
+                </Button>
+              </div>
+            </div>
+          </Reveal>
           <Reveal>
             <Testimonial
               quote={employeeQuote.quote}
@@ -273,21 +369,16 @@ export function About() {
               image={employeeQuote.image}
             />
           </Reveal>
-          <div className={styles.centerCta}>
-            <Button href="/careers" variant="ghost" arrow>
-              Explore careers at QUORIXA
-            </Button>
-          </div>
         </div>
       </section>
 
       <CTASection
-        title="Build with a team that cares about craft"
-        description="Join engineers, designers, and delivery leaders shaping products that matter."
-        ctaLabel="View open roles"
-        ctaHref="/careers"
-        secondaryLabel="Talk to us"
-        secondaryHref="/contact"
+        title="Talk to our experts about your software challenges and explore the solutions we can offer"
+        description="Drive your growth with technology expertise that powers successful digital products."
+        ctaLabel="Let's get in touch"
+        ctaHref="/contact"
+        secondaryLabel="View our work"
+        secondaryHref="/our-work"
       />
     </>
   );

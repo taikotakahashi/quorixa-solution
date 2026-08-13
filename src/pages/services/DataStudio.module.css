@@ -1,0 +1,146 @@
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.solutionsBlock {
+  margin-bottom: 48px;
+}
+
+.outcomesIntro {
+  max-width: 640px;
+  margin-bottom: 24px;
+}
+
+.outcomes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.photoCta {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.photoCtaCopy h2 {
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 12px 0 16px;
+  max-width: 520px;
+  line-height: 1.12;
+}
+
+.photoCtaCopy p {
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 460px;
+  margin-bottom: 28px;
+  line-height: 1.65;
+}
+
+.photoWrap {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.photoWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.caseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.advantageCard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  height: 100%;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.advantageCard:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.advantageIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  background: rgba(255, 101, 0, 0.15);
+  color: var(--color-orange);
+}
+
+.advantageCard h3 {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  color: var(--color-white);
+}
+
+.advantageCard p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+}
+
+@media (max-width: 1100px) {
+  .grid4,
+  .caseGrid,
+  .grid3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .photoCta,
+  .outcomes {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .statsRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid4,
+  .caseGrid,
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
+}
