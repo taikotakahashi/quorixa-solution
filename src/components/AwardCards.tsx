@@ -12,7 +12,7 @@ type Props = {
 export function AwardCards({
   showCertifications = true,
   fullWidth = false,
-  logoHeight = 120,
+  logoHeight = 190,
 }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
   const drag = useRef({

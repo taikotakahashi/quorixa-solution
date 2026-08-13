@@ -1,49 +1,88 @@
 .section {
-  background: #f7f7f7;
+  position: relative;
+  background: #f2f2f2;
+  padding: 0;
+}
+
+/* Soft white arc like the original divider-top */
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: #fff;
+  clip-path: ellipse(55% 100% at top);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 90px;
+  padding-bottom: 90px;
+  max-width: 1310px;
 }
 
 .intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  max-width: 780px;
-  margin: 0 auto 48px;
+  width: 100%;
+  margin: 0 0 50px;
 }
 
 .pill {
   display: inline-flex;
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: #e8e8e8;
-  color: #444;
-  font-size: 13px;
+  align-items: center;
+  margin: 0 0 30px;
+  padding: 5px 15px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid rgba(194, 194, 194, 0.2);
+  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.09);
+  backdrop-filter: blur(10px);
+  font-family: "Open Sans", Inter, sans-serif;
+  font-size: 12px;
   font-weight: 600;
-  margin-bottom: 20px;
+  line-height: 1.4;
+  color: #5d5d5d;
 }
 
 .title {
-  font-size: clamp(32px, 4.2vw, 44px);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.15;
-  margin-bottom: 16px;
+  max-width: 870px;
+  margin: 0 0 0;
+  font-family: Montserrat, Inter, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   color: #111;
+  text-align: center;
 }
 
 .desc {
+  width: 100%;
+  max-width: 600px;
+  margin: 30px auto 0;
+  font-family: "Open Sans", Inter, sans-serif;
   font-size: 16px;
-  color: #666;
-  line-height: 1.65;
-  margin-bottom: 18px;
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
+  font-weight: 500;
+  line-height: 28px;
+  color: #333;
+  text-align: center;
 }
 
 .growthLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 700;
+  display: inline;
+  font-family: "Open Sans", Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 28px;
   color: #111;
 }
 
@@ -51,161 +90,169 @@
   color: var(--color-purple);
 }
 
-.featureCard {
-  display: grid;
-  grid-template-columns: 0.92fr 1.08fr;
+.cards {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  margin-top: 0;
+  gap: 0;
+}
+
+.featureCard,
+.studioCard {
+  text-decoration: none;
   background: #fff;
-  border: 1px solid #e6e6e6;
   border-radius: 20px;
-  overflow: hidden;
-  margin-bottom: 16px;
-  transition: box-shadow var(--transition);
+  border: 1px solid transparent;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.featureCard:hover,
+.studioCard:hover {
+  box-shadow: 1px 2px 7px 0 #d6d6d6;
 }
 
 .featureCard:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  border-color: #ff6b00;
+}
+
+.studioCard:nth-child(2):hover {
+  border-color: #a920d3;
+}
+
+.studioCard:nth-child(3):hover {
+  border-color: #1570ef;
+}
+
+.studioCard:nth-child(4):hover {
+  border-color: #ff3c00;
+}
+
+.studioCard:nth-child(5):hover {
+  border-color: #35aa5e;
+}
+
+.featureCard {
+  width: 100%;
+  display: flex;
+  position: relative;
+  margin-bottom: 20px;
+  padding: 36px 24px;
+  overflow: hidden;
+}
+
+.featureInner {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+  position: relative;
+  z-index: 1;
 }
 
 .featureCopy {
-  padding: 40px 36px 64px;
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  justify-content: center;
+  align-items: flex-start;
+  padding-right: 12px;
 }
 
-.featureIcon {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: #ff6500;
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.drawIcon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
-.featureCopy h3 {
-  font-size: clamp(22px, 2.4vw, 28px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-  color: #111;
+.featureCopy h3,
+.studioCard h3 {
+  font-family: "Open Sans", Inter, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: #000;
+  margin: 0 0 12px;
 }
 
-.featureCopy p {
-  font-size: 15px;
-  color: #666;
-  line-height: 1.6;
-  max-width: 400px;
+.featureCopy p,
+.studioCard p {
+  font-family: "Open Sans", Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #000;
+  margin: 0;
+  max-width: 70%;
 }
 
-.featureMedia {
-  min-height: 300px;
-  background: #f0f0f1;
-}
-
-.featureMedia img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.studioGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-bottom: 24px;
-  align-items: stretch;
+.featureImg {
+  width: 51%;
+  margin: -100px 0 -36px 24px;
+  object-fit: contain;
+  object-position: bottom;
+  display: block;
+  align-self: flex-end;
+  pointer-events: none;
 }
 
 .studioCard {
+  width: calc(25% - 15px);
+  padding: 36px 24px;
+  margin-bottom: 20px;
+  min-height: 280px;
+}
+
+.studioInner {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 20px;
-  padding: 32px 28px 28px;
-  min-height: 300px;
-  height: 100%;
-  box-sizing: border-box;
-  transition: transform var(--transition), box-shadow var(--transition),
-    border-color var(--transition);
+  justify-content: space-between;
+  min-height: 220px;
 }
 
-.studioCard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-  border-color: #ddd;
-}
-
-.studioCard:hover .circleArrow {
-  border-color: #111;
-  background: #111;
-  color: #fff;
-}
-
-.studioIcon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 22px;
-  flex-shrink: 0;
-}
-
-.studioCard h4 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  letter-spacing: -0.025em;
-  color: #111;
-  line-height: 1.2;
+.studioInner > div {
+  height: calc(100% - 30px);
 }
 
 .studioCard p {
-  font-size: 15px;
-  color: #666;
-  line-height: 1.6;
-  margin: 0 0 28px;
-  flex: 1;
+  max-width: none;
+  margin-bottom: 0;
 }
 
 .circleArrow {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1.5px solid #d8d8d8;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #222;
-  background: #fff;
-  margin-top: auto;
-  align-self: flex-end;
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 24px 0 0 auto;
+  color: #000;
   flex-shrink: 0;
-  transition: background var(--transition), color var(--transition),
-    border-color var(--transition);
+  line-height: 0;
 }
 
-.featureCopy .circleArrow {
-  position: absolute;
-  right: 24px;
-  bottom: 24px;
-  margin-top: 0;
-  align-self: auto;
+.featureInner > .circleArrow {
+  margin-top: 28px;
+}
+
+.studioCard .circleArrow {
+  margin-top: 24px;
 }
 
 .roiBanner {
+  width: 100%;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   background: #000;
   border-radius: 20px;
   overflow: hidden;
   min-height: 320px;
+  margin-top: 4px;
 }
 
 .roiCopy {
@@ -265,35 +312,82 @@
 }
 
 @media (max-width: 1100px) {
-  .studioGrid {
-    grid-template-columns: 1fr 1fr;
+  .studioCard {
+    width: calc(50% - 10px);
+  }
+
+  .featureCopy p {
+    max-width: 100%;
   }
 }
 
 @media (max-width: 900px) {
-  .featureCard,
+  .container {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .title {
+    font-size: 32px;
+    max-width: 92%;
+  }
+
+  .desc {
+    max-width: 100%;
+  }
+
+  .featureCard {
+    flex-direction: column;
+    padding: 28px 24px;
+  }
+
+  .featureImg {
+    width: 100%;
+    margin: 24px 0 0;
+    max-height: 240px;
+  }
+
+  .featureInner {
+    min-height: 0;
+  }
+
   .roiBanner {
     grid-template-columns: 1fr;
   }
 
-  .featureMedia,
   .roiVisual {
     min-height: 220px;
   }
 
-  .featureCopy,
   .roiCopy {
     padding: 28px 24px 56px;
   }
 
   .studioCard {
-    min-height: 260px;
-    padding: 28px 24px 24px;
+    min-height: 240px;
+    padding: 28px 24px;
   }
 }
 
 @media (max-width: 640px) {
-  .studioGrid {
-    grid-template-columns: 1fr;
+  .section::before {
+    height: 28px;
+  }
+
+  .title {
+    font-size: 25px;
+  }
+
+  .intro {
+    margin-bottom: 36px;
+  }
+
+  .studioCard {
+    width: 100%;
+  }
+
+  .featureCopy h3,
+  .studioCard h3 {
+    font-size: 18px;
   }
 }

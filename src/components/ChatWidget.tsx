@@ -1,17 +1,43 @@
 import { useEffect, useRef, useState } from "react";
-import { MessageCircle, X } from "lucide-react";
+import type { FormEvent } from "react";
+import { ChevronDown, MessageCircle, Rocket, Send, X } from "lucide-react";
+import { requestAssistantReply } from "../lib/chatAssistant";
+import type { ChatMessage } from "../lib/chatKnowledge";
 import styles from "./ChatWidget.module.css";
 
-type Msg = { role: "bot" | "user"; text: string };
+type UiMsg = {
+  id: string;
+  role: "bot" | "user";
+  text: string;
+};
+
+function toApiMessages(msgs: UiMsg[]): ChatMessage[] {
+  return msgs.map((m) => ({
+    role: m.role === "bot" ? "assistant" : "user",
+    content: m.text,
+  }));
+}
+
+function renderText(text: string) {
+  return text.split("\n").map((line, i) => (
+    <span key={i}>
+      {i > 0 && <br />}
+      {line}
+    </span>
+  ));
+}
 
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<Msg[]>([
-    { role: "bot", text: "Hi! How can I help you?" },
+  const [busy, setBusy] = useState(false);
+  const [messages, setMessages] = useState<UiMsg[]>([
+    { id: "welcome", role: "bot", text: "Hi! How can I help you?" },
   ]);
   const [showTip, setShowTip] = useState(false);
+  const [showJump, setShowJump] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setShowTip(true), 2200);
@@ -33,33 +59,71 @@ export function ChatWidget() {
 
   useEffect(() => {
     if (!open) return;
-    listRef.current?.scrollTo({ top: listRef.current.scrollHeight });
-  }, [messages, open]);
+    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [messages, open, busy]);
 
-  const handleSend = (e: React.FormEvent) => {
-    e.preventDefault();
+  const onScroll = () => {
+    const el = listRef.current;
+    if (!el) return;
+    const distance = el.scrollHeight - el.scrollTop - el.clientHeight;
+    setShowJump(distance > 72);
+  };
+
+  const jumpToLatest = () => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    setShowJump(false);
+  };
+
+  const handleSend = async (e?: FormEvent) => {
+    e?.preventDefault();
     const text = message.trim();
-    if (!text) return;
-    setMessages((prev) => [
-      ...prev,
-      { role: "user", text },
-      {
-        role: "bot",
-        text: "Thanks — a QUORIXA specialist will follow up shortly. You can also book a consultation on our Contact page.",
-      },
-    ]);
+    if (!text || busy) return;
+
+    const userMsg: UiMsg = {
+      id: `u-${Date.now()}`,
+      role: "user",
+      text,
+    };
+    const next = [...messages, userMsg];
+    setMessages(next);
     setMessage("");
+    setBusy(true);
+
+    try {
+      const reply = await requestAssistantReply(toApiMessages(next));
+      setMessages((prev) => [
+        ...prev,
+        { id: `b-${Date.now()}`, role: "bot", text: reply },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `b-${Date.now()}`,
+          role: "bot",
+          text: "I hit a snag answering that. Please try again, or reach us via the Contact page.",
+        },
+      ]);
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
     <div className={styles.root}>
       {open && (
-        <div className={styles.panel} role="dialog" aria-label="Chat with QUORIXA">
+        <div
+          className={styles.panel}
+          role="dialog"
+          aria-label="Chat with QUORIXA"
+        >
           <div className={styles.header}>
             <div className={styles.brand}>
-              <span className={styles.logoMark}>Q</span>
+              <span className={styles.logoMark} aria-hidden>
+                <Rocket size={16} strokeWidth={2.2} />
+              </span>
               <div>
-                <strong>QUORIXA</strong>
+                <strong>QUORIXA Assistant</strong>
                 <span className={styles.status}>Typically replies instantly</span>
               </div>
             </div>
@@ -73,40 +137,71 @@ export function ChatWidget() {
             </button>
           </div>
 
-          <div className={styles.body} ref={listRef}>
-            {messages.map((msg, i) => (
-              <div
-                key={`${msg.role}-${i}`}
-                className={msg.role === "bot" ? styles.bubble : styles.bubbleUser}
+          <div className={styles.bodyWrap}>
+            <div className={styles.body} ref={listRef} onScroll={onScroll}>
+              {messages.map((msg) =>
+                msg.role === "bot" ? (
+                  <div key={msg.id} className={styles.botRow}>
+                    <span className={styles.avatar} aria-hidden>
+                      <Rocket size={14} strokeWidth={2.2} />
+                    </span>
+                    <div className={styles.bubble}>{renderText(msg.text)}</div>
+                  </div>
+                ) : (
+                  <div key={msg.id} className={styles.bubbleUser}>
+                    {renderText(msg.text)}
+                  </div>
+                ),
+              )}
+              {busy && (
+                <div className={styles.botRow}>
+                  <span className={styles.avatar} aria-hidden>
+                    <Rocket size={14} strokeWidth={2.2} />
+                  </span>
+                  <div className={`${styles.bubble} ${styles.typing}`}>
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                </div>
+              )}
+              <div ref={bottomRef} />
+            </div>
+
+            {showJump && (
+              <button
+                type="button"
+                className={styles.jump}
+                onClick={jumpToLatest}
+                aria-label="Scroll to latest message"
               >
-                {msg.text}
-              </div>
-            ))}
+                <ChevronDown size={18} />
+              </button>
+            )}
           </div>
 
           <form className={styles.form} onSubmit={handleSend}>
-            <textarea
-              placeholder="Type here..."
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              aria-label="Message"
-              rows={3}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSend(e);
-                }
-              }}
-            />
-            <button
-              type="submit"
-              className={styles.send}
-              disabled={!message.trim()}
-            >
-              Send
-            </button>
+            <div className={styles.inputRow}>
+              <input
+                type="text"
+                placeholder="Type here..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                aria-label="Message"
+                disabled={busy}
+                autoComplete="off"
+              />
+              <button
+                type="submit"
+                className={styles.send}
+                disabled={!message.trim() || busy}
+                aria-label="Send message"
+              >
+                <Send size={16} strokeWidth={2.2} />
+              </button>
+            </div>
+            <p className={styles.hint}>Press enter to send</p>
           </form>
-          <p className={styles.powered}>Chat with QUORIXA</p>
         </div>
       )}
 

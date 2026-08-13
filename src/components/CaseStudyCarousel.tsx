@@ -7,11 +7,10 @@ import styles from "./CaseStudyCarousel.module.css";
 
 type Props = {
   studies: CaseStudy[];
+  fullWidth?: boolean;
 };
 
-const GAP = 24;
-
-export function CaseStudyCarousel({ studies }: Props) {
+export function CaseStudyCarousel({ studies, fullWidth = false }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const drag = useRef({
@@ -22,33 +21,60 @@ export function CaseStudyCarousel({ studies }: Props) {
     pointerId: -1,
   });
 
-  const getStep = () => {
+  const getSlides = () =>
+    Array.from(
+      ref.current?.querySelectorAll<HTMLElement>(`.${styles.slide}`) ?? [],
+    );
+
+  const scrollToIndex = (index: number, behavior: ScrollBehavior = "smooth") => {
     const el = ref.current;
-    const slide = el?.querySelector(`.${styles.slide}`) as HTMLElement | null;
-    if (!el || !slide) return 0;
-    return slide.offsetWidth + GAP;
+    const slide = getSlides()[index];
+    if (!el || !slide) return;
+    const left =
+      slide.offsetLeft - (el.clientWidth - slide.offsetWidth) / 2;
+    el.scrollTo({ left, behavior });
+  };
+
+  const updateActiveFromScroll = () => {
+    const el = ref.current;
+    if (!el) return;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let best = 0;
+    let bestDist = Infinity;
+    getSlides().forEach((slide, i) => {
+      const mid = slide.offsetLeft + slide.offsetWidth / 2;
+      const dist = Math.abs(mid - center);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = i;
+      }
+    });
+    setActive(best);
   };
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const onScroll = () => {
-      const step = getStep();
-      if (!step) return;
-      const idx = Math.round(el.scrollLeft / step);
-      setActive(Math.min(Math.max(idx, 0), studies.length - 1));
-    };
-
+    const onScroll = () => updateActiveFromScroll();
     el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
+
+    // Center the first slide on mount / resize
+    const frame = requestAnimationFrame(() => scrollToIndex(0, "auto"));
+    const onResize = () => scrollToIndex(active, "auto");
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(frame);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [studies.length]);
 
   const goTo = (index: number) => {
-    const el = ref.current;
-    const step = getStep();
-    if (!el || !step) return;
-    el.scrollTo({ left: index * step, behavior: "smooth" });
+    scrollToIndex(index, "smooth");
+    setActive(index);
   };
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -84,13 +110,23 @@ export function CaseStudyCarousel({ studies }: Props) {
       /* already released */
     }
 
-    const step = getStep();
-    if (step) {
-      const idx = Math.round(el.scrollLeft / step);
-      const clamped = Math.min(Math.max(idx, 0), studies.length - 1);
-      el.scrollTo({ left: clamped * step, behavior: "smooth" });
-      setActive(clamped);
-    }
+    updateActiveFromScroll();
+    // Snap to nearest after measuring
+    requestAnimationFrame(() => {
+      const center = el.scrollLeft + el.clientWidth / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      getSlides().forEach((slide, i) => {
+        const mid = slide.offsetLeft + slide.offsetWidth / 2;
+        const dist = Math.abs(mid - center);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = i;
+        }
+      });
+      scrollToIndex(best, "smooth");
+      setActive(best);
+    });
 
     if (drag.current.moved) {
       e.preventDefault();
@@ -106,7 +142,7 @@ export function CaseStudyCarousel({ studies }: Props) {
   };
 
   return (
-    <div className={styles.wrap}>
+    <div className={`${styles.wrap} ${fullWidth ? styles.fullWidth : ""}`}>
       <div
         className={styles.track}
         ref={ref}
@@ -116,8 +152,11 @@ export function CaseStudyCarousel({ studies }: Props) {
         onPointerCancel={endDrag}
         onClickCapture={onClickCapture}
       >
-        {studies.map((study) => (
-          <div key={study.id} className={styles.slide}>
+        {studies.map((study, i) => (
+          <div
+            key={study.id}
+            className={`${styles.slide} ${active === i ? styles.slideActive : ""}`}
+          >
             <CaseStudyCard study={study} />
           </div>
         ))}

@@ -1,9 +1,22 @@
+import cs1 from "../assets/case-image/cs-img-1.webp";
+import cs2 from "../assets/case-image/cs-img-2.webp";
+import cs3 from "../assets/case-image/cs-img-3.webp";
+import cs4 from "../assets/case-image/cs-img-4.webp";
+import cs5 from "../assets/case-image/cs-img-5.webp";
+import cs6 from "../assets/case-image/cs-img-6.webp";
+
+export type CaseStudyTag = {
+  label: string;
+  color: string;
+  textColor: string;
+};
+
 export type CaseStudy = {
   id: string;
   title: string;
   description: string;
   image: string;
-  tags: { label: string; color: string }[];
+  tags: CaseStudyTag[];
   href: string;
   industry?: string;
   result?: string;
@@ -11,18 +24,32 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    id: "geotap",
-    title: "Idelic: AI-enabled safety intelligence for large-scale fleet operations",
+    id: "medflow",
+    title: "AI-driven RegTech monitoring Nasdaq and the NYSE trading",
     description:
-      "QUORIXA introduced critical data and architecture solutions to a leading fleet safety platform — enabling predictive risk insights at scale.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80",
+      "A Washington, D.C.-based RegTech overseeing brokerage firms and exchange markets...",
+    image: cs1,
     tags: [
-      { label: "Data Studio", color: "#EDE7F6" },
-      { label: "Quality Studio", color: "#E8F5E9" },
-      { label: "AI Studio", color: "#FCE4EC" },
-      { label: "Backend", color: "#E3F2FD" },
-      { label: "Front-end", color: "#E0F7FA" },
+      { label: "Data Studio", color: "#e6e7f9", textColor: "#444ce7" },
+      { label: "Quality Studio", color: "#bce1c9", textColor: "#1b6c36" },
+    ],
+    href: "/our-work/medflow",
+    industry: "Financial Services",
+    result: "Live market oversight",
+  },
+  {
+    id: "geotap",
+    title:
+      "Idelic: AI-enabled safety intelligence for large-scale fleet operations",
+    description:
+      "QUORIXA introduced critical data and architecture solutions to a leading fleet safety platform...",
+    image: cs2,
+    tags: [
+      { label: "Data Studio", color: "#e6e7f9", textColor: "#444ce7" },
+      { label: "Quality Studio", color: "#bce1c9", textColor: "#1b6c36" },
+      { label: "AI Studio", color: "#f5e6ff", textColor: "#9a01fd" },
+      { label: "Backend", color: "#d1f1ee", textColor: "#2e6b63" },
+      { label: "Front-end", color: "#d1f1ee", textColor: "#2e6b63" },
     ],
     href: "/our-work/geotap",
     industry: "Logistics & Delivery",
@@ -32,80 +59,63 @@ export const caseStudies: CaseStudy[] = [
     id: "finledger",
     title: "10x faster app modernization, powered by AI",
     description:
-      "An agentic AI platform that enables 10x faster modernization of legacy enterprise applications without freezing delivery.",
-    image:
-      "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900&q=80",
+      "An agentic AI platform that enables 10x faster modernization of legacy enterprise applications...",
+    image: cs3,
     tags: [
-      { label: "AI Studio", color: "#FCE4EC" },
-      { label: "Backend", color: "#E3F2FD" },
-      { label: "Front-end", color: "#E0F7FA" },
+      { label: "AI Studio", color: "#f5e6ff", textColor: "#9a01fd" },
+      { label: "Backend", color: "#d1f1ee", textColor: "#2e6b63" },
+      { label: "Front-end", color: "#d1f1ee", textColor: "#2e6b63" },
     ],
     href: "/our-work/finledger",
     industry: "Tech & Software",
     result: "10× faster modernization cycles",
   },
   {
-    id: "medflow",
-    title: "Real-time trading intelligence for exchange markets",
-    description:
-      "Built high-throughput data pipelines and dashboards so trading firms act on live market signals with confidence.",
-    image:
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=900&q=80",
-    tags: [
-      { label: "Data Studio", color: "#EDE7F6" },
-      { label: "Backend", color: "#E3F2FD" },
-      { label: "FinTech", color: "#FFF3E0" },
-    ],
-    href: "/our-work/medflow",
-    industry: "Financial Services",
-    result: "Sub-second market insight",
-  },
-  {
     id: "retailpulse",
-    title: "Unified commerce experience across web and mobile",
+    title:
+      "AI-powered customer communications platform leveraged by Uber and Motorola",
     description:
-      "A design system and front-end platform that scaled consistent UX across markets and channels.",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
+      "An enterprise communications platform powered by agentic AI engages QUORIXA...",
+    image: cs4,
     tags: [
-      { label: "Design Studio", color: "#FFF3E0" },
-      { label: "Front-end", color: "#E0F7FA" },
-      { label: "Mobile", color: "#E3F2FD" },
+      { label: "Design Studio", color: "#ffe6e6", textColor: "#bc1016" },
+      { label: "Quality Studio", color: "#bce1c9", textColor: "#1b6c36" },
+      { label: "Backend", color: "#d1f1ee", textColor: "#2e6b63" },
+      { label: "Front-end", color: "#d1f1ee", textColor: "#2e6b63" },
     ],
     href: "/our-work/retailpulse",
-    industry: "Retail & Ecommerce",
-    result: "+28% conversion",
+    industry: "Tech & Software",
+    result: "Enterprise agentic communications",
   },
   {
     id: "securegate",
-    title: "Automated quality gates for mission-critical SaaS releases",
+    title:
+      "The Baltimore Banner: AWS-based data and AI solutions driving subscription growth",
     description:
-      "Built a resilient AQA pipeline that caught regressions before production every sprint.",
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80",
+      "The Baltimore Banner is a Pulitzer Prize-winning news platform with...",
+    image: cs5,
     tags: [
-      { label: "Quality Studio", color: "#E8F5E9" },
-      { label: "Backend", color: "#E3F2FD" },
-      { label: "AI Studio", color: "#FCE4EC" },
+      { label: "Data Studio", color: "#e6e7f9", textColor: "#444ce7" },
+      { label: "AI Studio", color: "#f5e6ff", textColor: "#9a01fd" },
     ],
     href: "/our-work/securegate",
-    industry: "Tech & Software",
-    result: "90% regression coverage",
+    industry: "Media",
+    result: "Subscription growth via data & AI",
   },
   {
     id: "logix",
-    title: "Fleet analytics platform for global logistics operations",
+    title: "AI-native supply chain platform rewiring American manufacturing",
     description:
-      "Real-time telemetry, predictive ETAs, and operator tools for multi-region fleets.",
-    image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=80",
+      "QUORIXA drives the development of an AI-native platform serving 50,000+...",
+    image: cs6,
     tags: [
-      { label: "Backend", color: "#EDE7F6" },
-      { label: "Data Studio", color: "#E8F5E9" },
-      { label: "Front-end", color: "#E0F7FA" },
+      { label: "Backend", color: "#d1f1ee", textColor: "#2e6b63" },
+      { label: "Front-end", color: "#d1f1ee", textColor: "#2e6b63" },
+      { label: "Data Studio", color: "#e6e7f9", textColor: "#444ce7" },
+      { label: "AI Studio", color: "#f5e6ff", textColor: "#9a01fd" },
     ],
     href: "/our-work/logix",
-    industry: "Logistics & Delivery",
-    result: "1M+ events / day",
+    industry: "Manufacturing",
+    result: "AI-native supply chain at scale",
   },
 ];

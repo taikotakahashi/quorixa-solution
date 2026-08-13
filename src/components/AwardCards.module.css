@@ -41,8 +41,8 @@
 }
 
 .card {
-  width: 236px;
-  height: 318px;
+  width: 248px;
+  height: 340px;
   border-radius: 16px;
   padding: 24px 18px 20px;
   display: flex;
@@ -67,7 +67,7 @@
 
 .brand {
   margin-top: auto;
-  min-height: 132px;
+  min-height: 160px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -77,8 +77,8 @@
 .awardLogo {
   display: block;
   width: auto;
-  max-width: 190px;
-  max-height: 120px;
+  max-width: 230px;
+  max-height: 190px;
   height: auto;
   object-fit: contain;
   pointer-events: none;
@@ -140,8 +140,8 @@
   }
 
   .awardLogo {
-    max-width: 160px;
-    max-height: 96px;
+    max-width: 180px;
+    max-height: 140px;
   }
 
   .certLogo {

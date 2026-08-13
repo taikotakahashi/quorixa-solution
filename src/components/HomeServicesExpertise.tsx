@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  CalendarDays,
-  GitBranch,
-  Globe2,
-  Hexagon,
-  Layers,
-} from "lucide-react";
 import { Reveal } from "./Reveal";
 import tailored_expertise from "../assets/tailored_expertise-2.webp";
+import featureImg from "../assets/services/s1-img.webp";
+import {
+  IconAiStudio,
+  IconCardArrow,
+  IconCustomSoftware,
+  IconDataStudio,
+  IconDesignStudio,
+  IconQualityStudio,
+} from "./ServiceStudioIcons";
 import styles from "./HomeServicesExpertise.module.css";
 
 const studios = [
@@ -17,32 +18,28 @@ const studios = [
     description:
       "Drive the adoption of GenAI and ML from experiments to real-world use cases — at 2x the speed.",
     href: "/ai-ml",
-    icon: Hexagon,
-    color: "#5B35F5",
+    Icon: IconAiStudio,
   },
   {
     title: "Data Studio",
     description:
       "Enable data-driven decision-making with predictive analytics and data visualization.",
     href: "/data-studio",
-    icon: Globe2,
-    color: "#1677FF",
+    Icon: IconDataStudio,
   },
   {
     title: "Design Studio",
     description:
       "Grow UX/UI KPIs, such as conversions, by over 120% with our Lean UX model enhanced via AI mastery.",
     href: "/design-studio",
-    icon: Layers,
-    color: "#FF6500",
+    Icon: IconDesignStudio,
   },
   {
     title: "Quality Studio",
     description:
       "Speed up time-to-market and ensure healthy releases with agentic QA and testing solutions.",
     href: "/quality-assurance",
-    icon: GitBranch,
-    color: "#35B968",
+    Icon: IconQualityStudio,
   },
 ];
 
@@ -55,11 +52,11 @@ const roiItems = [
 
 export function HomeServicesExpertise() {
   return (
-    <section className={`section ${styles.section}`}>
-      <div className="container">
+    <section className={styles.section}>
+      <div className={`container-wide ${styles.container}`}>
         <Reveal>
           <div className={styles.intro}>
-            <span className={styles.pill}>Services and expertise</span>
+            <p className={styles.pill}>Services and expertise</p>
             <h2 className={styles.title}>
               Engineering solutions powered by GenAI and agentic development
             </h2>
@@ -67,56 +64,51 @@ export function HomeServicesExpertise() {
               Boost productivity, turn proofs of concept into market-ready
               products, and scale software using leading-edge architectures and
               technologies.
+              <br />
+              <br />
+              <Link to="/solutions" className={styles.growthLink}>
+                See how we support your growth
+              </Link>
             </p>
-            <Link to="/solutions" className={styles.growthLink}>
-              See how we support your growth <ArrowRight size={16} />
-            </Link>
           </div>
         </Reveal>
 
-        <Reveal>
+        <div className={styles.cards}>
           <Link to="/ai-ml" className={styles.featureCard}>
-            <div className={styles.featureCopy}>
-              <span className={styles.featureIcon}>
-                <CalendarDays size={18} strokeWidth={2} />
-              </span>
-              <h3>AI-Driven Custom Software Development</h3>
-              <p>
-                Build in days what used to take months in areas like mobile, web
-                UI, backend development, cloud, and DevOps.
-              </p>
+            <div className={styles.featureInner}>
+              <div className={styles.featureCopy}>
+                <IconCustomSoftware className={styles.drawIcon} />
+                <h3>AI-Driven Custom Software Development</h3>
+                <p>
+                  Build in days what used to take months in areas like mobile,
+                  web UI, backend development, cloud, and DevOps.
+                </p>
+              </div>
               <span className={styles.circleArrow} aria-hidden>
-                <ArrowRight size={16} />
+                <IconCardArrow />
               </span>
             </div>
-            <div className={styles.featureMedia}>
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80"
-                alt="Software dashboard"
-              />
-            </div>
+            <img
+              className={styles.featureImg}
+              src={featureImg}
+              alt="AI-driven software dashboard"
+            />
           </Link>
-        </Reveal>
 
-        <div className={styles.studioGrid}>
-          {studios.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link key={item.title} to={item.href} className={styles.studioCard}>
-                <span
-                  className={styles.studioIcon}
-                  style={{ background: item.color }}
-                >
-                  <Icon size={24} color="#fff" strokeWidth={2} />
-                </span>
-                <h4>{item.title}</h4>
-                <p>{item.description}</p>
+          {studios.map(({ title, description, href, Icon }) => (
+            <Link key={title} to={href} className={styles.studioCard}>
+              <div className={styles.studioInner}>
+                <div>
+                  <Icon className={styles.drawIcon} />
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
                 <span className={styles.circleArrow} aria-hidden>
-                  <ArrowRight size={18} strokeWidth={2.2} />
+                  <IconCardArrow />
                 </span>
-              </Link>
-            );
-          })}
+              </div>
+            </Link>
+          ))}
         </div>
 
         <Reveal>

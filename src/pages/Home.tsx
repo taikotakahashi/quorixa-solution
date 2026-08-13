@@ -31,44 +31,78 @@ const solutionsItems = [
 
 const testimonials = [
   {
-    quote:
-      "QUORIXA became an extension of our product org. The team shipped reliably and elevated our engineering standards.",
-    author: "Jordan Hale",
-    role: "CTO, enterprise SaaS",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&q=80",
+    quote: (
+      <>
+        QUORIXA delivers quality work, much of which can be attributed to their
+        ability to supply such expert resources that fit well with the internal
+        tech stack. They&apos;ve effectively become part of the internal team
+        while providing a good ROI.{" "}
+        <strong>Responsive and timely, they communicate seamlessly.</strong>
+      </>
+    ),
+    author: "Chris Johnson",
+    role: "CTO, Centriq",
   },
   {
-    quote:
-      "They moved faster than our internal hiring loop without sacrificing quality. Communication stayed crisp every week.",
-    author: "Priya Natarajan",
-    role: "VP Product, FinTech",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&q=80",
+    quote: (
+      <>
+        The past eight years, QUORIXA has been a critical part of our
+        development team makeup that has provided us with flexibility and
+        adjunct capabilities to meet our constantly evolving product roadmap
+        with{" "}
+        <strong>
+          reliable, high-quality, globally sourced resources.
+        </strong>
+      </>
+    ),
+    author: "Eric Schvimmer",
+    role: "EVP of Technology / CTO, Bloomberg Industry Group",
   },
   {
-    quote:
-      "Design and engineering worked as one unit. The release cadence and UX polish improved within the first quarter.",
-    author: "Marcus Lee",
-    role: "Head of Digital, Retail",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&q=80",
+    quote: (
+      <>
+        QUORIXA built a quality product, overcoming communication challenges and
+        several fluctuations in staff. Their{" "}
+        <strong>
+          CEO&apos;s strong leadership and desire to exceed expectations helps
+          them stand out
+        </strong>{" "}
+        among other vendors, although clearly defining project ownership is
+        recommended for future endeavors.
+      </>
+    ),
+    author: "Doug Ramsey",
+    role: "Former Director of Engineering, LivingSocial",
   },
   {
-    quote:
-      "We needed AI features with real evaluation. QUORIXA delivered production systems, not demos.",
-    author: "Elena Rossi",
-    role: "Director of AI, Healthcare",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&q=80",
+    quote: (
+      <>
+        <strong>QUORIXA&apos;s developers</strong> have adjusted well to the
+        complex software they had little prior experience with. Still, they{" "}
+        <strong>
+          have performed to a level on par with the in-house developers.
+        </strong>{" "}
+        They have been eager to learn and contribute, becoming invested in the
+        overall quality of the deliverables.
+      </>
+    ),
+    author: "Kevin Heidorn",
+    role: "COO, Yobi",
   },
   {
-    quote:
-      "From discovery to launch, ownership was clear. Our stakeholders finally trusted the roadmap again.",
-    author: "Daniel Brooks",
-    role: "COO, Logistics",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80",
+    quote: (
+      <>
+        Unlike other providers,{" "}
+        <strong>
+          QUORIXA offers a competitive price while still doing high-quality work
+        </strong>
+        . They focus on building a successful product and not just on getting
+        paid, which fosters a positive working relationship. The team
+        communicates well and is open to changes in project scope.
+      </>
+    ),
+    author: "Igor Minin",
+    role: "VP of Engineering, iControl",
   },
 ];
 
@@ -167,11 +201,11 @@ export function Home() {
         </div>
       </section>
 
-      <section className="section section--light">
-        <div className="container">
+      <section className={styles.casesSection}>
+        <div className={`container-wide ${styles.casesContainer}`}>
           <Reveal>
             <div className={styles.casesIntro}>
-              <span className={styles.casesPill}>Case studies</span>
+              <p className={styles.casesPill}>Case studies</p>
               <h2 className={styles.casesTitle}>
                 <span className={styles.casesAccent}>Our clients win.</span>
                 <br />
@@ -183,20 +217,15 @@ export function Home() {
               </p>
             </div>
           </Reveal>
-          <CaseStudyCarousel studies={caseStudies.slice(0, 5)} />
+          <CaseStudyCarousel studies={caseStudies} fullWidth />
         </div>
       </section>
 
-      <section className="section section--light">
-        <div className="container">
+      <section className={`section ${styles.testimonialsSection}`}>
+        <div className={`container-wide ${styles.testimonialsContainer}`}>
           <TestimonialGrid
             items={testimonials}
             featuredLabel="What our clients say about us"
-            featuredImages={[
-              "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160&h=160&fit=crop&q=80",
-              "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=160&h=160&fit=crop&q=80",
-              "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=160&h=160&fit=crop&q=80",
-            ]}
           />
         </div>
       </section>
@@ -234,7 +263,7 @@ export function Home() {
               />
             </div>
           </Reveal>
-          <AwardCards fullWidth logoHeight={120} />
+          <AwardCards fullWidth logoHeight={190} />
         </div>
       </section>
 

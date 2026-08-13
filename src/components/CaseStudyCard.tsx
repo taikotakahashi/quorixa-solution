@@ -14,7 +14,7 @@ export function CaseStudyCard({ study, featured = false }: Props) {
       className={`${styles.card} ${featured ? styles.featured : ""}`}
     >
       <div className={styles.imageWrap}>
-        <img src={study.image} alt={study.title} loading="lazy" />
+        <img src={study.image} alt={study.title} loading="lazy" draggable={false} />
       </div>
       <div className={styles.body}>
         <div className={styles.tags}>
@@ -22,7 +22,7 @@ export function CaseStudyCard({ study, featured = false }: Props) {
             <span
               key={tag.label}
               className={styles.tag}
-              style={{ background: tag.color }}
+              style={{ background: tag.color, color: tag.textColor }}
             >
               {tag.label}
             </span>
@@ -30,7 +30,6 @@ export function CaseStudyCard({ study, featured = false }: Props) {
         </div>
         <h3 className={styles.title}>{study.title}</h3>
         <p className={styles.desc}>{study.description}</p>
-        {study.result && <p className={styles.result}>{study.result}</p>}
       </div>
     </Link>
   );
