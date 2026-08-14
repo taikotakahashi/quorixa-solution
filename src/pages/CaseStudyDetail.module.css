@@ -179,6 +179,12 @@
   align-items: start;
 }
 
+.outcomesLayoutSolo {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 820px;
+}
+
 .outcomeList {
   display: flex;
   flex-direction: column;
@@ -396,6 +402,7 @@
 @media (max-width: 1100px) {
   .heroGrid,
   .outcomesLayout,
+  .outcomesLayoutSolo,
   .solutionsLayout {
     grid-template-columns: 1fr;
     gap: 32px;

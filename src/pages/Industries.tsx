@@ -114,7 +114,7 @@ const industryMeta: Record<
 };
 
 const selectedStudies = caseStudies.filter((study) =>
-  ["finledger", "medflow", "retailpulse", "logix"].includes(study.id),
+  ["dialpad", "regtech", "starz", "supply-chain"].includes(study.id),
 );
 
 export function Industries() {
