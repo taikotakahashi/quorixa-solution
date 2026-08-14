@@ -8,11 +8,13 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
-import { DashboardVisual } from "../../components/HeroVisuals";
+import { ServiceHeroImage } from "../../components/ServiceHeroImage";
+import aimlHero from "../../assets/services/aiml-hero.webp";
 import { CaseStudyCarousel } from "../../components/CaseStudyCarousel";
 import { Reveal } from "../../components/Reveal";
 import { CurvedDivider } from "../../components/CurvedDivider";
 import { Button } from "../../components/Button";
+import { submitContactMessage } from "../../lib/submitContact";
 import { caseStudies } from "../../data/caseStudies";
 import { certifications } from "../../data/content";
 import { techStackLogos } from "../../components/TechStackLogos";
@@ -194,9 +196,35 @@ function certSrc(id: string) {
 
 export function AIML() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setError(null);
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    setSubmitting(true);
+    const result = await submitContactMessage({
+      source: "AI/ML consultation form",
+      firstName: String(data.get("firstName") ?? "").trim(),
+      lastName: String(data.get("lastName") ?? "").trim(),
+      email: String(data.get("email") ?? "").trim(),
+      company: String(data.get("company") ?? "").trim(),
+      service: String(data.get("service") ?? "").trim(),
+      message:
+        String(data.get("message") ?? "").trim() || "AI/ML consultation request",
+    });
+    setSubmitting(false);
+
+    if (!result.ok) {
+      setError(result.message);
+      return;
+    }
+
+    form.reset();
     setSubmitted(true);
   }
 
@@ -210,7 +238,12 @@ export function AIML() {
         }
         description="86% of companies experiment with GenAI, yet only 21% see meaningful impact. Drive measurable growth with custom AI solutions and a highly efficient agile strategy — and leave your competition behind."
         ctaLabel="Get started today"
-        visual={<DashboardVisual accent="purple" />}
+        visual={
+          <ServiceHeroImage
+            src={aimlHero}
+            alt="AI Studio dashboard with GenAI and ML analytics"
+          />
+        }
       />
 
       {/* End-to-end services */}
@@ -553,8 +586,13 @@ export function AIML() {
                 <p className={styles.consent}>
                   You agree to our friendly privacy policy.
                 </p>
-                <Button type="submit" arrow>
-                  Book a free consultation
+                {error && (
+                  <p className={styles.error} role="alert">
+                    {error}
+                  </p>
+                )}
+                <Button type="submit" arrow disabled={submitting}>
+                  {submitting ? "Sending…" : "Book a free consultation"}
                 </Button>
               </form>
             )}

@@ -8,7 +8,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
-import { MobileVisual } from "../../components/HeroVisuals";
+import { ServiceHeroImage } from "../../components/ServiceHeroImage";
+import mobileHero from "../../assets/services/mobile-hero.webp";
 import { CurvedDivider } from "../../components/CurvedDivider";
 import { SectionHeader } from "../../components/SectionHeader";
 import { ServiceCard } from "../../components/ServiceCard";
@@ -143,7 +144,12 @@ export function MobileDevelopment() {
         }
         description="iOS, Android, and cross-platform — QUORIXA builds mobile apps that win awards and earn millions of downloads."
         ctaLabel="Book a free consultation"
-        visual={<MobileVisual />}
+        visual={
+          <ServiceHeroImage
+            src={mobileHero}
+            alt="Mobile development app screens on smartphones"
+          />
+        }
       />
 
       <CurvedDivider from="white" to="black" />

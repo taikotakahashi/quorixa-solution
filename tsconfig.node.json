@@ -22,6 +22,7 @@
   "include": [
     "vite.config.ts",
     "vite-plugin-chat-api.ts",
-    "api/_lib/sendJobApplicationMail.ts"
+    "api/_lib/sendJobApplicationMail.ts",
+    "api/_lib/sendContactMail.ts"
   ]
 }

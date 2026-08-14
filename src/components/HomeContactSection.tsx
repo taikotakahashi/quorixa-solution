@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { clients } from "../data/content";
+import { submitContactMessage } from "../lib/submitContact";
 import styles from "./HomeContactSection.module.css";
 
 const serviceOptions = [
@@ -17,9 +18,47 @@ const serviceOptions = [
 
 export function HomeContactSection() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    const message = String(data.get("message") ?? "").trim();
+    const service = String(data.get("service") ?? "").trim();
+
+    if (!message) {
+      setError("Please tell us how we can help.");
+      return;
+    }
+
+    if (!service) {
+      setError("Please select the service you're looking for.");
+      return;
+    }
+
+    setSubmitting(true);
+    const result = await submitContactMessage({
+      source: "Home consultation form",
+      firstName: String(data.get("firstName") ?? "").trim(),
+      lastName: String(data.get("lastName") ?? "").trim(),
+      email: String(data.get("email") ?? "").trim(),
+      company: String(data.get("company") ?? "").trim(),
+      service,
+      message,
+    });
+    setSubmitting(false);
+
+    if (!result.ok) {
+      setError(result.message);
+      return;
+    }
+
+    form.reset();
     setSent(true);
   };
 
@@ -90,11 +129,12 @@ export function HomeContactSection() {
                 </select>
               </label>
               <label>
-                <span>How can we help?</span>
+                <span>How can we help?*</span>
                 <textarea
                   name="message"
                   rows={4}
                   placeholder="Leave us a message..."
+                  required
                 />
               </label>
               <label className={styles.check}>
@@ -104,8 +144,17 @@ export function HomeContactSection() {
                   <Link to="/contact">privacy policy</Link>.
                 </span>
               </label>
-              <button type="submit" className={styles.submit}>
-                Book a free consultation
+              {error && (
+                <p className={styles.error} role="alert">
+                  {error}
+                </p>
+              )}
+              <button
+                type="submit"
+                className={styles.submit}
+                disabled={submitting}
+              >
+                {submitting ? "Sending…" : "Book a free consultation"}
                 <ArrowRight size={18} strokeWidth={2.2} />
               </button>
             </form>

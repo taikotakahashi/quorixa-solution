@@ -5,7 +5,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
-import { QAVisual } from "../../components/HeroVisuals";
+import { ServiceHeroImage } from "../../components/ServiceHeroImage";
+import qaHero from "../../assets/services/qa-hero.webp";
 import { CurvedDivider } from "../../components/CurvedDivider";
 import { SectionHeader } from "../../components/SectionHeader";
 import { ServiceCard } from "../../components/ServiceCard";
@@ -121,7 +122,12 @@ export function QualityAssurance() {
         }
         description="Speed up time-to-market, cut development costs, eliminate risks, and ship top-shelf digital products with tailored QA/AQA support."
         ctaLabel="Book a free consultation"
-        visual={<QAVisual />}
+        visual={
+          <ServiceHeroImage
+            src={qaHero}
+            alt="Quality Studio data exploration and testing dashboard"
+          />
+        }
       />
 
       <section className="section section--light">

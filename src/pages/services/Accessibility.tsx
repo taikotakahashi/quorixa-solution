@@ -8,7 +8,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
-import { QAVisual } from "../../components/HeroVisuals";
+import { ServiceHeroImage } from "../../components/ServiceHeroImage";
+import accessibilityHero from "../../assets/services/accessibility-hero.webp";
 import { SectionHeader } from "../../components/SectionHeader";
 import { ServiceCard } from "../../components/ServiceCard";
 import { StatCard } from "../../components/StatCard";
@@ -131,7 +132,12 @@ export function Accessibility() {
         }
         description="Comply with ADA, EAA, and WCAG — build more inclusive products and engage an audience representing roughly 15% of the world's population."
         ctaLabel="Book a free consultation"
-        visual={<QAVisual />}
+        visual={
+          <ServiceHeroImage
+            src={accessibilityHero}
+            alt="Accessible healthcare product interface and inclusive design"
+          />
+        }
       />
 
       <section className="section section--light">

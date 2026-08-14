@@ -3,13 +3,37 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "../components/Button";
 import { CTASection } from "../components/CTASection";
 import { Reveal } from "../components/Reveal";
+import { submitContactMessage } from "../lib/submitContact";
 import styles from "./Contact.module.css";
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setError(null);
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    setSubmitting(true);
+    const result = await submitContactMessage({
+      source: "Contact page",
+      name: String(data.get("name") ?? "").trim(),
+      email: String(data.get("email") ?? "").trim(),
+      company: String(data.get("company") ?? "").trim(),
+      message: String(data.get("message") ?? "").trim(),
+    });
+    setSubmitting(false);
+
+    if (!result.ok) {
+      setError(result.message);
+      return;
+    }
+
+    form.reset();
     setSubmitted(true);
   }
 
@@ -116,8 +140,13 @@ export function Contact() {
                       required
                     />
                   </label>
-                  <Button type="submit" arrow>
-                    Send message
+                  {error && (
+                    <p className={styles.error} role="alert">
+                      {error}
+                    </p>
+                  )}
+                  <Button type="submit" arrow disabled={submitting}>
+                    {submitting ? "Sending…" : "Send message"}
                   </Button>
                 </form>
               )}

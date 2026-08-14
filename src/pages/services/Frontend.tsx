@@ -5,7 +5,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
-import { DesignCollageVisual } from "../../components/HeroVisuals";
+import { ServiceHeroImage } from "../../components/ServiceHeroImage";
+import frontendHero from "../../assets/services/frontend-hero.webp";
 import { CurvedDivider } from "../../components/CurvedDivider";
 import { SectionHeader } from "../../components/SectionHeader";
 import { CaseStudyCard } from "../../components/CaseStudyCard";
@@ -118,7 +119,12 @@ export function Frontend() {
         }
         description="Captivate users with sleek, fast, fluid UIs that adapt to any screen — powered by future-proof technology."
         ctaLabel="Book a free consultation"
-        visual={<DesignCollageVisual />}
+        visual={
+          <ServiceHeroImage
+            src={frontendHero}
+            alt="Frontend product interface on tablet devices"
+          />
+        }
       />
 
       <CurvedDivider from="white" to="black" />

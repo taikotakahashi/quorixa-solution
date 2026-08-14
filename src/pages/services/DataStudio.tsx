@@ -1,6 +1,7 @@
 import { Check, Star } from "lucide-react";
 import { Hero } from "../../components/Hero";
-import { DashboardVisual } from "../../components/HeroVisuals";
+import { ServiceHeroImage } from "../../components/ServiceHeroImage";
+import dataHero from "../../assets/services/data-hero.webp";
 import { CaseStudyCarousel } from "../../components/CaseStudyCarousel";
 import { Reveal } from "../../components/Reveal";
 import { Button } from "../../components/Button";
@@ -129,7 +130,12 @@ export function DataStudio() {
         title="Turn data into action. We'll handle the tech"
         description="Tailored data engineering and business analytics — backed by scalable, secure, and future-proof software from QUORIXA Data Studio."
         ctaLabel="Ready to explore?"
-        visual={<DashboardVisual accent="orange" />}
+        visual={
+          <ServiceHeroImage
+            src={dataHero}
+            alt="Data Studio business analytics dashboard"
+          />
+        }
       />
 
       <section className={styles.sSolutions}>

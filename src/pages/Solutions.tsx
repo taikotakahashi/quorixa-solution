@@ -17,7 +17,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../components/Hero";
-import { MobileVisual } from "../components/HeroVisuals";
+import { ServiceHeroImage } from "../components/ServiceHeroImage";
+import solutionHero from "../assets/services/solution-hero.webp";
 import { SectionHeader } from "../components/SectionHeader";
 import { ServiceCard } from "../components/ServiceCard";
 import { CTASection } from "../components/CTASection";
@@ -330,7 +331,12 @@ export function Solutions() {
         }
         description="Push your business forward with efficient, comprehensive expertise in engineering, UX, data, and information security — under the QUORIXA brand."
         ctaLabel="Book a free consultation"
-        visual={<MobileVisual />}
+        visual={
+          <ServiceHeroImage
+            src={solutionHero}
+            alt="Digital solutions product experience across mobile devices"
+          />
+        }
       />
 
       <section className="section section--light">

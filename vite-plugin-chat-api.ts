@@ -1,6 +1,7 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 import type { Plugin } from "vite";
 import { loadEnv } from "vite";
+import { sendContactMail } from "./api/_lib/sendContactMail.ts";
 import { sendJobApplicationMail } from "./api/_lib/sendJobApplicationMail.ts";
 import { CHAT_SYSTEM_PROMPT } from "./src/lib/chatKnowledge.js";
 
@@ -59,6 +60,7 @@ function attachChatMiddleware(
   env: Record<string, string>,
 ) {
   attachJobApplicationMiddleware(middlewares, env);
+  attachContactMiddleware(middlewares, env);
 
   middlewares.use("/api/chat", (req, res, next) => {
     void (async () => {
@@ -172,6 +174,46 @@ function attachJobApplicationMiddleware(
           typeof sendJobApplicationMail
         >[0];
         const result = await sendJobApplicationMail(body, env);
+        sendJson(res, result.status, result.payload);
+      } catch (err) {
+        sendJson(res, 500, {
+          error: "server_error",
+          message: err instanceof Error ? err.message : "Unknown error",
+        });
+      }
+    })();
+  });
+}
+
+function attachContactMiddleware(
+  middlewares: {
+    use: (
+      path: string,
+      handler: (
+        req: import("http").IncomingMessage,
+        res: import("http").ServerResponse,
+        next: () => void,
+      ) => void,
+    ) => void;
+  },
+  env: Record<string, string>,
+) {
+  middlewares.use("/api/contact", (req, res, next) => {
+    void (async () => {
+      if (req.method === "OPTIONS") {
+        res.statusCode = 204;
+        res.end();
+        return;
+      }
+      if (req.method !== "POST") {
+        next();
+        return;
+      }
+
+      try {
+        const raw = await readBody(req);
+        const body = JSON.parse(raw) as Parameters<typeof sendContactMail>[0];
+        const result = await sendContactMail(body, env);
         sendJson(res, result.status, result.payload);
       } catch (err) {
         sendJson(res, 500, {

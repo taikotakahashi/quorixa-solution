@@ -13,6 +13,7 @@ type Props = {
   layout?: "split" | "centered";
   withVideo?: boolean;
   showLogos?: boolean;
+  compact?: boolean;
 };
 
 export function Hero({
@@ -25,6 +26,7 @@ export function Hero({
   layout = "split",
   withVideo = false,
   showLogos = true,
+  compact = false,
 }: Props) {
   if (layout === "centered") {
     return (
@@ -59,7 +61,9 @@ export function Hero({
   }
 
   return (
-    <section className={`${styles.hero} ${styles.heroSplit} grid-bg ${className}`}>
+    <section
+      className={`${styles.hero} ${styles.heroSplit} ${compact ? styles.heroCompact : ""} grid-bg ${className}`.trim()}
+    >
       <div className={`container-wide ${styles.inner}`}>
         <div className={styles.content}>
           <h1 className={styles.title}>{title}</h1>

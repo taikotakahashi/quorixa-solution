@@ -8,6 +8,7 @@ import { SectionHeader } from "../components/SectionHeader";
 import { StatCard } from "../components/StatCard";
 import { careerHeroPortraits } from "../data/careers";
 import { jobs } from "../data/team";
+import { submitContactMessage } from "../lib/submitContact";
 import styles from "./Careers.module.css";
 
 const faqs = [
@@ -50,6 +51,8 @@ export function Careers() {
   const [keyword, setKeyword] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
   const [showAllJobs, setShowAllJobs] = useState(false);
 
   const filteredJobs = useMemo(() => {
@@ -74,8 +77,28 @@ export function Careers() {
   const topRow = careerHeroPortraits.slice(0, 6);
   const bottomRow = careerHeroPortraits.slice(6, 11);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setFormError(null);
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    setSubmitting(true);
+    const result = await submitContactMessage({
+      source: "Careers FAQ form",
+      name: String(data.get("name") ?? "").trim(),
+      email: String(data.get("email") ?? "").trim(),
+      question: String(data.get("question") ?? "").trim(),
+    });
+    setSubmitting(false);
+
+    if (!result.ok) {
+      setFormError(result.message);
+      return;
+    }
+
+    form.reset();
     setSubmitted(true);
   }
 
@@ -353,8 +376,13 @@ export function Careers() {
                       required
                     />
                   </label>
-                  <Button type="submit" arrow>
-                    Send message
+                  {formError && (
+                    <p className={styles.error} role="alert">
+                      {formError}
+                    </p>
+                  )}
+                  <Button type="submit" arrow disabled={submitting}>
+                    {submitting ? "Sending…" : "Send message"}
                   </Button>
                 </form>
               )}

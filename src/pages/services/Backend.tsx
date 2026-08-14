@@ -11,7 +11,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
-import { DashboardVisual } from "../../components/HeroVisuals";
+import { ServiceHeroImage } from "../../components/ServiceHeroImage";
+import backendHero from "../../assets/services/backend-hero.webp";
 import { CurvedDivider } from "../../components/CurvedDivider";
 import { SectionHeader } from "../../components/SectionHeader";
 import { ServiceCard } from "../../components/ServiceCard";
@@ -181,7 +182,12 @@ export function Backend() {
         }
         description="Performant solutions, reliable architectures, impeccable code — a strong technology foundation for your digital products."
         ctaLabel="Book a free consultation"
-        visual={<DashboardVisual />}
+        visual={
+          <ServiceHeroImage
+            src={backendHero}
+            alt="Backend engineering code editor on a tablet"
+          />
+        }
       />
 
       <section className="section section--light">

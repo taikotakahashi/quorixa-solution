@@ -1,6 +1,6 @@
 import { Check, Star } from "lucide-react";
-import { Hero } from "../../components/Hero";
-import { DesignCollageVisual } from "../../components/HeroVisuals";
+import { DesignStudioHero } from "../../components/DesignStudioHero";
+import designHero from "../../assets/services/design-hero.webp";
 import { AwardCards } from "../../components/AwardCards";
 import { CaseStudyCarousel } from "../../components/CaseStudyCarousel";
 import { Reveal } from "../../components/Reveal";
@@ -12,6 +12,7 @@ import {
   IconInteraction,
   IconLowCode,
   IconMotion,
+  IconPenTip,
   IconStrategy,
 } from "../../components/DesignStudioIcons";
 import { caseStudies } from "../../data/caseStudies";
@@ -22,44 +23,49 @@ const designServices = [
     Icon: IconStrategy,
     title: "Product strategy & research",
     description:
-      "Align design with business goals, identify quick wins, and secure long-term growth with market and user research.",
+      "Align design with business goals, identify quick wins, and secure long-term growth with strategic consultancy driven by market and user research.",
+    span: "half" as const,
   },
   {
     Icon: IconInteraction,
     title: "Interaction design",
     description:
-      "Wow stakeholders with prototypes, accelerate iterations with wireframes, and guide engineering with ship-ready screens.",
+      "Wow investors with interactive prototypes, speed up product iterations with wireframes, and guide engineering with development-ready screens.",
+    span: "half" as const,
   },
   {
     Icon: IconLowCode,
     title: "Low-code solutions",
     description:
-      "Create PoCs, demos, and MVPs at warp speed — saving cost and freeing engineering for differentiated work.",
+      "Create PoCs, product demos, MVPs and other digital solutions at warp speed, while saving costs and freeing up your engineering resources.",
+    span: "third" as const,
   },
   {
     Icon: IconBranding,
     title: "Branding",
     description:
-      "Unify artifacts into a consistent system that amplifies your brand voice across digital channels.",
+      "Unify design efforts and artifacts into a comprehensive, consistent system, amplifying your brand voice across digital and offline channels.",
+    span: "third" as const,
   },
   {
     Icon: IconMotion,
-    title: "Illustration & motion",
+    title: "Illustration & motion graphics",
     description:
-      "Engaging visual and motion assets — from illustrations and animations to presentations and videos.",
+      "Impress customers and tell your brand's story with highly-engaging visual and motion assets ranging from illustrations and animations to presentations and videos.",
+    span: "third" as const,
   },
 ];
 
 const outcomesLeft = [
-  "124% conversion growth after a client redesign",
-  "200+ e-commerce sites impacted for a Fortune 500 brand",
-  "20% higher revenue from first-time visitors via UX lifts",
+  "124% conversion growth report by a client after our redesign",
+  "200+ e-commerce sites of a Fortune 500 company impacted by our design improvements",
+  "20% higher revenue from first-time visitors generated for a client through our UX/UI solutions",
 ];
 
 const outcomesRight = [
-  "2× customer-base growth supported through consultancy",
-  "45% usability-score boost on a critical internal tool",
-  "3.0 → 4.7 store ranking growth after an app redesign",
+  "2X customer base growth supported through our strategic consultancy",
+  "45% usability scores boost achieved thanks to our redesign of a client's internal tool",
+  "3.0 to 4.7 Google Play Store ranking growth after our app redesign",
 ];
 
 const advantageStatements: { text: string; pos: string }[] = [
@@ -134,31 +140,36 @@ const studies =
 export function DesignStudio() {
   return (
     <div className={styles.page}>
-      <Hero
-        title="Design digital products that stand out"
-        description="Captivate users, solve business challenges, and accelerate growth with highly effective, data-driven UI/UX design from QUORIXA Design Studio."
-        ctaLabel="Schedule a Session"
-        visual={<DesignCollageVisual />}
-      />
+      <DesignStudioHero imageSrc={designHero} />
 
       <section className={styles.sServices}>
         <div className={`container-wide ${styles.container}`}>
           <Reveal>
             <p className={styles.eyebrow}>
-              <span className={styles.eyebrowDot} aria-hidden />
+              <IconPenTip />
               Design services
             </p>
-            <h2 className={styles.sectionTitle}>
-              Your design needs are covered
-            </h2>
-            <p className={styles.sectionDesc}>
-              Solve UX/UI challenges end-to-end — from strategy to solutions
-              that impact experiences in meaningful, measurable ways.
-            </p>
+          </Reveal>
+          <Reveal>
+            <div className={styles.servicesHead}>
+              <h2 className={styles.sectionTitle}>
+                Your design needs are covered
+              </h2>
+              <p className={styles.sectionDesc}>
+                Solve UX/UI challenges end-to-end, from defining optimal design
+                strategies to creating solutions that impact user experiences in
+                meaningful, measurable ways
+              </p>
+            </div>
           </Reveal>
           <div className={styles.serviceGrid}>
-            {designServices.map(({ Icon, title, description }) => (
-              <Reveal key={title} className={styles.gridCell}>
+            {designServices.map(({ Icon, title, description, span }) => (
+              <Reveal
+                key={title}
+                className={`${styles.gridCell} ${
+                  span === "half" ? styles.cellHalf : styles.cellThird
+                }`}
+              >
                 <article className={styles.serviceCard}>
                   <Icon />
                   <h3>{title}</h3>
@@ -176,7 +187,7 @@ export function DesignStudio() {
             <ul>
               {outcomesLeft.map((item) => (
                 <li key={item}>
-                  <Check size={16} strokeWidth={2.4} aria-hidden />
+                  <Check size={16} strokeWidth={2.6} aria-hidden />
                   <span>{item}</span>
                 </li>
               ))}
@@ -184,7 +195,7 @@ export function DesignStudio() {
             <ul>
               {outcomesRight.map((item) => (
                 <li key={item}>
-                  <Check size={16} strokeWidth={2.4} aria-hidden />
+                  <Check size={16} strokeWidth={2.6} aria-hidden />
                   <span>{item}</span>
                 </li>
               ))}
