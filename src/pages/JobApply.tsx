@@ -7,6 +7,7 @@ import { jobs } from "../data/team";
 import {
   fileToBase64,
   submitJobApplication,
+  validateLinkedInUrl,
   validateResumeFile,
 } from "../lib/submitJobApplication";
 import styles from "./JobApply.module.css";
@@ -51,6 +52,12 @@ export function JobApply() {
     const resumeError = validateResumeFile(resume);
     if (resumeError) {
       setError(resumeError);
+      return;
+    }
+
+    const linkedInError = validateLinkedInUrl(linkedin);
+    if (linkedInError) {
+      setError(linkedInError);
       return;
     }
 
@@ -127,7 +134,7 @@ export function JobApply() {
               <ol className={styles.steps}>
                 <li>
                   <span className={styles.stepNum}>1</span>
-                  <span>Complete your contact details and links.</span>
+                  <span>Complete your contact details and LinkedIn URL.</span>
                 </li>
                 <li>
                   <span className={styles.stepNum}>2</span>
@@ -215,13 +222,14 @@ export function JobApply() {
                       />
                     </label>
                     <label className={styles.field}>
-                      <span>LinkedIn</span>
+                      <span>LinkedIn *</span>
                       <input
                         type="url"
                         name="linkedin"
                         placeholder="https://linkedin.com/in/you"
                         value={linkedin}
                         onChange={(e) => setLinkedin(e.target.value)}
+                        required
                       />
                     </label>
                   </div>

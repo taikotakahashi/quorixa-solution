@@ -26,6 +26,20 @@ const ALLOWED_RESUME_TYPES = new Set([
 ]);
 const DEFAULT_RECIPIENT = "pelixphilip@gmail.com";
 
+function isLinkedInUrl(value: string): boolean {
+  try {
+    const parsed = new URL(value);
+    const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
+    return (
+      (parsed.protocol === "http:" || parsed.protocol === "https:") &&
+      (host === "linkedin.com" || host.endsWith(".linkedin.com")) &&
+      parsed.pathname.length >= 2
+    );
+  } catch {
+    return false;
+  }
+}
+
 function escapeHtml(value: string): string {
   return value
     .replaceAll("&", "&amp;")
@@ -68,12 +82,24 @@ export async function sendJobApplicationMail(
   const portfolio = body.portfolio?.trim() ?? "";
   const resume = body.resume;
 
-  if (!fullName || !email || !coverLetter) {
+  if (!fullName || !email || !coverLetter || !linkedin) {
     return {
       status: 400,
       payload: {
         error: "validation_error",
-        message: "Full name, email, and cover letter are required.",
+        message:
+          "Full name, email, LinkedIn URL, and cover letter are required.",
+      },
+    };
+  }
+
+  if (!isLinkedInUrl(linkedin)) {
+    return {
+      status: 400,
+      payload: {
+        error: "validation_error",
+        message:
+          "Please enter a valid LinkedIn profile URL (for example https://linkedin.com/in/you).",
       },
     };
   }

@@ -38,6 +38,24 @@ export function validateResumeFile(file: File | null): string | null {
   return null;
 }
 
+export function validateLinkedInUrl(value: string): string | null {
+  const url = value.trim();
+  if (!url) return "Please enter your LinkedIn profile URL.";
+  try {
+    const parsed = new URL(url);
+    const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
+    const isLinkedIn =
+      (host === "linkedin.com" || host.endsWith(".linkedin.com")) &&
+      (parsed.protocol === "http:" || parsed.protocol === "https:");
+    if (!isLinkedIn || parsed.pathname.length < 2) {
+      return "Please enter a valid LinkedIn profile URL (for example https://linkedin.com/in/you).";
+    }
+  } catch {
+    return "Please enter a valid LinkedIn profile URL (for example https://linkedin.com/in/you).";
+  }
+  return null;
+}
+
 export async function fileToBase64(file: File): Promise<string> {
   const buffer = await file.arrayBuffer();
   const bytes = new Uint8Array(buffer);
