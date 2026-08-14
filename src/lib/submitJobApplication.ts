@@ -58,7 +58,17 @@ export async function submitJobApplication(
       body: JSON.stringify(payload),
     });
 
-    const data = (await res.json()) as { message?: string; error?: string };
+    const raw = await res.text();
+    let data: { message?: string; error?: string } = {};
+    try {
+      data = raw ? (JSON.parse(raw) as { message?: string; error?: string }) : {};
+    } catch {
+      return {
+        ok: false,
+        message:
+          "The application service is not available on this host. Deploy the API and try again.",
+      };
+    }
 
     if (!res.ok) {
       return {
