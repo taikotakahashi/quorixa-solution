@@ -73,12 +73,21 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: var(--color-orange);
+  background: #fff7f2;
+  border: 1px solid rgba(255, 122, 51, 0.18);
   color: white;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.brandIcon {
+  width: 72%;
+  height: 72%;
+  object-fit: contain;
+  display: block;
 }
 
 .avatar {

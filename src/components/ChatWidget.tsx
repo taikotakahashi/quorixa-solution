@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
-import { ChevronDown, MessageCircle, Rocket, Send, X } from "lucide-react";
+import { ChevronDown, MessageCircle, Send, X } from "lucide-react";
+import favicon from "../assets/fav-icon-update.png";
 import { requestAssistantReply } from "../lib/chatAssistant";
 import type { ChatMessage } from "../lib/chatKnowledge";
 import styles from "./ChatWidget.module.css";
@@ -38,6 +39,13 @@ export function ChatWidget() {
   const [showJump, setShowJump] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const focusInput = () => {
+    requestAnimationFrame(() => {
+      inputRef.current?.focus();
+    });
+  };
 
   useEffect(() => {
     const timer = window.setTimeout(() => setShowTip(true), 2200);
@@ -50,12 +58,18 @@ export function ChatWidget() {
 
   useEffect(() => {
     if (!open) return;
+    focusInput();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+
+  useEffect(() => {
+    if (!open || busy) return;
+    focusInput();
+  }, [open, busy]);
 
   useEffect(() => {
     if (!open) return;
@@ -88,6 +102,7 @@ export function ChatWidget() {
     setMessages(next);
     setMessage("");
     setBusy(true);
+    focusInput();
 
     try {
       const reply = await requestAssistantReply(toApiMessages(next));
@@ -106,6 +121,7 @@ export function ChatWidget() {
       ]);
     } finally {
       setBusy(false);
+      focusInput();
     }
   };
 
@@ -120,7 +136,7 @@ export function ChatWidget() {
           <div className={styles.header}>
             <div className={styles.brand}>
               <span className={styles.logoMark} aria-hidden>
-                <Rocket size={16} strokeWidth={2.2} />
+                <img src={favicon} alt="" className={styles.brandIcon} />
               </span>
               <div>
                 <strong>QUORIXA Assistant</strong>
@@ -143,7 +159,7 @@ export function ChatWidget() {
                 msg.role === "bot" ? (
                   <div key={msg.id} className={styles.botRow}>
                     <span className={styles.avatar} aria-hidden>
-                      <Rocket size={14} strokeWidth={2.2} />
+                      <img src={favicon} alt="" className={styles.brandIcon} />
                     </span>
                     <div className={styles.bubble}>{renderText(msg.text)}</div>
                   </div>
@@ -156,7 +172,7 @@ export function ChatWidget() {
               {busy && (
                 <div className={styles.botRow}>
                   <span className={styles.avatar} aria-hidden>
-                    <Rocket size={14} strokeWidth={2.2} />
+                    <img src={favicon} alt="" className={styles.brandIcon} />
                   </span>
                   <div className={`${styles.bubble} ${styles.typing}`}>
                     <span />
@@ -183,12 +199,13 @@ export function ChatWidget() {
           <form className={styles.form} onSubmit={handleSend}>
             <div className={styles.inputRow}>
               <input
+                ref={inputRef}
                 type="text"
                 placeholder="Type here..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 aria-label="Message"
-                disabled={busy}
+                readOnly={busy}
                 autoComplete="off"
               />
               <button
