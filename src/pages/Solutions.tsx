@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { Hero } from "../components/Hero";
 import { MobileVisual } from "../components/HeroVisuals";
-import { ClientLogoMarquee } from "../components/ClientLogoMarquee";
 import { SectionHeader } from "../components/SectionHeader";
 import { ServiceCard } from "../components/ServiceCard";
 import { CTASection } from "../components/CTASection";
@@ -334,8 +333,6 @@ export function Solutions() {
         visual={<MobileVisual />}
       />
 
-      <ClientLogoMarquee />
-
       <section className="section section--light">
         <div className="container">
           <Reveal>
@@ -418,7 +415,7 @@ export function Solutions() {
         </div>
       </section>
 
-      <CurvedDivider from="black" to="white" invert />
+      <CurvedDivider from="black" to="white" />
 
       <section className="section">
         <div className="container">

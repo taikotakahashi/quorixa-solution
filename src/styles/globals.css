@@ -74,8 +74,12 @@ p {
 }
 
 .container-wide {
-  width: min(var(--container-wide), calc(100% - 48px));
+  width: 100%;
+  max-width: var(--container-wide);
   margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
 }
 
 .grid-bg {
@@ -175,8 +179,7 @@ body.a11y-contrast {
 }
 
 @media (max-width: 1199px) {
-  .container,
-  .container-wide {
+  .container {
     width: min(100%, calc(100% - 64px));
   }
 
@@ -186,9 +189,13 @@ body.a11y-contrast {
 }
 
 @media (max-width: 767px) {
-  .container,
-  .container-wide {
+  .container {
     width: min(100%, calc(100% - 40px));
+  }
+
+  .container-wide {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .section {

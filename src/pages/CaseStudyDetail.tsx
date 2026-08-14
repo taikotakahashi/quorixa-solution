@@ -661,7 +661,7 @@ export function CaseStudyDetail() {
           </div>
         </div>
       </section>
-      <CurvedDivider from="black" to="white" invert />
+      <CurvedDivider from="black" to="white" />
 
       <section className={styles.solutionsSection}>
         <div className="container">

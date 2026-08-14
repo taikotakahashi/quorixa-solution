@@ -1,9 +1,14 @@
 .hero {
-  padding: 72px 0 88px;
+  padding: 40px 0 0;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   position: relative;
   overflow: hidden;
+}
+
+.heroSplit .inner {
+  padding-bottom: clamp(32px, 5vh, 56px);
 }
 
 .heroCentered {
@@ -58,47 +63,55 @@
   color: rgba(255, 255, 255, 0.82);
 }
 
-/* Split layout (two-column) */
+/* Split layout — align with header logo (left) and CTA (right) */
 .inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  width: 100%;
+  min-height: 70vh;
+  gap: 0;
   position: relative;
   z-index: 2;
 }
 
 .content {
-  max-width: 520px;
-  justify-self: end;
-  width: 100%;
-  padding-right: 12px;
+  width: 50%;
+  box-sizing: border-box;
+  padding-right: clamp(32px, 8vw, 120px);
 }
 
 .title {
-  font-size: clamp(38px, 4.8vw, 56px);
+  font-family: Montserrat, Inter, sans-serif;
+  font-size: clamp(36px, 4.2vw, 52px);
   font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.1;
-  margin-bottom: 24px;
-  color: var(--color-text);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: #111;
+  max-width: 560px;
 }
 
 .desc {
-  font-size: 17px;
-  line-height: 1.7;
-  color: #555555;
-  margin-bottom: 32px;
-  max-width: 460px;
+  font-family: "Open Sans", Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #555;
+  margin-bottom: 28px;
+  max-width: 520px;
 }
 
 .visual {
-  position: relative;
+  width: 50%;
+  box-sizing: border-box;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  padding-left: 12px;
+}
+
+.visual > * {
+  width: 100%;
+  max-width: 625px;
 }
 
 /* Centered layout */
@@ -141,10 +154,6 @@
 }
 
 @media (max-width: 1024px) {
-  .inner {
-    gap: 32px;
-  }
-
   .title {
     font-size: clamp(34px, 4.5vw, 48px);
   }
@@ -152,7 +161,7 @@
 
 @media (max-width: 900px) {
   .hero {
-    padding: 40px 0 56px;
+    padding: 40px 0 0;
   }
 
   .heroCentered {
@@ -167,27 +176,32 @@
   }
 
   .inner {
-    grid-template-columns: 1fr;
+    flex-direction: column-reverse;
+    min-height: 0;
     gap: 36px;
   }
 
-  .content {
-    max-width: 100%;
-    justify-self: stretch;
+  .content,
+  .visual {
+    width: 100%;
     padding-right: 0;
   }
 
+  .content {
+    text-align: center;
+  }
+
   .desc {
-    font-size: 16px;
-    margin-bottom: 28px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .visual {
-    max-width: 480px;
-    margin: 0 auto;
-    width: 100%;
     justify-content: center;
-    padding-left: 0;
+  }
+
+  .visual > * {
+    max-width: 480px;
   }
 
   .centeredTitle {

@@ -119,7 +119,7 @@ export function DashboardVisual({ accent = "purple" }: { accent?: string }) {
               <path
                 d="M0,60 C30,55 40,20 70,30 S110,70 140,40 S180,10 200,25"
                 fill="none"
-                stroke="#5B35F5"
+                stroke="#444ce7"
                 strokeWidth="3"
               />
             </svg>

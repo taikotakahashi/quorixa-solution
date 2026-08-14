@@ -1,8 +1,19 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { clients } from "../data/content";
-import { Button } from "./Button";
 import styles from "./HomeContactSection.module.css";
+
+const serviceOptions = [
+  "AI service",
+  "Design solutions",
+  "Dedicated team",
+  "Development solutions",
+  "QA solutions",
+  "Data solutions",
+  "Cybersecurity solutions",
+  "Staff augmentation",
+];
 
 export function HomeContactSection() {
   const [sent, setSent] = useState(false);
@@ -14,20 +25,25 @@ export function HomeContactSection() {
 
   return (
     <section className={styles.section}>
-      <div className={`container ${styles.inner}`}>
+      <div className={`container-wide ${styles.inner}`}>
         <div className={styles.logosCol}>
           <p className={styles.logosLabel}>Amazing clients who trust us</p>
-          <ul className={styles.logoList}>
+          <div className={styles.logoList}>
             {clients.map((client) => (
-              <li key={client.id}>
-                <img src={client.src} alt={client.name} />
-              </li>
+              <img
+                key={client.id}
+                src={client.src}
+                alt={client.name}
+                loading="lazy"
+              />
             ))}
-          </ul>
+          </div>
         </div>
 
         <div className={styles.formCol}>
-          <h2>Get in touch to discuss your software vision with industry experts</h2>
+          <h2>
+            Get in touch to discuss your software vision with industry experts
+          </h2>
 
           {sent ? (
             <p className={styles.success}>
@@ -37,45 +53,44 @@ export function HomeContactSection() {
             <form className={styles.form} onSubmit={onSubmit}>
               <div className={styles.row}>
                 <label>
-                  First name*
+                  <span>First name*</span>
                   <input name="firstName" required placeholder="First name" />
                 </label>
                 <label>
-                  Last name*
+                  <span>Last name*</span>
                   <input name="lastName" required placeholder="Last name" />
                 </label>
               </div>
               <div className={styles.row}>
                 <label>
-                  Email*
+                  <span>Email*</span>
                   <input
                     type="email"
                     name="email"
                     required
-                    placeholder="you@company.com"
+                    placeholder="Email"
                   />
                 </label>
                 <label>
-                  Company name*
-                  <input name="company" required placeholder="Company" />
+                  <span>Company name*</span>
+                  <input name="company" required placeholder="Company name" />
                 </label>
               </div>
               <label>
-                I&apos;m looking for*
+                <span>I&apos;m looking for*</span>
                 <select name="service" required defaultValue="">
                   <option value="" disabled>
                     Select your service
                   </option>
-                  <option>Dedicated teams</option>
-                  <option>AI &amp; Machine Learning</option>
-                  <option>Mobile development</option>
-                  <option>Data Studio</option>
-                  <option>Design Studio</option>
-                  <option>Quality Assurance</option>
+                  {serviceOptions.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
                 </select>
               </label>
               <label>
-                How can we help?
+                <span>How can we help?</span>
                 <textarea
                   name="message"
                   rows={4}
@@ -89,9 +104,10 @@ export function HomeContactSection() {
                   <Link to="/contact">privacy policy</Link>.
                 </span>
               </label>
-              <Button type="submit" arrow className={styles.submit}>
+              <button type="submit" className={styles.submit}>
                 Book a free consultation
-              </Button>
+                <ArrowRight size={18} strokeWidth={2.2} />
+              </button>
             </form>
           )}
         </div>

@@ -120,7 +120,7 @@ export function Header() {
       ref={headerRef}
       className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}
     >
-      <div className={`container ${styles.bar}`}>
+      <div className={`container-wide ${styles.bar}`}>
         <Link to="/" className={styles.logo} aria-label="QUORIXA home">
           <img
             src={ASSETS.logo}

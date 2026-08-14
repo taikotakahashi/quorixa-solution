@@ -14,11 +14,11 @@
 .track {
   display: flex;
   align-items: stretch;
-  gap: 32px;
+  gap: 28px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  /* Side padding centers a ~50vw card and peeks neighbors */
-  padding: 24px calc(25vw + 16px) 32px;
+  /* Side padding centers a large ~62vw card with smaller peeks */
+  padding: 28px calc(19vw + 8px) 36px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   cursor: grab;
@@ -39,15 +39,15 @@
   pointer-events: none;
 }
 
-/* Large center card; neighbors peek smaller at the edges */
+/* Large center card; neighbors scaled down + clipped */
 .slide {
-  flex: 0 0 calc(50vw - 32px);
-  max-width: 720px;
-  min-width: 280px;
+  flex: 0 0 calc(62vw - 24px);
+  max-width: 900px;
+  min-width: 300px;
   scroll-snap-align: center;
   scroll-snap-stop: always;
-  transform: scale(0.9);
-  opacity: 0.72;
+  transform: scale(0.78);
+  opacity: 0.65;
   transition: transform 0.35s ease, opacity 0.35s ease;
   transform-origin: center center;
 }
@@ -67,17 +67,19 @@
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #bbb;
+  background: #ccc;
   border: none;
   padding: 0;
   cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .dotActive {
   background: #000;
+  transform: scale(1.35);
 }
 
 .footerLink {
@@ -102,25 +104,30 @@
 
 @media (max-width: 900px) {
   .track {
-    gap: 20px;
-    padding: 20px calc(12vw + 12px) 28px;
+    gap: 18px;
+    padding: 20px calc(10vw + 8px) 28px;
   }
 
   .slide {
-    flex-basis: calc(76vw - 24px);
+    flex-basis: calc(80vw - 16px);
     max-width: none;
+    transform: scale(0.86);
+  }
+
+  .slideActive {
+    transform: scale(1);
   }
 }
 
 @media (max-width: 640px) {
   .track {
-    gap: 16px;
-    padding: 16px 10vw 24px;
+    gap: 14px;
+    padding: 16px 8vw 24px;
   }
 
   .slide {
-    flex-basis: 80vw;
-    transform: scale(0.94);
+    flex-basis: 84vw;
+    transform: scale(0.9);
   }
 
   .slideActive {

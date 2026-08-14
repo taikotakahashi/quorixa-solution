@@ -172,7 +172,7 @@ export function Careers() {
                       ))}
                     </ul>
                     <div className={styles.jobActions}>
-                      <Button href={`/careers/${job.id}`} arrow>
+                      <Button href={`/careers/${job.id}/apply`} arrow>
                         Apply
                       </Button>
                       <Link

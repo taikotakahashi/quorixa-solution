@@ -6,7 +6,6 @@ import {
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
 import { QAVisual } from "../../components/HeroVisuals";
-import { ClientLogoMarquee } from "../../components/ClientLogoMarquee";
 import { CurvedDivider } from "../../components/CurvedDivider";
 import { SectionHeader } from "../../components/SectionHeader";
 import { ServiceCard } from "../../components/ServiceCard";
@@ -124,8 +123,6 @@ export function QualityAssurance() {
         ctaLabel="Book a free consultation"
         visual={<QAVisual />}
       />
-
-      <ClientLogoMarquee />
 
       <section className="section section--light">
         <div className="container">

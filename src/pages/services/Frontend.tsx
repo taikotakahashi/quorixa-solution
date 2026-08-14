@@ -6,7 +6,6 @@ import {
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
 import { DesignCollageVisual } from "../../components/HeroVisuals";
-import { ClientLogoMarquee } from "../../components/ClientLogoMarquee";
 import { CurvedDivider } from "../../components/CurvedDivider";
 import { SectionHeader } from "../../components/SectionHeader";
 import { CaseStudyCard } from "../../components/CaseStudyCard";
@@ -122,8 +121,6 @@ export function Frontend() {
         visual={<DesignCollageVisual />}
       />
 
-      <ClientLogoMarquee />
-
       <CurvedDivider from="white" to="black" />
 
       <section className="section section--dark">
@@ -155,7 +152,7 @@ export function Frontend() {
         </div>
       </section>
 
-      <CurvedDivider from="black" to="light" invert />
+      <CurvedDivider from="black" to="light" />
 
       <section className="section section--light">
         <div className="container">

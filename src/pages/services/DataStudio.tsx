@@ -1,68 +1,45 @@
-import {
-  BarChart3,
-  Database,
-  Gauge,
-  LineChart,
-  Shield,
-  Sparkles,
-  Zap,
-  type LucideIcon,
-} from "lucide-react";
+import { Check, Star } from "lucide-react";
 import { Hero } from "../../components/Hero";
 import { DashboardVisual } from "../../components/HeroVisuals";
-import { ClientLogoMarquee } from "../../components/ClientLogoMarquee";
-import { SectionHeader } from "../../components/SectionHeader";
-import { ServiceCard } from "../../components/ServiceCard";
-import { StatCard } from "../../components/StatCard";
-import { CaseStudyCard } from "../../components/CaseStudyCard";
-import { Testimonial } from "../../components/Testimonial";
-import { CTASection } from "../../components/CTASection";
+import { CaseStudyCarousel } from "../../components/CaseStudyCarousel";
 import { Reveal } from "../../components/Reveal";
-import { CheckList } from "../../components/CheckList";
-import { ProcessSteps } from "../../components/ProcessSteps";
 import { Button } from "../../components/Button";
 import { CurvedDivider } from "../../components/CurvedDivider";
+import {
+  IconAdvantage,
+  IconDataEngineering,
+  IconDataScience,
+  IconPerformance,
+  IconStepBlue,
+  IconVisualization,
+} from "../../components/DataStudioIcons";
 import { caseStudies } from "../../data/caseStudies";
 import styles from "./DataStudio.module.css";
 
-const solutions: {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  iconBg: string;
-  iconColor: string;
-}[] = [
+const solutions = [
   {
-    icon: Database,
+    Icon: IconDataEngineering,
     title: "Data engineering",
     description:
       "Unify data for analysis and reporting with ETL pipelines, governance, quality checks, and monitoring.",
-    iconBg: "#FFF0E6",
-    iconColor: "#FF6500",
   },
   {
-    icon: Gauge,
+    Icon: IconPerformance,
     title: "Performance optimization",
     description:
       "Maximize efficiency and prevent degradation while achieving crystal-clear, trustworthy data.",
-    iconBg: "#E8F1FF",
-    iconColor: "#1677FF",
   },
   {
-    icon: BarChart3,
+    Icon: IconVisualization,
     title: "Data visualization",
     description:
       "Gain actionable insight from complex data with reporting tailored to your team, processes, and goals.",
-    iconBg: "#E6F7EF",
-    iconColor: "#35B968",
   },
   {
-    icon: LineChart,
+    Icon: IconDataScience,
     title: "Data science and ML",
     description:
       "Identify patterns, risks, and opportunities with domain-specific science and leading-edge ML.",
-    iconBg: "#F3E8FF",
-    iconColor: "#5B35F5",
   },
 ];
 
@@ -78,271 +55,304 @@ const outcomesRight = [
   "50% performance boost on pipelines scaling to 250M+ users",
 ];
 
-const advantages: {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}[] = [
+const advantages = [
   {
-    icon: Zap,
     title: "Top-1% talent",
     description:
       "Senior data engineers and scientists across the Americas, Europe, and Asia.",
   },
   {
-    icon: Shield,
     title: "Proven expertise",
     description:
       "99% of clients say they feel confident recommending QUORIXA to industry peers.",
   },
   {
-    icon: Sparkles,
     title: "Strategic support",
     description:
       "We've helped clients grow from PoCs to data products featured by analysts.",
   },
   {
-    icon: Gauge,
     title: "High efficiency",
     description:
       "In-house quality and industry expertise at a fraction of fully in-house cost.",
   },
   {
-    icon: Database,
     title: "Flexibility at scale",
     description:
       "The right capabilities at every growth stage — we handle the staffing details.",
   },
   {
-    icon: LineChart,
     title: "Tailored approach",
     description:
       "No cookie-cutter tech — solutions adapt to your business, not the other way around.",
   },
 ];
 
-const dataCaseStudies = caseStudies.filter((s) =>
-  ["finledger", "logix", "medflow"].includes(s.id)
-);
+const processSteps = [
+  {
+    title: "Define",
+    description:
+      "Identify business goals and challenges to determine optimal team composition.",
+  },
+  {
+    title: "Measure",
+    description:
+      "Collect relevant data points for a clear understanding of the current situation.",
+  },
+  {
+    title: "Analyze",
+    description:
+      "Detect patterns and develop potential solutions to coordinate further actions.",
+  },
+  {
+    title: "Improve",
+    description:
+      "Refine strategies and processes for quick, efficient solution development.",
+  },
+  {
+    title: "Control",
+    description:
+      "Monitor and fine-tune delivered solutions to ensure long-term performance.",
+  },
+];
 
+const dataCaseStudies = caseStudies.filter((s) =>
+  ["medflow", "finledger", "logix"].includes(s.id)
+);
 const studies =
   dataCaseStudies.length >= 3 ? dataCaseStudies : caseStudies.slice(0, 3);
 
 export function DataStudio() {
   return (
-    <>
+    <div className={styles.page}>
       <Hero
-        title={
-          <>
-            Turn data into action.{" "}
-            <span className="highlight-orange">We&apos;ll handle the tech</span>
-          </>
-        }
+        title="Turn data into action. We'll handle the tech"
         description="Tailored data engineering and business analytics — backed by scalable, secure, and future-proof software from QUORIXA Data Studio."
-        ctaLabel="Book a free consultation"
+        ctaLabel="Ready to explore?"
         visual={<DashboardVisual accent="orange" />}
       />
 
-      <ClientLogoMarquee />
-
-      <section className="section section--light">
-        <div className="container">
+      <section className={styles.sSolutions}>
+        <div className={`container-wide ${styles.container}`}>
           <Reveal>
-            <SectionHeader
-              label="Solutions and deliverables"
-              title="Solutions for your data-driven growth"
-              description="Engineering, performance, visualization, and applied science — delivered as one coherent data practice."
-            />
+            <p className={styles.eyebrow}>
+              <span className={styles.eyebrowDot} aria-hidden />
+              Solutions and deliverables
+            </p>
+            <h2 className={styles.sectionTitle}>
+              Solutions for your data-driven growth
+            </h2>
+            <p className={styles.sectionDesc}>
+              Engineering, performance, visualization, and applied science —
+              delivered as one coherent data practice.
+            </p>
           </Reveal>
-          <div className={`${styles.grid4} ${styles.solutionsBlock}`}>
-            {solutions.map((item) => (
-              <Reveal key={item.title}>
-                <ServiceCard
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.description}
-                  iconBg={item.iconBg}
-                  iconColor={item.iconColor}
-                />
+          <div className={styles.serviceGrid}>
+            {solutions.map(({ Icon, title, description }) => (
+              <Reveal key={title} className={styles.gridCell}>
+                <article className={styles.serviceCard}>
+                  <Icon />
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
               </Reveal>
             ))}
           </div>
           <Reveal>
-            <div className={styles.outcomesIntro}>
-              <SectionHeader
-                title="Client outcomes that make us proud"
-                description="Speed, quality, and scale — measured in the systems operators rely on every day."
-              />
-            </div>
+            <h3 className={styles.outcomesTitle}>
+              Client outcomes that make us proud
+            </h3>
           </Reveal>
           <div className={styles.outcomes}>
-            <Reveal>
-              <CheckList items={outcomesLeft} columns={1} />
-            </Reveal>
-            <Reveal>
-              <CheckList items={outcomesRight} columns={1} />
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--dark">
-        <div className="container">
-          <div className={styles.photoCta}>
-            <Reveal>
-              <div className={styles.photoCtaCopy}>
-                <span className="label">Let&apos;s talk</span>
-                <h2>
-                  Want to{" "}
-                  <span className="highlight-orange">10×</span> your data
-                  solutions?
-                </h2>
-                <p>
-                  We&apos;ll assess your stack, prioritize quick wins, and map a
-                  path to a durable analytics foundation your teams can trust.
-                </p>
-                <Button href="/contact" arrow>
-                  See what we can do for you
-                </Button>
-              </div>
-            </Reveal>
-            <Reveal>
-              <div className={styles.photoWrap}>
-                <img
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80"
-                  alt="Data analytics collaboration"
-                  loading="lazy"
-                />
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--light">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Case studies"
-              title="Success stories written with data"
-              description="From leading-edge data systems to ML analytics trusted by enterprise brands."
-              align="center"
-            />
-          </Reveal>
-          <div className={styles.caseGrid}>
-            {studies.map((study) => (
-              <Reveal key={study.id}>
-                <CaseStudyCard study={study} />
-              </Reveal>
-            ))}
+            <ul>
+              {outcomesLeft.map((item) => (
+                <li key={item}>
+                  <Check size={16} strokeWidth={2.4} aria-hidden />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <ul>
+              {outcomesRight.map((item) => (
+                <li key={item}>
+                  <Check size={16} strokeWidth={2.4} aria-hidden />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
       <CurvedDivider from="light" to="black" />
 
-      <section className="section section--dark">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Why QUORIXA"
-              title={
-                <>
-                  Your competitive advantages with{" "}
-                  <span className="highlight-orange">Data Studio</span>
-                </>
-              }
-              description="Enterprise rigor with product-team urgency — so data becomes a growth lever, not a backlog."
-              dark
-              align="center"
-            />
-          </Reveal>
-          <div className={styles.grid3}>
-            {advantages.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Reveal key={item.title}>
-                  <article className={styles.advantageCard}>
-                    <div className={styles.advantageIcon}>
-                      <Icon size={20} strokeWidth={1.8} />
-                    </div>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
-          <div className={styles.statsRow}>
-            <StatCard value="3×" label="Faster reporting cycles" />
-            <StatCard value="99.9%" label="Pipeline uptime targets" />
-            <StatCard value="30%" label="Cloud cost reductions" />
+      <section className={styles.sPhotoCta}>
+        <div className={`container-wide ${styles.container}`}>
+          <div className={styles.photoCta}>
+            <Reveal className={styles.photoCtaCopy}>
+              <span className={styles.photoLabel}>Let&apos;s talk</span>
+              <h2>
+                Want to <span className={styles.highlight}>10×</span> your data
+                solutions?
+              </h2>
+              <p>
+                We&apos;ll assess your stack, prioritize quick wins, and map a
+                path to a durable analytics foundation your teams can trust.
+              </p>
+              <Button href="/contact" arrow>
+                Get started
+              </Button>
+            </Reveal>
+            <Reveal className={styles.photoWrap}>
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80"
+                alt="Data analytics collaboration"
+                loading="lazy"
+              />
+            </Reveal>
           </div>
         </div>
       </section>
 
-      <CurvedDivider from="black" to="white" invert />
+      <CurvedDivider from="black" to="light" />
 
-      <section className="section">
-        <div className="container">
+      <section className={styles.sCases}>
+        <div className={`container-wide ${styles.container}`}>
           <Reveal>
-            <Testimonial
-              quote="QUORIXA stands out for the quality of their talent. They have a phenomenal process for ensuring they onboard the best of the best — and it shows in the data products they ship."
-              author="Maya Chen"
-              role="VP of Data"
-              company="IoT & software platform"
-              image="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&q=80"
-            />
+            <div className={styles.centeredIntro}>
+              <p className={styles.eyebrow}>
+                <span className={styles.eyebrowDot} aria-hidden />
+                Case studies
+              </p>
+              <h2>Success stories written with data</h2>
+              <p>
+                From leading-edge data systems to ML analytics trusted by
+                enterprise brands.
+              </p>
+            </div>
+          </Reveal>
+          <CaseStudyCarousel studies={studies} fullWidth />
+        </div>
+      </section>
+
+      <CurvedDivider from="light" to="black" />
+
+      <section className={styles.sAdvantages}>
+        <div className={`container-wide ${styles.container}`}>
+          <Reveal>
+            <div className={styles.sAdvantagesHead}>
+              <h2>
+                Your competitive advantages with{" "}
+                <span className={styles.highlight}>Data Studio</span>
+              </h2>
+              <p>
+                Enterprise rigor with product-team urgency — so data becomes a
+                growth lever, not a backlog.
+              </p>
+            </div>
+          </Reveal>
+          <div className={styles.advantageGrid}>
+            {advantages.map((item, i) => (
+              <Reveal key={item.title} className={styles.advantageCell}>
+                <article className={styles.advantageCard}>
+                  <IconAdvantage kind={i} />
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <div className={styles.advantagesBottom}>
+              <div>
+                <h3>Ready to elevate your data capabilities?</h3>
+                <p>
+                  Share your stack and goals — we&apos;ll outline a practical
+                  plan for pipelines, insights, and ML.
+                </p>
+              </div>
+              <Button href="/contact" arrow>
+                Book a consultation
+              </Button>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="section section--light">
-        <div className="container">
+      <CurvedDivider from="black" to="light" />
+
+      <section className={styles.sTestimonial}>
+        <div className={`container-wide ${styles.container}`}>
           <Reveal>
-            <ProcessSteps
-              title="The right process for elevating your data"
-              image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
-              imageAlt="Analytics dashboard collaboration"
-              steps={[
-                {
-                  title: "Define",
-                  description:
-                    "Identify business goals and challenges to determine optimal team composition.",
-                },
-                {
-                  title: "Measure",
-                  description:
-                    "Collect relevant data points for a clear understanding of the current situation.",
-                },
-                {
-                  title: "Analyze",
-                  description:
-                    "Detect patterns and develop potential solutions to coordinate further actions.",
-                },
-                {
-                  title: "Improve",
-                  description:
-                    "Refine strategies and processes for quick, efficient solution development.",
-                },
-                {
-                  title: "Control",
-                  description:
-                    "Monitor and fine-tune delivered solutions to ensure long-term performance.",
-                },
-              ]}
-            />
+            <figure className={styles.testimonialInner}>
+              <div className={styles.stars} aria-label="5 star rating">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={16} fill="#F5C518" color="#F5C518" />
+                ))}
+              </div>
+              <blockquote className={styles.quote}>
+                &ldquo;QUORIXA stands out for the quality of their talent. They
+                have a phenomenal process for ensuring they onboard the best of
+                the best — and it shows in the data products they ship.&rdquo;
+              </blockquote>
+              <figcaption>
+                <div className={styles.caption}>Maya Chen</div>
+                <div className={styles.role}>VP of Data, IoT &amp; software platform</div>
+              </figcaption>
+            </figure>
           </Reveal>
         </div>
       </section>
 
-      <CTASection
-        title="Let's explore what we can do for you"
-        description="Share your stack and goals — we'll outline a practical plan for pipelines, insights, and ML."
-        ctaLabel="Book a consultation"
-        secondaryLabel="View case studies"
-        secondaryHref="/our-work"
-      />
-    </>
+      <section className={styles.sProcess}>
+        <div className={styles.processInner}>
+          <div className={styles.processLeft}>
+            <Reveal>
+              <p className={styles.eyebrow}>
+                <span className={styles.eyebrowDot} aria-hidden />
+                Process
+              </p>
+              <h2 className={styles.sectionTitle}>
+                The right process for elevating your data
+              </h2>
+              <img
+                className={styles.processImg}
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+                alt="Analytics dashboard collaboration"
+                loading="lazy"
+              />
+            </Reveal>
+          </div>
+          <div className={styles.steps}>
+            {processSteps.map((step, i) => (
+              <Reveal key={step.title}>
+                <div className={styles.step}>
+                  <IconStepBlue n={i + 1} />
+                  <p className={styles.stepBody}>
+                    <span className={styles.stepName}>{step.title}</span>
+                    {step.description}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.sFooterCta}>
+        <div className={styles.footerCtaInner}>
+          <Reveal>
+            <h2>Let&apos;s explore what we can do for you</h2>
+            <p>
+              Share your stack and goals — we&apos;ll outline a practical plan
+              for pipelines, insights, and ML.
+            </p>
+            <Button href="/contact" arrow>
+              Book a consultation
+            </Button>
+          </Reveal>
+        </div>
+      </section>
+    </div>
   );
 }

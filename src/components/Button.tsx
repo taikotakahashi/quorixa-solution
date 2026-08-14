@@ -11,6 +11,7 @@ type ButtonProps = {
   className?: string;
   type?: "button" | "submit";
   ariaLabel?: string;
+  disabled?: boolean;
 };
 
 export function Button({
@@ -22,8 +23,9 @@ export function Button({
   className = "",
   type = "button",
   ariaLabel,
+  disabled = false,
 }: ButtonProps) {
-  const cls = `${styles.btn} ${styles[variant]} ${className}`.trim();
+  const cls = `${styles.btn} ${styles[variant]} ${disabled ? styles.disabled : ""} ${className}`.trim();
 
   const content = (
     <>
@@ -55,7 +57,13 @@ export function Button({
   }
 
   return (
-    <button type={type} className={cls} onClick={onClick} aria-label={ariaLabel}>
+    <button
+      type={type}
+      className={cls}
+      onClick={onClick}
+      aria-label={ariaLabel}
+      disabled={disabled}
+    >
       {content}
     </button>
   );

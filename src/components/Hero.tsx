@@ -1,5 +1,6 @@
 import { Button } from "./Button";
 import { ASSETS } from "../assets";
+import { ClientLogoMarquee } from "./ClientLogoMarquee";
 import styles from "./Hero.module.css";
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
   className?: string;
   layout?: "split" | "centered";
   withVideo?: boolean;
+  showLogos?: boolean;
 };
 
 export function Hero({
@@ -22,6 +24,7 @@ export function Hero({
   className = "",
   layout = "split",
   withVideo = false,
+  showLogos = true,
 }: Props) {
   if (layout === "centered") {
     return (
@@ -56,8 +59,8 @@ export function Hero({
   }
 
   return (
-    <section className={`${styles.hero} grid-bg ${className}`}>
-      <div className={`container ${styles.inner}`}>
+    <section className={`${styles.hero} ${styles.heroSplit} grid-bg ${className}`}>
+      <div className={`container-wide ${styles.inner}`}>
         <div className={styles.content}>
           <h1 className={styles.title}>{title}</h1>
           <p className={styles.desc}>{description}</p>
@@ -67,6 +70,7 @@ export function Hero({
         </div>
         {visual && <div className={styles.visual}>{visual}</div>}
       </div>
+      {showLogos && <ClientLogoMarquee variant="hero" />}
     </section>
   );
 }

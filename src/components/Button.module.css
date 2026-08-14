@@ -64,3 +64,11 @@
   color: var(--color-purple-dark);
   transform: none;
 }
+
+.disabled,
+.disabled:hover {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

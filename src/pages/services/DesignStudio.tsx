@@ -1,74 +1,52 @@
-import {
-  Boxes,
-  Brush,
-  Clapperboard,
-  Compass,
-  MousePointerClick,
-  type LucideIcon,
-} from "lucide-react";
+import { Check, Star } from "lucide-react";
 import { Hero } from "../../components/Hero";
 import { DesignCollageVisual } from "../../components/HeroVisuals";
-import { ClientLogoMarquee } from "../../components/ClientLogoMarquee";
-import { SectionHeader } from "../../components/SectionHeader";
-import { ServiceCard } from "../../components/ServiceCard";
-import { CaseStudyCard } from "../../components/CaseStudyCard";
-import { Testimonial } from "../../components/Testimonial";
 import { AwardCards } from "../../components/AwardCards";
-import { CTASection } from "../../components/CTASection";
+import { CaseStudyCarousel } from "../../components/CaseStudyCarousel";
 import { Reveal } from "../../components/Reveal";
-import { CheckList } from "../../components/CheckList";
-import { ProcessSteps } from "../../components/ProcessSteps";
 import { Button } from "../../components/Button";
 import { CurvedDivider } from "../../components/CurvedDivider";
+import {
+  IconBranding,
+  IconDesignBadge,
+  IconInteraction,
+  IconLowCode,
+  IconMotion,
+  IconStrategy,
+} from "../../components/DesignStudioIcons";
 import { caseStudies } from "../../data/caseStudies";
 import styles from "./DesignStudio.module.css";
 
-const designServices: {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  iconBg: string;
-  iconColor: string;
-}[] = [
+const designServices = [
   {
-    icon: Compass,
+    Icon: IconStrategy,
     title: "Product strategy & research",
     description:
       "Align design with business goals, identify quick wins, and secure long-term growth with market and user research.",
-    iconBg: "#FFE8E6",
-    iconColor: "#FF3B30",
   },
   {
-    icon: MousePointerClick,
+    Icon: IconInteraction,
     title: "Interaction design",
     description:
       "Wow stakeholders with prototypes, accelerate iterations with wireframes, and guide engineering with ship-ready screens.",
-    iconBg: "#F3E8FF",
-    iconColor: "#5B35F5",
   },
   {
-    icon: Boxes,
+    Icon: IconLowCode,
     title: "Low-code solutions",
     description:
       "Create PoCs, demos, and MVPs at warp speed — saving cost and freeing engineering for differentiated work.",
-    iconBg: "#E8F1FF",
-    iconColor: "#1677FF",
   },
   {
-    icon: Brush,
+    Icon: IconBranding,
     title: "Branding",
     description:
       "Unify artifacts into a consistent system that amplifies your brand voice across digital channels.",
-    iconBg: "#FFF0E6",
-    iconColor: "#FF6500",
   },
   {
-    icon: Clapperboard,
+    Icon: IconMotion,
     title: "Illustration & motion",
     description:
       "Engaging visual and motion assets — from illustrations and animations to presentations and videos.",
-    iconBg: "#E6F7EF",
-    iconColor: "#35B968",
   },
 ];
 
@@ -84,11 +62,23 @@ const outcomesRight = [
   "3.0 → 4.7 store ranking growth after an app redesign",
 ];
 
-const metrics = [
-  { value: "10+", label: "Years of UX/UI depth on dedicated product squads" },
-  { value: "3×", label: "Higher ROI vs typical US agency models" },
-  { value: "5★", label: "Average rating on B2B review platforms" },
-  { value: "50%", label: "Development cost saved by cutting rework" },
+const advantageStatements: { text: string; pos: string }[] = [
+  {
+    text: "UX/UI design professionals with 10+ years of dedicated product experience",
+    pos: "posTL",
+  },
+  {
+    text: "5-star average rating on leading B2B review platforms",
+    pos: "posBL",
+  },
+  {
+    text: "3× higher ROI compared to typical US agency engagement models",
+    pos: "posTR",
+  },
+  {
+    text: "Up to 50% cost-saving on development by reducing rework",
+    pos: "posBR",
+  },
 ];
 
 const experts = [
@@ -112,94 +102,248 @@ const experts = [
   },
 ];
 
+const processSteps = [
+  {
+    title: "Discovery",
+    description:
+      "Stakeholder and user interviews, system audit, market and competitive research to understand goals and challenges.",
+  },
+  {
+    title: "Design",
+    description:
+      "Ideate the solution, develop information architecture, and implement wireframes, flows, prototypes, and visual design.",
+  },
+  {
+    title: "Validation",
+    description:
+      "Usability testing, interviews, A/B tests, analytics, and surveys shape every UI/UX solution with data.",
+  },
+  {
+    title: "Delivery",
+    description:
+      "Design-system kits, source files, documentation, engineering consults, and post-launch support.",
+  },
+];
+
 const designCaseStudies = caseStudies.filter((s) =>
   ["retailpulse", "geotap", "medflow"].includes(s.id)
 );
-
 const studies =
   designCaseStudies.length >= 3 ? designCaseStudies : caseStudies.slice(0, 3);
 
 export function DesignStudio() {
   return (
-    <>
+    <div className={styles.page}>
       <Hero
-        title={
-          <>
-            Design digital products that{" "}
-            <span className="highlight-orange">stand out</span>
-          </>
-        }
+        title="Design digital products that stand out"
         description="Captivate users, solve business challenges, and accelerate growth with highly effective, data-driven UI/UX design from QUORIXA Design Studio."
-        ctaLabel="Book a free consultation"
+        ctaLabel="Schedule a Session"
         visual={<DesignCollageVisual />}
       />
 
-      <ClientLogoMarquee />
-
-      <section className="section section--light">
-        <div className="container">
+      <section className={styles.sServices}>
+        <div className={`container-wide ${styles.container}`}>
           <Reveal>
-            <SectionHeader
-              label="Design services"
-              title="Your design needs are covered"
-              description="Solve UX/UI challenges end-to-end — from strategy to solutions that impact experiences in meaningful, measurable ways."
-            />
+            <p className={styles.eyebrow}>
+              <span className={styles.eyebrowDot} aria-hidden />
+              Design services
+            </p>
+            <h2 className={styles.sectionTitle}>
+              Your design needs are covered
+            </h2>
+            <p className={styles.sectionDesc}>
+              Solve UX/UI challenges end-to-end — from strategy to solutions
+              that impact experiences in meaningful, measurable ways.
+            </p>
           </Reveal>
-          <div className={styles.grid5}>
-            {designServices.map((service) => (
-              <Reveal key={service.title}>
-                <ServiceCard
-                  icon={service.icon}
-                  title={service.title}
-                  description={service.description}
-                  iconBg={service.iconBg}
-                  iconColor={service.iconColor}
-                />
+          <div className={styles.serviceGrid}>
+            {designServices.map(({ Icon, title, description }) => (
+              <Reveal key={title} className={styles.gridCell}>
+                <article className={styles.serviceCard}>
+                  <Icon />
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
               </Reveal>
             ))}
           </div>
           <Reveal>
-            <SectionHeader
-              title="We design for impact and measurable growth"
-              description="Outcomes our clients report after shipping with Design Studio."
-              align="center"
-            />
+            <h3 className={styles.outcomesTitle}>
+              We design for impact and measurable growth
+            </h3>
           </Reveal>
           <div className={styles.outcomes}>
-            <Reveal>
-              <CheckList items={outcomesLeft} columns={1} />
-            </Reveal>
-            <Reveal>
-              <CheckList items={outcomesRight} columns={1} />
-            </Reveal>
+            <ul>
+              {outcomesLeft.map((item) => (
+                <li key={item}>
+                  <Check size={16} strokeWidth={2.4} aria-hidden />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <ul>
+              {outcomesRight.map((item) => (
+                <li key={item}>
+                  <Check size={16} strokeWidth={2.4} aria-hidden />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
       <CurvedDivider from="light" to="black" />
 
-      <section className="section section--dark">
-        <div className="container">
+      <section className={styles.sAdvantage}>
+        <div className={`container-wide ${styles.container}`}>
           <Reveal>
-            <SectionHeader
-              label="Strategic advantage"
-              title={
-                <>
-                  Turn design into a{" "}
-                  <span className="highlight-orange">strategic advantage</span>
-                </>
-              }
-              description="Senior craft, measurable ROI, and delivery discipline that reduces engineering rework."
-              dark
-              align="center"
-            />
+            <div className={styles.advantageHead}>
+              <IconDesignBadge />
+              <h2>
+                Turn design into a
+                <br />
+                <span className={styles.highlight}>strategic advantage</span>
+              </h2>
+            </div>
           </Reveal>
-          <div className={styles.metricsRow}>
-            {metrics.map((m) => (
-              <Reveal key={m.label}>
-                <div className={styles.metric}>
-                  <div className={styles.metricValue}>{m.value}</div>
-                  <div className={styles.metricLabel}>{m.label}</div>
+          <div className={styles.advantageStage}>
+            {advantageStatements.map(({ text, pos }) => (
+              <Reveal key={text}>
+                <article className={`${styles.advantageCard} ${styles[pos]}`}>
+                  <p>{text}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CurvedDivider from="black" to="light" />
+
+      <section className={styles.sTestimonial}>
+        <div className={`container-wide ${styles.container}`}>
+          <Reveal>
+            <figure className={styles.testimonialInner}>
+              <div className={styles.stars} aria-label="5 star rating">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={16} fill="#F5C518" color="#F5C518" />
+                ))}
+              </div>
+              <blockquote className={styles.quote}>
+                &ldquo;For years QUORIXA has been a critical part of our team
+                makeup — flexible, high-quality design and product capacity that
+                keeps pace with an evolving roadmap.&rdquo;
+              </blockquote>
+              <figcaption>
+                <div className={styles.caption}>Elena Ruiz</div>
+                <div className={styles.role}>
+                  Head of Product, enterprise information platform
+                </div>
+              </figcaption>
+            </figure>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className={styles.sAwards}>
+        <div className={`container-wide ${styles.container}`}>
+          <Reveal>
+            <div className={styles.centeredIntro}>
+              <p className={styles.eyebrow}>
+                <span className={styles.eyebrowDot} aria-hidden />
+                Awards and recognition
+              </p>
+              <h2>UX/UI expertise that gets you noticed</h2>
+              <p>
+                Headline-worthy products — top-listed by App Store features,
+                Gartner, G2, Deloitte, and more.
+              </p>
+            </div>
+          </Reveal>
+          <AwardCards showCertifications={false} fullWidth logoHeight={120} />
+        </div>
+      </section>
+
+      <CurvedDivider from="white" to="black" />
+
+      <section className={styles.sExpert}>
+        <div className={`container-wide ${styles.container}`}>
+          <div className={styles.expertCta}>
+            <Reveal className={styles.expertCopy}>
+              <h2>Talk to a Design Studio expert</h2>
+              <p>
+                Share your UX/UI challenges, explore collaboration strategies,
+                and meet the people who will own the craft.
+              </p>
+              <Button href="/contact" arrow>
+                Explore design solutions
+              </Button>
+            </Reveal>
+            <div className={styles.portraits}>
+              {experts.map((person) => (
+                <Reveal key={person.name} className={styles.portrait}>
+                  <img src={person.image} alt={person.name} loading="lazy" />
+                  <strong>{person.name}</strong>
+                  <span>{person.role}</span>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <CurvedDivider from="black" to="light" />
+
+      <section className={styles.sCases}>
+        <div className={`container-wide ${styles.container}`}>
+          <Reveal>
+            <div className={styles.centeredIntro}>
+              <p className={styles.eyebrow}>
+                <span className={styles.eyebrowDot} aria-hidden />
+                Success stories
+              </p>
+              <h2>See our work in action</h2>
+              <p>
+                Agile, data-driven, and result-oriented — enabling companies to
+                ship the best versions of their products.
+              </p>
+            </div>
+          </Reveal>
+          <CaseStudyCarousel studies={studies} fullWidth />
+        </div>
+      </section>
+
+      <section className={styles.sProcess}>
+        <div className={styles.processInner}>
+          <div className={styles.processLeft}>
+            <Reveal>
+              <p className={styles.eyebrow}>
+                <span className={styles.eyebrowDot} aria-hidden />
+                Process
+              </p>
+              <h2 className={styles.sectionTitle}>
+                Our process for elevating your product
+              </h2>
+              <img
+                className={styles.processImg}
+                src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80"
+                alt="Product design workshop"
+                loading="lazy"
+              />
+            </Reveal>
+          </div>
+          <div className={styles.steps}>
+            {processSteps.map((step, i) => (
+              <Reveal key={step.title}>
+                <div className={styles.step}>
+                  <span className={styles.stepBadge} aria-hidden>
+                    {i + 1}
+                  </span>
+                  <p className={styles.stepBody}>
+                    <span className={styles.stepName}>{step.title}</span>
+                    {step.description}
+                  </p>
                 </div>
               </Reveal>
             ))}
@@ -207,131 +351,20 @@ export function DesignStudio() {
         </div>
       </section>
 
-      <CurvedDivider from="black" to="white" invert />
-
-      <section className="section">
-        <div className="container">
+      <section className={styles.sFooterCta}>
+        <div className={styles.footerCtaInner}>
           <Reveal>
-            <Testimonial
-              quote="For years QUORIXA has been a critical part of our team makeup — flexible, high-quality design and product capacity that keeps pace with an evolving roadmap."
-              author="Elena Ruiz"
-              role="Head of Product"
-              company="enterprise information platform"
-              image="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&q=80"
-            />
+            <h2>Have a design project in mind? Let&apos;s talk</h2>
+            <p>
+              Your UX/UI transformation is one conversation away — explore
+              personalized strategies for elevating your product.
+            </p>
+            <Button href="/contact" arrow>
+              Book a consultation
+            </Button>
           </Reveal>
         </div>
       </section>
-
-      <section className="section section--light">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Awards and recognition"
-              title="UX/UI expertise that gets you noticed"
-              description="Headline-worthy products — top-listed by App Store features, Gartner, G2, Deloitte, and more."
-              align="center"
-            />
-          </Reveal>
-          <AwardCards />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <Reveal>
-            <div className={styles.expertCta}>
-              <div>
-                <h2 className={styles.expertTitle}>
-                  Talk to a Design Studio expert
-                </h2>
-                <p className={styles.expertDesc}>
-                  Share your UX/UI challenges, explore collaboration strategies,
-                  and meet the people who will own the craft.
-                </p>
-                <Button href="/contact" arrow>
-                  Explore design solutions
-                </Button>
-              </div>
-              <div className={styles.portraits}>
-                {experts.map((person) => (
-                  <article key={person.name} className={styles.portrait}>
-                    <img
-                      src={person.image}
-                      alt={person.name}
-                      loading="lazy"
-                    />
-                    <strong>{person.name}</strong>
-                    <span>{person.role}</span>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section section--light">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Success stories"
-              title="See our work in action"
-              description="Agile, data-driven, and result-oriented — enabling companies to ship the best versions of their products."
-              align="center"
-            />
-          </Reveal>
-          <div className={styles.caseGrid}>
-            {studies.map((study) => (
-              <Reveal key={study.id}>
-                <CaseStudyCard study={study} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <Reveal>
-            <ProcessSteps
-              title="Our process for elevating your product"
-              image="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80"
-              imageAlt="Product design workshop"
-              steps={[
-                {
-                  title: "Discovery",
-                  description:
-                    "Stakeholder and user interviews, system audit, market and competitive research to understand goals and challenges.",
-                },
-                {
-                  title: "Design",
-                  description:
-                    "Ideate the solution, develop information architecture, and implement wireframes, flows, prototypes, and visual design.",
-                },
-                {
-                  title: "Validation",
-                  description:
-                    "Usability testing, interviews, A/B tests, analytics, and surveys shape every UI/UX solution with data.",
-                },
-                {
-                  title: "Delivery",
-                  description:
-                    "Design-system kits, source files, documentation, engineering consults, and post-launch support.",
-                },
-              ]}
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      <CTASection
-        title="Have a design project in mind? Let's talk"
-        description="Your UX/UI transformation is one conversation away — explore personalized strategies for elevating your product."
-        ctaLabel="Book a consultation"
-        secondaryLabel="View our work"
-        secondaryHref="/our-work"
-      />
-    </>
+    </div>
   );
 }

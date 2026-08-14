@@ -231,7 +231,7 @@ export function Home() {
       </section>
 
       <section className={`section section--light ${styles.teamSection}`}>
-        <div className="container">
+        <div className={`container-wide ${styles.teamContainer}`}>
           <Reveal>
             <div className={styles.teamIntro}>
               <span className={styles.teamPill}>Leadership & key experts</span>

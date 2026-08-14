@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
 import { QAVisual } from "../../components/HeroVisuals";
-import { ClientLogoMarquee } from "../../components/ClientLogoMarquee";
 import { SectionHeader } from "../../components/SectionHeader";
 import { ServiceCard } from "../../components/ServiceCard";
 import { StatCard } from "../../components/StatCard";
@@ -135,8 +134,6 @@ export function Accessibility() {
         visual={<QAVisual />}
       />
 
-      <ClientLogoMarquee />
-
       <section className="section section--light">
         <div className="container">
           <Reveal>
@@ -251,7 +248,7 @@ export function Accessibility() {
         </div>
       </section>
 
-      <CurvedDivider from="black" to="white" invert />
+      <CurvedDivider from="black" to="white" />
 
       <section className="section">
         <div className="container">

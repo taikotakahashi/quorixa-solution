@@ -45,7 +45,7 @@ export function JobDetail() {
             </p>
             <p className={styles.summary}>{job.summary}</p>
             <div className={styles.actions}>
-              <Button href="/contact" arrow>
+              <Button href={`/careers/${job.id}/apply`} arrow>
                 Apply now
               </Button>
               <Button href="/careers#culture" variant="ghost" arrow>
@@ -85,7 +85,7 @@ export function JobDetail() {
                 Send a short note about your experience — our talent team typically
                 responds within a few business days.
               </p>
-              <Button href="/contact" arrow>
+              <Button href={`/careers/${job.id}/apply`} arrow>
                 Start application
               </Button>
             </div>

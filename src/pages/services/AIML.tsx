@@ -2,42 +2,33 @@ import { useState, type FormEvent } from "react";
 import {
   Bot,
   BrainCircuit,
+  Check,
   Database,
   Lightbulb,
   type LucideIcon,
 } from "lucide-react";
 import { Hero } from "../../components/Hero";
 import { DashboardVisual } from "../../components/HeroVisuals";
-import { ClientLogoMarquee } from "../../components/ClientLogoMarquee";
-import { SectionHeader } from "../../components/SectionHeader";
-import { ServiceCard } from "../../components/ServiceCard";
-import { StatCard } from "../../components/StatCard";
-import { CaseStudyCard } from "../../components/CaseStudyCard";
-import { Testimonial } from "../../components/Testimonial";
-import { CTASection } from "../../components/CTASection";
+import { CaseStudyCarousel } from "../../components/CaseStudyCarousel";
 import { Reveal } from "../../components/Reveal";
-import { CheckList } from "../../components/CheckList";
 import { CurvedDivider } from "../../components/CurvedDivider";
 import { Button } from "../../components/Button";
 import { caseStudies } from "../../data/caseStudies";
 import { certifications } from "../../data/content";
+import { techStackLogos } from "../../components/TechStackLogos";
 import styles from "./AIML.module.css";
 
 const aiServices: {
   icon: LucideIcon;
   title: string;
   description: string;
-  iconBg: string;
-  iconColor: string;
   items: string[];
 }[] = [
   {
     icon: Lightbulb,
     title: "AI consultancy",
     description:
-      "Translate workflows and business rules into a structured AI transformation strategy.",
-    iconBg: "#F3E8FF",
-    iconColor: "#5B35F5",
+      "Translate human workflows and business rules into a structured AI transformation strategy.",
     items: [
       "Business process discovery",
       "Digital maturity assessment",
@@ -48,9 +39,7 @@ const aiServices: {
     icon: Database,
     title: "Data science",
     description:
-      "Turn unstructured information into actionable, business-ready insights for models and products.",
-    iconBg: "#E6F7EF",
-    iconColor: "#35B968",
+      "Tame chaotic data by turning unstructured information into actionable, business-ready insights.",
     items: [
       "Data cleaning and structuring",
       "Legacy system integration",
@@ -61,9 +50,7 @@ const aiServices: {
     icon: BrainCircuit,
     title: "Machine learning",
     description:
-      "Predict outcomes, behaviors, and risks at scale with precise, production-ready models.",
-    iconBg: "#E8F1FF",
-    iconColor: "#1677FF",
+      "Predict outcomes, behaviors, and risks at scale by training highly precise machine learning models.",
     items: [
       "Predictive analytics",
       "Pattern recognition",
@@ -75,13 +62,26 @@ const aiServices: {
     title: "GenAI automation",
     description:
       "Deploy virtual teammates by automating daily workflows with autonomous AI agents.",
-    iconBg: "#FFF0E6",
-    iconColor: "#FF6500",
     items: [
-      "Hyper-personalized assistants",
+      "Hyper-personalized AI assistants",
       "CRM & ERP automation agents",
       "Policy and compliance monitoring",
     ],
+  },
+];
+
+const prototypeCols = [
+  {
+    title: "AI POC in 2–8 weeks",
+    body: "Validate ideas with high-quality AI prototypes and proofs of concepts built at warp speed.",
+  },
+  {
+    title: "2X more cost-efficient",
+    body: "Reduce engineering costs with remote teams and get 2X more value on your budget.",
+  },
+  {
+    title: "Value from day 1",
+    body: "Backed by discovery and architecture support, our experts deliver value from day one.",
   },
 ];
 
@@ -89,40 +89,59 @@ const stackAreas = [
   {
     title: "Generative AI",
     description:
-      "Augment workflows, automate content production, and power assistants with RAG and multimodal models.",
+      "Augment workflows and user experiences, automate the production of code, text, visuals, audio, and other assets, facilitate customer self-service, and analyze documents at massive scale.",
   },
   {
     title: "Predictive AI",
     description:
-      "Forecast risk, demand, and behavior across marketing, supply chain, manufacturing, and operations.",
+      "Streamline large-scale operations across business intelligence, marketing, risk management, supply chain, and manufacturing with accuracy, autonomy, and efficiency.",
   },
   {
     title: "Data science",
     description:
-      "Advisory and hands-on support to design models and turn data into a core AI asset.",
+      "QUORIXA guides you through designing machine learning models and turning data into a core asset fueling your AI transformation.",
   },
   {
-    title: "Data & AI engineering",
+    title: "Data & AI/ML engineering",
     description:
-      "Training, hosting, serving, pipelines, and applications that bring AI to customers and operators.",
+      "From model training, hosting, and serving to custom applications — train, monitor, and enhance models, build pipelines, and run experiments end-to-end.",
   },
   {
     title: "MLOps & DevOps",
     description:
-      "Shorten the AI lifecycle with automation for experiments, deployment, monitoring, and drift control.",
+      "Shorten and enhance the AI/ML lifecycle by automating data/ML engineering, software development, and IT operations workflows.",
   },
 ];
 
 const outcomesLeft = [
-  "350M+ monthly users reached by AI-driven personalization platforms",
-  "Fraud detection processing billions of daily trading records",
-  "90% QA-time reduction via predictive maintenance programs",
+  "350+ million monthly users reached by AI-driven personalization platforms",
+  "67 billion daily records processed by fraud detection on major trading platforms",
+  "90% reduction in QA time via predictive maintenance for a Fortune automotive brand",
 ];
 
 const outcomesRight = [
-  "GenAI e-discovery expanded to new languages and markets",
-  "90%+ accuracy on accident-prevention models for fleets",
-  "Supply-chain ML that protects high-value product inventory",
+  "8 new languages added to a GenAI e-discovery tool for enterprise clients",
+  "90%+ accuracy on traffic accident prevention — up to 48% insurance savings",
+  "1M vaccines protected from discard with ML supply-chain solutions",
+];
+
+const supportCards = [
+  {
+    id: "google-cloud",
+    title: "Google Cloud Partner Advantage Program, service partner",
+  },
+  {
+    id: "iso",
+    title: "Certified information security, cybersecurity, and privacy protection",
+  },
+  {
+    id: "aws",
+    title: "Certified Solutions Architects and Cloud Practitioners",
+  },
+  {
+    id: "clutch",
+    title: "Trusted delivery partner for enterprise AI programs",
+  },
 ];
 
 const processCards = [
@@ -152,12 +171,26 @@ const processCards = [
   },
 ];
 
-const aiCaseStudies = caseStudies.filter((s) =>
-  ["medflow", "finledger", "logix"].includes(s.id)
-);
+const serviceOptions = [
+  "AI service",
+  "Design solutions",
+  "Dedicated team",
+  "Development solutions",
+  "QA solutions",
+  "Data solutions",
+  "Cybersecurity solutions",
+  "Staff augmentation",
+];
 
+const aiCaseStudies = caseStudies.filter((s) =>
+  ["medflow", "finledger", "logix", "geotap"].includes(s.id)
+);
 const studies =
-  aiCaseStudies.length >= 3 ? aiCaseStudies : caseStudies.slice(0, 3);
+  aiCaseStudies.length >= 3 ? aiCaseStudies.slice(0, 3) : caseStudies.slice(0, 3);
+
+function certSrc(id: string) {
+  return certifications.find((c) => c.id === id)?.src;
+}
 
 export function AIML() {
   const [submitted, setSubmitted] = useState(false);
@@ -168,41 +201,54 @@ export function AIML() {
   }
 
   return (
-    <>
+    <div className={styles.page}>
       <Hero
         title={
           <>
-            Innovate with impact through custom{" "}
-            <span className="highlight-orange">GenAI &amp; ML</span> solutions
+            Innovate with impact through custom GenAI &amp; ML solutions
           </>
         }
-        description="86% of companies experiment with GenAI, yet only 21% see meaningful impact. Drive measurable growth with custom AI solutions and an agile strategy that ships past the PoC."
-        ctaLabel="Book a free consultation"
+        description="86% of companies experiment with GenAI, yet only 21% see meaningful impact. Drive measurable growth with custom AI solutions and a highly efficient agile strategy — and leave your competition behind."
+        ctaLabel="Get started today"
         visual={<DashboardVisual accent="purple" />}
       />
 
-      <ClientLogoMarquee />
-
-      <section className="section section--light">
-        <div className="container">
+      {/* End-to-end services */}
+      <section className={styles.sServices}>
+        <div className={`container-wide ${styles.container}`}>
           <Reveal>
-            <SectionHeader
-              label="Capabilities"
-              title="End-to-end AI services: from strategy to deployed agents"
-              description="AI creates value when it is embedded in how your business runs. QUORIXA aligns org, data, and engineering around scalable, IP-safe, ROI-focused delivery."
-            />
+            <div className={styles.centeredIntro}>
+              <p className={styles.eyebrow}>
+                <span className={styles.eyebrowDot} aria-hidden />
+                Capabilities
+              </p>
+              <h2>End-to-end AI services: from strategy to deployed agents</h2>
+              <p className={styles.introCopy}>
+                AI creates value only when embedded into how your business
+                actually runs. Accelerate your AI journey through scalable,
+                IP-safe, and ROI-focused solutions that align your org, data,
+                and engineering with your AI objectives.
+              </p>
+            </div>
           </Reveal>
-          <div className={styles.grid4}>
-            {aiServices.map((service) => (
-              <Reveal key={service.title}>
-                <ServiceCard
-                  icon={service.icon}
-                  title={service.title}
-                  description={service.description}
-                  iconBg={service.iconBg}
-                  iconColor={service.iconColor}
-                  items={service.items}
-                />
+          <div className={styles.serviceGrid}>
+            {aiServices.map(({ icon: Icon, title, description, items }) => (
+              <Reveal key={title} className={styles.serviceCell}>
+                <article className={styles.serviceCard}>
+                  <span className={styles.serviceIcon}>
+                    <Icon size={22} strokeWidth={1.7} />
+                  </span>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                  <ul>
+                    {items.map((item) => (
+                      <li key={item}>
+                        <Check size={14} strokeWidth={2.4} aria-hidden />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
               </Reveal>
             ))}
           </div>
@@ -211,66 +257,63 @@ export function AIML() {
 
       <CurvedDivider from="light" to="black" />
 
-      <section className="section section--dark">
-        <div className="container">
-          <div className={styles.darkSplit}>
-            <Reveal>
-              <div>
-                <span className="label">Prototype with confidence</span>
-                <h2 className={styles.darkTitle}>
-                  High-speed, low-risk{" "}
-                  <span className="highlight-orange">AI prototyping</span>
-                </h2>
-                <p className={styles.darkCopy}>
-                  Create AI prototypes and proofs of concept with lower upfront
-                  investment — at roughly 2× the speed of typical in-house
-                  experiments — with a clear path to production.
-                </p>
-              </div>
-            </Reveal>
-            <div className={styles.statsGrid3}>
-              <Reveal>
-                <StatCard
-                  value="2–8 wks"
-                  label="AI PoC cycle"
-                  description="Validate ideas with high-quality prototypes built at warp speed."
-                />
-              </Reveal>
-              <Reveal>
-                <StatCard
-                  value="2×"
-                  label="More cost-efficient"
-                  description="Remote senior teams that stretch AI budgets further."
-                />
-              </Reveal>
-              <Reveal>
-                <StatCard
-                  value="Day 1"
-                  label="Value delivered"
-                  description="Discovery and architecture support from the first engagement week."
-                />
-              </Reveal>
+      {/* Prototyping */}
+      <section className={styles.sProto}>
+        <div className={`container-wide ${styles.container}`}>
+          <Reveal>
+            <div className={styles.protoHead}>
+              <span className={styles.protoBadge} aria-hidden>
+                <BrainCircuit size={22} strokeWidth={1.7} />
+              </span>
+              <h2>
+                High-speed, low-risk
+                <br />
+                AI prototyping and development
+              </h2>
+              <p>
+                Create AI prototypes and proofs of concepts with lower upfront
+                investment, at 2X the speed of in-house development. We have the
+                expertise to accelerate your path from AI experiments to
+                successful products.
+              </p>
             </div>
+          </Reveal>
+          <div className={styles.protoCols}>
+            {prototypeCols.map((col) => (
+              <Reveal key={col.title} className={styles.protoCol}>
+                <h3>{col.title}</h3>
+                <p>{col.body}</p>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      <CurvedDivider from="black" to="white" invert />
+      <CurvedDivider from="black" to="white" />
 
-      <section className="section">
-        <div className="container">
+      {/* Stack */}
+      <section className={styles.sStack}>
+        <div className={`container-wide ${styles.container}`}>
           <Reveal>
-            <SectionHeader
-              label="Stack"
-              title="Your GenAI and ML stack is covered"
-              description="From generative and predictive AI to data science, engineering, and MLOps — specialists who own the full delivery path."
-              align="center"
-            />
+            <p className={styles.eyebrow}>
+              <span className={styles.eyebrowDot} aria-hidden />
+              AI expertise
+            </p>
+            <h2 className={styles.stackTitle}>
+              Your GenAI and ML stack is covered
+            </h2>
           </Reveal>
-          <div className={styles.stackGrid}>
+          <div className={styles.techGrid} role="list">
+            {techStackLogos.map(({ id, Logo }) => (
+              <div key={id} className={styles.techItem} role="listitem">
+                <Logo className={styles.techLogo} />
+              </div>
+            ))}
+          </div>
+          <div className={styles.stackAreas}>
             {stackAreas.map((area) => (
               <Reveal key={area.title}>
-                <article className={styles.stackCard}>
+                <article className={styles.stackArea}>
                   <h3>{area.title}</h3>
                   <p>{area.description}</p>
                 </article>
@@ -278,115 +321,153 @@ export function AIML() {
             ))}
           </div>
           <Reveal>
-            <SectionHeader
-              title="Featured client outcomes and impact"
-              description="Measurable results across personalization, risk, operations, and enterprise GenAI."
-              align="center"
-            />
+            <h3 className={styles.outcomesTitle}>
+              Featured client outcomes and impact
+            </h3>
           </Reveal>
           <div className={styles.outcomes}>
-            <Reveal>
-              <CheckList items={outcomesLeft} columns={1} />
-            </Reveal>
-            <Reveal>
-              <CheckList items={outcomesRight} columns={1} />
-            </Reveal>
+            <ul>
+              {outcomesLeft.map((item) => (
+                <li key={item}>
+                  <Check size={16} strokeWidth={2.4} aria-hidden />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <ul>
+              {outcomesRight.map((item) => (
+                <li key={item}>
+                  <Check size={16} strokeWidth={2.4} aria-hidden />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      <section className="section section--dark">
-        <div className="container">
+      {/* Mid CTA */}
+      <section className={styles.sMidCta}>
+        <div className={`container-wide ${styles.midCtaInner}`}>
           <Reveal>
-            <div className={styles.midCta}>
-              <div>
-                <h2 className={styles.midCtaTitle}>
-                  Accelerate your AI transformation
-                </h2>
-                <p className={styles.midCtaDesc}>
-                  Build future-proof AI products faster while maximizing
-                  engineering ROI — with senior specialists ready to start.
-                </p>
-              </div>
-              <Button href="/contact" arrow>
-                Book a consultation
-              </Button>
-            </div>
+            <p className={styles.midCtaEyebrow}>
+              Build future-proof AI products and enterprise solutions faster,
+              while maximizing engineering ROI.
+            </p>
+            <h2>Accelerate your AI transformation</h2>
+            <Button href="/contact" arrow>
+              Book a consultation
+            </Button>
           </Reveal>
         </div>
       </section>
 
-      <section className="section section--light">
-        <div className="container">
+      {/* Case studies */}
+      <section className={styles.sCases}>
+        <div className={`container-wide ${styles.container}`}>
           <Reveal>
-            <SectionHeader
-              label="Case studies"
-              title="Featured success stories"
-              description="From Fortune 500 supply chains to subscriber churn at massive scale — AI playbooks measured by impact."
-              align="center"
-            />
+            <div className={styles.centeredIntro}>
+              <p className={styles.eyebrow}>
+                <span className={styles.eyebrowDot} aria-hidden />
+                Case studies
+              </p>
+              <h2>Our recent success stories</h2>
+              <p className={styles.introCopy}>
+                From optimizing Fortune 500 supply chains to predicting
+                subscriber churn at massive scale — our AI playbook is about
+                measurable impact.
+              </p>
+            </div>
           </Reveal>
-          <div className={styles.caseGrid}>
-            {studies.map((study) => (
-              <Reveal key={study.id}>
-                <CaseStudyCard study={study} />
+          <CaseStudyCarousel studies={studies} fullWidth />
+        </div>
+      </section>
+
+      <CurvedDivider from="light" to="black" />
+
+      {/* Certified support */}
+      <section className={styles.sSupport}>
+        <div className={`container-wide ${styles.container}`}>
+          <Reveal>
+            <div className={styles.centeredIntroDark}>
+              <h2>Certified engineering support for your AI needs</h2>
+              <p>
+                Enable strategic AI adoption through custom-tailored cloud-native
+                solutions that meet key industry standards.
+              </p>
+            </div>
+          </Reveal>
+          <div className={styles.supportGrid}>
+            {supportCards.map((card) => (
+              <Reveal key={card.title} className={styles.supportCell}>
+                <article className={styles.supportCard}>
+                  {certSrc(card.id) && (
+                    <div className={styles.supportLogo}>
+                      <img src={certSrc(card.id)} alt="" loading="lazy" />
+                    </div>
+                  )}
+                  <h3>{card.title}</h3>
+                </article>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
+      <CurvedDivider from="black" to="light" />
+
+      {/* Testimonial */}
+      <section className={styles.sTestimonial}>
+        <div className={`container-wide ${styles.container}`}>
           <Reveal>
-            <SectionHeader
-              label="Partners"
-              title="Certified engineering support for your AI needs"
-              description="Cloud-native delivery that meets the standards enterprise buyers expect."
-              align="center"
-            />
-          </Reveal>
-          <Reveal>
-            <div className={styles.partners}>
-              {certifications.map((item) => (
-                <div key={item.id} className={styles.partnerBadge}>
-                  <img src={item.src} alt={item.label} />
+            <figure className={styles.testimonialInner}>
+              <blockquote className={styles.quote}>
+                &ldquo;QUORIXA helped us move from AI experiments to production
+                systems with a level of engineering discipline we hadn&apos;t
+                seen from external partners before.&rdquo;
+              </blockquote>
+              <figcaption>
+                <div className={styles.caption}>Eric Schvimmer</div>
+                <div className={styles.role}>
+                  VP of Engineering, enterprise software platform
                 </div>
-              ))}
+              </figcaption>
+            </figure>
+          </Reveal>
+        </div>
+      </section>
+
+      <CurvedDivider from="light" to="black" />
+
+      {/* Whitepaper CTA */}
+      <section className={styles.sWhitepaper}>
+        <div className={`container-wide ${styles.whitepaperInner}`}>
+          <Reveal>
+            <h2>
+              Explore AI/ML management strategies in our whitepaper
+            </h2>
+            <Button href="/contact" arrow>
+              Get started
+            </Button>
+          </Reveal>
+        </div>
+      </section>
+
+      <CurvedDivider from="black" to="white" />
+
+      {/* Process framework */}
+      <section className={styles.sProcess}>
+        <div className={`container-wide ${styles.container}`}>
+          <Reveal>
+            <div className={styles.processIntro}>
+              <h2>An agile framework for a reliable delivery</h2>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      <section className="section section--light">
-        <div className="container">
-          <Reveal>
-            <Testimonial
-              quote="QUORIXA became a critical part of our development makeup — flexible, high-quality AI and engineering capacity that kept pace with an evolving product roadmap."
-              author="Elena Voss"
-              role="EVP of Technology"
-              company="enterprise information platform"
-              image="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&q=80"
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              label="Process"
-              title="Strategic framework for AI solutions delivery"
-              description="A clear path from feasibility to production support — with transparent timelines at every stage."
-              align="center"
-            />
-          </Reveal>
           <div className={styles.processGrid}>
-            {processCards.map((step, index) => (
-              <Reveal key={step.title}>
+            {processCards.map((step, i) => (
+              <Reveal key={step.title} className={styles.processCell}>
                 <article className={styles.processCard}>
-                  <div className={styles.processNum}>{index + 1}</div>
+                  <span className={styles.processNum}>{i + 1}</span>
                   <span className={styles.processMeta}>{step.meta}</span>
                   <h3>{step.title}</h3>
                   <p>{step.description}</p>
@@ -397,100 +478,90 @@ export function AIML() {
         </div>
       </section>
 
-      <section className={styles.contactSection}>
-        <div className={`container ${styles.contactLayout}`}>
+      <CurvedDivider from="white" to="black" />
+
+      {/* Contact */}
+      <section className={styles.sContact}>
+        <div className={`container-wide ${styles.contactInner}`}>
           <Reveal>
-            <div>
-              <span className="label">Get in touch</span>
-              <h2 className={styles.contactTitle}>
-                Discuss your AI vision with{" "}
-                <span className="highlight-orange">industry experts</span>
-              </h2>
-              <p className={styles.contactDesc}>
-                Share your use case, data posture, and timeline. We&apos;ll
-                recommend a focused PoC or a production-ready delivery plan.
-              </p>
-              <Button href="/our-work" variant="ghost" arrow>
-                Explore AI case studies
-              </Button>
-            </div>
+            <h2>How can we help your business grow?</h2>
           </Reveal>
           <Reveal>
-            <div className={styles.formCard}>
-              {submitted ? (
-                <div className={styles.thanks}>
-                  <h2>Thank you</h2>
-                  <p>
-                    We&apos;ve received your message. A QUORIXA AI specialist
-                    will follow up shortly.
-                  </p>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    onClick={() => setSubmitted(false)}
-                  >
-                    Send another message
-                  </Button>
-                </div>
-              ) : (
-                <form
-                  className={styles.form}
-                  onSubmit={handleSubmit}
-                  noValidate
+            {submitted ? (
+              <div className={styles.thanks}>
+                <h3>Thank you</h3>
+                <p>
+                  We&apos;ve received your message. A QUORIXA AI specialist will
+                  follow up shortly.
+                </p>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => setSubmitted(false)}
                 >
-                  <h2 className={styles.formTitle}>Book a free consultation</h2>
-                  <label className={styles.field}>
-                    <span>Name</span>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Your name"
-                      required
-                    />
+                  Send another message
+                </Button>
+              </div>
+            ) : (
+              <form className={styles.form} onSubmit={handleSubmit} noValidate>
+                <div className={styles.formRow}>
+                  <label>
+                    <span>First name*</span>
+                    <input name="firstName" required placeholder="First name" />
                   </label>
-                  <label className={styles.field}>
-                    <span>Email</span>
+                  <label>
+                    <span>Last name*</span>
+                    <input name="lastName" required placeholder="Last name" />
+                  </label>
+                </div>
+                <div className={styles.formRow}>
+                  <label>
+                    <span>Email*</span>
                     <input
                       type="email"
                       name="email"
-                      placeholder="you@company.com"
                       required
+                      placeholder="Email"
                     />
                   </label>
-                  <label className={styles.field}>
-                    <span>Company</span>
-                    <input
-                      type="text"
-                      name="company"
-                      placeholder="Company name"
-                    />
+                  <label>
+                    <span>Company name*</span>
+                    <input name="company" required placeholder="Company name" />
                   </label>
-                  <label className={styles.field}>
-                    <span>How can we help?</span>
-                    <textarea
-                      name="message"
-                      rows={4}
-                      placeholder="Tell us about your GenAI or ML goals…"
-                      required
-                    />
-                  </label>
-                  <Button type="submit" arrow>
-                    Book a free consultation
-                  </Button>
-                </form>
-              )}
-            </div>
+                </div>
+                <label>
+                  <span>I&apos;m looking for*</span>
+                  <select name="service" required defaultValue="">
+                    <option value="" disabled>
+                      Select your service
+                    </option>
+                    {serviceOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  <span>How can we help?</span>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    placeholder="Tell us about your GenAI or ML goals…"
+                  />
+                </label>
+                <p className={styles.consent}>
+                  You agree to our friendly privacy policy.
+                </p>
+                <Button type="submit" arrow>
+                  Book a free consultation
+                </Button>
+              </form>
+            )}
           </Reveal>
         </div>
       </section>
 
-      <CTASection
-        title="Ready to turn AI ambition into shipped impact?"
-        description="Prefer a quick call first? Our team will assemble the right specialists for your roadmap."
-        ctaLabel="Talk to QUORIXA"
-        secondaryLabel="View all services"
-        secondaryHref="/solutions"
-      />
-    </>
+    </div>
   );
 }
