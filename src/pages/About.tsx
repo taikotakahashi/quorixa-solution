@@ -1,6 +1,5 @@
 import {
   Eye,
-  GraduationCap,
   Handshake,
   HeartHandshake,
   Lightbulb,
