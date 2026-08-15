@@ -1,5 +1,5 @@
 .hero {
-  padding: 48px 0 40px;
+  padding: calc(var(--header-height) + 48px) 0 40px;
 }
 
 .back {

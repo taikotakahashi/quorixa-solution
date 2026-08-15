@@ -1,5 +1,5 @@
 .hero {
-  padding: 48px 0 72px;
+  padding: calc(var(--header-height) + 48px) 0 72px;
   background: var(--color-white);
   overflow: hidden;
 }

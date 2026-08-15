@@ -7,7 +7,8 @@ type Props = {
 };
 
 export function ClientLogoMarquee({ variant = "standalone" }: Props) {
-  const items = [...clients, ...clients];
+  // Triple for a denser, continuous AE-style ticker
+  const items = [...clients, ...clients, ...clients];
   const isHero = variant === "hero";
 
   const track = (
@@ -19,7 +20,8 @@ export function ClientLogoMarquee({ variant = "standalone" }: Props) {
               src={client.src}
               alt={client.name}
               className={styles.image}
-              loading="lazy"
+              loading={isHero ? "eager" : "lazy"}
+              decoding="async"
               draggable={false}
             />
           </div>

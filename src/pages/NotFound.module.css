@@ -1,8 +1,8 @@
 .page {
-  min-height: calc(100vh - var(--header-height));
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 120px 0;
+  padding: calc(var(--header-height) + 40px) 0 120px;
 }
 
 .inner {

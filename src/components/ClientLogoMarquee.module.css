@@ -13,39 +13,43 @@
   overflow: hidden;
 }
 
-/* Inside hero section — AE .logo-slider */
+/* AE .logo-slider — sibling under hero container */
 .divider {
-  width: 100%;
-  height: 0;
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto 18px;
   border: none;
-  margin: 0 0 clamp(20px, 3vw, 32px);
 }
 
 .logoSlider {
+  display: block;
   width: 100%;
   overflow: hidden;
-  padding: 0 0 clamp(22px, 3.2vw, 36px);
+  padding: 8px 0 40px;
   flex-shrink: 0;
+  background: transparent;
+  box-sizing: border-box;
 }
 
 .track {
   overflow: hidden;
   width: 100%;
+  min-height: 52px;
 }
 
+.logoSlider .track,
 .section .track {
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    #000 8%,
-    #000 92%,
+    #000 5%,
+    #000 95%,
     transparent 100%
   );
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    #000 8%,
-    #000 92%,
+    #000 5%,
+    #000 95%,
     transparent 100%
   );
 }
@@ -55,6 +59,7 @@
   align-items: center;
   gap: clamp(56px, 7vw, 96px);
   width: max-content;
+  min-height: 52px;
   animation: scroll 36s linear infinite;
   will-change: transform;
 }
@@ -68,27 +73,22 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  height: clamp(56px, 6.5vw, 80px);
-  opacity: 0.85;
-  transition: opacity var(--transition);
+  height: 96px;
   user-select: none;
 }
 
 .logoSlider .logo {
-  height: clamp(56px, 7vw, 84px);
-}
-
-.logo:hover {
-  opacity: 1;
+  height: 96px;
 }
 
 .image {
   display: block;
   height: 100%;
   width: auto;
-  max-width: 220px;
+  max-width: 180px;
   object-fit: contain;
-  filter: grayscale(1) brightness(0.22);
+  filter: grayscale(1) brightness(0.28);
+  opacity: 0.92;
 }
 
 @keyframes scroll {
@@ -96,7 +96,7 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-33.333%);
   }
 }
 
@@ -105,16 +105,20 @@
     padding: 28px 0;
   }
 
+  .logoSlider {
+    padding: 4px 0 28px;
+  }
+
   .marquee {
-    gap: 44px;
+    gap: 40px;
   }
 
   .logo,
   .logoSlider .logo {
-    height: clamp(40px, 10vw, 52px);
+    height: 36px;
   }
 
   .image {
-    max-width: 150px;
+    max-width: 120px;
   }
 }
