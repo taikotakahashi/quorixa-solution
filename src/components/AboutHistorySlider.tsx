@@ -71,7 +71,7 @@ export function AboutHistorySlider({ items }: Props) {
     el.scrollLeft = drag.current.scrollLeft - dx;
   };
 
-  const onPointerUp = (e: React.PointerEvent) => {
+  const onPointerUp = () => {
     const el = trackRef.current;
     if (!el || !drag.current.active) return;
     drag.current.active = false;
