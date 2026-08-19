@@ -1,3 +1,4 @@
+import { memberPhotos } from "../data/team";
 import styles from "./HeroVisuals.module.css";
 import {
   Mic,
@@ -8,22 +9,10 @@ import {
 } from "lucide-react";
 
 const people = [
-  {
-    src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&q=80",
-    name: "Amelia C.",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&q=80",
-    name: "Marcus R.",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&q=80",
-    name: "Sofia A.",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&q=80",
-    name: "James O.",
-  },
+  { src: memberPhotos[0], name: "Amelia C." },
+  { src: memberPhotos[1], name: "Marcus R." },
+  { src: memberPhotos[2], name: "Sofia A." },
+  { src: memberPhotos[3], name: "James O." },
 ];
 
 export function VideoCallVisual() {

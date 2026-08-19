@@ -5,7 +5,7 @@
 .track {
   position: relative;
   display: flex;
-  gap: 28px;
+  gap: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding: 8px 4px 56px;
@@ -23,21 +23,11 @@
   cursor: grabbing;
 }
 
-.axis {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 78px;
-  height: 2px;
-  background: #e4e4ea;
-  pointer-events: none;
-  z-index: 0;
-}
-
 .slide {
   position: relative;
   z-index: 1;
-  flex: 0 0 min(280px, 72vw);
+  flex: 0 0 280px;
+  width: 280px;
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
@@ -45,14 +35,16 @@
 }
 
 .card {
-  width: 100%;
-  min-height: 168px;
+  width: 252px;
+  height: 200px;
   padding: 24px 22px;
   margin-bottom: 28px;
   border-radius: 18px;
   background: var(--color-white);
   border: 1px solid var(--color-border-soft);
   box-shadow: 0 8px 24px rgba(16, 24, 40, 0.04);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .card ul {
@@ -81,12 +73,28 @@
 }
 
 .marker {
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+}
+
+.marker::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #e4e4ea;
+  transform: translateY(-50%);
 }
 
 .yearBubble {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -155,7 +163,13 @@
 
 @media (max-width: 640px) {
   .slide {
-    flex-basis: min(240px, 78vw);
+    flex-basis: 240px;
+    width: 240px;
+  }
+
+  .card {
+    width: 212px;
+    height: 200px;
   }
 
   .scrollbar {

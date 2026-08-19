@@ -16,6 +16,7 @@ import {
   IconStrategy,
 } from "../../components/DesignStudioIcons";
 import { caseStudies } from "../../data/caseStudies";
+import { teamMembers } from "../../data/team";
 import styles from "./DesignStudio.module.css";
 
 const designServices = [
@@ -91,20 +92,17 @@ const experts = [
   {
     name: "Sofia Alvarez",
     role: "Head of Design",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&q=80",
+    image: teamMembers[2].image,
   },
   {
     name: "Amelia Chen",
     role: "Product Design Lead",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&q=80",
+    image: teamMembers[0].image,
   },
   {
     name: "Marcus Reid",
     role: "Design Systems Lead",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&q=80",
+    image: teamMembers[1].image,
   },
 ];
 

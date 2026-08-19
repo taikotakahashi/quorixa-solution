@@ -106,7 +106,6 @@ export function AboutHistorySlider({ items }: Props) {
             </div>
           </article>
         ))}
-        <div className={styles.axis} aria-hidden />
       </div>
 
       <div className={styles.scrollbar}>

@@ -1,3 +1,35 @@
+import memberDh from "../assets/members/dh.jpg";
+import memberSu from "../assets/members/su.png";
+import memberJb from "../assets/members/jb.jpg";
+import memberDy from "../assets/members/dy.jpg";
+import memberCg from "../assets/members/cg.png";
+import memberHg from "../assets/members/hg.png";
+import memberHc from "../assets/members/hc.jpg";
+import memberSc from "../assets/members/sc.png";
+import memberUc from "../assets/members/uc.jpg";
+import memberJr from "../assets/members/jr.jpg";
+import memberCj from "../assets/members/cj.jpg";
+import memberSj from "../assets/members/sj.png";
+import memberCh from "../assets/members/ch.jpg";
+import memberGs from "../assets/members/gs.png";
+
+export const memberPhotos = [
+  memberCg,
+  memberSc,
+  memberHg,
+  memberSu,
+  memberDh,
+  memberJb,
+  memberHc,
+  memberDy,
+  memberGs,
+  memberJr,
+  memberCj,
+  memberUc,
+  memberSj,
+  memberCh,
+];
+
 export type Job = {
   id: string;
   title: string;
@@ -156,50 +188,42 @@ export const teamMembers = [
   {
     name: "Amelia Chen",
     role: "Engineering Director",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=520&fit=crop&q=80",
+    image: memberPhotos[0],
   },
   {
     name: "Marcus Reid",
     role: "Principal Architect",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=520&fit=crop&q=80",
+    image: memberPhotos[1],
   },
   {
     name: "Sofia Alvarez",
     role: "Head of Design",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=520&fit=crop&q=80",
+    image: memberPhotos[2],
   },
   {
     name: "James Okonkwo",
     role: "AI Practice Lead",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=520&fit=crop&q=80",
+    image: memberPhotos[3],
   },
   {
     name: "Elena Petrova",
     role: "QA Lead",
-    image:
-      "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=520&fit=crop&q=80",
+    image: memberPhotos[4],
   },
   {
     name: "David Kim",
     role: "Delivery Manager",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=520&fit=crop&q=80",
+    image: memberPhotos[5],
   },
   {
     name: "Priya Sharma",
     role: "Data Engineering Lead",
-    image:
-      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=520&fit=crop&q=80",
+    image: memberPhotos[6],
   },
   {
     name: "Noah Fischer",
     role: "Mobile Lead",
-    image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=520&fit=crop&q=80",
+    image: memberPhotos[7],
   },
 ];
 
@@ -216,91 +240,85 @@ export const leadershipTeam: LeadershipMember[] = [
     name: "Amelia Chen",
     role: "CEO",
     region: "USA",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=480&h=560&fit=crop&q=80",
+    image: memberPhotos[0],
   },
   {
     name: "Marcus Reid",
     role: "CTO",
     region: "USA",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=480&h=560&fit=crop&q=80",
+    image: memberPhotos[1],
   },
   {
     name: "Sofia Alvarez",
     role: "Chief Growth Officer",
     region: "Americas",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=480&h=560&fit=crop&q=80",
+    image: memberPhotos[2],
   },
   {
     name: "Elena Petrova",
     role: "CFO",
     region: "Europe",
-    image:
-      "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=480&h=560&fit=crop&q=80",
+    image: memberPhotos[3],
   },
   {
     name: "James Okonkwo",
     role: "EVP of Solutions",
     region: "Americas",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=480&h=560&fit=crop&q=80",
+    image: memberPhotos[4],
   },
   {
     name: "Priya Sharma",
     role: "VP of Recruiting",
     region: "Americas",
-    image:
-      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=480&h=560&fit=crop&q=80",
+    image: memberPhotos[5],
   },
   {
     name: "David Kim",
     role: "VP of Engineering",
     region: "USA",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=480&h=560&fit=crop&q=80",
+    image: memberPhotos[6],
   },
   {
     name: "Noah Fischer",
     role: "Head of Partnerships",
     region: "Americas",
-    image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=480&h=560&fit=crop&q=80",
+    image: memberPhotos[7],
   },
   {
     name: "Lina Kowalski",
     role: "CDO & VP of IT",
     region: "Europe",
-    image:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=480&h=560&fit=crop&q=80",
+    image: memberPhotos[8],
   },
   {
     name: "Maya Brooks",
     role: "VP of Global Delivery",
     region: "Americas",
-    image:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=480&h=560&fit=crop&q=80",
+    image: memberPhotos[9],
   },
   {
     name: "Andrei Volkov",
     role: "VP of Engineering",
     region: "Europe",
+    image: memberPhotos[10],
   },
   {
     name: "Thiago Mendes",
     role: "VP of Engineering",
     region: "Americas",
+    image: memberPhotos[11],
   },
   {
     name: "Yulia Moroz",
     role: "Head of Engineering Operations",
     region: "Europe",
+    image: memberPhotos[12],
   },
   {
     name: "Vanessa Ortiz",
     role: "Director of People",
     region: "Americas",
+    image: memberPhotos[13],
   },
   {
     name: "Dania Kravets",
@@ -341,8 +359,7 @@ export const employeeTestimonials = [
     name: "Amelia Chen",
     role: "Engineering Director",
     location: "Singapore",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&q=80",
+    image: memberPhotos[0],
   },
   {
     quote:
@@ -350,8 +367,7 @@ export const employeeTestimonials = [
     name: "Marcus Reid",
     role: "Principal Architect",
     location: "Austin",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&q=80",
+    image: memberPhotos[1],
   },
   {
     quote:
@@ -359,7 +375,6 @@ export const employeeTestimonials = [
     name: "Sofia Alvarez",
     role: "Head of Design",
     location: "Madrid",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&q=80",
+    image: memberPhotos[2],
   },
 ];

@@ -1,3 +1,5 @@
+import { memberPhotos } from "./team";
+
 export type TalentLocation = {
   id: string;
   name: string;
@@ -29,16 +31,4 @@ export const talentLocations: TalentLocation[] = [
   { id: "india", name: "India", region: "Asia", flag: "🇮🇳", utcOffset: "UTC+5:30", openRoles: 9, x: 68, y: 50 },
 ];
 
-export const careerHeroPortraits = [
-  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=520&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=520&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=520&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=520&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=520&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=520&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=520&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=520&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=520&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=520&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1544005313-94ddf0286db2?w=400&h=520&fit=crop&q=80",
-];
+export const careerHeroPortraits = memberPhotos;
