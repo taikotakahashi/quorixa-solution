@@ -98,7 +98,7 @@ export const aboutNav: NavItem[] = [
   {
     title: "Leadership",
     description: "Meet the people behind QUORIXA",
-    href: "/about#leadership",
+    href: "/leadership",
     icon: "Users",
   },
   {

@@ -11,6 +11,7 @@ import { Backend } from "./pages/services/Backend";
 import { Frontend } from "./pages/services/Frontend";
 import { Accessibility } from "./pages/services/Accessibility";
 import { About } from "./pages/About";
+import { Leadership } from "./pages/Leadership";
 import { OurWork } from "./pages/OurWork";
 import { Careers } from "./pages/Careers";
 import { Contact } from "./pages/Contact";
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="frontend-development" element={<Frontend />} />
           <Route path="accessibility" element={<Accessibility />} />
           <Route path="about" element={<About />} />
+          <Route path="leadership" element={<Leadership />} />
           <Route path="our-work" element={<OurWork />} />
           <Route path="our-work/:id" element={<CaseStudyDetail />} />
           <Route path="careers" element={<Careers />} />

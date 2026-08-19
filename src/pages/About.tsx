@@ -282,7 +282,7 @@ export function About() {
           </Reveal>
           <TeamMembers members={teamMembers} />
           <div className={styles.centerCta}>
-            <Button href="/careers" variant="ghost" arrow>
+            <Button href="/leadership" variant="ghost" arrow>
               All the team
             </Button>
           </div>

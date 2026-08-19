@@ -136,6 +136,7 @@ export function Header() {
               (item.hasDropdown === "careers" && isCareers) ||
               (item.hasDropdown === "about" &&
                 (location.pathname === "/about" ||
+                  location.pathname === "/leadership" ||
                   location.pathname === "/insights" ||
                   location.pathname.startsWith("/insights/"))) ||
               (item.hasDropdown === "services" &&

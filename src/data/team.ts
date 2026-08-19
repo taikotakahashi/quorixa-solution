@@ -203,6 +203,137 @@ export const teamMembers = [
   },
 ];
 
+/** Full leadership directory (AE /leadership layout): photo for first 10, text-only after */
+export type LeadershipMember = {
+  name: string;
+  role: string;
+  region: string;
+  image?: string;
+};
+
+export const leadershipTeam: LeadershipMember[] = [
+  {
+    name: "Amelia Chen",
+    role: "CEO",
+    region: "USA",
+    image:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=480&h=560&fit=crop&q=80",
+  },
+  {
+    name: "Marcus Reid",
+    role: "CTO",
+    region: "USA",
+    image:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=480&h=560&fit=crop&q=80",
+  },
+  {
+    name: "Sofia Alvarez",
+    role: "Chief Growth Officer",
+    region: "Americas",
+    image:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=480&h=560&fit=crop&q=80",
+  },
+  {
+    name: "Elena Petrova",
+    role: "CFO",
+    region: "Europe",
+    image:
+      "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=480&h=560&fit=crop&q=80",
+  },
+  {
+    name: "James Okonkwo",
+    role: "EVP of Solutions",
+    region: "Americas",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=480&h=560&fit=crop&q=80",
+  },
+  {
+    name: "Priya Sharma",
+    role: "VP of Recruiting",
+    region: "Americas",
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=480&h=560&fit=crop&q=80",
+  },
+  {
+    name: "David Kim",
+    role: "VP of Engineering",
+    region: "USA",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=480&h=560&fit=crop&q=80",
+  },
+  {
+    name: "Noah Fischer",
+    role: "Head of Partnerships",
+    region: "Americas",
+    image:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=480&h=560&fit=crop&q=80",
+  },
+  {
+    name: "Lina Kowalski",
+    role: "CDO & VP of IT",
+    region: "Europe",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=480&h=560&fit=crop&q=80",
+  },
+  {
+    name: "Maya Brooks",
+    role: "VP of Global Delivery",
+    region: "Americas",
+    image:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=480&h=560&fit=crop&q=80",
+  },
+  {
+    name: "Andrei Volkov",
+    role: "VP of Engineering",
+    region: "Europe",
+  },
+  {
+    name: "Thiago Mendes",
+    role: "VP of Engineering",
+    region: "Americas",
+  },
+  {
+    name: "Yulia Moroz",
+    role: "Head of Engineering Operations",
+    region: "Europe",
+  },
+  {
+    name: "Vanessa Ortiz",
+    role: "Director of People",
+    region: "Americas",
+  },
+  {
+    name: "Dania Kravets",
+    role: "Director of Product Development",
+    region: "Europe",
+  },
+  {
+    name: "Francisco Lima",
+    role: "Director of Recruiting",
+    region: "Americas",
+  },
+  {
+    name: "Stepan Bondar",
+    role: "Director of Engineering",
+    region: "Europe",
+  },
+  {
+    name: "Yulia Moise",
+    role: "Director of Marketing Operations",
+    region: "Europe",
+  },
+  {
+    name: "Kapil Nair",
+    role: "Director of Engineering",
+    region: "Asia",
+  },
+  {
+    name: "Carlos Diaz",
+    role: "Legal Counsel",
+    region: "Americas",
+  },
+];
+
 export const employeeTestimonials = [
   {
     quote:

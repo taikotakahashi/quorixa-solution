@@ -49,6 +49,7 @@ const services = [
 const company = [
   { label: "About QUORIXA", href: "/about" },
   { label: "Our work", href: "/our-work" },
+  { label: "Our expertise team", href: "/leadership" },
   { label: "Solutions", href: "/solutions" },
   { label: "Industries", href: "/industries" },
   { label: "Technologies", href: "/technologies" },

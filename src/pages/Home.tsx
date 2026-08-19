@@ -217,7 +217,7 @@ export function Home() {
               </p>
             </div>
           </Reveal>
-          <CaseStudyCarousel studies={caseStudies} fullWidth />
+          <CaseStudyCarousel studies={caseStudies.slice(0, 5)} fullWidth />
         </div>
       </section>
 
