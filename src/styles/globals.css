@@ -13,6 +13,11 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html.is-booting,
+html.is-booting body {
+  background: var(--color-white);
+}
+
 body {
   font-family: var(--font-sans);
   font-size: 16px;

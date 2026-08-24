@@ -1,9 +1,10 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { ChatWidget } from "./ChatWidget";
 import { CookieConsent } from "./CookieConsent";
+import { RouteFallback, RouteTransition } from "./PageLoader";
 
 export function Layout() {
   const location = useLocation();
@@ -22,8 +23,11 @@ export function Layout() {
   return (
     <>
       <Header />
+      <RouteTransition />
       <main>
-        <Outlet />
+        <Suspense fallback={<RouteFallback />}>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
       <ChatWidget />

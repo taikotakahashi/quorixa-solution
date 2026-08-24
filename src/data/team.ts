@@ -1,17 +1,17 @@
-import memberDh from "../assets/members/dh.jpg";
-import memberSu from "../assets/members/su.png";
-import memberJb from "../assets/members/jb.jpg";
-import memberDy from "../assets/members/dy.jpg";
-import memberCg from "../assets/members/cg.png";
-import memberHg from "../assets/members/hg.png";
-import memberHc from "../assets/members/hc.jpg";
-import memberSc from "../assets/members/sc.png";
-import memberUc from "../assets/members/uc.jpg";
-import memberJr from "../assets/members/jr.jpg";
-import memberCj from "../assets/members/cj.jpg";
-import memberSj from "../assets/members/sj.png";
-import memberCh from "../assets/members/ch.jpg";
-import memberGs from "../assets/members/gs.png";
+import memberDh from "../assets/members/dh.webp";
+import memberSu from "../assets/members/su.webp";
+import memberJb from "../assets/members/jb.webp";
+import memberDy from "../assets/members/dy.webp";
+import memberCg from "../assets/members/cg.webp";
+import memberHg from "../assets/members/hg.webp";
+import memberHc from "../assets/members/hc.webp";
+import memberSc from "../assets/members/sc.webp";
+import memberUc from "../assets/members/uc.webp";
+import memberJr from "../assets/members/jr.webp";
+import memberCj from "../assets/members/cj.webp";
+import memberSj from "../assets/members/sj.webp";
+import memberCh from "../assets/members/ch.webp";
+import memberGs from "../assets/members/gs.webp";
 
 export const memberPhotos = [
   memberCg,
