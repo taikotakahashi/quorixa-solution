@@ -1,5 +1,5 @@
 import memberDh from "../assets/members/dh.webp";
-import memberSu from "../assets/members/su.webp";
+import memberSjj from "../assets/members/sj.webp";
 import memberJb from "../assets/members/jb.webp";
 import memberDy from "../assets/members/dy.webp";
 import memberCg from "../assets/members/cg.webp";
@@ -17,7 +17,7 @@ export const memberPhotos = [
   memberCg,
   memberSc,
   memberHg,
-  memberSu,
+  memberSjj,
   memberDh,
   memberJb,
   memberHc,
