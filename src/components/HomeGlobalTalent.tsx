@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { talentLocations, type TalentLocation } from "../data/careers";
+import { talentLocations as staticLocations, type TalentLocation } from "../data/careers";
+import { getTalentLocations } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import { CountryFlag } from "./CountryFlag";
 import mapBg from "../assets/map-2025-scaled.webp";
 import styles from "./HomeGlobalTalent.module.css";
@@ -20,18 +22,19 @@ function formatLocalTime(utcOffset: string) {
 }
 
 export function HomeGlobalTalent() {
+  const { data: talentLocations } = useCmsData(getTalentLocations, staticLocations);
   const [region, setRegion] = useState<TalentLocation["region"]>("Americas");
   const [activeId, setActiveId] = useState("usa");
   const [, setTick] = useState(0);
 
   const countries = useMemo(
     () => talentLocations.filter((l) => l.region === region),
-    [region],
+    [region, talentLocations],
   );
 
   const active = useMemo(
     () => talentLocations.find((l) => l.id === activeId) ?? countries[0],
-    [activeId, countries],
+    [activeId, countries, talentLocations],
   );
 
   useEffect(() => {

@@ -1,9 +1,12 @@
 import { HomeContactSection } from "../components/HomeContactSection";
 import { Reveal } from "../components/Reveal";
-import { leadershipTeam } from "../data/team";
+import { leadershipTeam as staticLeadership } from "../data/team";
+import { getLeadershipTeam } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./Leadership.module.css";
 
 export function Leadership() {
+  const { data: leadershipTeam } = useCmsData(getLeadershipTeam, staticLeadership);
   return (
     <>
       <section className={styles.hero}>

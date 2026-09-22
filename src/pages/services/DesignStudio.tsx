@@ -15,8 +15,10 @@ import {
   IconPenTip,
   IconStrategy,
 } from "../../components/DesignStudioIcons";
-import { caseStudies } from "../../data/caseStudies";
-import { teamMembers } from "../../data/team";
+import { caseStudies as staticCaseStudies } from "../../data/caseStudies";
+import { teamMembers as staticTeam } from "../../data/team";
+import { getCaseStudies, getTeamMembers } from "../../lib/cms";
+import { useCmsData } from "../../lib/cms/useCmsData";
 import styles from "./DesignStudio.module.css";
 
 const designServices = [
@@ -88,24 +90,6 @@ const advantageStatements: { text: string; pos: string }[] = [
   },
 ];
 
-const experts = [
-  {
-    name: "Sofia Alvarez",
-    role: "Head of Design",
-    image: teamMembers[2].image,
-  },
-  {
-    name: "Amelia Chen",
-    role: "Product Design Lead",
-    image: teamMembers[0].image,
-  },
-  {
-    name: "Marcus Reid",
-    role: "Design Systems Lead",
-    image: teamMembers[1].image,
-  },
-];
-
 const processSteps = [
   {
     title: "Discovery",
@@ -129,13 +113,31 @@ const processSteps = [
   },
 ];
 
-const designCaseStudies = caseStudies.filter((s) =>
-  ["retailpulse", "geotap", "medflow"].includes(s.id)
-);
-const studies =
-  designCaseStudies.length >= 3 ? designCaseStudies : caseStudies.slice(0, 3);
-
 export function DesignStudio() {
+  const { data: caseStudies } = useCmsData(getCaseStudies, staticCaseStudies);
+  const { data: teamMembers } = useCmsData(getTeamMembers, staticTeam);
+  const experts = [
+    {
+      name: "Sofia Alvarez",
+      role: "Head of Design",
+      image: teamMembers[2]?.image ?? "",
+    },
+    {
+      name: "Amelia Chen",
+      role: "Product Design Lead",
+      image: teamMembers[0]?.image ?? "",
+    },
+    {
+      name: "Marcus Reid",
+      role: "Design Systems Lead",
+      image: teamMembers[1]?.image ?? "",
+    },
+  ];
+  const designCaseStudies = caseStudies.filter((s) =>
+    ["retailpulse", "geotap", "medflow"].includes(s.id),
+  );
+  const studies =
+    designCaseStudies.length >= 3 ? designCaseStudies : caseStudies.slice(0, 3);
   return (
     <div className={styles.page}>
       <DesignStudioHero imageSrc={designHero} />

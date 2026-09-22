@@ -1,4 +1,6 @@
-import { clients } from "../data/content";
+import { clients as staticClients } from "../data/content";
+import { getClients } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./ClientLogoMarquee.module.css";
 
 type Props = {
@@ -7,6 +9,7 @@ type Props = {
 };
 
 export function ClientLogoMarquee({ variant = "standalone" }: Props) {
+  const { data: clients } = useCmsData(getClients, staticClients);
   // Triple for a denser, continuous AE-style ticker
   const items = [...clients, ...clients, ...clients];
   const isHero = variant === "hero";

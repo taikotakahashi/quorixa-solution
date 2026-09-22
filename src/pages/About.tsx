@@ -20,7 +20,12 @@ import { CurvedDivider } from "../components/CurvedDivider";
 import { Reveal } from "../components/Reveal";
 import { TeamMembers } from "../components/TeamMembers";
 import { certifications } from "../data/content";
-import { employeeTestimonials, teamMembers } from "../data/team";
+import {
+  employeeTestimonials as staticTestimonials,
+  teamMembers as staticTeam,
+} from "../data/team";
+import { getEmployeeTestimonials, getTeamMembers } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./About.module.css";
 
 /** AE hero-section structure: ae-container (copy + gallery) then logo-slider sibling */
@@ -173,16 +178,27 @@ const partnerCards = [
   },
 ];
 
-const employeeQuote = {
+const employeeQuoteFallback = {
   quote:
     "Having been with QUORIXA for over 10 years, I continue to discover endless opportunities for growth and development. Over this time, QUORIXA has become more than just a workplace — it’s a place where I can find help, support others, and become better from day to day!",
-  name: employeeTestimonials[0]?.name ?? "Ruslan Mihorianu",
+  name: "Ruslan Mihorianu",
   role: "Lead Product Studio Infrastructure Owner",
-  location: employeeTestimonials[0]?.location ?? "",
-  image: employeeTestimonials[0]?.image ?? "",
+  location: "",
+  image: "",
 };
 
 export function About() {
+  const { data: teamMembers } = useCmsData(getTeamMembers, staticTeam);
+  const { data: employeeTestimonials } = useCmsData(
+    getEmployeeTestimonials,
+    staticTestimonials,
+  );
+  const employeeQuote = {
+    ...employeeQuoteFallback,
+    name: employeeTestimonials[0]?.name ?? employeeQuoteFallback.name,
+    location: employeeTestimonials[0]?.location ?? "",
+    image: employeeTestimonials[0]?.image ?? "",
+  };
   return (
     <>
       {/* Mirrors AE: section.hero-section > .ae-container + .logo-slider */}

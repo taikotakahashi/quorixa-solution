@@ -3,24 +3,31 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "../components/Button";
 import { CTASection } from "../components/CTASection";
 import { Reveal } from "../components/Reveal";
-import { insights } from "../data/insights";
+import { insights as staticInsights } from "../data/insights";
+import { getInsights } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./InsightDetail.module.css";
 
 export function InsightDetail() {
   const { id } = useParams();
+  const { data: insights, loading } = useCmsData(getInsights, staticInsights);
   const article = insights.find((item) => item.id === id);
 
   if (!article) {
     return (
       <section className="section">
         <div className="container" style={{ textAlign: "center" }}>
-          <h1>Article not found</h1>
-          <p style={{ margin: "16px 0 28px" }}>
-            This insight may have moved or no longer exists.
-          </p>
-          <Button href="/insights" arrow>
-            Back to insights
-          </Button>
+          <h1>{loading ? "Loading…" : "Article not found"}</h1>
+          {!loading && (
+            <>
+              <p style={{ margin: "16px 0 28px" }}>
+                This insight may have moved or no longer exists.
+              </p>
+              <Button href="/insights" arrow>
+                Back to insights
+              </Button>
+            </>
+          )}
         </div>
       </section>
     );

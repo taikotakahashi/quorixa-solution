@@ -3,24 +3,31 @@ import { ArrowLeft, MapPin } from "lucide-react";
 import { Button } from "../components/Button";
 import { CTASection } from "../components/CTASection";
 import { Reveal } from "../components/Reveal";
-import { jobs } from "../data/team";
+import { jobs as staticJobs } from "../data/team";
+import { getJobs } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./JobDetail.module.css";
 
 export function JobDetail() {
   const { id } = useParams();
+  const { data: jobs, loading } = useCmsData(getJobs, staticJobs);
   const job = jobs.find((item) => item.id === id);
 
   if (!job) {
     return (
       <section className="section">
         <div className="container" style={{ textAlign: "center" }}>
-          <h1>Position not found</h1>
-          <p style={{ margin: "16px 0 28px" }}>
-            This role may have closed or the link is outdated.
-          </p>
-          <Button href="/careers#positions" arrow>
-            View open positions
-          </Button>
+          <h1>{loading ? "Loading…" : "Position not found"}</h1>
+          {!loading && (
+            <>
+              <p style={{ margin: "16px 0 28px" }}>
+                This role may have closed or the link is outdated.
+              </p>
+              <Button href="/careers#positions" arrow>
+                View open positions
+              </Button>
+            </>
+          )}
         </div>
       </section>
     );

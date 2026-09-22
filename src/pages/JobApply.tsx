@@ -3,7 +3,9 @@ import { Link, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "../components/Button";
 import { Reveal } from "../components/Reveal";
-import { jobs } from "../data/team";
+import { jobs as staticJobs } from "../data/team";
+import { getJobs } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import {
   fileToBase64,
   submitJobApplication,
@@ -14,6 +16,7 @@ import styles from "./JobApply.module.css";
 
 export function JobApply() {
   const { id } = useParams();
+  const { data: jobs, loading } = useCmsData(getJobs, staticJobs);
   const job = jobs.find((item) => item.id === id);
 
   const [fullName, setFullName] = useState("");
@@ -31,13 +34,17 @@ export function JobApply() {
     return (
       <section className="section">
         <div className="container" style={{ textAlign: "center" }}>
-          <h1>Position not found</h1>
-          <p style={{ margin: "16px 0 28px" }}>
-            This role may have closed or the link is outdated.
-          </p>
-          <Button href="/careers#positions" arrow>
-            View open positions
-          </Button>
+          <h1>{loading ? "Loading…" : "Position not found"}</h1>
+          {!loading && (
+            <>
+              <p style={{ margin: "16px 0 28px" }}>
+                This role may have closed or the link is outdated.
+              </p>
+              <Button href="/careers#positions" arrow>
+                View open positions
+              </Button>
+            </>
+          )}
         </div>
       </section>
     );

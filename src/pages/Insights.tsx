@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { CTASection } from "../components/CTASection";
 import { Reveal } from "../components/Reveal";
 import {
-  insights,
+  insights as staticInsights,
   type Insight,
   type InsightSection,
 } from "../data/insights";
+import { getInsights } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./Insights.module.css";
 
 const SECTIONS: InsightSection[] = ["Insights", "Articles", "News"];
@@ -35,10 +37,21 @@ function ArticleCard({ article }: { article: Insight }) {
 }
 
 export function Insights() {
+  const { data: insights } = useCmsData(getInsights, staticInsights);
   const featured = insights.find((item) => item.featured) ?? insights[0];
 
   const bySection = (section: InsightSection) =>
     insights.filter((item) => item.section === section);
+
+  if (!featured) {
+    return (
+      <section className="section">
+        <div className="container">
+          <p className="muted">No posts yet.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <>

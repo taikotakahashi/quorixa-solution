@@ -1,4 +1,6 @@
-import { memberPhotos } from "../data/team";
+import { memberPhotos as staticPhotos } from "../data/team";
+import { getMemberPhotos } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./HeroVisuals.module.css";
 import {
   Mic,
@@ -8,14 +10,14 @@ import {
   Video,
 } from "lucide-react";
 
-const people = [
-  { src: memberPhotos[0], name: "Amelia C." },
-  { src: memberPhotos[1], name: "Marcus R." },
-  { src: memberPhotos[2], name: "Sofia A." },
-  { src: memberPhotos[3], name: "James O." },
-];
-
 export function VideoCallVisual() {
+  const { data: memberPhotos } = useCmsData(getMemberPhotos, staticPhotos);
+  const people = [
+    { src: memberPhotos[0], name: "Amelia C." },
+    { src: memberPhotos[1], name: "Marcus R." },
+    { src: memberPhotos[2], name: "Sofia A." },
+    { src: memberPhotos[3], name: "James O." },
+  ];
   return (
     <div className={styles.stage}>
       <div className={styles.glow} />

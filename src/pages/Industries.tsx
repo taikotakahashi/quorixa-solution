@@ -19,8 +19,10 @@ import { CTASection } from "../components/CTASection";
 import { Reveal } from "../components/Reveal";
 import { SectionHeader } from "../components/SectionHeader";
 import { ServiceCard } from "../components/ServiceCard";
-import { caseStudies } from "../data/caseStudies";
+import { caseStudies as staticCaseStudies } from "../data/caseStudies";
 import { industries } from "../data/content";
+import { getCaseStudies } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./Industries.module.css";
 
 const industryMeta: Record<
@@ -113,11 +115,11 @@ const industryMeta: Record<
   },
 };
 
-const selectedStudies = caseStudies.filter((study) =>
-  ["dialpad", "regtech", "starz", "supply-chain"].includes(study.id),
-);
-
 export function Industries() {
+  const { data: caseStudies } = useCmsData(getCaseStudies, staticCaseStudies);
+  const selectedStudies = caseStudies.filter((study) =>
+    ["dialpad", "regtech", "starz", "supply-chain"].includes(study.id),
+  );
   return (
     <>
       <section className={`${styles.hero} grid-bg`}>

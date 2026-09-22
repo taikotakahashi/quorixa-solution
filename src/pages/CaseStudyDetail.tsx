@@ -14,12 +14,10 @@ import { CaseStudyCard } from "../components/CaseStudyCard";
 import { CTASection } from "../components/CTASection";
 import { CurvedDivider } from "../components/CurvedDivider";
 import { Reveal } from "../components/Reveal";
-import { caseStudies } from "../data/caseStudies";
-import {
-  detailsById,
-  fallbackDetail,
-  type StudyDetail,
-} from "../data/caseStudyDetails";
+import { caseStudies as staticCaseStudies } from "../data/caseStudies";
+import { type StudyDetail } from "../data/caseStudyDetails";
+import { getCaseStudies, getCaseStudyDetail } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./CaseStudyDetail.module.css";
 
 const infoMeta: {
@@ -43,12 +41,27 @@ function listValue(
 
 export function CaseStudyDetail() {
   const { id } = useParams<{ id: string }>();
+  const { data: caseStudies, loading } = useCmsData(
+    getCaseStudies,
+    staticCaseStudies,
+  );
   const study = caseStudies.find((item) => item.id === id);
   const [activeSection, setActiveSection] = useState("");
+  const [detail, setDetail] = useState<StudyDetail | null>(null);
 
-  const detail = study
-    ? (detailsById[study.id] ?? fallbackDetail(study.industry))
-    : null;
+  useEffect(() => {
+    if (!study) {
+      setDetail(null);
+      return;
+    }
+    let cancelled = false;
+    getCaseStudyDetail(study.id).then((d) => {
+      if (!cancelled) setDetail(d);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [study]);
 
   useEffect(() => {
     if (!detail?.solutionAreas.length) return;
@@ -82,14 +95,18 @@ export function CaseStudyDetail() {
     return (
       <section className={`${styles.notFound} grid-bg`}>
         <div className="container">
-          <h1>Case study not found</h1>
-          <p>
-            We couldn&apos;t find that engagement. Browse the full portfolio
-            instead.
-          </p>
-          <Button href="/our-work" arrow>
-            Back to our work
-          </Button>
+          <h1>{loading ? "Loading…" : "Case study not found"}</h1>
+          {!loading && (
+            <>
+              <p>
+                We couldn&apos;t find that engagement. Browse the full portfolio
+                instead.
+              </p>
+              <Button href="/our-work" arrow>
+                Back to our work
+              </Button>
+            </>
+          )}
         </div>
       </section>
     );

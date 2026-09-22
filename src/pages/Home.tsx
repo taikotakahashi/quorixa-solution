@@ -11,8 +11,10 @@ import { TestimonialGrid } from "../components/TestimonialGrid";
 import { HomeServicesExpertise } from "../components/HomeServicesExpertise";
 import { HomeContactSection } from "../components/HomeContactSection";
 import { HomeGlobalTalent } from "../components/HomeGlobalTalent";
-import { caseStudies } from "../data/caseStudies";
-import { teamMembers } from "../data/team";
+import { caseStudies as staticCaseStudies } from "../data/caseStudies";
+import { teamMembers as staticTeam } from "../data/team";
+import { getCaseStudies, getTeamMembers } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./Home.module.css";
 
 const engineeringItems = [
@@ -107,6 +109,8 @@ const testimonials = [
 ];
 
 export function Home() {
+  const { data: caseStudies } = useCmsData(getCaseStudies, staticCaseStudies);
+  const { data: teamMembers } = useCmsData(getTeamMembers, staticTeam);
   return (
     <>
       <Hero

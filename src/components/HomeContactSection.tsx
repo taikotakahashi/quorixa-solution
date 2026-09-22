@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { clients } from "../data/content";
+import { clients as staticClients } from "../data/content";
+import { getClients } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import { submitContactMessage } from "../lib/submitContact";
 import styles from "./HomeContactSection.module.css";
 
@@ -17,6 +19,7 @@ const serviceOptions = [
 ];
 
 export function HomeContactSection() {
+  const { data: clients } = useCmsData(getClients, staticClients);
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);

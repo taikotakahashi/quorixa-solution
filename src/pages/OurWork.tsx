@@ -9,7 +9,9 @@ import { ChevronDown } from "lucide-react";
 import { CaseStudyCard } from "../components/CaseStudyCard";
 import { CTASection } from "../components/CTASection";
 import { Reveal } from "../components/Reveal";
-import { caseStudies } from "../data/caseStudies";
+import { caseStudies as staticCaseStudies } from "../data/caseStudies";
+import { getCaseStudies } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./OurWork.module.css";
 
 const SERVICE_OPTIONS = [
@@ -79,6 +81,7 @@ function toggleValue(list: string[], value: string) {
 }
 
 export function OurWork() {
+  const { data: caseStudies } = useCmsData(getCaseStudies, staticCaseStudies);
   const [openPanel, setOpenPanel] = useState<FilterPanel>(null);
   const [services, setServices] = useState<string[]>([]);
   const [industries, setIndustries] = useState<string[]>([]);
@@ -89,7 +92,7 @@ export function OurWork() {
       .map((study) => study.industry)
       .filter((value): value is string => Boolean(value));
     return Array.from(new Set([...INDUSTRY_OPTIONS, ...fromData]));
-  }, []);
+  }, [caseStudies]);
 
   const filtered = useMemo(
     () =>
@@ -98,7 +101,7 @@ export function OurWork() {
           matchesService(study.tags, services) &&
           matchesIndustry(study.industry, industries),
       ),
-    [services, industries],
+    [services, industries, caseStudies],
   );
 
   useEffect(() => {

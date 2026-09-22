@@ -246,7 +246,7 @@ export const leadershipTeam: LeadershipMember[] = [
     name: "Marcus Reid",
     role: "CTO",
     region: "USA",
-    image: memberPhotos[1],
+    image: memberPhotos[10],
   },
   {
     name: "Sofia Alvarez",
@@ -300,7 +300,7 @@ export const leadershipTeam: LeadershipMember[] = [
     name: "Andrei Volkov",
     role: "VP of Engineering",
     region: "Europe",
-    image: memberPhotos[10],
+    image: memberPhotos[1],
   },
   {
     name: "Thiago Mendes",

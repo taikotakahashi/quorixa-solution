@@ -6,8 +6,9 @@ import { GlobalTalentMap } from "../components/GlobalTalentMap";
 import { Reveal } from "../components/Reveal";
 import { SectionHeader } from "../components/SectionHeader";
 import { StatCard } from "../components/StatCard";
-import { careerHeroPortraits } from "../data/careers";
-import { jobs } from "../data/team";
+import { jobs as staticJobs, memberPhotos } from "../data/team";
+import { getJobs, getMemberPhotos } from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
 import { submitContactMessage } from "../lib/submitContact";
 import styles from "./Careers.module.css";
 
@@ -41,13 +42,15 @@ const cultureStats = [
   { value: "68%", label: "are in senior or lead roles" },
 ];
 
-function jobBullets(job: (typeof jobs)[number]): string[] {
+function jobBullets(job: (typeof staticJobs)[number]): string[] {
   const fromResponsibilities = job.responsibilities.slice(0, 3);
   if (fromResponsibilities.length >= 3) return fromResponsibilities;
   return [job.summary, ...job.responsibilities].slice(0, 3);
 }
 
 export function Careers() {
+  const { data: jobs } = useCmsData(getJobs, staticJobs);
+  const { data: careerHeroPortraits } = useCmsData(getMemberPhotos, memberPhotos);
   const [keyword, setKeyword] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [submitted, setSubmitted] = useState(false);
@@ -71,7 +74,7 @@ export function Careers() {
         .toLowerCase();
       return haystack.includes(q);
     });
-  }, [keyword]);
+  }, [keyword, jobs]);
 
   const visibleJobs = showAllJobs ? filteredJobs : filteredJobs.slice(0, 4);
   const topRow = careerHeroPortraits.slice(0, 6);

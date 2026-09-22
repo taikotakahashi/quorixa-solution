@@ -15,11 +15,11 @@ export type TalentLocation = {
 
 export const talentLocations: TalentLocation[] = [
   { id: "usa", name: "USA", region: "Americas", flag: "🇺🇸", utcOffset: "UTC-5", openRoles: 13, x: 22, y: 38 },
-  { id: "mexico", name: "Mexico", region: "Americas", flag: "🇲🇽", utcOffset: "UTC-6", openRoles: 4, x: 18, y: 48 },
-  { id: "argentina", name: "Argentina", region: "Americas", flag: "🇦🇷", utcOffset: "UTC-3", openRoles: 3, x: 28, y: 78 },
+  { id: "mexico", name: "Mexico", region: "Americas", flag: "🇲🇽", utcOffset: "UTC-6", openRoles: 4, x: 21, y: 49 },
+  { id: "argentina", name: "Argentina", region: "Americas", flag: "🇦🇷", utcOffset: "UTC-3", openRoles: 3, x: 34, y: 82 },
   { id: "colombia", name: "Colombia", region: "Americas", flag: "🇨🇴", utcOffset: "UTC-5", openRoles: 5, x: 26, y: 58 },
-  { id: "brazil", name: "Brazil", region: "Americas", flag: "🇧🇷", utcOffset: "UTC-3", openRoles: 6, x: 32, y: 68 },
-  { id: "guatemala", name: "Guatemala", region: "Americas", flag: "🇬🇹", utcOffset: "UTC-6", openRoles: 2, x: 20, y: 52 },
+  { id: "brazil", name: "Brazil", region: "Americas", flag: "🇧🇷", utcOffset: "UTC-3", openRoles: 6, x: 36, y: 72 },
+  { id: "guatemala", name: "Guatemala", region: "Americas", flag: "🇬🇹", utcOffset: "UTC-6", openRoles: 2, x: 23, y: 54 },
   { id: "poland", name: "Poland", region: "Europe", flag: "🇵🇱", utcOffset: "UTC+1", openRoles: 8, x: 52, y: 32 },
   { id: "spain", name: "Spain", region: "Europe", flag: "🇪🇸", utcOffset: "UTC+1", openRoles: 5, x: 46, y: 40 },
   { id: "portugal", name: "Portugal", region: "Europe", flag: "🇵🇹", utcOffset: "UTC+0", openRoles: 4, x: 44, y: 42 },
