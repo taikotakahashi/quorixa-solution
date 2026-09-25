@@ -35,7 +35,7 @@ const MEMBER_FILES = [
   "cg.webp",
   "sc.webp",
   "hg.webp",
-  "su.webp",
+  "sj.webp",
   "dh.webp",
   "jb.webp",
   "hc.webp",
@@ -44,8 +44,8 @@ const MEMBER_FILES = [
   "jr.webp",
   "cj.webp",
   "uc.webp",
-  "sj.webp",
   "ch.webp",
+  "tg.webp",
 ];
 
 const CLIENT_LOGOS: { id: string; name: string; file: string }[] = [
@@ -251,106 +251,194 @@ async function main() {
     photoUrls.push(url ?? "");
   }
 
-  const teamMembers = [
-    { name: "Amelia Chen", role: "Engineering Director", kind: "team", photo: 0 },
-    { name: "Marcus Reid", role: "Principal Architect", kind: "team", photo: 1 },
-    { name: "Sofia Alvarez", role: "Head of Design", kind: "team", photo: 2 },
-    { name: "James Okonkwo", role: "AI Practice Lead", kind: "team", photo: 3 },
-    { name: "Elena Petrova", role: "QA Lead", kind: "team", photo: 4 },
-    { name: "David Kim", role: "Delivery Manager", kind: "team", photo: 5 },
-    { name: "Priya Sharma", role: "Data Engineering Lead", kind: "team", photo: 6 },
-    { name: "Noah Fischer", role: "Mobile Lead", kind: "team", photo: 7 },
-  ];
-
-  const leadership = [
-    { name: "Amelia Chen", role: "CEO", region: "USA", photo: 0 },
-    { name: "Marcus Reid", role: "CTO", region: "USA", photo: 10 },
-    { name: "Sofia Alvarez", role: "Chief Growth Officer", region: "Americas", photo: 2 },
-    { name: "Elena Petrova", role: "CFO", region: "Europe", photo: 3 },
-    { name: "James Okonkwo", role: "EVP of Solutions", region: "Americas", photo: 4 },
-    { name: "Priya Sharma", role: "VP of Recruiting", region: "Americas", photo: 5 },
-    { name: "David Kim", role: "VP of Engineering", region: "USA", photo: 6 },
-    { name: "Noah Fischer", role: "Head of Partnerships", region: "Americas", photo: 7 },
-    { name: "Lina Kowalski", role: "CDO & VP of IT", region: "Europe", photo: 8 },
-    { name: "Maya Brooks", role: "VP of Global Delivery", region: "Americas", photo: 9 },
-    { name: "Andrei Volkov", role: "VP of Engineering", region: "Europe", photo: 1 },
-    { name: "Thiago Mendes", role: "VP of Engineering", region: "Americas", photo: 11 },
-    { name: "Yulia Moroz", role: "Head of Engineering Operations", region: "Europe", photo: 12 },
-    { name: "Vanessa Ortiz", role: "Director of People", region: "Americas", photo: 13 },
-    { name: "Dania Kravets", role: "Director of Product Development", region: "Europe", photo: null },
-    { name: "Francisco Lima", role: "Director of Recruiting", region: "Americas", photo: null },
-    { name: "Stepan Bondar", role: "Director of Engineering", region: "Europe", photo: null },
-    { name: "Yulia Moise", role: "Director of Marketing Operations", region: "Europe", photo: null },
-    { name: "Kapil Nair", role: "Director of Engineering", region: "Asia", photo: null },
-    { name: "Carlos Diaz", role: "Legal Counsel", region: "Americas", photo: null },
-  ];
-
-  const testimonials = [
+  // One DB row per person. Roles are fields (team / leadership / quote), not duplicate kinds.
+  const people: {
+    slug: string;
+    name: string;
+    region: string;
+    photo: number | null;
+    teamRole?: string;
+    leadershipRole?: string;
+    quote?: string;
+  }[] = [
     {
+      slug: "amelia-chen",
       name: "Amelia Chen",
-      role: "Engineering Director",
       region: "Singapore",
+      photo: 0,
+      teamRole: "Engineering Director",
+      leadershipRole: "CEO",
       quote:
         "I joined QUORIXA for the engineering culture. The best part is autonomy to solve hard problems with peers across multiple countries.",
-      photo: 0,
     },
     {
+      slug: "marcus-reid",
       name: "Marcus Reid",
-      role: "Principal Architect",
       region: "Austin",
+      photo: 1,
+      teamRole: "Principal Architect",
+      leadershipRole: "CTO",
       quote:
         "Ownership is real here. You ship, you learn, and you get mentorship without bureaucracy slowing the work.",
-      photo: 1,
     },
     {
+      slug: "sofia-alvarez",
       name: "Sofia Alvarez",
-      role: "Head of Design",
       region: "Madrid",
+      photo: 2,
+      teamRole: "Head of Design",
+      leadershipRole: "Chief Growth Officer",
       quote:
         "Design and engineering collaborate as one team. That partnership is rare — and it shows in the products we deliver.",
-      photo: 2,
     },
+    {
+      slug: "james-okonkwo",
+      name: "James Okonkwo",
+      region: "Lagos",
+      photo: 3,
+      teamRole: "AI Practice Lead",
+      leadershipRole: "EVP of Solutions",
+      quote:
+        "Working on AI programs here means real evaluation discipline — not demos. Clients trust the results because we measure them.",
+    },
+    {
+      slug: "elena-petrova",
+      name: "Elena Petrova",
+      region: "Warsaw",
+      photo: 4,
+      teamRole: "QA Lead",
+      quote:
+        "We treat quality as a product feature, not a gate. That mindset lets us move fast without surprising clients in production.",
+    },
+    {
+      slug: "david-kim",
+      name: "David Kim",
+      region: "Seoul",
+      photo: 5,
+      teamRole: "Delivery Manager",
+      quote:
+        "Having been with QUORIXA for over 10 years, I continue to discover endless opportunities for growth and development. Over this time, QUORIXA has become more than just a workplace — it's a place where I can find help, support others, and become better from day to day!",
+    },
+    {
+      slug: "priya-sharma",
+      name: "Priya Sharma",
+      region: "Bangalore",
+      photo: 6,
+      teamRole: "Data Engineering Lead",
+    },
+    {
+      slug: "noah-fischer",
+      name: "Noah Fischer",
+      region: "Berlin",
+      photo: 7,
+      teamRole: "Mobile Lead",
+    },
+    {
+      slug: "lina-kowalski",
+      name: "Lina Kowalski",
+      region: "Europe",
+      photo: 8,
+      leadershipRole: "CDO & VP of IT",
+    },
+    {
+      slug: "maya-brooks",
+      name: "Maya Brooks",
+      region: "Americas",
+      photo: 9,
+      leadershipRole: "VP of Global Delivery",
+    },
+    {
+      slug: "andrei-volkov",
+      name: "Andrei Volkov",
+      region: "Europe",
+      photo: 10,
+      leadershipRole: "VP of Engineering",
+    },
+    {
+      slug: "thiago-mendes",
+      name: "Thiago Mendes",
+      region: "Americas",
+      photo: 11,
+      leadershipRole: "VP of Engineering",
+    },
+    {
+      slug: "yulia-moroz",
+      name: "Yulia Moroz",
+      region: "Europe",
+      photo: 12,
+      leadershipRole: "Head of Engineering Operations",
+    },
+    {
+      slug: "vanessa-ortiz",
+      name: "Vanessa Ortiz",
+      region: "Americas",
+      photo: 13,
+      leadershipRole: "Director of People",
+    },
+    { slug: "helena-sorensen", name: "Helena Sorensen", region: "Europe", photo: null, leadershipRole: "CFO" },
+    { slug: "olivia-grant", name: "Olivia Grant", region: "Americas", photo: null, leadershipRole: "VP of Recruiting" },
+    { slug: "daniel-ortiz", name: "Daniel Ortiz", region: "Americas", photo: null, leadershipRole: "Head of Partnerships" },
+    { slug: "dania-kravets", name: "Dania Kravets", region: "Europe", photo: null, leadershipRole: "Director of Product Development" },
+    { slug: "francisco-lima", name: "Francisco Lima", region: "Americas", photo: null, leadershipRole: "Director of Recruiting" },
+    { slug: "stepan-bondar", name: "Stepan Bondar", region: "Europe", photo: null, leadershipRole: "Director of Engineering" },
+    { slug: "yulia-moise", name: "Yulia Moise", region: "Europe", photo: null, leadershipRole: "Director of Marketing Operations" },
+    { slug: "kapil-nair", name: "Kapil Nair", region: "Asia", photo: null, leadershipRole: "Director of Engineering" },
+    { slug: "carlos-diaz", name: "Carlos Diaz", region: "Americas", photo: null, leadershipRole: "Legal Counsel" },
   ];
 
-  // Clear & reinsert team (stable slugs)
+  const { serializePersonMeta } = await import("../../shared/personMeta.ts");
+
+  // Clear & reinsert people (one row each)
   await supabase.from("team_members").delete().neq("id", "00000000-0000-0000-0000-000000000000");
 
-  const memberRows = [
-    ...teamMembers.map((m, i) => ({
-      slug: `team-${i + 1}`,
-      name: m.name,
-      role: m.role,
-      kind: "team" as const,
-      photo_url: photoUrls[m.photo] || null,
+  const memberRows = people.map((p, i) => {
+    const teamRole = p.teamRole ?? null;
+    const leadershipRole = p.leadershipRole ?? null;
+    return {
+      slug: p.slug,
+      name: p.name,
+      role: teamRole || leadershipRole || "",
+      region: p.region,
+      quote: p.quote ?? null,
+      photo_url: p.photo != null ? photoUrls[p.photo] || null : null,
+      // Legacy kind for older admin filters: prefer team when both exist
+      kind: (teamRole ? "team" : "leadership") as "team" | "leadership",
+      bio: serializePersonMeta({
+        leadershipRole: leadershipRole || undefined,
+        bioText: "",
+      }),
       sort_order: i,
       published: true,
-    })),
-    ...leadership.map((m, i) => ({
-      slug: `lead-${i + 1}`,
-      name: m.name,
-      role: m.role,
-      region: m.region,
-      kind: "leadership" as const,
-      photo_url: m.photo != null ? photoUrls[m.photo] || null : null,
-      sort_order: i,
-      published: true,
-    })),
-    ...testimonials.map((m, i) => ({
-      slug: `testimonial-${i + 1}`,
-      name: m.name,
-      role: m.role,
-      region: m.region,
-      quote: m.quote,
-      kind: "testimonial" as const,
-      photo_url: photoUrls[m.photo] || null,
-      sort_order: i,
-      published: true,
-    })),
-  ];
+    };
+  });
   {
     const { error } = await supabase.from("team_members").insert(memberRows);
     if (error) throw error;
-    console.log(`team_members: ${memberRows.length}`);
+    console.log(`team_members: ${memberRows.length} people (1 row each)`);
+  }
+
+  // --- Feedback (quotes only; photo/name must match the person row) ---
+  {
+    await supabase.from("feedback").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+    const rows = people
+      .filter((p) => p.quote && p.teamRole)
+      .map((p, i) => ({
+        author_name: p.name,
+        author_role: p.teamRole!,
+        author_type: "team" as const,
+        quote: p.quote!,
+        location: p.region,
+        photo_url: p.photo != null ? photoUrls[p.photo] || null : null,
+        status: "approved" as const,
+        sort_order: i,
+        published: true,
+      }));
+    const { error } = await supabase.from("feedback").insert(rows);
+    if (error) {
+      console.warn(`feedback skipped: ${error.message}`);
+    } else {
+      console.log(`feedback: ${rows.length}`);
+    }
   }
 
   // --- Jobs ---

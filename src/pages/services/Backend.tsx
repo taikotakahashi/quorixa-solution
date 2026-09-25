@@ -378,7 +378,7 @@ export function Backend() {
               align="center"
             />
           </Reveal>
-          <AwardCards />
+          <AwardCards visible={4} />
         </div>
       </section>
 

@@ -357,13 +357,21 @@
 .sMidCta {
   background: #000;
   color: #fff;
-  text-align: center;
+  text-align: left;
 }
 
 .midCtaInner {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 20px;
+  padding: 88px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.midCtaCopy {
+  max-width: 520px;
 }
 
 .midCtaEyebrow {
@@ -377,6 +385,27 @@
 .midCtaInner h2 {
   color: #fff;
   margin-bottom: 28px;
+  text-align: left;
+}
+
+.midCtaMedia {
+  min-width: 0;
+}
+
+.midCtaPhoto {
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #1a1a1a;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+
+.midCtaPhoto img {
+  display: block;
+  width: 100%;
+  height: clamp(240px, 32vw, 380px);
+  object-fit: cover;
+  object-position: center 28%;
 }
 
 /* Cases */
@@ -485,15 +514,43 @@
   margin: 0;
 }
 
+.processLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.processPhotoWrap {
+  min-height: 100%;
+}
+
+.processPhoto {
+  margin: 0;
+  height: 100%;
+  min-height: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f3f3f3;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.processPhoto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+  object-position: center 28%;
+}
+
 .processGrid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
 .processCell {
-  width: calc(25% - 15px);
   min-width: 0;
   box-sizing: border-box;
 }
@@ -503,7 +560,7 @@
   background: #fff;
   border: none;
   border-radius: 8px;
-  padding: 32px 28px;
+  padding: 28px 24px;
   box-sizing: border-box;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
@@ -795,8 +852,18 @@
     width: calc(50% - 8px);
   }
 
+  .processLayout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .processPhoto,
+  .processPhoto img {
+    min-height: 280px;
+  }
+
   .processCell {
-    width: calc(50% - 8px);
+    width: auto;
   }
 
   .stackAreas {
@@ -814,6 +881,19 @@
   .centeredIntroDark h2,
   .stackTitle,
   .protoHead h2,
+  .midCtaInner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .midCtaCopy {
+    max-width: none;
+  }
+
+  .midCtaPhoto img {
+    height: 240px;
+  }
+
   .midCtaInner h2 {
     font-size: 32px;
   }
@@ -864,9 +944,17 @@
 }
 
 @media (max-width: 640px) {
-  .serviceCell,
-  .processCell {
+  .serviceCell {
     width: 100%;
+  }
+
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .processPhoto,
+  .processPhoto img {
+    min-height: 220px;
   }
 
   .stackAreas {

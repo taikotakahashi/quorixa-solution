@@ -9,9 +9,13 @@ import memberSc from "../assets/members/sc.webp";
 import memberUc from "../assets/members/uc.webp";
 import memberJr from "../assets/members/jr.webp";
 import memberCj from "../assets/members/cj.webp";
-import memberSj from "../assets/members/sj.webp";
 import memberCh from "../assets/members/ch.webp";
 import memberGs from "../assets/members/gs.webp";
+import memberTg from "../assets/members/tg.webp";
+import groupOffice from "../assets/members/group/team-office.webp";
+import groupBuilding from "../assets/members/group/team-building.webp";
+import groupHandshake from "../assets/members/group/team-handshake.webp";
+import groupCrew from "../assets/members/group/team-crew.webp";
 
 export const memberPhotos = [
   memberCg,
@@ -26,9 +30,48 @@ export const memberPhotos = [
   memberJr,
   memberCj,
   memberUc,
-  memberSj,
   memberCh,
+  memberTg,
 ];
+
+export type GroupPhoto = {
+  id: string;
+  src: string;
+  alt: string;
+  orientation: "landscape" | "portrait" | "square";
+};
+
+/** Workplace / culture group shots — use beside portraits, not as name+role cards */
+export const groupPhotos: GroupPhoto[] = [
+  {
+    id: "office",
+    src: groupOffice,
+    alt: "QUORIXA team posed together in the office under the company signage",
+    orientation: "landscape",
+  },
+  {
+    id: "building",
+    src: groupBuilding,
+    alt: "QUORIXA colleagues gathered on the steps outside the office building",
+    orientation: "square",
+  },
+  {
+    id: "handshake",
+    src: groupHandshake,
+    alt: "Two QUORIXA teammates shaking hands in a conference room",
+    orientation: "portrait",
+  },
+  {
+    id: "crew",
+    src: groupCrew,
+    alt: "QUORIXA team members collaborating together",
+    orientation: "square",
+  },
+];
+
+export const groupPhotoById = Object.fromEntries(
+  groupPhotos.map((p) => [p.id, p]),
+) as Record<GroupPhoto["id"], GroupPhoto>;
 
 export type Job = {
   id: string;
@@ -184,50 +227,140 @@ export const jobs: Job[] = [
   },
 ];
 
-export const teamMembers = [
+/**
+ * Canonical people registry.
+ * Rule: each person has exactly one name + one portrait. Roles may differ by surface
+ * (team card vs leadership title), but photo and home base stay consistent.
+ */
+type Person = {
+  id: string;
+  name: string;
+  photo: string;
+  /** Home base shown on leadership / testimonials */
+  region: string;
+  teamRole?: string;
+  leadershipRole?: string;
+  quote?: string;
+};
+
+const people: Person[] = [
   {
+    id: "amelia-chen",
     name: "Amelia Chen",
-    role: "Engineering Director",
-    image: memberPhotos[0],
+    photo: memberPhotos[0],
+    region: "Singapore",
+    teamRole: "Engineering Director",
+    leadershipRole: "CEO",
+    quote:
+      "I joined QUORIXA for the engineering culture. The best part is autonomy to solve hard problems with peers across multiple countries.",
   },
   {
+    id: "marcus-reid",
     name: "Marcus Reid",
-    role: "Principal Architect",
-    image: memberPhotos[1],
+    photo: memberPhotos[1],
+    region: "Austin",
+    teamRole: "Principal Architect",
+    leadershipRole: "CTO",
+    quote:
+      "Ownership is real here. You ship, you learn, and you get mentorship without bureaucracy slowing the work.",
   },
   {
+    id: "sofia-alvarez",
     name: "Sofia Alvarez",
-    role: "Head of Design",
-    image: memberPhotos[2],
+    photo: memberPhotos[2],
+    region: "Madrid",
+    teamRole: "Head of Design",
+    leadershipRole: "Chief Growth Officer",
+    quote:
+      "Design and engineering collaborate as one team. That partnership is rare — and it shows in the products we deliver.",
   },
   {
+    id: "james-okonkwo",
     name: "James Okonkwo",
-    role: "AI Practice Lead",
-    image: memberPhotos[3],
+    photo: memberPhotos[3],
+    region: "Lagos",
+    teamRole: "AI Practice Lead",
+    leadershipRole: "EVP of Solutions",
+    quote:
+      "Working on AI programs here means real evaluation discipline — not demos. Clients trust the results because we measure them.",
   },
   {
+    id: "elena-petrova",
     name: "Elena Petrova",
-    role: "QA Lead",
-    image: memberPhotos[4],
+    photo: memberPhotos[4],
+    region: "Warsaw",
+    teamRole: "QA Lead",
+    quote:
+      "We treat quality as a product feature, not a gate. That mindset lets us move fast without surprising clients in production.",
   },
   {
+    id: "david-kim",
     name: "David Kim",
-    role: "Delivery Manager",
-    image: memberPhotos[5],
+    photo: memberPhotos[5],
+    region: "Seoul",
+    teamRole: "Delivery Manager",
+    quote:
+      "Having been with QUORIXA for over 10 years, I continue to discover endless opportunities for growth and development. Over this time, QUORIXA has become more than just a workplace — it's a place where I can find help, support others, and become better from day to day!",
   },
   {
+    id: "priya-sharma",
     name: "Priya Sharma",
-    role: "Data Engineering Lead",
-    image: memberPhotos[6],
+    photo: memberPhotos[6],
+    region: "Bangalore",
+    teamRole: "Data Engineering Lead",
   },
   {
+    id: "noah-fischer",
     name: "Noah Fischer",
-    role: "Mobile Lead",
-    image: memberPhotos[7],
+    photo: memberPhotos[7],
+    region: "Berlin",
+    teamRole: "Mobile Lead",
+  },
+  // Leadership-only (unique people — never reuse team names with different faces)
+  {
+    id: "lina-kowalski",
+    name: "Lina Kowalski",
+    photo: memberPhotos[8],
+    region: "Europe",
+    leadershipRole: "CDO & VP of IT",
+  },
+  {
+    id: "maya-brooks",
+    name: "Maya Brooks",
+    photo: memberPhotos[9],
+    region: "Americas",
+    leadershipRole: "VP of Global Delivery",
+  },
+  {
+    id: "andrei-volkov",
+    name: "Andrei Volkov",
+    photo: memberPhotos[10],
+    region: "Europe",
+    leadershipRole: "VP of Engineering",
+  },
+  {
+    id: "thiago-mendes",
+    name: "Thiago Mendes",
+    photo: memberPhotos[11],
+    region: "Americas",
+    leadershipRole: "VP of Engineering",
+  },
+  {
+    id: "yulia-moroz",
+    name: "Yulia Moroz",
+    photo: memberPhotos[12],
+    region: "Europe",
+    leadershipRole: "Head of Engineering Operations",
+  },
+  {
+    id: "vanessa-ortiz",
+    name: "Vanessa Ortiz",
+    photo: memberPhotos[13],
+    region: "Americas",
+    leadershipRole: "Director of People",
   },
 ];
 
-/** Full leadership directory (AE /leadership layout): photo for first 10, text-only after */
 export type LeadershipMember = {
   name: string;
   role: string;
@@ -235,146 +368,54 @@ export type LeadershipMember = {
   image?: string;
 };
 
-export const leadershipTeam: LeadershipMember[] = [
-  {
-    name: "Amelia Chen",
-    role: "CEO",
-    region: "USA",
-    image: memberPhotos[0],
-  },
-  {
-    name: "Marcus Reid",
-    role: "CTO",
-    region: "USA",
-    image: memberPhotos[10],
-  },
-  {
-    name: "Sofia Alvarez",
-    role: "Chief Growth Officer",
-    region: "Americas",
-    image: memberPhotos[2],
-  },
-  {
-    name: "Elena Petrova",
-    role: "CFO",
-    region: "Europe",
-    image: memberPhotos[3],
-  },
-  {
-    name: "James Okonkwo",
-    role: "EVP of Solutions",
-    region: "Americas",
-    image: memberPhotos[4],
-  },
-  {
-    name: "Priya Sharma",
-    role: "VP of Recruiting",
-    region: "Americas",
-    image: memberPhotos[5],
-  },
-  {
-    name: "David Kim",
-    role: "VP of Engineering",
-    region: "USA",
-    image: memberPhotos[6],
-  },
-  {
-    name: "Noah Fischer",
-    role: "Head of Partnerships",
-    region: "Americas",
-    image: memberPhotos[7],
-  },
-  {
-    name: "Lina Kowalski",
-    role: "CDO & VP of IT",
-    region: "Europe",
-    image: memberPhotos[8],
-  },
-  {
-    name: "Maya Brooks",
-    role: "VP of Global Delivery",
-    region: "Americas",
-    image: memberPhotos[9],
-  },
-  {
-    name: "Andrei Volkov",
-    role: "VP of Engineering",
-    region: "Europe",
-    image: memberPhotos[1],
-  },
-  {
-    name: "Thiago Mendes",
-    role: "VP of Engineering",
-    region: "Americas",
-    image: memberPhotos[11],
-  },
-  {
-    name: "Yulia Moroz",
-    role: "Head of Engineering Operations",
-    region: "Europe",
-    image: memberPhotos[12],
-  },
-  {
-    name: "Vanessa Ortiz",
-    role: "Director of People",
-    region: "Americas",
-    image: memberPhotos[13],
-  },
-  {
-    name: "Dania Kravets",
-    role: "Director of Product Development",
-    region: "Europe",
-  },
-  {
-    name: "Francisco Lima",
-    role: "Director of Recruiting",
-    region: "Americas",
-  },
-  {
-    name: "Stepan Bondar",
-    role: "Director of Engineering",
-    region: "Europe",
-  },
-  {
-    name: "Yulia Moise",
-    role: "Director of Marketing Operations",
-    region: "Europe",
-  },
-  {
-    name: "Kapil Nair",
-    role: "Director of Engineering",
-    region: "Asia",
-  },
-  {
-    name: "Carlos Diaz",
-    role: "Legal Counsel",
-    region: "Americas",
-  },
+const leadershipTextOnly: Omit<LeadershipMember, "image">[] = [
+  { name: "Helena Sorensen", role: "CFO", region: "Europe" },
+  { name: "Olivia Grant", role: "VP of Recruiting", region: "Americas" },
+  { name: "Daniel Ortiz", role: "Head of Partnerships", region: "Americas" },
+  { name: "Dania Kravets", role: "Director of Product Development", region: "Europe" },
+  { name: "Francisco Lima", role: "Director of Recruiting", region: "Americas" },
+  { name: "Stepan Bondar", role: "Director of Engineering", region: "Europe" },
+  { name: "Yulia Moise", role: "Director of Marketing Operations", region: "Europe" },
+  { name: "Kapil Nair", role: "Director of Engineering", region: "Asia" },
+  { name: "Carlos Diaz", role: "Legal Counsel", region: "Americas" },
 ];
 
-export const employeeTestimonials = [
-  {
-    quote:
-      "I joined QUORIXA for the engineering culture. The best part is autonomy to solve hard problems with peers across multiple countries.",
-    name: "Amelia Chen",
-    role: "Engineering Director",
-    location: "Singapore",
-    image: memberPhotos[0],
-  },
-  {
-    quote:
-      "Ownership is real here. You ship, you learn, and you get mentorship without bureaucracy slowing the work.",
-    name: "Marcus Reid",
-    role: "Principal Architect",
-    location: "Austin",
-    image: memberPhotos[1],
-  },
-  {
-    quote:
-      "Design and engineering collaborate as one team. That partnership is rare — and it shows in the products we deliver.",
-    name: "Sofia Alvarez",
-    role: "Head of Design",
-    location: "Madrid",
-    image: memberPhotos[2],
-  },
+export const teamMembers = people
+  .filter((p) => p.teamRole)
+  .map((p) => ({
+    name: p.name,
+    role: p.teamRole!,
+    image: p.photo,
+  }));
+
+/** Full leadership directory: photo for people with portraits, text-only after */
+export const leadershipTeam: LeadershipMember[] = [
+  ...people
+    .filter((p) => p.leadershipRole)
+    .map((p) => ({
+      name: p.name,
+      role: p.leadershipRole!,
+      region: p.region,
+      image: p.photo,
+    })),
+  ...leadershipTextOnly,
 ];
+
+export type EmployeeTestimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  location: string;
+  image: string;
+};
+
+/** Feedback cards — only people with quotes; photo/role always match their team identity */
+export const employeeTestimonials: EmployeeTestimonial[] = people
+  .filter((p) => p.quote && p.teamRole)
+  .map((p) => ({
+    quote: p.quote!,
+    name: p.name,
+    role: p.teamRole!,
+    location: p.region,
+    image: p.photo,
+  }));

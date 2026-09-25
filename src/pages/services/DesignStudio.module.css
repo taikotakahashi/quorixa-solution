@@ -523,7 +523,7 @@
 .sFooterCta {
   background: #000;
   color: #fff;
-  text-align: center;
+  text-align: left;
   position: relative;
 }
 
@@ -539,14 +539,19 @@
 }
 
 .footerCtaInner {
-  max-width: 860px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 20px;
-  display: flex;
-  flex-direction: column;
+  padding: 88px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
   align-items: center;
   position: relative;
   z-index: 1;
+}
+
+.footerCtaCopy {
+  max-width: 520px;
 }
 
 .footerCtaInner h2 {
@@ -554,9 +559,10 @@
   font-size: 40px;
   font-weight: 800;
   color: #fff;
-  margin: 0 0 28px;
+  margin: 0 0 16px;
   line-height: 1.2;
-  max-width: 720px;
+  max-width: 520px;
+  text-align: left;
 }
 
 .footerCtaInner p {
@@ -565,7 +571,27 @@
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.65);
   margin: 0 0 28px;
-  max-width: 560px;
+  max-width: 480px;
+}
+
+.footerCtaMedia {
+  min-width: 0;
+}
+
+.footerCtaPhoto {
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #1a1a1a;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+
+.footerCtaPhoto img {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 34vw, 400px);
+  object-fit: cover;
+  object-position: center 22%;
 }
 
 @media (max-width: 1100px) {
@@ -594,6 +620,19 @@
   .footerCtaInner h2,
   .expertCopy h2 {
     font-size: 32px;
+  }
+
+  .footerCtaInner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footerCtaCopy {
+    max-width: none;
+  }
+
+  .footerCtaPhoto img {
+    height: 240px;
   }
 
   .servicesHead {

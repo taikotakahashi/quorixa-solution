@@ -511,16 +511,21 @@
 .s6 {
   background: #000;
   color: #fff;
-  text-align: center;
+  text-align: left;
 }
 
 .s6Inner {
-  max-width: 860px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 20px;
-  display: flex;
-  flex-direction: column;
+  padding: 88px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
   align-items: center;
+}
+
+.s6Copy {
+  max-width: 520px;
 }
 
 .s6Eyebrow {
@@ -537,7 +542,28 @@
   color: #fff;
   margin: 0 0 28px;
   line-height: 1.2;
-  max-width: 800px;
+  max-width: 520px;
+  text-align: left;
+}
+
+.s6Media {
+  min-width: 0;
+}
+
+.s6Photo {
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #1a1a1a;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+
+.s6Photo img {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 34vw, 400px);
+  object-fit: cover;
+  object-position: center 28%;
 }
 
 @media (max-width: 1024px) {
@@ -546,6 +572,20 @@
   .s4Head h2,
   .s6Inner h2 {
     font-size: 32px;
+  }
+
+  .s6Inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 72px 20px;
+  }
+
+  .s6Copy {
+    max-width: none;
+  }
+
+  .s6Photo img {
+    height: 260px;
   }
 
   .s2TitleWrap {

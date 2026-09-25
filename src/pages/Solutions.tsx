@@ -22,6 +22,7 @@ import solutionHero from "../assets/services/solution-hero.webp";
 import { SectionHeader } from "../components/SectionHeader";
 import { ServiceCard } from "../components/ServiceCard";
 import { CTASection } from "../components/CTASection";
+import { groupPhotoById } from "../data/team";
 import { Reveal } from "../components/Reveal";
 import { CurvedDivider } from "../components/CurvedDivider";
 import { industries } from "../data/content";
@@ -530,6 +531,10 @@ export function Solutions() {
         ctaHref="/contact"
         secondaryLabel="Explore our work"
         secondaryHref="/our-work"
+        image={{
+          src: groupPhotoById.office.src,
+          alt: groupPhotoById.office.alt,
+        }}
       />
     </>
   );

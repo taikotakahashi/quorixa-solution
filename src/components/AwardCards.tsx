@@ -1,11 +1,18 @@
 import { awards, certifications } from "../data/content";
 import styles from "./AwardCards.module.css";
 
+export type AwardVisibleCount = 4 | 7;
+
 type Props = {
   showCertifications?: boolean;
   fullWidth?: boolean;
   /** Max height for award logos inside cards (px) */
   logoHeight?: number;
+  /**
+   * How many award cards fit in the viewport at once.
+   * Full-bleed (`fullWidth`) defaults to 7; contained recognition sections default to 4.
+   */
+  visible?: AwardVisibleCount;
 };
 
 function AwardCard({
@@ -39,7 +46,12 @@ export function AwardCards({
   showCertifications = true,
   fullWidth = false,
   logoHeight = 190,
+  /** Full-bleed strips default to 7; contained recognition sections default to 4 */
+  visible = fullWidth ? 7 : 4,
 }: Props) {
+  const densityClass =
+    visible === 7 ? styles.visible7 : styles.visible4;
+
   const set = (
     <div className={styles.set}>
       {awards.map((award) => (
@@ -55,7 +67,9 @@ export function AwardCards({
   );
 
   return (
-    <div className={`${styles.root} ${fullWidth ? styles.fullWidth : ""}`}>
+    <div
+      className={`${styles.root} ${densityClass} ${fullWidth ? styles.fullWidth : ""}`}
+    >
       <div className={styles.wrap}>
         <div className={styles.track}>
           <div className={styles.marquee}>

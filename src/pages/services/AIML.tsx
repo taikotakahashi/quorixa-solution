@@ -17,6 +17,7 @@ import { Button } from "../../components/Button";
 import { submitContactMessage } from "../../lib/submitContact";
 import { caseStudies } from "../../data/caseStudies";
 import { certifications } from "../../data/content";
+import { groupPhotoById } from "../../data/team";
 import { techStackLogos } from "../../components/TechStackLogos";
 import styles from "./AIML.module.css";
 
@@ -382,7 +383,7 @@ export function AIML() {
       {/* Mid CTA */}
       <section className={styles.sMidCta}>
         <div className={`container-wide ${styles.midCtaInner}`}>
-          <Reveal>
+          <Reveal className={styles.midCtaCopy}>
             <p className={styles.midCtaEyebrow}>
               Build future-proof AI products and enterprise solutions faster,
               while maximizing engineering ROI.
@@ -391,6 +392,16 @@ export function AIML() {
             <Button href="/contact" arrow>
               Book a consultation
             </Button>
+          </Reveal>
+          <Reveal className={styles.midCtaMedia}>
+            <figure className={styles.midCtaPhoto}>
+              <img
+                src={groupPhotoById.building.src}
+                alt={groupPhotoById.building.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
           </Reveal>
         </div>
       </section>
@@ -496,17 +507,29 @@ export function AIML() {
               <h2>An agile framework for a reliable delivery</h2>
             </div>
           </Reveal>
-          <div className={styles.processGrid}>
-            {processCards.map((step, i) => (
-              <Reveal key={step.title} className={styles.processCell}>
-                <article className={styles.processCard}>
-                  <span className={styles.processNum}>{i + 1}</span>
-                  <span className={styles.processMeta}>{step.meta}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </article>
-              </Reveal>
-            ))}
+          <div className={styles.processLayout}>
+            <Reveal className={styles.processPhotoWrap}>
+              <figure className={styles.processPhoto}>
+                <img
+                  src={groupPhotoById.office.src}
+                  alt={groupPhotoById.office.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </Reveal>
+            <div className={styles.processGrid}>
+              {processCards.map((step, i) => (
+                <Reveal key={step.title} className={styles.processCell}>
+                  <article className={styles.processCard}>
+                    <span className={styles.processNum}>{i + 1}</span>
+                    <span className={styles.processMeta}>{step.meta}</span>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>

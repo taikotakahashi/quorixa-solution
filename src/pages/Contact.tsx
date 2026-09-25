@@ -69,7 +69,7 @@ export function Contact() {
                   </span>
                   <div>
                     <strong>Phone</strong>
-                    <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                    <a href="tel:+15551234567">+1 (963) 930-2136</a>
                   </div>
                 </li>
                 <li>

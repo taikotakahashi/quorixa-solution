@@ -307,7 +307,7 @@ export function QualityAssurance() {
               </Reveal>
             ))}
           </div>
-          <AwardCards />
+          <AwardCards visible={4} />
         </div>
       </section>
 

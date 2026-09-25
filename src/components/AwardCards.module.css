@@ -1,8 +1,7 @@
+/* Shared shell — density lives on .visible4 / .visible7 */
+
 .root {
   width: 100%;
-  --awards-visible: 7;
-  --awards-gap: 16px;
-  --awards-pad: clamp(24px, 3vw, 48px);
 }
 
 .fullWidth {
@@ -45,17 +44,12 @@
 }
 
 .card {
-  /* Exactly 7 cards in the visible strip */
-  --card-w: calc(
-    (100cqw - 2 * var(--awards-pad) - (var(--awards-visible) - 1) * var(--awards-gap) - 1px) /
-      var(--awards-visible)
-  );
   flex: 0 0 var(--card-w);
   width: var(--card-w);
   max-width: var(--card-w);
-  height: 340px;
-  border-radius: 16px;
-  padding: 24px 14px 20px;
+  height: var(--awards-card-h);
+  border-radius: var(--awards-radius);
+  padding: var(--awards-card-pad);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -83,7 +77,7 @@
 
 .title {
   font-family: Inter, "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(13px, 1.15vw, 17px);
+  font-size: var(--awards-title-size);
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: -0.02em;
@@ -94,7 +88,7 @@
 
 .brand {
   margin-top: auto;
-  min-height: 120px;
+  min-height: var(--awards-brand-min);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -105,11 +99,60 @@
   display: block;
   width: auto;
   max-width: 92%;
-  max-height: 190px;
+  max-height: var(--awards-logo-max);
   height: auto;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
+}
+
+/* —— Density: 4 cards visible (contained recognition sections) —— */
+
+.visible4 {
+  --awards-visible: 4;
+  --awards-gap: 18px;
+  --awards-pad: 0px;
+  --awards-card-h: 360px;
+  --awards-radius: 18px;
+  --awards-card-pad: 28px 18px 22px;
+  --awards-title-size: clamp(15px, 1.35vw, 20px);
+  --awards-brand-min: 132px;
+  --awards-logo-max: 200px;
+  --card-w: calc(
+    (100cqw - (var(--awards-visible) - 1) * var(--awards-gap)) /
+      var(--awards-visible)
+  );
+}
+
+.visible4 .marquee {
+  animation-duration: 42s;
+}
+
+/* —— Density: 7 cards visible (full-bleed Home / Design Studio) —— */
+
+.visible7 {
+  --awards-visible: 7;
+  --awards-gap: 16px;
+  --awards-pad: clamp(24px, 3vw, 48px);
+  --awards-card-h: 340px;
+  --awards-radius: 16px;
+  --awards-card-pad: 24px 14px 20px;
+  --awards-title-size: clamp(13px, 1.15vw, 17px);
+  --awards-brand-min: 120px;
+  --awards-logo-max: 190px;
+  /* cqw is the padded content box, so do not subtract pad again */
+  --card-w: calc(
+    (100cqw - (var(--awards-visible) - 1) * var(--awards-gap)) /
+      var(--awards-visible)
+  );
+}
+
+.visible7 .wrap {
+  padding-inline: var(--awards-pad);
+}
+
+.visible7 .marquee {
+  animation-duration: 48s;
 }
 
 .footer {
@@ -154,41 +197,55 @@
   opacity: 0.9;
 }
 
+/* Tablet: keep densities distinct */
+
+@media (max-width: 1100px) {
+  .visible7 {
+    --awards-visible: 5;
+    --awards-gap: 14px;
+    --awards-pad: 24px;
+  }
+
+  .visible4 {
+    --awards-visible: 3;
+    --awards-gap: 14px;
+    --awards-pad: 20px;
+    --awards-card-h: 320px;
+  }
+}
+
 @media (max-width: 900px) {
-  .root {
+  .visible7 {
     --awards-visible: 4;
     --awards-gap: 12px;
     --awards-pad: 20px;
+    --awards-card-h: 300px;
   }
 
-  .card {
-    height: 300px;
+  .visible4 {
+    --awards-visible: 2;
+    --awards-gap: 12px;
+    --awards-pad: 16px;
+    --awards-card-h: 300px;
   }
 
-  .marquee {
+  .visible7 .marquee,
+  .visible4 .marquee {
     animation-duration: 40s;
   }
 }
 
 @media (max-width: 700px) {
-  .root {
+  .visible7,
+  .visible4 {
     --awards-visible: 2;
     --awards-gap: 12px;
-    --awards-pad: 20px;
-  }
-
-  .card {
-    height: 252px;
-    border-radius: 14px;
-    padding: 18px 12px 16px;
-  }
-
-  .title {
-    font-size: 15px;
-  }
-
-  .awardLogo {
-    max-height: 140px;
+    --awards-pad: 16px;
+    --awards-card-h: 252px;
+    --awards-radius: 14px;
+    --awards-card-pad: 18px 12px 16px;
+    --awards-title-size: 15px;
+    --awards-logo-max: 140px;
   }
 
   .certLogo {
@@ -201,7 +258,8 @@
     gap: 16px;
   }
 
-  .marquee {
+  .visible7 .marquee,
+  .visible4 .marquee {
     animation-duration: 32s;
   }
 }

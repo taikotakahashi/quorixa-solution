@@ -22,6 +22,7 @@ import { TeamMembers } from "../components/TeamMembers";
 import { certifications } from "../data/content";
 import {
   employeeTestimonials as staticTestimonials,
+  groupPhotoById,
   teamMembers as staticTeam,
 } from "../data/team";
 import { getEmployeeTestimonials, getTeamMembers } from "../lib/cms";
@@ -180,10 +181,10 @@ const partnerCards = [
 
 const employeeQuoteFallback = {
   quote:
-    "Having been with QUORIXA for over 10 years, I continue to discover endless opportunities for growth and development. Over this time, QUORIXA has become more than just a workplace — it’s a place where I can find help, support others, and become better from day to day!",
-  name: "Ruslan Mihorianu",
-  role: "Lead Product Studio Infrastructure Owner",
-  location: "",
+    "Having been with QUORIXA for over 10 years, I continue to discover endless opportunities for growth and development. Over this time, QUORIXA has become more than just a workplace — it's a place where I can find help, support others, and become better from day to day!",
+  name: "David",
+  role: "Delivery Manager",
+  location: "Manila",
   image: "",
 };
 
@@ -193,12 +194,10 @@ export function About() {
     getEmployeeTestimonials,
     staticTestimonials,
   );
-  const employeeQuote = {
-    ...employeeQuoteFallback,
-    name: employeeTestimonials[0]?.name ?? employeeQuoteFallback.name,
-    location: employeeTestimonials[0]?.location ?? "",
-    image: employeeTestimonials[0]?.image ?? "",
-  };
+  const feedback =
+    employeeTestimonials.length > 0
+      ? employeeTestimonials
+      : [employeeQuoteFallback];
   return (
     <>
       {/* Mirrors AE: section.hero-section > .ae-container + .logo-slider */}
@@ -296,6 +295,16 @@ export function About() {
               </p>
             </div>
           </Reveal>
+          <Reveal>
+            <figure className={styles.teamGroupBand}>
+              <img
+                src={groupPhotoById.crew.src}
+                alt={groupPhotoById.crew.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </Reveal>
           <TeamMembers members={teamMembers} />
           <div className={styles.centerCta}>
             <Button href="/leadership" variant="ghost" arrow>
@@ -349,7 +358,7 @@ export function About() {
           </div>
 
           <div className={styles.awardStrip}>
-            <AwardCards showCertifications={false} />
+            <AwardCards showCertifications={false} visible={4} />
           </div>
         </div>
       </section>
@@ -390,63 +399,110 @@ export function About() {
       <section className={`section section--light ${styles.expertsSection}`}>
         <div className="container">
           <div className={styles.cultureGrid}>
-            <Reveal>
-              <article className={styles.cultureCopyCard}>
-                <span className={styles.pill}>Culture and values</span>
-                <h2 className={styles.cultureTitle}>
-                  We engage top experts — and help them grow
-                </h2>
-                <p className={styles.cultureDesc}>
-                  Technical, honest, enthusiastic, and innovative, our team
-                  consistently gets stellar reviews and high rankings from
-                  talented software experts.
-                </p>
-              </article>
-            </Reveal>
-
-            <Reveal>
-              <aside className={styles.cultureRatingsCard}>
-                <div className={styles.ratingBlock}>
-                  <strong className={styles.ratingBrandGlass}>Glassdoor</strong>
-                  <div className={styles.ratingScore}>
-                    <span>4.6</span>
-                    <span className={styles.stars} aria-hidden>
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          size={14}
-                          fill="#0caa41"
-                          stroke="#0caa41"
-                        />
-                      ))}
-                    </span>
-                  </div>
-                </div>
-                <div className={styles.ratingDivider} aria-hidden />
-                <div className={styles.ratingBlock}>
-                  <strong className={styles.ratingBrandComp}>Comparably</strong>
-                  <span className={styles.ratingSub}>Top company culture</span>
-                </div>
-              </aside>
-            </Reveal>
-
-            <Reveal>
-              <blockquote className={styles.cultureQuoteCard}>
+            <Reveal className={styles.culturePhotoReveal}>
+              <figure className={styles.cultureSidePhoto}>
                 <img
-                  src={employeeQuote.image}
-                  alt=""
-                  className={styles.quoteAvatar}
+                  src={groupPhotoById.building.src}
+                  alt={groupPhotoById.building.alt}
                   loading="lazy"
+                  decoding="async"
                 />
-                <div>
-                  <p className={styles.quoteText}>“{employeeQuote.quote}”</p>
-                  <footer className={styles.quoteMeta}>
-                    <strong>{employeeQuote.name}</strong>
-                    <span>{employeeQuote.role}</span>
-                  </footer>
-                </div>
-              </blockquote>
+              </figure>
             </Reveal>
+
+            <div className={styles.cultureStack}>
+              <Reveal>
+                <article className={styles.cultureCopyCard}>
+                  <span className={styles.pill}>Culture and values</span>
+                  <h2 className={styles.cultureTitle}>
+                    We engage top experts — and help them grow
+                  </h2>
+                  <p className={styles.cultureDesc}>
+                    Technical, honest, enthusiastic, and innovative, our team
+                    consistently gets stellar reviews and high rankings from
+                    talented software experts.
+                  </p>
+                </article>
+              </Reveal>
+
+              <Reveal>
+                <aside className={styles.cultureRatingsCard}>
+                  <div className={styles.ratingRow}>
+                    <div className={styles.ratingBlock}>
+                      <strong className={styles.ratingBrandGlass}>
+                        Glassdoor
+                      </strong>
+                      <div className={styles.ratingScore}>
+                        <span>4.6</span>
+                        <span className={styles.stars} aria-hidden>
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <Star
+                              key={i}
+                              size={14}
+                              fill="#0caa41"
+                              stroke="#0caa41"
+                            />
+                          ))}
+                        </span>
+                      </div>
+                    </div>
+                    <div className={styles.ratingDividerVert} aria-hidden />
+                    <div className={styles.ratingBlock}>
+                      <strong className={styles.ratingBrandComp}>
+                        Comparably
+                      </strong>
+                      <span className={styles.ratingSub}>
+                        Top company culture
+                      </span>
+                    </div>
+                  </div>
+                </aside>
+              </Reveal>
+            </div>
+
+            <Reveal className={styles.cultureGroupReveal}>
+              <figure className={styles.cultureGroup}>
+                <img
+                  src={groupPhotoById.office.src}
+                  alt={groupPhotoById.office.alt}
+                  className={styles.cultureGroupImg}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </Reveal>
+
+            <div className={styles.cultureFeedback}>
+              {feedback.map((item) => (
+                <Reveal key={`${item.name}-${item.role}`}>
+                  <blockquote className={styles.cultureQuoteCard}>
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={`${item.name}, ${item.role}`}
+                        className={styles.quoteAvatar}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <div className={styles.quoteAvatarFallback} aria-hidden />
+                    )}
+                    <div>
+                      <p className={styles.quoteText}>“{item.quote}”</p>
+                      <footer className={styles.quoteMeta}>
+                        <strong>{item.name}</strong>
+                        <span>{item.role}</span>
+                        {item.location ? (
+                          <span className={styles.quoteLocation}>
+                            {item.location}
+                          </span>
+                        ) : null}
+                      </footer>
+                    </div>
+                  </blockquote>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -458,6 +514,10 @@ export function About() {
         ctaHref="/contact"
         secondaryLabel="View our work"
         secondaryHref="/our-work"
+        image={{
+          src: groupPhotoById.handshake.src,
+          alt: groupPhotoById.handshake.alt,
+        }}
       />
     </>
   );

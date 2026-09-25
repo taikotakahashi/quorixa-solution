@@ -16,7 +16,7 @@ import {
   IconStrategy,
 } from "../../components/DesignStudioIcons";
 import { caseStudies as staticCaseStudies } from "../../data/caseStudies";
-import { teamMembers as staticTeam } from "../../data/team";
+import { groupPhotoById, teamMembers as staticTeam } from "../../data/team";
 import { getCaseStudies, getTeamMembers } from "../../lib/cms";
 import { useCmsData } from "../../lib/cms/useCmsData";
 import styles from "./DesignStudio.module.css";
@@ -272,7 +272,7 @@ export function DesignStudio() {
               </p>
             </div>
           </Reveal>
-          <AwardCards showCertifications={false} fullWidth logoHeight={120} />
+          <AwardCards showCertifications={false} fullWidth logoHeight={120} visible={7} />
         </div>
       </section>
 
@@ -363,8 +363,8 @@ export function DesignStudio() {
       </section>
 
       <section className={styles.sFooterCta}>
-        <div className={styles.footerCtaInner}>
-          <Reveal>
+        <div className={`container-wide ${styles.footerCtaInner}`}>
+          <Reveal className={styles.footerCtaCopy}>
             <h2>Have a design project in mind? Let&apos;s talk</h2>
             <p>
               Your UX/UI transformation is one conversation away — explore
@@ -373,6 +373,16 @@ export function DesignStudio() {
             <Button href="/contact" arrow>
               Book a consultation
             </Button>
+          </Reveal>
+          <Reveal className={styles.footerCtaMedia}>
+            <figure className={styles.footerCtaPhoto}>
+              <img
+                src={groupPhotoById.handshake.src}
+                alt={groupPhotoById.handshake.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
           </Reveal>
         </div>
       </section>

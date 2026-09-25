@@ -10,6 +10,8 @@ type Props = {
   secondaryLabel?: string;
   secondaryHref?: string;
   links?: { label: string; href: string }[];
+  /** When set, renders text left + image right (dark CTA band) */
+  image?: { src: string; alt: string };
 };
 
 export function CTASection({
@@ -20,6 +22,7 @@ export function CTASection({
   secondaryLabel,
   secondaryHref,
   links,
+  image,
 }: Props) {
   if (links?.length) {
     return (
@@ -43,6 +46,32 @@ export function CTASection({
               </Button>
             </div>
           </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (image) {
+    return (
+      <section className={styles.section}>
+        <div className={`container ${styles.mediaSplit}`}>
+          <div className={styles.mediaCopy}>
+            <h2 className={styles.mediaTitle}>{title}</h2>
+            {description && <p className={styles.mediaDesc}>{description}</p>}
+            <div className={styles.mediaActions}>
+              <Button href={ctaHref} arrow>
+                {ctaLabel}
+              </Button>
+              {secondaryLabel && secondaryHref && (
+                <Button href={secondaryHref} variant="outline" arrow>
+                  {secondaryLabel}
+                </Button>
+              )}
+            </div>
+          </div>
+          <figure className={styles.mediaFigure}>
+            <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+          </figure>
         </div>
       </section>
     );

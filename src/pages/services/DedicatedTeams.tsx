@@ -19,6 +19,7 @@ import {
 } from "../../components/DedicatedTeamIcons";
 import heroImg from "../../assets/dt/hero.webp";
 import processImg from "../../assets/dt/img-1.webp";
+import { groupPhotoById } from "../../data/team";
 import styles from "./DedicatedTeams.module.css";
 
 const specialties = [
@@ -321,7 +322,7 @@ export function DedicatedTeams() {
 
       <section className={styles.s6}>
         <div className={`container-wide ${styles.s6Inner}`}>
-          <Reveal>
+          <Reveal className={styles.s6Copy} >
             <p className={styles.s6Eyebrow}>Your success is our key priority</p>
             <h2>
               Talk with our experts to see how companies in your industry grow
@@ -330,6 +331,16 @@ export function DedicatedTeams() {
             <Button href="/contact" arrow>
               Book a consultation
             </Button>
+          </Reveal>
+          <Reveal className={styles.s6Media}>
+            <figure className={styles.s6Photo}>
+              <img
+                src={groupPhotoById.building.src}
+                alt={groupPhotoById.building.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
           </Reveal>
         </div>
       </section>

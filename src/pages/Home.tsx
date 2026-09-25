@@ -12,7 +12,7 @@ import { HomeServicesExpertise } from "../components/HomeServicesExpertise";
 import { HomeContactSection } from "../components/HomeContactSection";
 import { HomeGlobalTalent } from "../components/HomeGlobalTalent";
 import { caseStudies as staticCaseStudies } from "../data/caseStudies";
-import { teamMembers as staticTeam } from "../data/team";
+import { groupPhotoById, teamMembers as staticTeam } from "../data/team";
 import { getCaseStudies, getTeamMembers } from "../lib/cms";
 import { useCmsData } from "../lib/cms/useCmsData";
 import styles from "./Home.module.css";
@@ -246,6 +246,16 @@ export function Home() {
               </p>
             </div>
           </Reveal>
+          <Reveal>
+            <figure className={styles.teamGroup}>
+              <img
+                src={groupPhotoById.office.src}
+                alt={groupPhotoById.office.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </Reveal>
           <TeamMembers members={teamMembers} />
           <div className={styles.centerCta}>
             <Button href="/about" variant="ghost" arrow>
@@ -267,7 +277,7 @@ export function Home() {
               />
             </div>
           </Reveal>
-          <AwardCards fullWidth logoHeight={190} />
+          <AwardCards fullWidth logoHeight={190} visible={7} />
         </div>
       </section>
 

@@ -222,7 +222,7 @@ export function JobApply() {
                       <input
                         type="tel"
                         name="phone"
-                        placeholder="+1 (555) 123-4567"
+                        placeholder="+1 (963) 930-2136"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         autoComplete="tel"

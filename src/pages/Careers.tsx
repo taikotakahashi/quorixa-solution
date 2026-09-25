@@ -6,7 +6,7 @@ import { GlobalTalentMap } from "../components/GlobalTalentMap";
 import { Reveal } from "../components/Reveal";
 import { SectionHeader } from "../components/SectionHeader";
 import { StatCard } from "../components/StatCard";
-import { jobs as staticJobs, memberPhotos } from "../data/team";
+import { jobs as staticJobs, groupPhotoById, memberPhotos } from "../data/team";
 import { getJobs, getMemberPhotos } from "../lib/cms";
 import { useCmsData } from "../lib/cms/useCmsData";
 import { submitContactMessage } from "../lib/submitContact";
@@ -77,8 +77,7 @@ export function Careers() {
   }, [keyword, jobs]);
 
   const visibleJobs = showAllJobs ? filteredJobs : filteredJobs.slice(0, 4);
-  const topRow = careerHeroPortraits.slice(0, 6);
-  const bottomRow = careerHeroPortraits.slice(6, 11);
+  const accentPortraits = careerHeroPortraits.slice(0, 4);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -110,28 +109,32 @@ export function Careers() {
       <section className={styles.hero}>
         <div className="container">
           <Reveal>
-            <div className={styles.collage} aria-hidden>
-              <div className={`${styles.collageRow} ${styles.collageRowTop}`}>
-                {topRow.map((src, i) => (
+            <div className={styles.heroVisual}>
+              <figure className={styles.heroGroup}>
+                <img
+                  src={groupPhotoById.building.src}
+                  alt={groupPhotoById.building.alt}
+                  loading="eager"
+                  decoding="async"
+                />
+              </figure>
+              <div className={styles.heroAccents} aria-hidden>
+                {accentPortraits.map((src, i) => (
                   <div
                     key={src}
-                    className={styles.portrait}
+                    className={styles.accentPortrait}
                     style={{ ["--i" as string]: String(i) }}
                   >
                     <img src={src} alt="" loading="lazy" />
                   </div>
                 ))}
-              </div>
-              <div className={`${styles.collageRow} ${styles.collageRowBottom}`}>
-                {bottomRow.map((src, i) => (
-                  <div
-                    key={src}
-                    className={styles.portrait}
-                    style={{ ["--i" as string]: String(i) }}
-                  >
-                    <img src={src} alt="" loading="lazy" />
-                  </div>
-                ))}
+                <div className={`${styles.accentPortrait} ${styles.accentGroup}`}>
+                  <img
+                    src={groupPhotoById.handshake.src}
+                    alt=""
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           </Reveal>
@@ -253,9 +256,10 @@ export function Careers() {
           <Reveal>
             <div className={styles.statsPhoto}>
               <img
-                src="https://images.unsplash.com/photo-1522071820081-009fce77f987?w=1000&q=80"
-                alt="QUORIXA team collaborating"
+                src={groupPhotoById.crew.src}
+                alt={groupPhotoById.crew.alt}
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </Reveal>
