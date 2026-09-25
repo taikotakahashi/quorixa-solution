@@ -8,6 +8,8 @@ export type Insight = {
   section: InsightSection;
   tags: string[];
   date: string;
+  /** ISO timestamp for notification freshness filters */
+  publishedAt?: string;
   readTime: string;
   image: string;
   content: string[];
@@ -23,7 +25,8 @@ export const insights: Insight[] = [
     category: "News",
     section: "News",
     tags: ["Awards", "Company"],
-    date: "Jul 8, 2026",
+    date: "Sep 24, 2026",
+    publishedAt: "2026-09-25T08:00:00.000Z",
     readTime: "3 min",
     image:
       "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1000&q=80",

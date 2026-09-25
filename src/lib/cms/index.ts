@@ -19,7 +19,12 @@ import {
   type StudyDetail,
 } from "../../data/caseStudyDetails";
 import { clients as staticClients, type ClientLogo } from "../../data/content";
+import {
+  announcements as staticAnnouncements,
+  type Announcement,
+} from "../../data/announcements";
 import type {
+  AnnouncementRow,
   CaseStudyRow,
   ClientRow,
   FeedbackRow,
@@ -101,7 +106,7 @@ async function loadPeople(): Promise<PersonRecord[] | null> {
   return mergePeople(data as TeamMemberRow[]);
 }
 
-function mapJob(row: JobRow): Job {
+function mapJob(row: JobRow & { created_at?: string }): Job {
   return {
     id: row.id,
     title: row.title,
@@ -113,6 +118,7 @@ function mapJob(row: JobRow): Job {
     summary: row.summary,
     responsibilities: row.responsibilities ?? [],
     requirements: row.requirements ?? [],
+    postedAt: row.created_at || undefined,
   };
 }
 
@@ -146,6 +152,7 @@ function mapInsight(row: InsightRow): Insight {
           year: "numeric",
         })
       : "",
+    publishedAt: row.published_at || undefined,
     readTime: row.read_time,
     image: row.image_url ?? "",
     content: row.content ?? [],
@@ -353,4 +360,31 @@ export async function getClients(): Promise<ClientLogo[]> {
     name: c.name,
     src: c.logo_url ?? "",
   }));
+}
+
+function mapAnnouncement(row: AnnouncementRow): Announcement {
+  return {
+    id: row.id,
+    title: row.title,
+    body: row.body,
+    linkLabel: row.link_label ?? undefined,
+    linkUrl: row.link_url ?? undefined,
+    tone: row.tone || "info",
+    startsAt: row.starts_at ?? undefined,
+    endsAt: row.ends_at ?? undefined,
+    publishedAt: row.starts_at || row.created_at || new Date().toISOString(),
+    sortOrder: row.sort_order,
+  };
+}
+
+/** Active announcements from `public.announcements` (RLS enforces schedule). */
+export async function getAnnouncements(): Promise<Announcement[]> {
+  const sb = getSupabase();
+  if (!sb || !isCmsConfigured) return staticAnnouncements;
+  const { data, error } = await sb
+    .from("announcements")
+    .select("*")
+    .order("sort_order");
+  if (error || !data?.length) return staticAnnouncements;
+  return (data as AnnouncementRow[]).map(mapAnnouncement);
 }

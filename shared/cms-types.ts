@@ -121,3 +121,21 @@ export type FeedbackRow = {
   sort_order: number;
   published: boolean;
 };
+
+export type AnnouncementTone = "info" | "highlight" | "urgent";
+
+/** Marketing-site announcements (header feed / banners) — admin-managed. */
+export type AnnouncementRow = {
+  id: string;
+  title: string;
+  body: string;
+  link_label: string | null;
+  link_url: string | null;
+  tone: AnnouncementTone;
+  starts_at: string | null;
+  ends_at: string | null;
+  sort_order: number;
+  published: boolean;
+  created_at?: string;
+  updated_at?: string;
+};

@@ -3,7 +3,10 @@
 ## 1. Create a Supabase project
 
 1. Create a project at https://supabase.com
-2. Open **SQL Editor** and run [`supabase/migrations/20260322000000_cms_phase1.sql`](../supabase/migrations/20260322000000_cms_phase1.sql)
+2. Open **SQL Editor** and run migrations in order:
+   - [`supabase/migrations/20260322000000_cms_phase1.sql`](../supabase/migrations/20260322000000_cms_phase1.sql)
+   - [`supabase/migrations/20260925150000_normalize_people.sql`](../supabase/migrations/20260925150000_normalize_people.sql)
+   - [`supabase/migrations/20260925200000_announcements.sql`](../supabase/migrations/20260925200000_announcements.sql) (skip if already applied)
 3. **Authentication → Users**: create an admin user (email + password). Disable public signups if enabled.
 4. Copy **Project URL** and **anon public** key from **Project Settings → API**
 5. Copy **service_role** key for seeding only (never put in the browser)
@@ -37,7 +40,7 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 npm run cms:seed
 ```
 
-Uploads member / case-study / client images and upserts jobs, locations, insights, case studies, clients.
+Uploads member / case-study / client images and upserts jobs, locations, insights, case studies, clients, and **announcements**.
 
 ## 4. Run locally
 

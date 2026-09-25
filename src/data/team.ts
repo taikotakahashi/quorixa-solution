@@ -84,6 +84,8 @@ export type Job = {
   summary: string;
   responsibilities: string[];
   requirements: string[];
+  /** ISO timestamp — used for “new jobs” notifications */
+  postedAt?: string;
 };
 
 export const jobs: Job[] = [
@@ -109,6 +111,7 @@ export const jobs: Job[] = [
       "Comfort collaborating with product squads in agile delivery",
       "Clear written communication in English",
     ],
+    postedAt: "2026-09-24T14:00:00.000Z",
   },
   {
     id: "fe-1",
@@ -132,6 +135,7 @@ export const jobs: Job[] = [
       "Experience with design systems or component libraries",
       "Strong product sense and attention to detail",
     ],
+    postedAt: "2026-09-25T08:00:00.000Z",
   },
   {
     id: "ml-1",

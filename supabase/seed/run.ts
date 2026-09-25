@@ -13,6 +13,7 @@ import { basename, join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { detailsById } from "../../src/data/caseStudyDetails.ts";
 import { insights } from "../../src/data/insights.ts";
+import { announcements } from "../../src/data/announcements.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "../..");
@@ -87,6 +88,7 @@ type JobSeed = {
   responsibilities: string[];
   requirements: string[];
   location_id: string | null;
+  posted_at?: string;
 };
 
 async function uploadFile(
@@ -219,6 +221,7 @@ function loadJobsFromSource(): JobSeed[] {
       responsibilities: getArr("responsibilities"),
       requirements: getArr("requirements"),
       location_id: locationGuess[id] ?? null,
+      posted_at: get("postedAt") ?? undefined,
     });
   }
   return jobs;
@@ -545,6 +548,25 @@ async function main() {
     if (error) throw error;
   }
   console.log(`clients: ${CLIENT_LOGOS.length}`);
+
+  // --- Announcements (header feed — admin-managed in public.announcements) ---
+  {
+    const rows = announcements.map((ann) => ({
+      id: ann.id,
+      title: ann.title,
+      body: ann.body,
+      link_label: ann.linkLabel ?? null,
+      link_url: ann.linkUrl ?? null,
+      tone: ann.tone,
+      starts_at: ann.publishedAt,
+      ends_at: null,
+      sort_order: ann.sortOrder,
+      published: true,
+    }));
+    const { error } = await supabase.from("announcements").upsert(rows);
+    if (error) throw error;
+    console.log(`announcements: ${rows.length}`);
+  }
 
   console.log("Seed complete.");
 }

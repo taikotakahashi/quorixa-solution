@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ASSETS } from "../assets";
 
@@ -26,6 +26,8 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
+import { caseStudies as staticCaseStudies } from "../data/caseStudies";
+import { insights as staticInsights } from "../data/insights";
 import {
   aboutNav,
   careersNav,
@@ -33,8 +35,27 @@ import {
   servicesLeft,
   servicesRight,
 } from "../data/navigation";
+import {
+  jobs as staticJobs,
+  leadershipTeam as staticLeadership,
+  teamMembers as staticTeam,
+} from "../data/team";
+import {
+  getAnnouncements,
+  getCaseStudies,
+  getInsights,
+  getJobs,
+  getLeadershipTeam,
+  getTeamMembers,
+} from "../lib/cms";
+import { useCmsData } from "../lib/cms/useCmsData";
+import { buildNotifications } from "../lib/notifications";
+import { buildSearchIndex } from "../lib/siteSearch";
 import { Button } from "./Button";
+import { HeaderNotifications } from "./HeaderNotifications";
+import { HeaderSearch } from "./HeaderSearch";
 import styles from "./Header.module.css";
+import { announcements as staticAnnouncements } from "../data/announcements";
 
 const iconMap: Record<string, LucideIcon> = {
   Code2,
@@ -64,14 +85,45 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<DropdownKey>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [toolsKey, setToolsKey] = useState(0);
+  const [searchEpoch, setSearchEpoch] = useState(0);
+  const [notifyEpoch, setNotifyEpoch] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
   const location = useLocation();
   const menuId = useId();
+
+  const { data: jobs } = useCmsData(getJobs, staticJobs);
+  const { data: insights } = useCmsData(getInsights, staticInsights);
+  const { data: team } = useCmsData(getTeamMembers, staticTeam);
+  const { data: leadership } = useCmsData(getLeadershipTeam, staticLeadership);
+  const { data: caseStudies } = useCmsData(getCaseStudies, staticCaseStudies);
+  const { data: announcements } = useCmsData(
+    getAnnouncements,
+    staticAnnouncements,
+  );
+
+  const searchIndex = useMemo(
+    () =>
+      buildSearchIndex({
+        jobs,
+        insights,
+        team,
+        leadership,
+        caseStudies,
+      }),
+    [jobs, insights, team, leadership, caseStudies],
+  );
+
+  const notifications = useMemo(
+    () => buildNotifications({ jobs, insights, announcements }),
+    [jobs, insights, announcements],
+  );
 
   useEffect(() => {
     setOpen(null);
     setMobileOpen(false);
     setMobileSection(null);
+    setToolsKey((k) => k + 1);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -193,6 +245,28 @@ export function Header() {
         </nav>
 
         <div className={styles.actions}>
+          <HeaderSearch
+            key={`search-${toolsKey}-${searchEpoch}`}
+            index={searchIndex}
+            onOpenChange={(isOpen) => {
+              if (isOpen) {
+                setNotifyEpoch((n) => n + 1);
+                setOpen(null);
+                setMobileOpen(false);
+              }
+            }}
+          />
+          <HeaderNotifications
+            key={`notify-${toolsKey}-${notifyEpoch}`}
+            items={notifications}
+            onOpenChange={(isOpen) => {
+              if (isOpen) {
+                setSearchEpoch((n) => n + 1);
+                setOpen(null);
+                setMobileOpen(false);
+              }
+            }}
+          />
           {isCareers ? (
             <Button
               href="/careers#positions"
