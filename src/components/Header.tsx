@@ -41,21 +41,19 @@ import {
   teamMembers as staticTeam,
 } from "../data/team";
 import {
-  getAnnouncements,
   getCaseStudies,
+  getHeaderNotifications,
   getInsights,
   getJobs,
   getLeadershipTeam,
   getTeamMembers,
 } from "../lib/cms";
 import { useCmsData } from "../lib/cms/useCmsData";
-import { buildNotifications } from "../lib/notifications";
 import { buildSearchIndex } from "../lib/siteSearch";
 import { Button } from "./Button";
 import { HeaderNotifications } from "./HeaderNotifications";
 import { HeaderSearch } from "./HeaderSearch";
 import styles from "./Header.module.css";
-import { announcements as staticAnnouncements } from "../data/announcements";
 
 const iconMap: Record<string, LucideIcon> = {
   Code2,
@@ -97,10 +95,7 @@ export function Header() {
   const { data: team } = useCmsData(getTeamMembers, staticTeam);
   const { data: leadership } = useCmsData(getLeadershipTeam, staticLeadership);
   const { data: caseStudies } = useCmsData(getCaseStudies, staticCaseStudies);
-  const { data: announcements } = useCmsData(
-    getAnnouncements,
-    staticAnnouncements,
-  );
+  const { data: notifications } = useCmsData(getHeaderNotifications, []);
 
   const searchIndex = useMemo(
     () =>
@@ -112,11 +107,6 @@ export function Header() {
         caseStudies,
       }),
     [jobs, insights, team, leadership, caseStudies],
-  );
-
-  const notifications = useMemo(
-    () => buildNotifications({ jobs, insights, announcements }),
-    [jobs, insights, announcements],
   );
 
   useEffect(() => {

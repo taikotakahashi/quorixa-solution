@@ -19,10 +19,12 @@ import {
   type StudyDetail,
 } from "../../data/caseStudyDetails";
 import { clients as staticClients, type ClientLogo } from "../../data/content";
+import type { Announcement } from "../../data/announcements";
 import {
-  announcements as staticAnnouncements,
-  type Announcement,
-} from "../../data/announcements";
+  buildNotifications,
+  NOTIFICATION_WINDOWS,
+  type NotificationItem,
+} from "../notifications";
 import type {
   AnnouncementRow,
   CaseStudyRow,
@@ -372,19 +374,76 @@ function mapAnnouncement(row: AnnouncementRow): Announcement {
     tone: row.tone || "info",
     startsAt: row.starts_at ?? undefined,
     endsAt: row.ends_at ?? undefined,
-    publishedAt: row.starts_at || row.created_at || new Date().toISOString(),
+    // Prefer created_at = when admin submitted the post
+    publishedAt: row.created_at || row.starts_at || new Date().toISOString(),
     sortOrder: row.sort_order,
   };
 }
 
-/** Active announcements from `public.announcements` (RLS enforces schedule). */
+/**
+ * Active announcements from `public.announcements`.
+ * Empty when CMS is off or the query fails — never substitutes static seed data.
+ */
 export async function getAnnouncements(): Promise<Announcement[]> {
   const sb = getSupabase();
-  if (!sb || !isCmsConfigured) return staticAnnouncements;
+  if (!sb || !isCmsConfigured) return [];
   const { data, error } = await sb
     .from("announcements")
     .select("*")
+    .eq("published", true)
     .order("sort_order");
-  if (error || !data?.length) return staticAnnouncements;
+  if (error || !data?.length) return [];
   return (data as AnnouncementRow[]).map(mapAnnouncement);
+}
+
+/**
+ * Header bell feed — database only (announcements + recent jobs + recent articles).
+ * No static `src/data` fallbacks.
+ */
+export async function getHeaderNotifications(): Promise<NotificationItem[]> {
+  const sb = getSupabase();
+  if (!sb || !isCmsConfigured) return [];
+
+  const now = new Date();
+  const annSince = new Date(
+    now.getTime() - NOTIFICATION_WINDOWS.announcement,
+  ).toISOString();
+  const jobSince = new Date(
+    now.getTime() - NOTIFICATION_WINDOWS.job,
+  ).toISOString();
+  const articleSince = new Date(now.getTime() - NOTIFICATION_WINDOWS.article)
+    .toISOString()
+    .slice(0, 10);
+
+  const [annRes, jobRes, insightRes] = await Promise.all([
+    sb
+      .from("announcements")
+      .select("*")
+      .eq("published", true)
+      .gte("created_at", annSince)
+      .order("sort_order"),
+    sb
+      .from("jobs")
+      .select("*")
+      .eq("published", true)
+      .gte("created_at", jobSince)
+      .order("sort_order"),
+    sb
+      .from("insights")
+      .select("*")
+      .eq("published", true)
+      .gte("published_at", articleSince)
+      .order("sort_order"),
+  ]);
+
+  const announcements = (annRes.data as AnnouncementRow[] | null)?.map(
+    mapAnnouncement,
+  ) ?? [];
+  const jobs = (jobRes.data as (JobRow & { created_at?: string })[] | null)?.map(
+    mapJob,
+  ) ?? [];
+  const insights =
+    (insightRes.data as InsightRow[] | null)?.map(mapInsight) ?? [];
+
+  return buildNotifications({ announcements, jobs, insights, now });
 }
