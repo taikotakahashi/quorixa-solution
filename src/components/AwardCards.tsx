@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { awards, certifications } from "../data/content";
 import styles from "./AwardCards.module.css";
 
@@ -9,80 +8,70 @@ type Props = {
   logoHeight?: number;
 };
 
+function AwardCard({
+  title,
+  color,
+  logoSrc,
+  logoHeight,
+}: {
+  title: string;
+  color: string;
+  logoSrc: string;
+  logoHeight: number;
+}) {
+  return (
+    <article className={styles.card} style={{ background: color }}>
+      <p className={styles.title}>{title}</p>
+      <div className={styles.brand}>
+        <img
+          src={logoSrc}
+          alt=""
+          className={styles.awardLogo}
+          style={{ maxHeight: logoHeight }}
+          draggable={false}
+        />
+      </div>
+    </article>
+  );
+}
+
 export function AwardCards({
   showCertifications = true,
   fullWidth = false,
   logoHeight = 190,
 }: Props) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const drag = useRef({
-    active: false,
-    startX: 0,
-    scrollLeft: 0,
-    pointerId: -1,
-  });
-
-  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    const el = trackRef.current;
-    if (!el || e.button !== 0) return;
-    drag.current = {
-      active: true,
-      startX: e.clientX,
-      scrollLeft: el.scrollLeft,
-      pointerId: e.pointerId,
-    };
-    el.setPointerCapture(e.pointerId);
-    el.classList.add(styles.dragging);
-  };
-
-  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    const el = trackRef.current;
-    if (!el || !drag.current.active) return;
-    const dx = e.clientX - drag.current.startX;
-    el.scrollLeft = drag.current.scrollLeft - dx;
-  };
-
-  const endDrag = () => {
-    const el = trackRef.current;
-    if (!el || !drag.current.active) return;
-    drag.current.active = false;
-    el.classList.remove(styles.dragging);
-    try {
-      el.releasePointerCapture(drag.current.pointerId);
-    } catch {
-      /* already released */
-    }
-  };
+  const set = (
+    <div className={styles.set}>
+      {awards.map((award) => (
+        <AwardCard
+          key={award.title + award.logoSrc}
+          title={award.title}
+          color={award.color}
+          logoSrc={award.logoSrc}
+          logoHeight={logoHeight}
+        />
+      ))}
+    </div>
+  );
 
   return (
     <div className={`${styles.root} ${fullWidth ? styles.fullWidth : ""}`}>
       <div className={styles.wrap}>
-        <div
-          className={styles.track}
-          ref={trackRef}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={endDrag}
-          onPointerCancel={endDrag}
-        >
-          {awards.map((award) => (
-            <article
-              key={award.title + award.logoSrc}
-              className={styles.card}
-              style={{ background: award.color }}
-            >
-              <p className={styles.title}>{award.title}</p>
-              <div className={styles.brand}>
-                <img
-                  src={award.logoSrc}
-                  alt=""
-                  className={styles.awardLogo}
-                  style={{ maxHeight: logoHeight }}
-                  draggable={false}
+        <div className={styles.track}>
+          <div className={styles.marquee}>
+            {set}
+            <div className={styles.set} aria-hidden>
+              {awards.map((award) => (
+                <AwardCard
+                  key={`loop-${award.title}-${award.logoSrc}`}
+                  title={award.title}
+                  color={award.color}
+                  logoSrc={award.logoSrc}
+                  logoHeight={logoHeight}
                 />
-              </div>
-            </article>
-          ))}
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
