@@ -19,7 +19,7 @@ import groupCrew from "../assets/members/group/team-crew.webp";
 
 export const memberPhotos = [
   memberCg,
-  memberSc,
+  memberCj,
   memberHg,
   memberSjj,
   memberDh,
@@ -28,7 +28,7 @@ export const memberPhotos = [
   memberDy,
   memberGs,
   memberJr,
-  memberCj,
+  memberSc,
   memberUc,
   memberCh,
   memberTg,

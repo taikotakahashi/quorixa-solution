@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>(function(){var t=localStorage.getItem('tda-theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');})();</script>
+  <meta name="description" content="Gestión de alojamiento para estudiantes: solo alojamiento, media pensión o pensión completa. Tierra D'Acogida® ofrece soluciones seguras y cómodas.">
+  <title>Gestión de Alojamiento | Tierra D'Acogida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+</head>
+<body data-page="accommodation">
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo"><img src="assets/img/logo.png" alt="Tierra D'Acogida"></a>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link" data-i18n="nav.home">Inicio</a></li>
+          <li><a href="about.html" class="nav__link" data-i18n="nav.about">Nosotros</a></li>
+          <li><a href="programs.html" class="nav__link" data-i18n="nav.programs">Programas</a></li>
+          <li><a href="accommodation.html" class="nav__link active" data-i18n="nav.accommodation">Alojamiento</a></li>
+          <li><a href="activities.html" class="nav__link" data-i18n="nav.activities">Actividades</a></li>
+          <li><a href="gallery.html" class="nav__link" data-i18n="nav.gallery">Galería</a></li>
+          <li><a href="contact.html" class="nav__link" data-i18n="nav.contact">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="header__tools">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="true" data-i18n-aria="theme.switchToLight" aria-label="Cambiar a tema claro">
+          <svg class="theme-toggle__icon theme-toggle__icon--light" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="theme-toggle__icon theme-toggle__icon--dark" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <div class="lang-switcher" role="group" data-i18n-aria="nav.lang" aria-label="Idioma">
+          <button type="button" class="lang-switcher__btn active" data-lang="es" aria-pressed="true" data-i18n-aria="lang.es" aria-label="Español"><img src="assets/img/flags/es.svg" alt="" class="lang-switcher__flag" width="28" height="19"></button>
+          <button type="button" class="lang-switcher__btn" data-lang="en" aria-pressed="false" data-i18n-aria="lang.en" aria-label="English"><img src="assets/img/flags/us.svg" alt="" class="lang-switcher__flag" width="28" height="19"></button>
+        </div>
+        <button class="nav__toggle" data-i18n-aria="nav.menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" data-i18n-aria="common.breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html" data-i18n="common.home">Inicio</a><span class="sep">/</span><span data-i18n="nav.accommodation">Alojamiento</span>
+      </nav>
+      <h1 data-i18n="accom.heroTitle">Gestión de Alojamiento</h1>
+      <p data-i18n="accom.heroSub">Soluciones de alojamiento adaptadas a cada programa: solo alojamiento, media pensión o pensión completa para sus estudiantes.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="split fade-in">
+        <div class="split__content">
+          <span class="section__label" data-i18n="accom.s1Label">Alojamiento Estudiantil</span>
+          <h2 data-i18n="accom.s1Title">Un hogar lejos de casa</h2>
+          <p data-i18n="accom.s1P1">El alojamiento es uno de los aspectos más importantes de cualquier programa de movilidad. En Tierra D'Acogida® seleccionamos cuidadosamente cada alojamiento para garantizar la seguridad, comodidad y bienestar de los participantes.</p>
+          <p data-i18n="accom.s1P2">Ofrecemos tres modalidades de alojamiento adaptadas a las necesidades y presupuesto de cada programa.</p>
+          <ul class="feature-list">
+            <li data-i18n="accom.s1F1">Alojamientos verificados y seguros</li>
+            <li data-i18n="accom.s1F2">Proximidad a universidades y centros de formación</li>
+            <li data-i18n="accom.s1F3">Opciones para grupos e individuales</li>
+            <li data-i18n="accom.s1F4">Soporte 24/7 durante la estancia</li>
+          </ul>
+        </div>
+        <div class="split__media">
+          <img src="assets/img/IMG_5506.jpeg" data-i18n-alt="accom.s1ImgAlt" alt="Alojamiento moderno para estudiantes" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header fade-in">
+        <span class="section__label" data-i18n="accom.s2Label">Modalidades</span>
+        <h2 class="section__title" data-i18n="accom.s2Title">Opciones de alojamiento disponibles</h2>
+        <p class="section__subtitle" data-i18n="accom.s2Sub">Elija la modalidad que mejor se adapte a las necesidades de su programa.</p>
+      </div>
+      <div class="accommodation-grid">
+        <div class="accommodation-card fade-in">
+          <h3 data-i18n="accom.m1t">Solo Alojamiento</h3>
+          <p data-i18n="accom.m1d">Alojamiento en residencia, apartamento compartido o familia de acogida, sin servicio de comidas incluido.</p>
+          <ul>
+            <li data-i18n="accom.m1i1">Habitación individual o compartida</li>
+            <li data-i18n="accom.m1i2">Acceso a cocina equipada</li>
+            <li data-i18n="accom.m1i3">Servicios básicos incluidos</li>
+            <li data-i18n="accom.m1i4">WiFi y suministros</li>
+            <li data-i18n="accom.m1i5">Limpieza semanal</li>
+          </ul>
+        </div>
+        <div class="accommodation-card fade-in">
+          <h3 data-i18n="accom.m2t">Media Pensión</h3>
+          <p data-i18n="accom.m2d">Alojamiento con desayuno y una comida principal (almuerzo o cena) incluidos diariamente.</p>
+          <ul>
+            <li data-i18n="accom.m2i1">Desayuno completo</li>
+            <li data-i18n="accom.m2i2">Almuerzo o cena</li>
+            <li data-i18n="accom.m2i3">Menús equilibrados y variados</li>
+            <li data-i18n="accom.m2i4">Opciones dietéticas disponibles</li>
+            <li data-i18n="accom.m2i5">Ideal para estancias medias</li>
+          </ul>
+        </div>
+        <div class="accommodation-card fade-in">
+          <h3 data-i18n="accom.m3t">Pensión Completa</h3>
+          <p data-i18n="accom.m3d">Alojamiento con todas las comidas incluidas: desayuno, almuerzo y cena para máxima comodidad.</p>
+          <ul>
+            <li data-i18n="accom.m3i1">Tres comidas diarias</li>
+            <li data-i18n="accom.m3i2">Menús adaptados culturalmente</li>
+            <li data-i18n="accom.m3i3">Sin preocupaciones logísticas</li>
+            <li data-i18n="accom.m3i4">Perfecto para grupos</li>
+            <li data-i18n="accom.m3i5">Experiencia integral</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header fade-in">
+        <span class="section__label" data-i18n="accom.s3Label">Tipos de Alojamiento</span>
+        <h2 class="section__title" data-i18n="accom.s3Title">Dónde alojamos a sus estudiantes</h2>
+      </div>
+      <div class="services-grid">
+        <article class="service-card fade-in">
+          <div class="service-card__image">
+            <img src="assets/img/IMG_5506.jpeg" data-i18n-alt="accom.r1ImgAlt" alt="Residencia universitaria" loading="lazy">
+          </div>
+          <div class="service-card__body">
+            <h3 data-i18n="accom.r1t">Residencias Universitarias</h3>
+            <p data-i18n="accom.r1d">Alojamiento en residencias con todas las comodidades, ideal para grupos grandes y estancias largas.</p>
+          </div>
+        </article>
+        <article class="service-card fade-in">
+          <div class="service-card__image">
+            <img src="assets/img/IMG_5507.jpeg" data-i18n-alt="accom.r2ImgAlt" alt="Apartamentos compartidos" loading="lazy">
+          </div>
+          <div class="service-card__body">
+            <h3 data-i18n="accom.r2t">Apartamentos Compartidos</h3>
+            <p data-i18n="accom.r2d">Pisos compartidos en zonas céntricas, perfectos para fomentar la convivencia internacional.</p>
+          </div>
+        </article>
+        <article class="service-card fade-in">
+          <div class="service-card__image">
+            <img src="assets/img/IMG_5720.jpeg" data-i18n-alt="accom.r3ImgAlt" alt="Familia de acogida" loading="lazy">
+          </div>
+          <div class="service-card__body">
+            <h3 data-i18n="accom.r3t">Familias de Acogida</h3>
+            <p data-i18n="accom.r3d">Experiencia de inmersión cultural total viviendo con familias locales seleccionadas.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header fade-in">
+        <h2 class="section__title" data-i18n="accom.faqTitle">Preguntas frecuentes</h2>
+      </div>
+      <div class="faq-list fade-in">
+        <div class="faq-item">
+          <button class="faq-item__question" data-i18n="accom.faq1q">¿Con cuánta antelación debo reservar el alojamiento?</button>
+          <div class="faq-item__answer">
+            <p data-i18n="accom.faq1a">Recomendamos contactar con al menos 2-3 meses de antelación, especialmente para grupos grandes o en temporada alta.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__question" data-i18n="accom.faq2q">¿Pueden adaptarse a necesidades dietéticas especiales?</button>
+          <div class="faq-item__answer">
+            <p data-i18n="accom.faq2a">Sí, en las modalidades de media pensión y pensión completa podemos adaptar los menús a alergias, intolerancias y preferencias dietéticas.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__question" data-i18n="accom.faq3q">¿Qué incluye el servicio de gestión de alojamiento?</button>
+          <div class="faq-item__answer">
+            <p data-i18n="accom.faq3a">Incluye búsqueda y selección de alojamiento, negociación de tarifas, gestión de reservas, check-in/check-out y soporte durante la estancia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner fade-in">
+        <h2 data-i18n="accom.ctaTitle">¿Necesita alojamiento para su programa?</h2>
+        <p data-i18n="accom.ctaText">Solicite un presupuesto personalizado indicando fechas, número de participantes y modalidad preferida.</p>
+        <a href="contact.html" class="btn btn--orange" data-i18n="common.requestQuote">Solicitar Presupuesto</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img src="assets/img/logo.png" alt="Tierra D'Acogida">
+        <p data-i18n="footer.brand">Tierra D'Acogida® — Destination Management Center especializado en movilidad estudiantil.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+        </div>
+      </div>
+      <div>
+        <h4 data-i18n="footer.programs">Programas</h4>
+        <nav class="footer__links">
+          <a href="programs.html" data-i18n="nav.programs">Programas</a>
+          <a href="accommodation.html" data-i18n="nav.accommodation">Alojamiento</a>
+          <a href="activities.html" data-i18n="nav.activities">Actividades</a>
+        </nav>
+      </div>
+      <div>
+        <h4 data-i18n="footer.company">Empresa</h4>
+        <nav class="footer__links">
+          <a href="about.html" data-i18n="nav.about">Nosotros</a>
+          <a href="gallery.html" data-i18n="nav.gallery">Galería</a>
+        </nav>
+      </div>
+      <div>
+        <h4 data-i18n="footer.contact">Contacto</h4>
+        <nav class="footer__links">
+          <a href="tel:+34000000000">+34 000 000 000</a>
+          <a href="mailto:info@tierradacogida.com">info@tierradacogida.com</a>
+          <a href="contact.html" data-i18n="common.contactUs">Contactar con Nosotros</a>
+        </nav>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p data-i18n="footer.rights">&copy; 2026 Tierra D'Acogida®. Todos los derechos reservados.</p>
+      <div>
+        <a href="#" data-i18n="footer.privacy">Política de Privacidad</a>
+        <span> · </span>
+        <a href="#" data-i18n="footer.cookies">Política de Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/34000000000" class="whatsapp-float" target="_blank" rel="noopener noreferrer" data-i18n-aria="footer.whatsappAria" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.89-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <div class="cookie-bar"><div class="container"><p><span data-i18n="cookie.text">Valoramos tu privacidad.</span> <a href="#" data-i18n="cookie.link">política de cookies</a>.</p><button class="btn btn--orange cookie-bar__accept" data-i18n="cookie.accept">Cerrar y aceptar</button></div></div>
+
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
