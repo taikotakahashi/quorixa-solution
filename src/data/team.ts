@@ -1,3 +1,4 @@
+import memberWang from "../assets/members/david wang.webp";
 import memberDh from "../assets/members/dh.webp";
 import memberSjj from "../assets/members/sj.webp";
 import memberJb from "../assets/members/jb.webp";
@@ -32,6 +33,7 @@ export const memberPhotos = [
   memberUc,
   memberCh,
   memberTg,
+  memberWang,
 ];
 
 export type GroupPhoto = {
@@ -250,8 +252,8 @@ type Person = {
 const people: Person[] = [
   {
     id: "amelia-chen",
-    name: "Amelia Chen",
-    photo: memberPhotos[0],
+    name: "David Wang",
+    photo: memberPhotos[14],
     region: "Singapore",
     teamRole: "Engineering Director",
     leadershipRole: "CEO",
