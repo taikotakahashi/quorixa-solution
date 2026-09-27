@@ -247,6 +247,9 @@ type Person = {
   teamRole?: string;
   leadershipRole?: string;
   quote?: string;
+  linkedinUrl?: string;
+  email?: string;
+  phone?: string;
 };
 
 const people: Person[] = [
@@ -259,6 +262,9 @@ const people: Person[] = [
     leadershipRole: "CEO",
     quote:
       "I joined QUORIXA for the engineering culture. The best part is autonomy to solve hard problems with peers across multiple countries.",
+    linkedinUrl: "https://www.linkedin.com/in/example-david-wang",
+    email: "david.wang@quorixa.com",
+    phone: "+65 8123 4567",
   },
   {
     id: "marcus-reid",
@@ -269,6 +275,9 @@ const people: Person[] = [
     leadershipRole: "CTO",
     quote:
       "Ownership is real here. You ship, you learn, and you get mentorship without bureaucracy slowing the work.",
+    linkedinUrl: "https://www.linkedin.com/in/example-marcus-reid",
+    email: "marcus.reid@quorixa.com",
+    phone: "+1 512 555 0142",
   },
   {
     id: "sofia-alvarez",
@@ -279,6 +288,9 @@ const people: Person[] = [
     leadershipRole: "Chief Growth Officer",
     quote:
       "Design and engineering collaborate as one team. That partnership is rare — and it shows in the products we deliver.",
+    linkedinUrl: "https://www.linkedin.com/in/example-sofia-alvarez",
+    email: "sofia.alvarez@quorixa.com",
+    phone: "+34 612 345 678",
   },
   {
     id: "james-okonkwo",
@@ -289,6 +301,9 @@ const people: Person[] = [
     leadershipRole: "EVP of Solutions",
     quote:
       "Working on AI programs here means real evaluation discipline — not demos. Clients trust the results because we measure them.",
+    linkedinUrl: "https://www.linkedin.com/in/example-james-okonkwo",
+    email: "james.okonkwo@quorixa.com",
+    phone: "+234 801 234 5678",
   },
   {
     id: "elena-petrova",
@@ -298,6 +313,9 @@ const people: Person[] = [
     teamRole: "QA Lead",
     quote:
       "We treat quality as a product feature, not a gate. That mindset lets us move fast without surprising clients in production.",
+    linkedinUrl: "https://www.linkedin.com/in/example-elena-petrova",
+    email: "elena.petrova@quorixa.com",
+    phone: "+48 512 345 678",
   },
   {
     id: "david-kim",
@@ -307,6 +325,9 @@ const people: Person[] = [
     teamRole: "Delivery Manager",
     quote:
       "Having been with QUORIXA for over 10 years, I continue to discover endless opportunities for growth and development. Over this time, QUORIXA has become more than just a workplace — it's a place where I can find help, support others, and become better from day to day!",
+    linkedinUrl: "https://www.linkedin.com/in/example-david-kim",
+    email: "david.kim@quorixa.com",
+    phone: "+82 10 1234 5678",
   },
   {
     id: "priya-sharma",
@@ -314,6 +335,9 @@ const people: Person[] = [
     photo: memberPhotos[6],
     region: "Bangalore",
     teamRole: "Data Engineering Lead",
+    linkedinUrl: "https://www.linkedin.com/in/example-priya-sharma",
+    email: "priya.sharma@quorixa.com",
+    phone: "+91 98765 43210",
   },
   {
     id: "noah-fischer",
@@ -321,6 +345,9 @@ const people: Person[] = [
     photo: memberPhotos[7],
     region: "Berlin",
     teamRole: "Mobile Lead",
+    linkedinUrl: "https://www.linkedin.com/in/example-noah-fischer",
+    email: "noah.fischer@quorixa.com",
+    phone: "+49 151 23456789",
   },
   // Leadership-only (unique people — never reuse team names with different faces)
   {
@@ -329,6 +356,8 @@ const people: Person[] = [
     photo: memberPhotos[8],
     region: "Europe",
     leadershipRole: "CDO & VP of IT",
+    linkedinUrl: "https://www.linkedin.com/in/example-lina-kowalski",
+    email: "lina.kowalski@quorixa.com",
   },
   {
     id: "maya-brooks",
@@ -336,6 +365,8 @@ const people: Person[] = [
     photo: memberPhotos[9],
     region: "Americas",
     leadershipRole: "VP of Global Delivery",
+    linkedinUrl: "https://www.linkedin.com/in/example-maya-brooks",
+    email: "maya.brooks@quorixa.com",
   },
   {
     id: "andrei-volkov",
@@ -343,6 +374,8 @@ const people: Person[] = [
     photo: memberPhotos[10],
     region: "Europe",
     leadershipRole: "VP of Engineering",
+    linkedinUrl: "https://www.linkedin.com/in/example-andrei-volkov",
+    email: "andrei.volkov@quorixa.com",
   },
   {
     id: "thiago-mendes",
@@ -350,6 +383,8 @@ const people: Person[] = [
     photo: memberPhotos[11],
     region: "Americas",
     leadershipRole: "VP of Engineering",
+    linkedinUrl: "https://www.linkedin.com/in/example-thiago-mendes",
+    email: "thiago.mendes@quorixa.com",
   },
   {
     id: "yulia-moroz",
@@ -357,6 +392,8 @@ const people: Person[] = [
     photo: memberPhotos[12],
     region: "Europe",
     leadershipRole: "Head of Engineering Operations",
+    linkedinUrl: "https://www.linkedin.com/in/example-yulia-moroz",
+    email: "yulia.moroz@quorixa.com",
   },
   {
     id: "vanessa-ortiz",
@@ -364,6 +401,9 @@ const people: Person[] = [
     photo: memberPhotos[13],
     region: "Americas",
     leadershipRole: "Director of People",
+    linkedinUrl: "https://www.linkedin.com/in/example-vanessa-ortiz",
+    email: "vanessa.ortiz@quorixa.com",
+    phone: "+1 415 555 0198",
   },
 ];
 
@@ -372,6 +412,9 @@ export type LeadershipMember = {
   role: string;
   region: string;
   image?: string;
+  linkedinUrl?: string;
+  email?: string;
+  phone?: string;
 };
 
 const leadershipTextOnly: Omit<LeadershipMember, "image">[] = [
@@ -392,6 +435,9 @@ export const teamMembers = people
     name: p.name,
     role: p.teamRole!,
     image: p.photo,
+    linkedinUrl: p.linkedinUrl,
+    email: p.email,
+    phone: p.phone,
   }));
 
 /** Full leadership directory: photo for people with portraits, text-only after */
@@ -403,6 +449,9 @@ export const leadershipTeam: LeadershipMember[] = [
       role: p.leadershipRole!,
       region: p.region,
       image: p.photo,
+      linkedinUrl: p.linkedinUrl,
+      email: p.email,
+      phone: p.phone,
     })),
   ...leadershipTextOnly,
 ];
@@ -413,6 +462,9 @@ export type EmployeeTestimonial = {
   role: string;
   location: string;
   image: string;
+  linkedinUrl?: string;
+  email?: string;
+  phone?: string;
 };
 
 /** Feedback cards — only people with quotes; photo/role always match their team identity */
@@ -424,4 +476,7 @@ export const employeeTestimonials: EmployeeTestimonial[] = people
     role: p.teamRole!,
     location: p.region,
     image: p.photo,
+    linkedinUrl: p.linkedinUrl,
+    email: p.email,
+    phone: p.phone,
   }));

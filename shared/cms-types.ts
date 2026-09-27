@@ -33,6 +33,9 @@ export type TeamMemberRow = {
   kind: TeamMemberKind;
   team_role?: string | null;
   leadership_role?: string | null;
+  linkedin_url?: string | null;
+  email?: string | null;
+  phone?: string | null;
   sort_order: number;
   published: boolean;
 };

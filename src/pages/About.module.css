@@ -245,12 +245,45 @@
 
 .teamSection {
   padding-top: 48px;
+  background:
+    radial-gradient(circle at 8% 20%, rgba(68, 76, 231, 0.06), transparent 28%),
+    radial-gradient(circle at 92% 10%, rgba(168, 85, 247, 0.06), transparent 24%),
+    #fafbff;
 }
 
 .teamHeader {
   max-width: 720px;
-  margin: 0 auto 40px;
+  margin: 0 auto 48px;
   text-align: center;
+}
+
+.teamPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #444ce7;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.teamAccent {
+  color: #444ce7;
+}
+
+.teamUnderline {
+  display: block;
+  width: 56px;
+  height: 4px;
+  border-radius: 999px;
+  background: #444ce7;
+  margin: 18px auto 0;
 }
 
 .teamLead,
@@ -263,31 +296,13 @@
 }
 
 .teamLead {
-  margin-top: -28px;
-}
-
-.teamGroupBand {
-  margin: 0 auto 40px;
-  max-width: 960px;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid var(--color-border-soft);
-  box-shadow: 0 12px 36px rgba(16, 24, 40, 0.06);
-  background: var(--color-light-bg);
-}
-
-.teamGroupBand img {
-  display: block;
-  width: 100%;
-  height: clamp(200px, 28vw, 340px);
-  object-fit: cover;
-  object-position: center 28%;
+  margin-top: 8px;
 }
 
 .centerCta {
   display: flex;
   justify-content: center;
-  margin-top: 36px;
+  margin-top: 56px;
 }
 
 .recognition {
@@ -466,8 +481,7 @@
 }
 
 .cultureCopyCard,
-.cultureRatingsCard,
-.cultureQuoteCard {
+.cultureRatingsCard {
   background: var(--color-white);
   border-radius: 20px;
   border: 1px solid var(--color-border-soft);
@@ -599,13 +613,41 @@
 }
 
 .cultureQuoteCard {
+  position: relative;
   display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 20px;
+  grid-template-columns: 88px 1fr;
+  gap: 18px;
   align-items: start;
-  padding: 28px 30px;
+  padding: 26px 28px 24px;
   margin: 0;
   height: 100%;
+  background: #fff;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 12px 32px rgba(68, 76, 231, 0.08);
+  overflow: hidden;
+}
+
+.quoteToneA {
+  border-color: rgba(168, 85, 247, 0.35);
+  box-shadow:
+    0 12px 32px rgba(168, 85, 247, 0.08),
+    inset 0 0 0 1px rgba(168, 85, 247, 0.08);
+}
+
+.quoteToneB {
+  border-color: rgba(68, 76, 231, 0.35);
+  box-shadow:
+    0 12px 32px rgba(68, 76, 231, 0.08),
+    inset 0 0 0 1px rgba(68, 76, 231, 0.08);
+}
+
+.quoteAvatarWrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
 }
 
 .quoteAvatar,
@@ -616,36 +658,100 @@
   object-fit: cover;
   object-position: center 20%;
   background: var(--color-light-bg);
-  flex-shrink: 0;
+  display: block;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 5px rgba(68, 76, 231, 0.35);
+}
+
+.quoteToneA .quoteAvatar,
+.quoteToneA .quoteAvatarFallback {
+  box-shadow: 0 0 0 3px #fff, 0 0 0 5px rgba(168, 85, 247, 0.4);
+}
+
+.quoteMarkBadge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #444ce7;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.quoteToneA .quoteMarkBadge {
+  background: #a855f7;
+}
+
+.quoteBody {
+  position: relative;
+  min-width: 0;
+}
+
+.quoteWatermark {
+  position: absolute;
+  top: -4px;
+  left: -2px;
+  color: rgba(68, 76, 231, 0.14);
+  pointer-events: none;
+}
+
+.quoteToneA .quoteWatermark {
+  color: rgba(168, 85, 247, 0.16);
 }
 
 .quoteText {
-  font-size: 16px;
+  position: relative;
+  font-size: 15px;
   line-height: 1.65;
-  color: var(--color-text);
+  color: #1f2937;
   margin: 0 0 16px;
+  padding-top: 8px;
 }
 
 .quoteMeta {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .quoteMeta strong {
   font-size: 15px;
   font-weight: 800;
-  color: var(--color-text);
+  color: #111827;
 }
 
-.quoteMeta span {
+.quoteMetaLine {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
   font-size: 13px;
-  color: var(--color-muted);
+  color: #6b7280;
 }
 
-.quoteLocation {
-  font-size: 12px !important;
-  color: #9a9a9a !important;
+.quoteMetaLine svg {
+  color: #444ce7;
+  flex-shrink: 0;
+}
+
+.quoteSep {
+  color: #d1d5db;
+  margin: 0 2px;
+}
+
+.quoteDots {
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  width: 40px;
+  height: 28px;
+  opacity: 0.28;
+  background-image: radial-gradient(#9ca3af 1.2px, transparent 1.3px);
+  background-size: 8px 8px;
+  pointer-events: none;
 }
 
 @media (max-width: 1100px) {
@@ -718,18 +824,22 @@
   }
 
   .cultureCopyCard,
-  .cultureQuoteCard,
   .expertBar {
     padding: 24px;
   }
 
   .cultureQuoteCard {
     grid-template-columns: 1fr;
+    padding: 22px 20px;
+  }
+
+  .quoteAvatarWrap {
+    margin: 0 auto;
   }
 
   .teamLead,
   .principlesLead {
-    margin-top: -20px;
+    margin-top: 8px;
   }
 
   .heroGallery {

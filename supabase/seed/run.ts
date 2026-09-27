@@ -34,7 +34,7 @@ const supabase = createClient(url, key, {
 
 const MEMBER_FILES = [
   "cg.webp",
-  "sc.webp",
+  "cj.webp",
   "hg.webp",
   "sj.webp",
   "dh.webp",
@@ -43,11 +43,31 @@ const MEMBER_FILES = [
   "dy.webp",
   "gs.webp",
   "jr.webp",
-  "cj.webp",
+  "sc.webp",
   "uc.webp",
   "ch.webp",
   "tg.webp",
+  "david wang.webp",
 ];
+
+/** Must match `memberPhotos` order in src/data/team.ts */
+const PHOTO = {
+  cg: 0,
+  cj: 1,
+  hg: 2,
+  sj: 3,
+  dh: 4,
+  jb: 5,
+  hc: 6,
+  dy: 7,
+  gs: 8,
+  jr: 9,
+  sc: 10,
+  uc: 11,
+  ch: 12,
+  tg: 13,
+  wang: 14,
+} as const;
 
 const CLIENT_LOGOS: { id: string; name: string; file: string }[] = [
   { id: "shutterstock", name: "Shutterstock", file: "sh-logo.webp" },
@@ -254,7 +274,7 @@ async function main() {
     photoUrls.push(url ?? "");
   }
 
-  // One DB row per person. Roles are fields (team / leadership / quote), not duplicate kinds.
+  // Keep names + photo indices in sync with src/data/team.ts people registry.
   const people: {
     slug: string;
     name: string;
@@ -263,12 +283,15 @@ async function main() {
     teamRole?: string;
     leadershipRole?: string;
     quote?: string;
+    linkedinUrl?: string;
+    email?: string;
+    phone?: string;
   }[] = [
     {
-      slug: "amelia-chen",
-      name: "Amelia Chen",
+      slug: "david-wang",
+      name: "David Wang",
       region: "Singapore",
-      photo: 0,
+      photo: PHOTO.wang,
       teamRole: "Engineering Director",
       leadershipRole: "CEO",
       quote:
@@ -278,7 +301,7 @@ async function main() {
       slug: "marcus-reid",
       name: "Marcus Reid",
       region: "Austin",
-      photo: 1,
+      photo: PHOTO.cj,
       teamRole: "Principal Architect",
       leadershipRole: "CTO",
       quote:
@@ -288,7 +311,7 @@ async function main() {
       slug: "sofia-alvarez",
       name: "Sofia Alvarez",
       region: "Madrid",
-      photo: 2,
+      photo: PHOTO.hg,
       teamRole: "Head of Design",
       leadershipRole: "Chief Growth Officer",
       quote:
@@ -298,7 +321,7 @@ async function main() {
       slug: "james-okonkwo",
       name: "James Okonkwo",
       region: "Lagos",
-      photo: 3,
+      photo: PHOTO.sj,
       teamRole: "AI Practice Lead",
       leadershipRole: "EVP of Solutions",
       quote:
@@ -308,7 +331,7 @@ async function main() {
       slug: "elena-petrova",
       name: "Elena Petrova",
       region: "Warsaw",
-      photo: 4,
+      photo: PHOTO.dh,
       teamRole: "QA Lead",
       quote:
         "We treat quality as a product feature, not a gate. That mindset lets us move fast without surprising clients in production.",
@@ -317,7 +340,7 @@ async function main() {
       slug: "david-kim",
       name: "David Kim",
       region: "Seoul",
-      photo: 5,
+      photo: PHOTO.jb,
       teamRole: "Delivery Manager",
       quote:
         "Having been with QUORIXA for over 10 years, I continue to discover endless opportunities for growth and development. Over this time, QUORIXA has become more than just a workplace — it's a place where I can find help, support others, and become better from day to day!",
@@ -326,67 +349,121 @@ async function main() {
       slug: "priya-sharma",
       name: "Priya Sharma",
       region: "Bangalore",
-      photo: 6,
+      photo: PHOTO.hc,
       teamRole: "Data Engineering Lead",
     },
     {
       slug: "noah-fischer",
       name: "Noah Fischer",
       region: "Berlin",
-      photo: 7,
+      photo: PHOTO.dy,
       teamRole: "Mobile Lead",
     },
     {
       slug: "lina-kowalski",
       name: "Lina Kowalski",
       region: "Europe",
-      photo: 8,
+      photo: PHOTO.gs,
       leadershipRole: "CDO & VP of IT",
     },
     {
       slug: "maya-brooks",
       name: "Maya Brooks",
       region: "Americas",
-      photo: 9,
+      photo: PHOTO.jr,
       leadershipRole: "VP of Global Delivery",
     },
     {
       slug: "andrei-volkov",
       name: "Andrei Volkov",
       region: "Europe",
-      photo: 10,
+      photo: PHOTO.sc,
       leadershipRole: "VP of Engineering",
     },
     {
       slug: "thiago-mendes",
       name: "Thiago Mendes",
       region: "Americas",
-      photo: 11,
+      photo: PHOTO.uc,
       leadershipRole: "VP of Engineering",
     },
     {
       slug: "yulia-moroz",
       name: "Yulia Moroz",
       region: "Europe",
-      photo: 12,
+      photo: PHOTO.ch,
       leadershipRole: "Head of Engineering Operations",
     },
     {
       slug: "vanessa-ortiz",
       name: "Vanessa Ortiz",
       region: "Americas",
-      photo: 13,
+      photo: PHOTO.tg,
       leadershipRole: "Director of People",
     },
-    { slug: "helena-sorensen", name: "Helena Sorensen", region: "Europe", photo: null, leadershipRole: "CFO" },
-    { slug: "olivia-grant", name: "Olivia Grant", region: "Americas", photo: null, leadershipRole: "VP of Recruiting" },
-    { slug: "daniel-ortiz", name: "Daniel Ortiz", region: "Americas", photo: null, leadershipRole: "Head of Partnerships" },
-    { slug: "dania-kravets", name: "Dania Kravets", region: "Europe", photo: null, leadershipRole: "Director of Product Development" },
-    { slug: "francisco-lima", name: "Francisco Lima", region: "Americas", photo: null, leadershipRole: "Director of Recruiting" },
-    { slug: "stepan-bondar", name: "Stepan Bondar", region: "Europe", photo: null, leadershipRole: "Director of Engineering" },
-    { slug: "yulia-moise", name: "Yulia Moise", region: "Europe", photo: null, leadershipRole: "Director of Marketing Operations" },
-    { slug: "kapil-nair", name: "Kapil Nair", region: "Asia", photo: null, leadershipRole: "Director of Engineering" },
-    { slug: "carlos-diaz", name: "Carlos Diaz", region: "Americas", photo: null, leadershipRole: "Legal Counsel" },
+    {
+      slug: "helena-sorensen",
+      name: "Helena Sorensen",
+      region: "Europe",
+      photo: null,
+      leadershipRole: "CFO",
+    },
+    {
+      slug: "olivia-grant",
+      name: "Olivia Grant",
+      region: "Americas",
+      photo: null,
+      leadershipRole: "VP of Recruiting",
+    },
+    {
+      slug: "daniel-ortiz",
+      name: "Daniel Ortiz",
+      region: "Americas",
+      photo: null,
+      leadershipRole: "Head of Partnerships",
+    },
+    {
+      slug: "dania-kravets",
+      name: "Dania Kravets",
+      region: "Europe",
+      photo: null,
+      leadershipRole: "Director of Product Development",
+    },
+    {
+      slug: "francisco-lima",
+      name: "Francisco Lima",
+      region: "Americas",
+      photo: null,
+      leadershipRole: "Director of Recruiting",
+    },
+    {
+      slug: "stepan-bondar",
+      name: "Stepan Bondar",
+      region: "Europe",
+      photo: null,
+      leadershipRole: "Director of Engineering",
+    },
+    {
+      slug: "yulia-moise",
+      name: "Yulia Moise",
+      region: "Europe",
+      photo: null,
+      leadershipRole: "Director of Marketing Operations",
+    },
+    {
+      slug: "kapil-nair",
+      name: "Kapil Nair",
+      region: "Asia",
+      photo: null,
+      leadershipRole: "Director of Engineering",
+    },
+    {
+      slug: "carlos-diaz",
+      name: "Carlos Diaz",
+      region: "Americas",
+      photo: null,
+      leadershipRole: "Legal Counsel",
+    },
   ];
 
   const { serializePersonMeta } = await import("../../shared/personMeta.ts");
@@ -394,24 +471,49 @@ async function main() {
   // Clear & reinsert people (one row each)
   await supabase.from("team_members").delete().neq("id", "00000000-0000-0000-0000-000000000000");
 
+  // Detect optional columns (normalize_people + contact migrations)
+  const { error: roleColErr } = await supabase
+    .from("team_members")
+    .select("team_role,leadership_role")
+    .limit(1);
+  const hasRoleColumns = !roleColErr;
+  if (!hasRoleColumns) {
+    console.warn(
+      "⚠️  team_role / leadership_role columns missing — apply supabase/migrations/20260925150000_normalize_people.sql in the Supabase SQL editor, then re-seed.\n" +
+        "   Seeding with legacy columns only (role + kind + bio meta).",
+    );
+  }
+
   const memberRows = people.map((p, i) => {
     const teamRole = p.teamRole ?? null;
     const leadershipRole = p.leadershipRole ?? null;
-    return {
+    const email =
+      p.email ??
+      `${p.name.toLowerCase().replace(/\s+/g, ".")}@quorixa.com`;
+    const base = {
       slug: p.slug,
       name: p.name,
       role: teamRole || leadershipRole || "",
       region: p.region,
       quote: p.quote ?? null,
       photo_url: p.photo != null ? photoUrls[p.photo] || null : null,
-      // Legacy kind for older admin filters: prefer team when both exist
       kind: (teamRole ? "team" : "leadership") as "team" | "leadership",
+      linkedin_url:
+        p.linkedinUrl ?? `https://www.linkedin.com/in/example-${p.slug}`,
+      email,
+      phone: p.phone ?? null,
       bio: serializePersonMeta({
         leadershipRole: leadershipRole || undefined,
         bioText: "",
       }),
       sort_order: i,
       published: true,
+    };
+    if (!hasRoleColumns) return base;
+    return {
+      ...base,
+      team_role: teamRole,
+      leadership_role: leadershipRole,
     };
   });
   {

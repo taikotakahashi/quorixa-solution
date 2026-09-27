@@ -1,9 +1,10 @@
 import { getSupabase, isCmsConfigured } from "../supabase";
+import type { EmployeeTestimonial } from "../../data/team";
 import {
-  jobs as staticJobs,
-  teamMembers as staticTeam,
-  leadershipTeam as staticLeadership,
   employeeTestimonials as staticTestimonials,
+  jobs as staticJobs,
+  leadershipTeam as staticLeadership,
+  teamMembers as staticTeam,
   type Job,
   type LeadershipMember,
 } from "../../data/team";
@@ -44,6 +45,9 @@ type PersonRecord = {
   teamRole?: string;
   leadershipRole?: string;
   quote?: string;
+  linkedinUrl?: string;
+  email?: string;
+  phone?: string;
   sort_order: number;
 };
 
@@ -67,6 +71,9 @@ function personFromRow(row: TeamMemberRow): PersonRecord {
     teamRole: teamRole || undefined,
     leadershipRole: leadershipRole || undefined,
     quote: row.quote || undefined,
+    linkedinUrl: row.linkedin_url || undefined,
+    email: row.email || undefined,
+    phone: row.phone || undefined,
     sort_order: row.sort_order ?? 0,
   };
 }
@@ -90,6 +97,9 @@ function mergePeople(rows: TeamMemberRow[]): PersonRecord[] {
       teamRole: prev.teamRole || next.teamRole,
       leadershipRole: prev.leadershipRole || next.leadershipRole,
       quote: prev.quote || next.quote,
+      linkedinUrl: prev.linkedinUrl || next.linkedinUrl,
+      email: prev.email || next.email,
+      phone: prev.phone || next.phone,
       sort_order: Math.min(prev.sort_order, next.sort_order),
     });
   }
@@ -222,7 +232,14 @@ export async function getTalentLocations(): Promise<TalentLocation[]> {
 }
 
 export async function getTeamMembers(): Promise<
-  { name: string; role: string; image: string }[]
+  {
+    name: string;
+    role: string;
+    image: string;
+    linkedinUrl?: string;
+    email?: string;
+    phone?: string;
+  }[]
 > {
   const people = await loadPeople();
   if (!people) return staticTeam;
@@ -232,6 +249,9 @@ export async function getTeamMembers(): Promise<
       name: p.name,
       role: p.teamRole!,
       image: p.photo,
+      linkedinUrl: p.linkedinUrl,
+      email: p.email,
+      phone: p.phone,
     }));
   return team.length ? team : staticTeam;
 }
@@ -246,13 +266,28 @@ export async function getLeadershipTeam(): Promise<LeadershipMember[]> {
       role: p.leadershipRole!,
       region: p.region,
       image: p.photo || undefined,
+      linkedinUrl: p.linkedinUrl,
+      email: p.email,
+      phone: p.phone,
     }));
   return leaders.length ? leaders : staticLeadership;
 }
 
-export async function getEmployeeTestimonials() {
+export async function getEmployeeTestimonials(): Promise<EmployeeTestimonial[]> {
   const sb = getSupabase();
   if (!sb || !isCmsConfigured) return staticTestimonials;
+
+  const people = await loadPeople();
+  const contactByName = new Map(
+    (people ?? []).map((p) => [
+      p.name.trim().toLowerCase(),
+      {
+        linkedinUrl: p.linkedinUrl,
+        email: p.email,
+        phone: p.phone,
+      },
+    ]),
+  );
 
   const { data: feedback, error: feedbackError } = await sb
     .from("feedback")
@@ -269,18 +304,21 @@ export async function getEmployeeTestimonials() {
       const key = row.author_name.trim().toLowerCase();
       if (seen.has(key)) continue;
       seen.add(key);
+      const contact = contactByName.get(key);
       items.push({
         quote: row.quote,
         name: row.author_name,
         role: row.author_role,
         location: row.location ?? "",
         image: row.photo_url ?? "",
+        linkedinUrl: contact?.linkedinUrl,
+        email: contact?.email,
+        phone: contact?.phone,
       });
     }
     if (items.length) return items;
   }
 
-  const people = await loadPeople();
   if (!people) return staticTestimonials;
   const fromPeople = people
     .filter((p) => p.quote && p.teamRole)
@@ -290,6 +328,9 @@ export async function getEmployeeTestimonials() {
       role: p.teamRole!,
       location: p.region,
       image: p.photo,
+      linkedinUrl: p.linkedinUrl,
+      email: p.email,
+      phone: p.phone,
     }));
   return fromPeople.length ? fromPeople : staticTestimonials;
 }

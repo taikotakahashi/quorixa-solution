@@ -7,6 +7,7 @@
    - [`supabase/migrations/20260322000000_cms_phase1.sql`](../supabase/migrations/20260322000000_cms_phase1.sql)
    - [`supabase/migrations/20260925150000_normalize_people.sql`](../supabase/migrations/20260925150000_normalize_people.sql)
    - [`supabase/migrations/20260925200000_announcements.sql`](../supabase/migrations/20260925200000_announcements.sql) (skip if already applied)
+   - [`supabase/migrations/20260927120000_team_contact_fields.sql`](../supabase/migrations/20260927120000_team_contact_fields.sql)
 3. **Authentication → Users**: create an admin user (email + password). Disable public signups if enabled.
 4. Copy **Project URL** and **anon public** key from **Project Settings → API**
 5. Copy **service_role** key for seeding only (never put in the browser)
@@ -72,6 +73,30 @@ Recommended: `admin.yourdomain.com` for the admin project.
 - [ ] Admin login works; create/edit/delete a job
 - [ ] Public site shows updated content when env vars are set
 - [ ] Confirm unpublished rows are hidden on the public site
+
+## Troubleshooting: Admin shows “No people found”
+
+Usually one of:
+
+1. **Missing columns** — `team_role` / `leadership_role` were never created. In **Supabase → SQL Editor**, run:
+
+```sql
+alter table public.team_members
+  add column if not exists team_role text,
+  add column if not exists leadership_role text;
+```
+
+   (Full file: [`20260925150000_normalize_people.sql`](./migrations/20260925150000_normalize_people.sql).)
+
+2. **Empty table** — seed failed earlier because of (1). After adding columns:
+
+```bash
+npm run cms:seed
+```
+
+3. **Wrong project env** — admin `.env` / Vercel must use the same `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY` as the public site.
+
+Without Supabase env vars, the public site **falls back** to hardcoded `src/data/*`. Admin has no fallback and will show empty.
 
 ## Phase 2 (later)
 

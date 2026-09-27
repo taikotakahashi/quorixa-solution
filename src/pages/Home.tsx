@@ -1,4 +1,4 @@
-import { Check, FolderCode, Smile } from "lucide-react";
+import { Check, FolderCode, Smile, Users } from "lucide-react";
 import { Hero } from "../components/Hero";
 import { ClientLogoMarquee } from "../components/ClientLogoMarquee";
 import { SectionHeader } from "../components/SectionHeader";
@@ -6,6 +6,7 @@ import { AwardCards } from "../components/AwardCards";
 import { Reveal } from "../components/Reveal";
 import { Button } from "../components/Button";
 import { CaseStudyCarousel } from "../components/CaseStudyCarousel";
+import { TeamGroupShowcase } from "../components/TeamGroupShowcase";
 import { TeamMembers } from "../components/TeamMembers";
 import { TestimonialGrid } from "../components/TestimonialGrid";
 import { HomeServicesExpertise } from "../components/HomeServicesExpertise";
@@ -238,23 +239,25 @@ export function Home() {
         <div className={`container-wide ${styles.teamContainer}`}>
           <Reveal>
             <div className={styles.teamIntro}>
-              <span className={styles.teamPill}>Leadership & key experts</span>
-              <h2>Meet our team</h2>
+              <span className={styles.teamPill}>
+                <Users size={14} strokeWidth={2.2} aria-hidden />
+                Our team
+              </span>
+              <h2>
+                Meet Our <span className={styles.teamAccent}>Key Experts</span>
+              </h2>
               <p>
-                Exceptional technology solutions are only possible with
-                exceptional people. Learn more about our key experts
+                A diverse team of talented professionals working together to
+                build innovative solutions and deliver exceptional results.
               </p>
+              <span className={styles.teamUnderline} aria-hidden />
             </div>
           </Reveal>
           <Reveal>
-            <figure className={styles.teamGroup}>
-              <img
-                src={groupPhotoById.office.src}
-                alt={groupPhotoById.office.alt}
-                loading="lazy"
-                decoding="async"
-              />
-            </figure>
+            <TeamGroupShowcase
+              src={groupPhotoById.office.src}
+              alt={groupPhotoById.office.alt}
+            />
           </Reveal>
           <TeamMembers members={teamMembers} />
           <div className={styles.centerCta}>

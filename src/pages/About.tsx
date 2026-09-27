@@ -1,8 +1,11 @@
 import {
+  Briefcase,
   Eye,
   Handshake,
   HeartHandshake,
   Lightbulb,
+  MapPin,
+  Quote,
   Star,
   Target,
   Users,
@@ -18,12 +21,14 @@ import { ClientLogoMarquee } from "../components/ClientLogoMarquee";
 import { CTASection } from "../components/CTASection";
 import { CurvedDivider } from "../components/CurvedDivider";
 import { Reveal } from "../components/Reveal";
+import { TeamGroupShowcase } from "../components/TeamGroupShowcase";
 import { TeamMembers } from "../components/TeamMembers";
 import { certifications } from "../data/content";
 import {
   employeeTestimonials as staticTestimonials,
   groupPhotoById,
   teamMembers as staticTeam,
+  type EmployeeTestimonial,
 } from "../data/team";
 import { getEmployeeTestimonials, getTeamMembers } from "../lib/cms";
 import { useCmsData } from "../lib/cms/useCmsData";
@@ -179,7 +184,7 @@ const partnerCards = [
   },
 ];
 
-const employeeQuoteFallback = {
+const employeeQuoteFallback: EmployeeTestimonial = {
   quote:
     "Having been with QUORIXA for over 10 years, I continue to discover endless opportunities for growth and development. Over this time, QUORIXA has become more than just a workplace — it's a place where I can find help, support others, and become better from day to day!",
   name: "David",
@@ -288,22 +293,25 @@ export function About() {
         <div className="container">
           <Reveal>
             <div className={styles.teamHeader}>
-              <h2 className={styles.sectionTitleCentered}>Meet our team</h2>
+              <span className={styles.teamPill}>
+                <Users size={14} strokeWidth={2.2} aria-hidden />
+                Our team
+              </span>
+              <h2 className={styles.sectionTitleCentered}>
+                Meet Our <span className={styles.teamAccent}>Key Experts</span>
+              </h2>
               <p className={styles.teamLead}>
-                Exceptional technology solutions are only possible with
-                exceptional people. Learn more about our key experts.
+                A diverse team of talented professionals working together to
+                build innovative solutions and deliver exceptional results.
               </p>
+              <span className={styles.teamUnderline} aria-hidden />
             </div>
           </Reveal>
           <Reveal>
-            <figure className={styles.teamGroupBand}>
-              <img
-                src={groupPhotoById.crew.src}
-                alt={groupPhotoById.crew.alt}
-                loading="lazy"
-                decoding="async"
-              />
-            </figure>
+            <TeamGroupShowcase
+              src={groupPhotoById.crew.src}
+              alt={groupPhotoById.crew.alt}
+            />
           </Reveal>
           <TeamMembers members={teamMembers} />
           <div className={styles.centerCta}>
@@ -473,32 +481,62 @@ export function About() {
             </Reveal>
 
             <div className={styles.cultureFeedback}>
-              {feedback.map((item) => (
+              {feedback.map((item, index) => (
                 <Reveal key={`${item.name}-${item.role}`}>
-                  <blockquote className={styles.cultureQuoteCard}>
-                    {item.image ? (
-                      <img
-                        src={item.image}
-                        alt={`${item.name}, ${item.role}`}
-                        className={styles.quoteAvatar}
-                        loading="lazy"
-                        decoding="async"
+                  <blockquote
+                    className={`${styles.cultureQuoteCard} ${
+                      index % 2 === 0 ? styles.quoteToneA : styles.quoteToneB
+                    }`}
+                  >
+                    <div className={styles.quoteAvatarWrap}>
+                      {item.image ? (
+                        <img
+                          src={item.image}
+                          alt={`${item.name}, ${item.role}`}
+                          className={styles.quoteAvatar}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ) : (
+                        <div
+                          className={styles.quoteAvatarFallback}
+                          aria-hidden
+                        />
+                      )}
+                      <span className={styles.quoteMarkBadge} aria-hidden>
+                        <Quote size={12} strokeWidth={2.4} />
+                      </span>
+                    </div>
+                    <div className={styles.quoteBody}>
+                      <Quote
+                        className={styles.quoteWatermark}
+                        size={36}
+                        strokeWidth={1.5}
+                        aria-hidden
                       />
-                    ) : (
-                      <div className={styles.quoteAvatarFallback} aria-hidden />
-                    )}
-                    <div>
-                      <p className={styles.quoteText}>“{item.quote}”</p>
+                      <p className={styles.quoteText}>{item.quote}</p>
                       <footer className={styles.quoteMeta}>
                         <strong>{item.name}</strong>
-                        <span>{item.role}</span>
-                        {item.location ? (
-                          <span className={styles.quoteLocation}>
-                            {item.location}
-                          </span>
-                        ) : null}
+                        <span className={styles.quoteMetaLine}>
+                          <Briefcase size={13} strokeWidth={2.2} aria-hidden />
+                          {item.role}
+                          {item.location ? (
+                            <>
+                              <span className={styles.quoteSep} aria-hidden>
+                                |
+                              </span>
+                              <MapPin
+                                size={13}
+                                strokeWidth={2.2}
+                                aria-hidden
+                              />
+                              {item.location}
+                            </>
+                          ) : null}
+                        </span>
                       </footer>
                     </div>
+                    <span className={styles.quoteDots} aria-hidden />
                   </blockquote>
                 </Reveal>
               ))}
