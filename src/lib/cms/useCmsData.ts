@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { isCmsConfigured } from "../supabase";
 
 type State<T> = {
   data: T;
@@ -6,13 +7,32 @@ type State<T> = {
   error: string | null;
 };
 
-/** Load CMS data once; `fallback` is shown until the async load resolves. */
+function emptyLike<T>(fallback: T): T {
+  if (Array.isArray(fallback)) return [] as unknown as T;
+  return fallback;
+}
+
+/**
+ * Load CMS data once.
+ * - CMS configured: start empty (no static flash), then show DB result.
+ * - CMS not configured: use `fallback` immediately (hardcoded src/data).
+ */
 export function useCmsData<T>(loader: () => Promise<T>, fallback: T): State<T> {
-  const [data, setData] = useState<T>(fallback);
-  const [loading, setLoading] = useState(true);
+  const cms = isCmsConfigured;
+  const [data, setData] = useState<T>(() =>
+    cms ? emptyLike(fallback) : fallback,
+  );
+  const [loading, setLoading] = useState(cms);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!cms) {
+      setData(fallback);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     let cancelled = false;
     setLoading(true);
     loader()
@@ -25,11 +45,13 @@ export function useCmsData<T>(loader: () => Promise<T>, fallback: T): State<T> {
       .catch((err: unknown) => {
         if (!cancelled) {
           setError(err instanceof Error ? err.message : "Failed to load");
+          setData(fallback);
         }
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
       });
+
     return () => {
       cancelled = true;
     };
